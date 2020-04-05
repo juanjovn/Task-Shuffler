@@ -1,0 +1,36 @@
+PODS:
+  - AMTabView (0.1.1)
+  - BubbleTransition (3.2.0)
+  - fluid-slider (1.1.0):
+    - pop
+  - pop (1.0.12)
+  - SkyFloatingLabelTextField (3.8.0)
+  - WCLShineButton (1.0.8)
+
+DEPENDENCIES:
+  - AMTabView
+  - BubbleTransition (~> 3.2.0)
+  - fluid-slider
+  - SkyFloatingLabelTextField (~> 3.0)
+  - WCLShineButton
+
+SPEC REPOS:
+  trunk:
+    - AMTabView
+    - BubbleTransition
+    - fluid-slider
+    - pop
+    - SkyFloatingLabelTextField
+    - WCLShineButton
+
+SPEC CHECKSUMS:
+  AMTabView: 86e156d6d9ab42d091e46466648ac5ce00abe615
+  BubbleTransition: 2f112cc19772d9ab199bc850de92f5eb34744bce
+  fluid-slider: 68037ac7247f16a89f3e24ff5d0167c8eea6f50b
+  pop: d582054913807fd11fd50bfe6a539d91c7e1a55a
+  SkyFloatingLabelTextField: 5a338412114808e961fe2d14ea2c5452c8b6e4aa
+  WCLShineButton: 315ee9b0024b1cc56dba34fb6a8878937eb8d0b1
+
+PODFILE CHECKSUM: 1a25185f66ad109007cbda2d1609d1106c749115
+
+COCOAPODS: 1.9.0
