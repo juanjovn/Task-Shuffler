@@ -18,10 +18,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //MARK: AMTabView Customization
         // Customize the colors
-        AMTabView.settings.ballColor = #colorLiteral(red: 0.9137254902, green: 0.3098039216, blue: 0.2156862745, alpha: 1)
-        AMTabView.settings.tabColor = #colorLiteral(red: 0.1333333333, green: 0.2196078431, blue: 0.262745098, alpha: 1)
-        AMTabView.settings.selectedTabTintColor = #colorLiteral(red: 0.937254902, green: 0.9450980392, blue: 0.9529411765, alpha: 1)
-        AMTabView.settings.unSelectedTabTintColor = #colorLiteral(red: 0.937254902, green: 0.9450980392, blue: 0.9529411765, alpha: 1)
+        AMTabView.settings.ballColor = .fireOrange
+        AMTabView.settings.tabColor = .mysticBlue
+        AMTabView.settings.selectedTabTintColor = .pearlWhite
+        AMTabView.settings.unSelectedTabTintColor = .pearlWhite
 
         // Change the animation duration
         AMTabView.settings.animationDuration = 0.7

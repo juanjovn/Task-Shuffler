@@ -63,7 +63,7 @@ class NewTaskViewController: UIViewController {
     let slider = Slider()
     let sliderLabelAttributes: [NSAttributedString.Key: Any] = [
         .font: UIFont(name: "Avenir Next Medium", size: 20)!,
-        .foregroundColor: #colorLiteral(red: 0.937254902, green: 0.9450980392, blue: 0.9529411765, alpha: 1)
+        .foregroundColor: UIColor.pearlWhite
     ]
     var sliderNobLabelAttributes: [NSAttributedString.Key: Any] = [:]
     
@@ -90,7 +90,7 @@ class NewTaskViewController: UIViewController {
         newTaskTextName.delegate = self
         
         // View style
-        view.backgroundColor = #colorLiteral(red: 0.9137254902, green: 0.3098039216, blue: 0.2156862745, alpha: 1)
+        view.backgroundColor = .fireOrange
 
         // Back button style
         confBackButtonStyle()
@@ -221,8 +221,8 @@ class NewTaskViewController: UIViewController {
     func confBackButtonStyle(){
         backButton.layer.cornerRadius = backButton.bounds.size.width/2
         backButton.layer.shadowOffset = .init(width: 0, height: 1)
-        backButton.backgroundColor = #colorLiteral(red: 0.937254902, green: 0.9450980392, blue: 0.9529411765, alpha: 1)
-        backButton.setTitleColor(#colorLiteral(red: 0.1333333333, green: 0.2196078431, blue: 0.262745098, alpha: 1), for: .normal)
+        backButton.backgroundColor = .pearlWhite
+        backButton.setTitleColor(.mysticBlue, for: .normal)
         backButton.setTitle("<", for: .normal)
     }
     
@@ -234,7 +234,7 @@ class NewTaskViewController: UIViewController {
         
         sliderNobLabelAttributes = [
             .font: UIFont(name: "Avenir Next Medium", size: 20)!,
-            .foregroundColor: #colorLiteral(red: 0.1333333333, green: 0.2196078431, blue: 0.262745098, alpha: 1),
+            .foregroundColor: UIColor.mysticBlue,
             .shadow: nobShadow
         ]
         
@@ -255,8 +255,8 @@ class NewTaskViewController: UIViewController {
         slider.shadowOffset = CGSize(width: 0, height: 10)
         slider.shadowBlur = 5
         slider.shadowColor = UIColor(white: 0, alpha: 0.1)
-        slider.contentViewColor = #colorLiteral(red: 0.1333333333, green: 0.2196078431, blue: 0.262745098, alpha: 1)
-        slider.valueViewColor = #colorLiteral(red: 0.937254902, green: 0.9450980392, blue: 0.9529411765, alpha: 1)
+        slider.contentViewColor = .mysticBlue
+        slider.valueViewColor = .pearlWhite
         slider.addTarget(self, action: #selector(sliderValueChanged), for: .valueChanged)
         slider.didBeginTracking = { _ in
             
@@ -327,13 +327,13 @@ class NewTaskViewController: UIViewController {
 
         switch priorityButtonImageIndex {
         case 0:
-            tintColor = #colorLiteral(red: 0.1254901961, green: 0.7490196078, blue: 0.4196078431, alpha: 1)
+            tintColor = .powerGreen
         case 1:
-            tintColor = #colorLiteral(red: 0.1333333333, green: 0.2196078431, blue: 0.262745098, alpha: 1)
+            tintColor = .mysticBlue
         case 2:
-            tintColor = #colorLiteral(red: 0.9137254902, green: 0.3098039216, blue: 0.2156862745, alpha: 1)
+            tintColor = .fireOrange
         default:
-            tintColor = #colorLiteral(red: 0.1333333333, green: 0.2196078431, blue: 0.262745098, alpha: 1)
+            tintColor = .mysticBlue
         }
 
         guard var customizedImage = buttonImage.tinted(color: tintColor) else {

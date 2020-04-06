@@ -43,8 +43,8 @@ class TasksListViewController: AMTabsViewController {
         newTaskButton.layer.cornerRadius = newTaskButton.bounds.size.width/2
         newTaskButton.layer.shadowOffset = .init(width: 0, height: 1)
         newTaskButtonBottomConstraint.constant = -100
-        newTaskButton.backgroundColor = #colorLiteral(red: 0.9137254902, green: 0.3098039216, blue: 0.2156862745, alpha: 1)
-        newTaskButton.setTitleColor(#colorLiteral(red: 0.937254902, green: 0.9450980392, blue: 0.9529411765, alpha: 1), for: .normal)
+        newTaskButton.backgroundColor = .fireOrange
+        newTaskButton.setTitleColor(.pearlWhite, for: .normal)
         showButton()
         
         
