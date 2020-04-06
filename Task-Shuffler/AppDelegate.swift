@@ -26,6 +26,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Change the animation duration
         AMTabView.settings.animationDuration = 0.7
         
+        // Navigation Bar Appearance
+        if #available(iOS 13.0, *) {
+            let appearance = UINavigationBarAppearance()
+            appearance.backgroundColor = .mysticBlue
+            appearance.titleTextAttributes = [.foregroundColor: UIColor.pearlWhite, .font: UIFont.avenirMedium(ofSize: 20)]
+            appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.pearlWhite, .font: UIFont.avenirDemiBold(ofSize: 35)]
+
+            UINavigationBar.appearance().tintColor = UIColor.pearlWhite
+            UINavigationBar.appearance().standardAppearance = appearance
+            UINavigationBar.appearance().compactAppearance = appearance
+            UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        } else {
+            UINavigationBar.appearance().tintColor = .pearlWhite
+            UINavigationBar.appearance().barTintColor = .mysticBlue
+            UINavigationBar.appearance().isTranslucent = false
+        }
+        
     
         self.window!.rootViewController = ViewController()
         window?.makeKeyAndVisible()

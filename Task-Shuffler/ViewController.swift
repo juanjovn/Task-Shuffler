@@ -47,15 +47,19 @@ class ViewController: AMTabsViewController {
     
     private func setTabsControllers() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let tasksViewController = storyboard.instantiateViewController(withIdentifier: "TasksListViewController")
-        let gapsViewController = storyboard.instantiateViewController(withIdentifier: "GapsViewController")
-        let scheduleViewController = storyboard.instantiateViewController(withIdentifier: "ScheduleViewController")
+        
+//        let tasksViewController = storyboard.instantiateViewController(withIdentifier: "TasksListViewController")
+//        let gapsViewController = storyboard.instantiateViewController(withIdentifier: "GapsViewController")
+//        let scheduleViewController = storyboard.instantiateViewController(withIdentifier: "ScheduleViewController")
+        let tasksNavigationController = storyboard.instantiateViewController(withIdentifier: "TasksNavigationController")
+        let gapsNavigationController = storyboard.instantiateViewController(withIdentifier: "GapsNavigationController")
+        let scheduleNavigationController = storyboard.instantiateViewController(withIdentifier: "ScheduleNavigationController")
         
         
         viewControllers = [
-        tasksViewController,
-        gapsViewController,
-        scheduleViewController
+        tasksNavigationController,
+        gapsNavigationController,
+        scheduleNavigationController
       ]
     }
 
