@@ -62,7 +62,7 @@ class NewTaskViewController: UIViewController {
     // MARK: Slider
     let slider = Slider()
     let sliderLabelAttributes: [NSAttributedString.Key: Any] = [
-        .font: UIFont(name: "Avenir Next Medium", size: 20)!,
+        .font: UIFont.avenirMedium(ofSize: 20),
         .foregroundColor: UIColor.pearlWhite
     ]
     var sliderNobLabelAttributes: [NSAttributedString.Key: Any] = [:]
@@ -233,7 +233,7 @@ class NewTaskViewController: UIViewController {
         nobShadow.shadowOffset = .init(width: 0, height: 1)
         
         sliderNobLabelAttributes = [
-            .font: UIFont(name: "Avenir Next Medium", size: 20)!,
+            .font: UIFont.avenirMedium(ofSize: 20),
             .foregroundColor: UIColor.mysticBlue,
             .shadow: nobShadow
         ]
@@ -366,7 +366,7 @@ class NewTaskViewController: UIViewController {
             let value: Float = Float(fractionValue * (180 - 10))
             let resultValue: Int = 10 + roundTo(n: value, mult: 5)
             
-            sliderNobLabelAttributes[.font] = UIFont(name: "Avenir Next Medium", size: 16)!
+            sliderNobLabelAttributes[.font] = UIFont.avenirMedium(ofSize: 16)
             let attributedString = NSAttributedString(string: String(resultValue), attributes: sliderNobLabelAttributes)
             slider.attributedTextForFraction = { fractionValue in
                 print("INSIDE THE CLOSURE")
