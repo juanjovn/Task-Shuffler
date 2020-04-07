@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_0" orientation="portrait" appearance="light"/>
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
@@ -8,16 +8,16 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Gaps View Controller-->
+        <!--Gaps-->
         <scene sceneID="HDJ-m7-KWq">
             <objects>
                 <viewController storyboardIdentifier="GapsViewController" interfaceStyle="dark" id="SIv-r7-qSN" customClass="GapsViewController" customModule="Task_Shuffler" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xoh-fp-SvY">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gaps View" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S72-w2-QIr">
-                                <rect key="frame" x="73" y="261" width="174" height="46"/>
+                                <rect key="frame" x="100.5" y="310.5" width="174" height="46"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="38"/>
                                 <color key="textColor" red="0.1333333333" green="0.21960784310000001" blue="0.26274509800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -30,17 +30,18 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="sOJ-LN-tvB"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Gaps" id="oCX-y3-nCK"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qda-7O-fTs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="126" y="-698"/>
+            <point key="canvasLocation" x="126" y="-699"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController storyboardIdentifier="ViewController" id="BYZ-38-t0r" customClass="ViewController" customModule="Task_Shuffler" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5Sc-LW-hXk">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.79215686269999996" green="0.79215686269999996" blue="0.66666666669999997" alpha="0.85433433219999999" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="TMy-g1-BjN"/>
@@ -48,18 +49,18 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1858" y="-698"/>
+            <point key="canvasLocation" x="-2284" y="-699"/>
         </scene>
-        <!--Schedule View Controller-->
+        <!--Schedule-->
         <scene sceneID="Let-U9-peq">
             <objects>
                 <viewController storyboardIdentifier="ScheduleViewController" id="GAi-E4-euQ" customClass="ScheduleViewController" customModule="Task_Shuffler" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="JJr-rD-t8C">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Schedule View" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DNw-fi-x8g">
-                                <rect key="frame" x="39.5" y="261" width="241" height="46"/>
+                                <rect key="frame" x="67" y="310.5" width="241" height="46"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="38"/>
                                 <color key="textColor" red="0.1333333333" green="0.21960784310000001" blue="0.26274509800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -72,21 +73,22 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="dT1-uB-YdO"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Schedule" id="yf9-Qc-mKM"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7eB-GS-Ios" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1143" y="-698"/>
+            <point key="canvasLocation" x="126" y="55"/>
         </scene>
         <!--New Task View Controller-->
         <scene sceneID="g4o-Gp-zQO">
             <objects>
                 <viewController storyboardIdentifier="newTaskView" id="VRM-bD-Ucz" customClass="NewTaskViewController" customModule="Task_Shuffler" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="O6l-jb-PYp">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xBG-74-0Nf">
-                                <rect key="frame" x="130" y="408" width="60" height="60"/>
+                                <rect key="frame" x="157.5" y="507" width="60" height="60"/>
                                 <color key="backgroundColor" red="0.92156862750000001" green="0.96078431369999995" blue="0.87450980389999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="30U-7x-ji4"/>
@@ -101,7 +103,7 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="fTt-03-Gnr" customClass="SkyFloatingLabelTextField" customModule="SkyFloatingLabelTextField">
-                                <rect key="frame" x="20" y="20" width="280" height="50"/>
+                                <rect key="frame" x="20" y="20" width="335" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="khb-T2-LdP"/>
                                 </constraints>
@@ -148,32 +150,32 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MAX LENGTH REACHED!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e9e-cH-PUs">
-                                <rect key="frame" x="30" y="75" width="260" height="26"/>
+                                <rect key="frame" x="30" y="75" width="315" height="26"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="19"/>
                                 <color key="textColor" red="0.1333333333" green="0.21960784310000001" blue="0.26274509800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Duration" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6sJ-9S-Hn2">
-                                <rect key="frame" x="20" y="111" width="250" height="41"/>
+                                <rect key="frame" x="20" y="111" width="305" height="41"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="30"/>
                                 <color key="textColor" red="0.93725490199999995" green="0.94509803920000002" blue="0.95294117649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OCN-zr-XKs">
-                                <rect key="frame" x="100" y="301" width="120" height="119.5"/>
+                                <rect key="frame" x="118.5" y="301" width="138" height="137.5"/>
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.94509803920000002" blue="0.95294117649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="OCN-zr-XKs" secondAttribute="height" multiplier="1:1" id="2yz-0Q-t1j"/>
                                 </constraints>
                             </view>
                             <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oO3-Jf-tbb" customClass="WCLShineButton" customModule="WCLShineButton">
-                                <rect key="frame" x="110" y="311" width="100" height="99.5"/>
+                                <rect key="frame" x="128.5" y="311" width="118" height="117.5"/>
                                 <connections>
                                     <action selector="priorityButtonClicked:" destination="VRM-bD-Ucz" eventType="touchUpInside" id="p0r-F4-ZO4"/>
                                 </connections>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Priority" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FFv-QV-uJS" userLabel="Priority Label">
-                                <rect key="frame" x="20" y="231" width="250" height="41"/>
+                                <rect key="frame" x="20" y="231" width="305" height="41"/>
                                 <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="30"/>
                                 <color key="textColor" red="0.93725490199999995" green="0.94509803920000002" blue="0.95294117649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -225,30 +227,30 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v3d-n9-Vbn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-871.20000000000005" y="-1504.4977511244379"/>
+            <point key="canvasLocation" x="126" y="-2325"/>
         </scene>
-        <!--Tasks List View Controller-->
+        <!--Tasks-->
         <scene sceneID="dhW-88-fuG">
             <objects>
-                <viewController storyboardIdentifier="TasksListViewController" id="E20-oo-eoh" customClass="TasksListViewController" customModule="Task_Shuffler" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TasksListViewController" title="Tasks" id="E20-oo-eoh" customClass="TasksListViewController" customModule="Task_Shuffler" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="s1Q-l0-V7B">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xM7-Rj-uE6">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="96" width="375" height="571"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vm8-BK-CVn">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="1360"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1360"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="B6L-YQ-64S">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="1360"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="1360"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Thb-CB-40g">
-                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Kp-ca-PIN">
-                                                                <rect key="frame" x="66.5" y="32.5" width="187" height="35"/>
+                                                                <rect key="frame" x="94" y="32.5" width="187" height="35"/>
                                                                 <attributedString key="attributedText">
                                                                     <fragment content="$ DOLLARS $">
                                                                         <attributes>
@@ -269,10 +271,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RhN-Ul-Tvu">
-                                                        <rect key="frame" x="0.0" y="105" width="320" height="100"/>
+                                                        <rect key="frame" x="0.0" y="105" width="375" height="100"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0af-ax-KNR">
-                                                                <rect key="frame" x="66.5" y="32.5" width="187" height="35"/>
+                                                                <rect key="frame" x="94" y="32.5" width="187" height="35"/>
                                                                 <attributedString key="attributedText">
                                                                     <fragment content="$ DOLLARS $">
                                                                         <attributes>
@@ -293,10 +295,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UPi-q9-r6q">
-                                                        <rect key="frame" x="0.0" y="210" width="320" height="100"/>
+                                                        <rect key="frame" x="0.0" y="210" width="375" height="100"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="frK-SZ-Rx9">
-                                                                <rect key="frame" x="66.5" y="32.5" width="187" height="35"/>
+                                                                <rect key="frame" x="94" y="32.5" width="187" height="35"/>
                                                                 <attributedString key="attributedText">
                                                                     <fragment content="$ DOLLARS $">
                                                                         <attributes>
@@ -317,10 +319,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oJm-cp-wuG">
-                                                        <rect key="frame" x="0.0" y="315" width="320" height="100"/>
+                                                        <rect key="frame" x="0.0" y="315" width="375" height="100"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iqj-YW-aVg">
-                                                                <rect key="frame" x="66.5" y="32.5" width="187" height="35"/>
+                                                                <rect key="frame" x="94" y="32.5" width="187" height="35"/>
                                                                 <attributedString key="attributedText">
                                                                     <fragment content="$ DOLLARS $">
                                                                         <attributes>
@@ -341,10 +343,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RLj-zi-uod">
-                                                        <rect key="frame" x="0.0" y="420" width="320" height="100"/>
+                                                        <rect key="frame" x="0.0" y="420" width="375" height="100"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CpE-Ry-tf2">
-                                                                <rect key="frame" x="66.5" y="32.5" width="187" height="35"/>
+                                                                <rect key="frame" x="94" y="32.5" width="187" height="35"/>
                                                                 <attributedString key="attributedText">
                                                                     <fragment content="$ DOLLARS $">
                                                                         <attributes>
@@ -365,10 +367,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="odh-Jk-J8X">
-                                                        <rect key="frame" x="0.0" y="525" width="320" height="100"/>
+                                                        <rect key="frame" x="0.0" y="525" width="375" height="100"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iXM-rZ-mIQ">
-                                                                <rect key="frame" x="66.5" y="32.5" width="187" height="35"/>
+                                                                <rect key="frame" x="94" y="32.5" width="187" height="35"/>
                                                                 <attributedString key="attributedText">
                                                                     <fragment content="$ DOLLARS $">
                                                                         <attributes>
@@ -389,10 +391,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s97-E3-tS0">
-                                                        <rect key="frame" x="0.0" y="630" width="320" height="100"/>
+                                                        <rect key="frame" x="0.0" y="630" width="375" height="100"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y7R-MI-mcx">
-                                                                <rect key="frame" x="66.5" y="32.5" width="187" height="35"/>
+                                                                <rect key="frame" x="94" y="32.5" width="187" height="35"/>
                                                                 <attributedString key="attributedText">
                                                                     <fragment content="$ DOLLARS $">
                                                                         <attributes>
@@ -413,10 +415,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rAd-4j-hVk">
-                                                        <rect key="frame" x="0.0" y="735" width="320" height="100"/>
+                                                        <rect key="frame" x="0.0" y="735" width="375" height="100"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lha-Pp-h9Z">
-                                                                <rect key="frame" x="66.5" y="32.5" width="187" height="35"/>
+                                                                <rect key="frame" x="94" y="32.5" width="187" height="35"/>
                                                                 <attributedString key="attributedText">
                                                                     <fragment content="$ DOLLARS $">
                                                                         <attributes>
@@ -437,10 +439,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u1c-jV-V1i">
-                                                        <rect key="frame" x="0.0" y="840" width="320" height="100"/>
+                                                        <rect key="frame" x="0.0" y="840" width="375" height="100"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BRp-Jy-8dF">
-                                                                <rect key="frame" x="66.5" y="32.5" width="187" height="35"/>
+                                                                <rect key="frame" x="94" y="32.5" width="187" height="35"/>
                                                                 <attributedString key="attributedText">
                                                                     <fragment content="$ DOLLARS $">
                                                                         <attributes>
@@ -461,10 +463,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uyh-uC-07P">
-                                                        <rect key="frame" x="0.0" y="945" width="320" height="100"/>
+                                                        <rect key="frame" x="0.0" y="945" width="375" height="100"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ajx-Ic-bEV">
-                                                                <rect key="frame" x="66.5" y="32.5" width="187" height="35"/>
+                                                                <rect key="frame" x="94" y="32.5" width="187" height="35"/>
                                                                 <attributedString key="attributedText">
                                                                     <fragment content="$ DOLLARS $">
                                                                         <attributes>
@@ -485,10 +487,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NuH-p9-Bxd">
-                                                        <rect key="frame" x="0.0" y="1050" width="320" height="100"/>
+                                                        <rect key="frame" x="0.0" y="1050" width="375" height="100"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gwb-oG-B33">
-                                                                <rect key="frame" x="66.5" y="32.5" width="187" height="35"/>
+                                                                <rect key="frame" x="94" y="32.5" width="187" height="35"/>
                                                                 <attributedString key="attributedText">
                                                                     <fragment content="$ DOLLARS $">
                                                                         <attributes>
@@ -509,10 +511,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="52q-3S-PhC">
-                                                        <rect key="frame" x="0.0" y="1155" width="320" height="100"/>
+                                                        <rect key="frame" x="0.0" y="1155" width="375" height="100"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vp0-PY-TFd">
-                                                                <rect key="frame" x="66.5" y="32.5" width="187" height="35"/>
+                                                                <rect key="frame" x="94" y="32.5" width="187" height="35"/>
                                                                 <attributedString key="attributedText">
                                                                     <fragment content="$ DOLLARS $">
                                                                         <attributes>
@@ -533,10 +535,10 @@
                                                         </constraints>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V2w-Oj-DcQ">
-                                                        <rect key="frame" x="0.0" y="1260" width="320" height="100"/>
+                                                        <rect key="frame" x="0.0" y="1260" width="375" height="100"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CmA-w7-9mq">
-                                                                <rect key="frame" x="66.5" y="32.5" width="187" height="35"/>
+                                                                <rect key="frame" x="94" y="32.5" width="187" height="35"/>
                                                                 <attributedString key="attributedText">
                                                                     <fragment content="$ DOLLARS $">
                                                                         <attributes>
@@ -584,7 +586,7 @@
                                 </constraints>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hW7-Hr-s8P">
-                                <rect key="frame" x="130" y="428" width="60" height="60"/>
+                                <rect key="frame" x="157.5" y="527" width="60" height="60"/>
                                 <color key="backgroundColor" red="0.1333333333" green="0.43921568630000002" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="R5p-Rc-PvB"/>
@@ -610,6 +612,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Oi9-0p-9MJ"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Tasks" id="RgV-61-hod"/>
                     <connections>
                         <outlet property="newTaskButton" destination="hW7-Hr-s8P" id="yro-Ui-VEo"/>
                         <outlet property="newTaskButtonBottomConstraint" destination="fdP-3U-jPn" id="zxU-1u-z0g"/>
@@ -618,7 +621,69 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5VI-51-6Lt" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-871.20000000000005" y="-698.27586206896558"/>
+            <point key="canvasLocation" x="126" y="-1497"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Vu9-3W-L9t">
+            <objects>
+                <navigationController storyboardIdentifier="TasksNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="uh1-Mj-GlJ" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="D2C-Lx-V1a">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="20"/>
+                            <color key="textColor" red="0.93725490199999995" green="0.94509803920000002" blue="0.95294117649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="35"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="E20-oo-eoh" kind="relationship" relationship="rootViewController" id="Ohc-3w-RCJ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dUZ-5u-7ez" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-890" y="-1497"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="EGg-fy-JGC">
+            <objects>
+                <navigationController storyboardIdentifier="GapsNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="BcC-5R-a6j" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="5Z3-ig-jPu">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="SIv-r7-qSN" kind="relationship" relationship="rootViewController" id="zRN-cm-UZs"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="l1P-DX-wGg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-890" y="-699"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="WkI-Bg-Hm1">
+            <objects>
+                <navigationController storyboardIdentifier="ScheduleNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="rka-mY-OxM" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="Zmo-SF-BNB">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="GAi-E4-euQ" kind="relationship" relationship="rootViewController" id="enL-ol-khd"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cxa-3j-tMC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-890" y="55"/>
         </scene>
     </scenes>
 </document>
