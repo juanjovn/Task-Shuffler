@@ -207,7 +207,7 @@ class NewTaskViewController: UIViewController {
         }
         
         priorityButtonImage = priorityButtomImages[priorityButtonImageIndex]!
-        //priorityButtonImage = customizePriorityButtonImage(buttonImage: priorityButtonImage)
+        priorityButtonImage = customizePriorityButtonImage(buttonImage: priorityButtonImage)
         priorityButton.image = .defaultAndSelect(priorityButtonImage, priorityButtonImage)
         
         
