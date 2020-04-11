@@ -14,6 +14,8 @@ import WCLShineButton
 
 class NewTaskViewController: UIViewController {
     
+    var taskListVC: TasksListViewController?
+    
     // MARK: Buttons
     
     @IBOutlet weak var backButton: UIButton!
@@ -58,6 +60,7 @@ class NewTaskViewController: UIViewController {
     
     var priorityButtonImageIndex: Int = 0
     var priorityButtonImage = UIImage()
+    var taskPriority = Priority.low
     
     // MARK: Slider
     let slider = Slider()
@@ -111,6 +114,9 @@ class NewTaskViewController: UIViewController {
         priorityButton.alpha = 0
         priorityButtonBackgroundView.alpha = 0
         
+        // Text Field
+        newTaskTextName.becomeFirstResponder()
+        
         // Responsive resize
         
         print("ENTERING SETUP SCREEN SIZE")
@@ -131,6 +137,13 @@ class NewTaskViewController: UIViewController {
     // MARK: Actions
     
     @IBAction func closeView(_ sender: Any) {
+        var newTask : Task
+        if backButton.titleLabel?.text == "OK"{
+            newTask = Task(name: newTaskTextName.text!, duration: Int(slider.fraction), priority: taskPriority, state: .pending)
+            
+            taskListVC?.addNewTask(task: newTask)
+        }
+        
         dismiss(animated: true, completion: nil)
     }
     
@@ -209,6 +222,17 @@ class NewTaskViewController: UIViewController {
         priorityButtonImage = priorityButtomImages[priorityButtonImageIndex]!
         priorityButtonImage = customizePriorityButtonImage(buttonImage: priorityButtonImage)
         priorityButton.image = .defaultAndSelect(priorityButtonImage, priorityButtonImage)
+        
+        switch priorityButtonImageIndex {
+            case 0:
+                taskPriority = .low
+            case 1:
+                taskPriority = .medium
+            case 2:
+                taskPriority = .high
+        default:
+            taskPriority = .low
+        }
         
         
     }

@@ -25,7 +25,7 @@ class ViewController: AMTabsViewController {
         //***** Testing code *****
         
         
-        myTask = Task(name: "Tarea de prueba", duration: 60, priority: .low)
+        myTask = Task(name: "Tarea de prueba", duration: 60, priority: .low, state: .pending)
         
 //        if let task = myTask {
 //            print(task)
