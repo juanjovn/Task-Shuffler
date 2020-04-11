@@ -25,12 +25,16 @@ class TasksListViewController: AMTabsViewController {
     
     //Variables
     
-    var myTasks = [Task]() {
-        didSet{
-            groupTasks(myTasks)
-        }
-    }
-    var groupedTasks: [(State, [Task])] = [(.pending, []), (.assigned, [])]
+//    var myTasks = [Task]() {
+//        didSet{
+//            groupTasks(myTasks)
+//        }
+//    }
+//    var groupedTasks: [(State, [Task])] = [(.pending, []), (.assigned, [])]
+    
+    var pendingTasks = [Task]()
+    var assignedTasks = [Task]()
+    var completedTasks = [Task]()
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -60,14 +64,7 @@ class TasksListViewController: AMTabsViewController {
         
         //***** Testing code *****
         
-        myTasks = createTestTasks()
-        //groupTasks(myTasks)
-        
-//        if let task = myTask {
-//            print(task)
-//        } else {
-//            print("Task llegó nulo")
-//        }
+        createTestTasks()
         
         //***** Testing code *****
         
@@ -90,33 +87,46 @@ class TasksListViewController: AMTabsViewController {
         tableView.backgroundColor = .naturGreen
     }
     
-    func createTestTasks () -> [Task] {
-        return [Task(name: "Tarea de prueba 1", duration: 60, priority: .medium, state: .assigned),
-                Task(name: "Tarea de prueba 2", duration: 90, priority: .low, state: .pending),
-                Task(name: "Tarea de prueba 3", duration: 15, priority: .low, state: .assigned),
-                Task(name: "Tarea de prueba 4", duration: 30, priority: .high, state: .pending),
-                Task(name: "Tarea de prueba 5", duration: 90, priority: .low, state: .pending),
-                Task(name: "Tarea de prueba 6", duration: 180, priority: .medium, state: .pending),
-                Task(name: "Tarea de prueba 7", duration: 120, priority: .low, state: .completed)
-                ]
+    func createTestTasks() {
+        pendingTasks = [
+            Task(name: "Tarea pendiente 1", duration: 60, priority: .medium, state: .pending),
+            Task(name: "Tarea pendiente 2", duration: 90, priority: .low, state: .pending),
+            Task(name: "Tarea pendiente 3", duration: 15, priority: .low, state: .pending),
+            Task(name: "Tarea pendiente 4", duration: 30, priority: .high, state: .pending),
+            Task(name: "Tarea pendiente 5", duration: 90, priority: .low, state: .pending),
+            Task(name: "Tarea pendiente 6", duration: 180, priority: .medium, state: .pending),
+            Task(name: "Tarea pendiente 7", duration: 120, priority: .low, state: .pending)
+        ]
+        assignedTasks = [
+            Task(name: "Tarea asignada 1", duration: 60, priority: .medium, state: .assigned),
+            Task(name: "Tarea asignada 2", duration: 90, priority: .low, state: .assigned)
+        ]
+        completedTasks = [
+            Task(name: "Tarea completada 1", duration: 60, priority: .medium, state: .completed),
+            Task(name: "Tarea completada 2", duration: 90, priority: .low, state: .completed),
+            Task(name: "Tarea completada 3", duration: 15, priority: .low, state: .completed),
+            Task(name: "Tarea completada 4", duration: 30, priority: .high, state: .completed),
+            Task(name: "Tarea completada 5", duration: 90, priority: .low, state: .completed)
+        ]
     }
     
-    func groupTasks (_ tasks:[Task]) -> (){
-        groupedTasks = [(.pending, []), (.assigned, [])] // Reinitialize array
-        
-        for t in tasks {
-            if t.state == .pending{
-                groupedTasks[0].1.append(t)
-            }
-            else {
-                groupedTasks[1].1.append(t)
-            }
-        }
-    }
+//    func groupTasks (_ tasks:[Task]) -> (){
+//        groupedTasks = [(.pending, []), (.assigned, [])] // Reinitialize array
+//
+//        for t in tasks {
+//            if t.state == .pending{
+//                groupedTasks[0].1.append(t)
+//            }
+//            else {
+//                groupedTasks[1].1.append(t)
+//            }
+//        }
+//    }
     
     public func addNewTask (task: Task) {
-        myTasks.append(task)
-        print(groupedTasks.description)
+        
+        pendingTasks.append(task)
+        print(pendingTasks.description)
 //        let numbCurrentRows = tableView.numberOfRows(inSection: 0)
 //        _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) {_ in
 //        let indexPath = IndexPath(row: numbCurrentRows, section: 0)
@@ -238,24 +248,52 @@ extension TasksListViewController: UITableViewDelegate{
         
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            switch indexPath.section {
+                case 0:
+                    pendingTasks.remove(at: indexPath.row)
+                case 1:
+                    assignedTasks.remove(at: indexPath.row)
+                default:
+                    break
+            }
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
+    
 }
 
 // MARK: TableView Data Source Delegate
 
 extension TasksListViewController : UITableViewDataSource{
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return countByState(myTasks, .pending)
+            return pendingTasks.count
         } else {
-            return countByState(myTasks, .assigned)
+            return assignedTasks.count
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let zelda = UITableViewCell.init(style: .default, reuseIdentifier: "prueba")
         zelda.backgroundColor = .pearlWhite
-
-        zelda.textLabel?.text = groupedTasks[indexPath.section].1[indexPath.row].name + " -  \(groupedTasks[indexPath.section].1[indexPath.row].duration) -  \(groupedTasks[indexPath.section].1[indexPath.row].priority.rawValue)"
+        
+        var cellText = ""
+        switch indexPath.section {
+            case 0:
+                cellText = "\(pendingTasks[indexPath.row].name) -  \(pendingTasks[indexPath.row].duration) -  \(pendingTasks[indexPath.row].priority.rawValue)"
+            case 1:
+                cellText = "\(assignedTasks[indexPath.row].name) -  \(assignedTasks[indexPath.row].duration) -  \(assignedTasks[indexPath.row].priority.rawValue)"
+            case 2:
+                cellText = "\(completedTasks[indexPath.row].name) -  \(completedTasks[indexPath.row].duration) -  \(completedTasks[indexPath.row].priority.rawValue)"
+            default:
+                break
+            
+        }
+        
+        zelda.textLabel?.text = cellText
         
         print("\(#function) --- section = \(indexPath.section), row = \(indexPath.row), name = \(zelda.textLabel?.text ?? "default")")
         
@@ -263,7 +301,7 @@ extension TasksListViewController : UITableViewDataSource{
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        if existAssigned(myTasks) {
+        if existTasks(tasks: assignedTasks) {
             return 2
         } else {
             return 1
@@ -282,29 +320,20 @@ extension TasksListViewController : UITableViewDataSource{
     }
     
     
-    func countByState (_ tasks: [Task], _ state: State) -> Int {
-        var counter = 0
-        
-        for task in tasks {
-            if task.state == state {
-                counter += 1
-            }
-        }
-        print ("Number of ROWS with state \(state) is : \(counter)")
-        return counter
-    }
+//    func countByState (_ tasks: [Task], _ state: State) -> Int {
+//        var counter = 0
+//
+//        for task in tasks {
+//            if task.state == state {
+//                counter += 1
+//            }
+//        }
+//        print ("Number of ROWS with state \(state) is : \(counter)")
+//        return counter
+//    }
     
-    func existAssigned (_ tasks: [Task]) -> Bool {
-        var isAssigned = false
-        
-        for task in tasks {
-            if task.state == .assigned {
-                isAssigned = true
-                break
-            }
-        }
-        
-        return isAssigned
+    func existTasks (tasks: [Task]) -> Bool {
+        return tasks.count > 0
     }
     
 }
