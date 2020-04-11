@@ -195,6 +195,7 @@
                         <constraints>
                             <constraint firstItem="FFv-QV-uJS" firstAttribute="top" secondItem="6sJ-9S-Hn2" secondAttribute="bottom" multiplier="1.52" id="0QV-j7-5GM"/>
                             <constraint firstItem="OCN-zr-XKs" firstAttribute="centerX" secondItem="70n-6M-WfS" secondAttribute="centerX" id="12D-8q-v3Y"/>
+                            <constraint firstItem="70n-6M-WfS" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="dU6-YS-Aub" secondAttribute="trailing" id="1U7-vv-Hv3"/>
                             <constraint firstItem="70n-6M-WfS" firstAttribute="trailing" secondItem="fTt-03-Gnr" secondAttribute="trailing" constant="20" id="2rJ-58-6gl"/>
                             <constraint firstItem="oO3-Jf-tbb" firstAttribute="centerY" secondItem="OCN-zr-XKs" secondAttribute="centerY" id="42B-cB-6KQ"/>
                             <constraint firstItem="70n-6M-WfS" firstAttribute="trailing" secondItem="FFv-QV-uJS" secondAttribute="trailing" constant="50" id="7Fl-Za-rKa"/>
