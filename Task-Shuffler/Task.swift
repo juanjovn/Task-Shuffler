@@ -14,12 +14,21 @@ struct Task {
     var name: String
     var duration: Int
     var priority: Priority
+    var state: State
 }
 
 // Enumeration of priority levels
 
-enum Priority: String{
+enum Priority: String {
     case low = "Low"
     case medium = "Medium"
     case high = "High"
+}
+
+// Enumeration of task state
+
+enum State: String {
+    case pending = "Pending"
+    case assigned = "Assigned"
+    case completed = "Completed"
 }
