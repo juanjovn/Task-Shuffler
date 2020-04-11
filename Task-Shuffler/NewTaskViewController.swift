@@ -20,6 +20,7 @@ class NewTaskViewController: UIViewController {
     
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var priorityButton: WCLShineButton!
+    @IBOutlet weak var cancelButton: UIButton!
     
     // MARK: TextFields
     
@@ -139,7 +140,7 @@ class NewTaskViewController: UIViewController {
     @IBAction func closeView(_ sender: Any) {
         var newTask : Task
         if backButton.titleLabel?.text == "OK"{
-            newTask = Task(name: newTaskTextName.text!, duration: Int(slider.fraction), priority: taskPriority, state: .pending)
+            newTask = Task(name: newTaskTextName.text!, duration: Int(slider.attributedTextForFraction(slider.fraction).string)!, priority: taskPriority, state: .pending)
             
             taskListVC?.addNewTask(task: newTask)
         }
@@ -147,6 +148,9 @@ class NewTaskViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func cancelView(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
     
     @objc func sliderValueChanged(_ sender: UIControl){
         let fractionValue = slider.fraction
@@ -478,9 +482,11 @@ extension NewTaskViewController: UITextFieldDelegate{
         
         if newString.length > 0 {
             backButton.setTitle("OK", for: .normal)
+            cancelButton.isHidden = false
         }
         else {
             backButton.setTitle("<", for: .normal)
+            cancelButton.isHidden = true
         }
         return newString.length <= maxLength
     }

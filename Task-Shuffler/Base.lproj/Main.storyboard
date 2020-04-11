@@ -180,6 +180,16 @@
                                 <color key="textColor" red="0.93725490199999995" green="0.94509803920000002" blue="0.95294117649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dU6-YS-Aub">
+                                <rect key="frame" x="261" y="519" width="54" height="36"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleColor" red="0.93725490199999995" green="0.94509803920000002" blue="0.95294117649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancelView:" destination="VRM-bD-Ucz" eventType="touchUpInside" id="1u6-iv-Zak"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                         <constraints>
@@ -195,6 +205,7 @@
                             <constraint firstItem="OCN-zr-XKs" firstAttribute="height" secondItem="O6l-jb-PYp" secondAttribute="height" multiplier="2:11" constant="20" id="Rm7-DX-9d6"/>
                             <constraint firstItem="e9e-cH-PUs" firstAttribute="top" secondItem="fTt-03-Gnr" secondAttribute="bottom" constant="5" id="T3N-SL-DET"/>
                             <constraint firstItem="6sJ-9S-Hn2" firstAttribute="leading" secondItem="70n-6M-WfS" secondAttribute="leading" constant="20" id="UAd-Z6-Re3"/>
+                            <constraint firstItem="dU6-YS-Aub" firstAttribute="leading" secondItem="xBG-74-0Nf" secondAttribute="trailing" multiplier="1.2" id="Xyr-gZ-gcf"/>
                             <constraint firstItem="fTt-03-Gnr" firstAttribute="centerX" secondItem="O6l-jb-PYp" secondAttribute="centerX" id="dHk-x8-rgv"/>
                             <constraint firstItem="fTt-03-Gnr" firstAttribute="top" secondItem="70n-6M-WfS" secondAttribute="top" constant="20" id="dZb-cV-1aH"/>
                             <constraint firstItem="FFv-QV-uJS" firstAttribute="leading" secondItem="70n-6M-WfS" secondAttribute="leading" constant="20" id="dp4-ed-8yv"/>
@@ -203,6 +214,7 @@
                             <constraint firstItem="xBG-74-0Nf" firstAttribute="centerX" secondItem="O6l-jb-PYp" secondAttribute="centerX" id="gfy-lJ-IPV"/>
                             <constraint firstItem="70n-6M-WfS" firstAttribute="trailing" secondItem="e9e-cH-PUs" secondAttribute="trailing" constant="30" id="hCp-WG-cZq"/>
                             <constraint firstItem="6sJ-9S-Hn2" firstAttribute="top" secondItem="e9e-cH-PUs" secondAttribute="bottom" multiplier="1.1" id="jJl-yk-bup"/>
+                            <constraint firstItem="dU6-YS-Aub" firstAttribute="centerY" secondItem="xBG-74-0Nf" secondAttribute="centerY" id="pcq-wN-Y0D"/>
                             <constraint firstItem="e9e-cH-PUs" firstAttribute="leading" secondItem="70n-6M-WfS" secondAttribute="leading" constant="30" id="rma-K8-kIf"/>
                             <constraint firstItem="OCN-zr-XKs" firstAttribute="top" secondItem="FFv-QV-uJS" secondAttribute="bottom" multiplier="8/7" constant="-10" id="tXA-Lj-tKo"/>
                         </constraints>
@@ -211,6 +223,7 @@
                     <navigationItem key="navigationItem" id="LLY-MS-P52"/>
                     <connections>
                         <outlet property="backButton" destination="xBG-74-0Nf" id="X2P-ok-VwU"/>
+                        <outlet property="cancelButton" destination="dU6-YS-Aub" id="HjH-yT-TV0"/>
                         <outlet property="durationLabel" destination="6sJ-9S-Hn2" id="dFC-Rs-pgt"/>
                         <outlet property="maxLengthLabel" destination="e9e-cH-PUs" id="k9O-8P-brN"/>
                         <outlet property="newTaskTextName" destination="fTt-03-Gnr" id="jgE-3t-y8h"/>
