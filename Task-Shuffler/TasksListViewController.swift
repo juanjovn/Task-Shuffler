@@ -9,6 +9,7 @@
 import UIKit
 import AMTabView
 import BubbleTransition
+import SJFluidSegmentedControl
 
 class TasksListViewController: AMTabsViewController {
     
@@ -17,6 +18,8 @@ class TasksListViewController: AMTabsViewController {
     @IBOutlet weak var newTaskButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var newTaskButtonBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var segmentedController: SJFluidSegmentedControl!
+    
     
     
     //Constants
@@ -49,6 +52,7 @@ class TasksListViewController: AMTabsViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
+        segmentedController.dataSource = self
         
         view.backgroundColor = .naturGreen
         
@@ -69,6 +73,11 @@ class TasksListViewController: AMTabsViewController {
         //***** Testing code *****
         
         
+        
+    }
+    
+    override func viewDidLayoutSubviews() {
+        setupSegmentedController()
     }
     
     // MARK: viewWillAppear
@@ -87,6 +96,12 @@ class TasksListViewController: AMTabsViewController {
         tableView.backgroundColor = .naturGreen
     }
     
+    func setupSegmentedController(){
+        segmentedController.cornerRadius = segmentedController.frame.height / 2
+        let currentTextSize = segmentedController.textFont.pointSize
+        segmentedController.textFont = UIFont.avenirMedium(ofSize: currentTextSize)
+    }
+    
     func createTestTasks() {
         pendingTasks = [
             Task(name: "Tarea pendiente 1", duration: 60, priority: .medium, state: .pending),
@@ -99,7 +114,7 @@ class TasksListViewController: AMTabsViewController {
         ]
         assignedTasks = [
             Task(name: "Tarea asignada 1", duration: 60, priority: .medium, state: .assigned),
-            Task(name: "Tarea asignada 2", duration: 90, priority: .low, state: .assigned)
+            //Task(name: "Tarea asignada 2", duration: 90, priority: .low, state: .assigned)
         ]
         completedTasks = [
             Task(name: "Tarea completada 1", duration: 60, priority: .medium, state: .completed),
@@ -258,9 +273,13 @@ extension TasksListViewController: UITableViewDelegate{
                 default:
                     break
             }
+            
             tableView.deleteRows(at: [indexPath], with: .fade)
+            
+            
         }
     }
+    
     
 }
 
@@ -318,6 +337,7 @@ extension TasksListViewController : UITableViewDataSource{
             return ""
         }
     }
+
     
     
 //    func countByState (_ tasks: [Task], _ state: State) -> Int {
@@ -335,5 +355,19 @@ extension TasksListViewController : UITableViewDataSource{
     func existTasks (tasks: [Task]) -> Bool {
         return tasks.count > 0
     }
+    
+}
+
+//MARK: Segmented Controller datasource delegate
+
+extension TasksListViewController: SJFluidSegmentedControlDataSource{
+    func numberOfSegmentsInSegmentedControl(_ segmentedControl: SJFluidSegmentedControl) -> Int {
+        2
+    }
+    
+    func segmentedControl(_ segmentedControl: SJFluidSegmentedControl, titleForSegmentAtIndex index: Int) -> String? {
+        index == 0 ? "Current" : "Completed"
+    }
+    
     
 }
