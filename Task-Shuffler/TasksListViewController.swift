@@ -259,6 +259,11 @@ extension TasksListViewController: UITableViewDelegate{
                     break
             }
             tableView.deleteRows(at: [indexPath], with: .fade)
+            
+            if !existTasks(tasks: assignedTasks){
+                tableView.reloadSections(IndexSet(integer: 1), with: .fade)
+            }
+            
         }
     }
     
@@ -301,11 +306,7 @@ extension TasksListViewController : UITableViewDataSource{
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        if existTasks(tasks: assignedTasks) {
-            return 2
-        } else {
-            return 1
-        }
+        return 2
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -313,7 +314,11 @@ extension TasksListViewController : UITableViewDataSource{
         case 0:
             return "Pending"
         case 1:
-            return "Assigned"
+            if existTasks(tasks: assignedTasks){
+                return "Assigned"
+            } else{
+                return nil
+            }
         default:
             return ""
         }
@@ -333,6 +338,8 @@ extension TasksListViewController : UITableViewDataSource{
 //    }
     
     func existTasks (tasks: [Task]) -> Bool {
+        print(tasks.count)
+        print(tasks.count > 0)
         return tasks.count > 0
     }
     
