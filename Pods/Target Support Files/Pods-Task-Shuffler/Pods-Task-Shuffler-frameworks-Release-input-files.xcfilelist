@@ -1,6 +1,7 @@
 ${PODS_ROOT}/Target Support Files/Pods-Task-Shuffler/Pods-Task-Shuffler-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/AMTabView/AMTabView.framework
 ${BUILT_PRODUCTS_DIR}/BubbleTransition/BubbleTransition.framework
+${BUILT_PRODUCTS_DIR}/SJFluidSegmentedControl/SJFluidSegmentedControl.framework
 ${BUILT_PRODUCTS_DIR}/SkyFloatingLabelTextField/SkyFloatingLabelTextField.framework
 ${BUILT_PRODUCTS_DIR}/WCLShineButton/WCLShineButton.framework
 ${BUILT_PRODUCTS_DIR}/fluid-slider/fluid_slider.framework

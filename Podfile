@@ -11,5 +11,6 @@ target 'Task-Shuffler' do
   pod 'SkyFloatingLabelTextField', '~> 3.0'
   pod 'fluid-slider'
   pod 'WCLShineButton'
+  pod 'SJFluidSegmentedControl', '~> 1.0'
 
 end

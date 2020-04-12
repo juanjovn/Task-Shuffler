@@ -1,5 +1,6 @@
 ${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AMTabView.framework
 ${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BubbleTransition.framework
+${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SJFluidSegmentedControl.framework
 ${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SkyFloatingLabelTextField.framework
 ${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WCLShineButton.framework
 ${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/fluid_slider.framework

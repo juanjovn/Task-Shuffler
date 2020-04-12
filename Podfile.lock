@@ -4,6 +4,7 @@ PODS:
   - fluid-slider (1.1.0):
     - pop
   - pop (1.0.12)
+  - SJFluidSegmentedControl (1.1.2)
   - SkyFloatingLabelTextField (3.8.0)
   - WCLShineButton (1.0.8)
 
@@ -11,6 +12,7 @@ DEPENDENCIES:
   - AMTabView
   - BubbleTransition (~> 3.2.0)
   - fluid-slider
+  - SJFluidSegmentedControl (~> 1.0)
   - SkyFloatingLabelTextField (~> 3.0)
   - WCLShineButton
 
@@ -20,6 +22,7 @@ SPEC REPOS:
     - BubbleTransition
     - fluid-slider
     - pop
+    - SJFluidSegmentedControl
     - SkyFloatingLabelTextField
     - WCLShineButton
 
@@ -28,9 +31,10 @@ SPEC CHECKSUMS:
   BubbleTransition: 2f112cc19772d9ab199bc850de92f5eb34744bce
   fluid-slider: 68037ac7247f16a89f3e24ff5d0167c8eea6f50b
   pop: d582054913807fd11fd50bfe6a539d91c7e1a55a
+  SJFluidSegmentedControl: efd26ea5f0832c715e2750314a2dc0cc81e39ae5
   SkyFloatingLabelTextField: 5a338412114808e961fe2d14ea2c5452c8b6e4aa
   WCLShineButton: 315ee9b0024b1cc56dba34fb6a8878937eb8d0b1
 
-PODFILE CHECKSUM: 1a25185f66ad109007cbda2d1609d1106c749115
+PODFILE CHECKSUM: 763681f6612e107f00e6581fcd6a0ddd26b46696
 
 COCOAPODS: 1.9.0

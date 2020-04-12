@@ -199,6 +199,7 @@ fi
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/AMTabView/AMTabView.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/BubbleTransition/BubbleTransition.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/SJFluidSegmentedControl/SJFluidSegmentedControl.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SkyFloatingLabelTextField/SkyFloatingLabelTextField.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/WCLShineButton/WCLShineButton.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/fluid-slider/fluid_slider.framework"
@@ -207,6 +208,7 @@ fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/AMTabView/AMTabView.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/BubbleTransition/BubbleTransition.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/SJFluidSegmentedControl/SJFluidSegmentedControl.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SkyFloatingLabelTextField/SkyFloatingLabelTextField.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/WCLShineButton/WCLShineButton.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/fluid-slider/fluid_slider.framework"
