@@ -276,12 +276,9 @@ extension TasksListViewController: UITableViewDelegate{
             
             tableView.deleteRows(at: [indexPath], with: .fade)
             
-<<<<<<< HEAD
-=======
             if !existTasks(tasks: assignedTasks){
                 tableView.reloadSections(IndexSet(integer: 1), with: .fade)
             }
->>>>>>> feature/tasklist-tableview
             
         }
     }
