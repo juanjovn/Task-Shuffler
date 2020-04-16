@@ -252,13 +252,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="drR-vR-BFd">
-                                <rect key="frame" x="0.0" y="134" width="375" height="533"/>
+                                <rect key="frame" x="0.0" y="137" width="375" height="530"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s5V-zp-QGi">
-                                <rect key="frame" x="0.0" y="96" width="375" height="38"/>
+                                <rect key="frame" x="0.0" y="96" width="375" height="41"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vC2-CB-gc4" customClass="SJFluidSegmentedControl" customModule="SJFluidSegmentedControl">
-                                        <rect key="frame" x="112.5" y="5" width="150" height="28.5"/>
+                                        <rect key="frame" x="94" y="4" width="187.5" height="32.5"/>
                                         <color key="backgroundColor" red="0.79215686269999996" green="0.79215686269999996" blue="0.66666666669999997" alpha="0.85433433219999999" colorSpace="custom" customColorSpace="sRGB"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="selectorViewColor">
@@ -275,8 +275,8 @@
                                 <constraints>
                                     <constraint firstItem="vC2-CB-gc4" firstAttribute="centerY" secondItem="s5V-zp-QGi" secondAttribute="centerY" id="1S1-7K-mkd"/>
                                     <constraint firstItem="vC2-CB-gc4" firstAttribute="centerX" secondItem="s5V-zp-QGi" secondAttribute="centerX" id="OEf-QF-ehT"/>
-                                    <constraint firstItem="vC2-CB-gc4" firstAttribute="width" secondItem="s5V-zp-QGi" secondAttribute="width" multiplier="0.4" id="b2Y-aZ-RkS"/>
-                                    <constraint firstItem="vC2-CB-gc4" firstAttribute="height" secondItem="s5V-zp-QGi" secondAttribute="height" multiplier="0.75" id="gNw-aP-SdB"/>
+                                    <constraint firstItem="vC2-CB-gc4" firstAttribute="width" secondItem="s5V-zp-QGi" secondAttribute="width" multiplier="0.5" id="b2Y-aZ-RkS"/>
+                                    <constraint firstItem="vC2-CB-gc4" firstAttribute="height" secondItem="s5V-zp-QGi" secondAttribute="height" multiplier="0.8" id="gNw-aP-SdB"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hW7-Hr-s8P">
@@ -305,7 +305,7 @@
                             <constraint firstAttribute="bottom" secondItem="hW7-Hr-s8P" secondAttribute="bottom" constant="80" id="fdP-3U-jPn"/>
                             <constraint firstItem="s5V-zp-QGi" firstAttribute="leading" secondItem="Oi9-0p-9MJ" secondAttribute="leading" id="hSq-wz-Izh"/>
                             <constraint firstItem="drR-vR-BFd" firstAttribute="leading" secondItem="Oi9-0p-9MJ" secondAttribute="leading" id="lYN-eV-G8A"/>
-                            <constraint firstItem="s5V-zp-QGi" firstAttribute="height" secondItem="Oi9-0p-9MJ" secondAttribute="height" multiplier="1:15" id="rcV-Ww-6AD"/>
+                            <constraint firstItem="s5V-zp-QGi" firstAttribute="height" secondItem="Oi9-0p-9MJ" secondAttribute="height" multiplier="1:14" id="rcV-Ww-6AD"/>
                             <constraint firstItem="hW7-Hr-s8P" firstAttribute="centerX" secondItem="s1Q-l0-V7B" secondAttribute="centerX" id="vcw-vY-q0L"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Oi9-0p-9MJ"/>

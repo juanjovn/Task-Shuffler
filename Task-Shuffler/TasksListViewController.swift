@@ -53,6 +53,7 @@ class TasksListViewController: AMTabsViewController {
         tableView.delegate = self
         tableView.dataSource = self
         segmentedController.dataSource = self
+        segmentedController.delegate = self
         
         view.backgroundColor = .naturGreen
         
@@ -76,7 +77,7 @@ class TasksListViewController: AMTabsViewController {
         
     }
     
-    override func viewDidLayoutSubviews() {
+    override func viewDidAppear(_ animated: Bool) {
         setupSegmentedController()
     }
     
@@ -267,7 +268,11 @@ extension TasksListViewController: UITableViewDelegate{
         if editingStyle == .delete {
             switch indexPath.section {
                 case 0:
-                    pendingTasks.remove(at: indexPath.row)
+                    if segmentedController.currentSegment == 0 {
+                        pendingTasks.remove(at: indexPath.row)
+                    } else {
+                        completedTasks.remove(at: indexPath.row)
+                }
                 case 1:
                     assignedTasks.remove(at: indexPath.row)
                 default:
@@ -292,9 +297,9 @@ extension TasksListViewController : UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return pendingTasks.count
+            return segmentedController.currentSegment == 0 ? pendingTasks.count : completedTasks.count
         } else {
-            return assignedTasks.count
+            return segmentedController.currentSegment == 0 ? assignedTasks.count : 0
         }
     }
     
@@ -305,11 +310,15 @@ extension TasksListViewController : UITableViewDataSource{
         var cellText = ""
         switch indexPath.section {
             case 0:
-                cellText = "\(pendingTasks[indexPath.row].name) -  \(pendingTasks[indexPath.row].duration) -  \(pendingTasks[indexPath.row].priority.rawValue)"
+                if segmentedController.currentSegment == 0{
+                    cellText = "\(pendingTasks[indexPath.row].name) -  \(pendingTasks[indexPath.row].duration) -  \(pendingTasks[indexPath.row].priority.rawValue)"
+                } else {
+                    cellText = "\(completedTasks[indexPath.row].name) -  \(completedTasks[indexPath.row].duration) -  \(completedTasks[indexPath.row].priority.rawValue)"
+                }
+                
             case 1:
                 cellText = "\(assignedTasks[indexPath.row].name) -  \(assignedTasks[indexPath.row].duration) -  \(assignedTasks[indexPath.row].priority.rawValue)"
-            case 2:
-                cellText = "\(completedTasks[indexPath.row].name) -  \(completedTasks[indexPath.row].duration) -  \(completedTasks[indexPath.row].priority.rawValue)"
+            
             default:
                 break
             
@@ -323,16 +332,19 @@ extension TasksListViewController : UITableViewDataSource{
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
+        //return segmentedController.currentSegment == 0 ? 2 : 1 //In segmented controller index 0 two sections, in index 1 only one section with completed tasks
         return 2
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let firstSectionTitle: String = segmentedController.currentSegment == 0 ? "Pending" : "Completed"
+        let secondSectionTitle: String = segmentedController.currentSegment == 0 ? "Assigned" : ""
         switch section {
         case 0:
-            return "Pending"
+            return firstSectionTitle
         case 1:
             if existTasks(tasks: assignedTasks){
-                return "Assigned"
+                return secondSectionTitle
             } else{
                 return nil
             }
@@ -363,7 +375,7 @@ extension TasksListViewController : UITableViewDataSource{
     
 }
 
-//MARK: Segmented Controller datasource delegate
+//MARK: Segmented Control datasource protocol
 
 extension TasksListViewController: SJFluidSegmentedControlDataSource{
     func numberOfSegmentsInSegmentedControl(_ segmentedControl: SJFluidSegmentedControl) -> Int {
@@ -375,4 +387,30 @@ extension TasksListViewController: SJFluidSegmentedControlDataSource{
     }
     
     
+    
+    
+}
+
+//MARK: Segmented Control Delegate
+
+extension TasksListViewController: SJFluidSegmentedControlDelegate {
+    
+//    func segmentedControl(_ segmentedControl: SJFluidSegmentedControl, willChangeFromSegment fromSegment: Int) {
+//        if fromSegment == 0 {
+//            //tableView.deleteSections(IndexSet(integer: 1), with: .bottom)
+//        } else {
+//            //tableView.reloadSections(IndexSet(integersIn: 0...1), with: .fade)
+//        }
+//    }
+    
+    func segmentedControl(_ segmentedControl: SJFluidSegmentedControl, didChangeFromSegmentAtIndex fromIndex: Int, toSegmentAtIndex toIndex: Int) {
+//        if toIndex == 1 {
+//            //tableView.deleteSections(IndexSet(integer: 1), with: .bottom)
+//            tableView.reloadSections(IndexSet(integer: 0), with: .fade)
+//        } else {
+//            tableView.reloadSections(IndexSet(integersIn: 0...1), with: .fade)
+//        }
+        
+        tableView.reloadSections(IndexSet(integersIn: 0...1), with: .fade)
+    }
 }
