@@ -3,7 +3,7 @@
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -291,7 +291,7 @@
                                     <color key="titleColor" red="0.24313725489999999" green="0.2666666667" blue="0.16862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="VRM-bD-Ucz" kind="presentation" id="JnC-nl-LKn"/>
+                                    <segue destination="VRM-bD-Ucz" kind="presentation" identifier="newTaskSegue" id="JnC-nl-LKn"/>
                                 </connections>
                             </button>
                         </subviews>

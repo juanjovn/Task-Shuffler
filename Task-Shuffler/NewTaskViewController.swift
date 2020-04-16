@@ -62,6 +62,7 @@ class NewTaskViewController: UIViewController {
     var priorityButtonImageIndex: Int = 0
     var priorityButtonImage = UIImage()
     var taskPriority = Priority.low
+    var selectedRow: IndexPath = []
     
     // MARK: Slider
     let slider = Slider()
@@ -133,6 +134,14 @@ class NewTaskViewController: UIViewController {
         priorityButton.isHidden = true
         priorityButton.alpha = 0
         priorityButtonBackgroundView.alpha = 0
+        
+        if let taskEditing = taskListVC?.isTaskEditing {
+            if taskEditing{
+                 configureEditingForm()
+            }
+        } else {
+            print ("TasksListViewController was nil")
+        }
     }
     
     // MARK: Actions
@@ -145,10 +154,12 @@ class NewTaskViewController: UIViewController {
             taskListVC?.addNewTask(task: newTask)
         }
         
+        taskListVC?.isTaskEditing = false
         dismiss(animated: true, completion: nil)
     }
     
     @IBAction func cancelView(_ sender: Any) {
+        taskListVC?.isTaskEditing = false
         dismiss(animated: true, completion: nil)
     }
     
@@ -175,19 +186,7 @@ class NewTaskViewController: UIViewController {
         newTaskTextName.endEditing(true)
         if let taskText = newTaskTextName.text{
             if taskText.count > 0 {
-                self.durationLabel.isHidden = false
-                self.slider.isHidden = false
-                self.priorityLabel.isHidden = false
-                self.priorityButton.isHidden = false
-                self.priorityButtonBackgroundView.isHidden = false
-                UIView.animate(withDuration: 0.7, animations: {self.durationLabel.alpha = 1})
-                UIView.animate(withDuration: 0.7, animations: {self.slider.alpha = 1})
-                _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) {_ in
-                    UIView.animate(withDuration: 0.7, animations: {self.priorityLabel.alpha = 1})
-                    UIView.animate(withDuration: 0.7, animations: { self.priorityButton.alpha = 1
-                        self.priorityButtonBackgroundView.alpha = 1
-                    })
-                }
+                showForm()
             }
             else{
                 UIView.animate(withDuration: 0.5, animations: {self.priorityLabel.alpha = 0})
@@ -245,6 +244,23 @@ class NewTaskViewController: UIViewController {
     
     
     // MARK: Functions
+    
+    func showForm() {
+        self.durationLabel.isHidden = false
+        self.slider.isHidden = false
+        self.priorityLabel.isHidden = false
+        self.priorityButton.isHidden = false
+        self.priorityButtonBackgroundView.isHidden = false
+        backButton.setTitle("OK", for: .normal)
+        UIView.animate(withDuration: 0.7, animations: {self.durationLabel.alpha = 1})
+        UIView.animate(withDuration: 0.7, animations: {self.slider.alpha = 1})
+        _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) {_ in
+            UIView.animate(withDuration: 0.7, animations: {self.priorityLabel.alpha = 1})
+            UIView.animate(withDuration: 0.7, animations: { self.priorityButton.alpha = 1
+                self.priorityButtonBackgroundView.alpha = 1
+            })
+        }
+    }
     
     func confBackButtonStyle(){
         backButton.layer.cornerRadius = backButton.bounds.size.width/2
@@ -435,6 +451,11 @@ class NewTaskViewController: UIViewController {
         
     }
     
+    func configureEditingForm() {
+        newTaskTextName.text = taskListVC?.tableView.cellForRow(at: selectedRow)?.textLabel?.text
+        showForm()
+    }
+    
     
     
     
@@ -481,7 +502,7 @@ extension NewTaskViewController: UITextFieldDelegate{
         }
         
         if newString.length > 0 {
-            backButton.setTitle("OK", for: .normal)
+            //backButton.setTitle("OK", for: .normal)
             cancelButton.isHidden = false
         }
         else {

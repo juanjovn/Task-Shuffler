@@ -38,6 +38,7 @@ class TasksListViewController: AMTabsViewController {
     var pendingTasks = [Task]()
     var assignedTasks = [Task]()
     var completedTasks = [Task]()
+    var isTaskEditing: Bool = false
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -159,6 +160,7 @@ class TasksListViewController: AMTabsViewController {
         }
     }
     
+    
 }
 
 extension TasksListViewController: TabItem{
@@ -175,14 +177,22 @@ extension TasksListViewController: TabItem{
 extension TasksListViewController: UIViewControllerTransitioningDelegate{
     
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+      let rowIndex: IndexPath
       let controller = segue.destination
       controller.transitioningDelegate = self
       controller.modalPresentationCapturesStatusBarAppearance = true
       controller.modalPresentationStyle = .custom
-        
+        if let i = (sender as? UIScrollView){
+            print ("SENDER ->>>>> \(i)")
+            rowIndex = tableView.indexPathForSelectedRow!
+            
+        } else { return }
+        print("pasa")
+        print(sender.debugDescription)
         // Pass data between controllers
         let vc = segue.destination as? NewTaskViewController
         vc?.taskListVC = self // Assigns reference to the property on the modal view controller NewTaskViewController
+        vc?.selectedRow = rowIndex
     }
     
     // MARK: UIViewControllerTransitioningDelegate
@@ -287,6 +297,15 @@ extension TasksListViewController: UITableViewDelegate{
             
         }
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        isTaskEditing = true
+        performSegue(withIdentifier: "newTaskSegue", sender: tableView)
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    
+    
     
     
 }
