@@ -14,6 +14,10 @@ import WCLShineButton
 
 class NewTaskViewController: UIViewController {
     
+    deinit {
+        print("⚠️ DEINIT NEWTASKVC ⚠️")
+    }
+    
     var taskListVC: TasksListViewController?
     
     // MARK: Buttons
@@ -139,8 +143,6 @@ class NewTaskViewController: UIViewController {
             if taskEditing{
                  configureEditingForm()
             }
-        } else {
-            print ("TasksListViewController was nil")
         }
     }
     
@@ -283,13 +285,12 @@ class NewTaskViewController: UIViewController {
         ]
         
         // Fraction
-        slider.attributedTextForFraction = { fraction in
+        slider.attributedTextForFraction = { [unowned self] fraction in
             let formatter = NumberFormatter()
             formatter.maximumIntegerDigits = 3
             formatter.maximumFractionDigits = 0
             let string = formatter.string(from: 10 + (fraction * (180 - 10)) as NSNumber) ?? ""
             let attributedString = NSAttributedString(string: string, attributes: self.sliderNobLabelAttributes)
-            
             return attributedString
         }
         
@@ -302,7 +303,7 @@ class NewTaskViewController: UIViewController {
         slider.contentViewColor = .mysticBlue
         slider.valueViewColor = .pearlWhite
         slider.addTarget(self, action: #selector(sliderValueChanged), for: .valueChanged)
-        slider.didBeginTracking = { _ in
+        slider.didBeginTracking = { [unowned self] _ in
             
             let animationDisappear = {
                 self.durationLabel.alpha = 0
@@ -312,7 +313,7 @@ class NewTaskViewController: UIViewController {
             UIView.animate(withDuration: 0.11, animations: animationDisappear)
         }
         
-        slider.didEndTracking = { _ in
+        slider.didEndTracking = { [unowned self] _ in
             
             let animationAppear = {
                 self.durationLabel.alpha = 1
@@ -421,7 +422,6 @@ class NewTaskViewController: UIViewController {
             slider.fraction = slider.fraction
             
             
-            
             print("SLIDER UPDATED")
         }
         
@@ -452,7 +452,7 @@ class NewTaskViewController: UIViewController {
     }
     
     func configureEditingForm() {
-        newTaskTextName.text = taskListVC?.tableView.cellForRow(at: selectedRow)?.textLabel?.text
+        newTaskTextName.text = taskListVC?.pendingTasks[selectedRow.row].name
         showForm()
     }
     

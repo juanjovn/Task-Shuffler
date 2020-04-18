@@ -140,25 +140,21 @@ class TasksListViewController: AMTabsViewController {
 //        }
 //    }
     
-    public func addNewTask (task: Task) {
-        
-        pendingTasks.append(task)
-        print(pendingTasks.description)
-//        let numbCurrentRows = tableView.numberOfRows(inSection: 0)
-//        _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) {_ in
-//        let indexPath = IndexPath(row: numbCurrentRows, section: 0)
-//        self.tableView.insertRows(at: [indexPath], with: UITableView.RowAnimation.fade)
-//
-//        }
-        
+    func delayReloadSections(section: Int) {
         _ = Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false) {_ in
             UIView.animate(withDuration: 0.5, animations: { [weak self] in
                 guard let `self` = self else { return }
-                let indexSet = IndexSet(integer: 0)
-                self.tableView.reloadSections(indexSet, with: UITableView.RowAnimation.fade)
+                self.tableView.reloadSections(IndexSet(integer: section), with: UITableView.RowAnimation.fade)
             })
         }
     }
+    
+    public func addNewTask (task: Task) {
+        pendingTasks.append(task)
+        delayReloadSections(section: 0)
+    }
+    
+    
     
     
 }
@@ -178,21 +174,19 @@ extension TasksListViewController: UIViewControllerTransitioningDelegate{
     
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
       let rowIndex: IndexPath
-      let controller = segue.destination
-      controller.transitioningDelegate = self
-      controller.modalPresentationCapturesStatusBarAppearance = true
-      controller.modalPresentationStyle = .custom
+      let controller = segue.destination as? NewTaskViewController
+      controller?.transitioningDelegate = self
+      controller?.modalPresentationCapturesStatusBarAppearance = true
+      controller?.modalPresentationStyle = .custom
         if let i = (sender as? UIScrollView){
             print ("SENDER ->>>>> \(i)")
             rowIndex = tableView.indexPathForSelectedRow!
-            
-        } else { return }
+            controller?.selectedRow = rowIndex
+        }
         print("pasa")
         print(sender.debugDescription)
         // Pass data between controllers
-        let vc = segue.destination as? NewTaskViewController
-        vc?.taskListVC = self // Assigns reference to the property on the modal view controller NewTaskViewController
-        vc?.selectedRow = rowIndex
+        controller?.taskListVC = self // Assigns reference to the property on the modal view controller NewTaskViewController
     }
     
     // MARK: UIViewControllerTransitioningDelegate
@@ -299,8 +293,11 @@ extension TasksListViewController: UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        isTaskEditing = true
-        performSegue(withIdentifier: "newTaskSegue", sender: tableView)
+        if tableView.headerView(forSection: indexPath.section)?.textLabel?.text?.lowercased() == "pending"{
+            isTaskEditing = true
+            performSegue(withIdentifier: "newTaskSegue", sender: tableView)
+        }
+        
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
