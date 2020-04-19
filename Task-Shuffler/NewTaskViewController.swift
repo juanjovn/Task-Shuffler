@@ -116,6 +116,7 @@ class NewTaskViewController: UIViewController {
         priorityLabel.alpha = 0
         
         // Priority button
+        addPriorityButton()
         priorityButton.isHidden = true
         priorityButton.alpha = 0
         priorityButtonBackgroundView.alpha = 0
@@ -130,14 +131,19 @@ class NewTaskViewController: UIViewController {
         print("VIEW DID LOAD FINISHED")
     }
     
+    // MARK: viewWillLayoutSubviews
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        print("🥶🥶🥶🥶🥶🥶🥶🥶🥶🥶🥶🥶🥶")
+        priorityButton.fitLayers()
+    }
+    
     // MARK: viewDidAppear
     
     override func viewDidAppear(_ animated: Bool) {
         // Priority button
-        addPriorityButton()
-        priorityButton.isHidden = true
-        priorityButton.alpha = 0
-        priorityButtonBackgroundView.alpha = 0
+        priorityButtonBackgroundView.layer.cornerRadius = priorityButtonBackgroundView.bounds.size.width/2
         
         if let taskEditing = taskListVC?.isTaskEditing {
             if taskEditing{
@@ -172,11 +178,6 @@ class NewTaskViewController: UIViewController {
         let nobShadow = NSShadow()
         nobShadow.shadowOffset = .init(width: 0, height: 1)
         
-//        sliderNobLabelAttributes = [
-//            .font: UIFont(name: "Avenir Next Medium", size: 20)!,
-//            .foregroundColor: #colorLiteral(red: 0.1333333333, green: 0.2196078431, blue: 0.262745098, alpha: 1),
-//            .shadow: nobShadow
-//        ]
         let attributedString = NSAttributedString(string: String(resultValue), attributes: sliderNobLabelAttributes)
         
         slider.attributedTextForFraction = { fractionValue in
@@ -238,8 +239,6 @@ class NewTaskViewController: UIViewController {
         default:
             taskPriority = .low
         }
-        
-        
     }
     
     
@@ -342,25 +341,14 @@ class NewTaskViewController: UIViewController {
 
         priorityButtonImage = priorityButtomImages[priorityButtonImageIndex]!
         var param1 = WCLShineParams()
-        //param1.bigShineColor = UIColor(#colorLiteral(red: 0.1333333333, green: 0.2196078431, blue: 0.262745098, alpha: 1))
-        //param1.smallShineColor = UIColor(#colorLiteral(red: 0.7921568627, green: 0.7921568627, blue: 0.6666666667, alpha: 0.8543343322))
         param1.animDuration = 0.8
         param1.allowRandomColor = true
-        //param1.shineCount = 30
         priorityButton.params = param1
-        //priorityButton.isSelected = true
         priorityButtonImage = customizePriorityButtonImage(buttonImage: priorityButtonImage)
         priorityButton.image = .defaultAndSelect(priorityButtonImage, priorityButtonImage)
-
-        //Fit button sublayers to new bounds when it was resized due to screen size
-        let subLayersArray = priorityButton.layer.sublayers
         
-        for l in subLayersArray! {
-            l.frame = priorityButton.bounds
-        }
         
         // Circular background of the priority exlamation mark button
-        priorityButtonBackgroundView.layer.cornerRadius = priorityButtonBackgroundView.bounds.size.width/2
         priorityButtonBackgroundView.layer.shadowOpacity = 0.1
         priorityButtonBackgroundView.layer.shadowOffset = CGSize(width: 0, height: 10)
         priorityButtonBackgroundView.layer.shadowColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
@@ -455,11 +443,6 @@ class NewTaskViewController: UIViewController {
         newTaskTextName.text = taskListVC?.pendingTasks[selectedRow.row].name
         showForm()
     }
-    
-    
-    
-    
-
 
 }
 
@@ -550,4 +533,18 @@ extension UIImage {
 
         return image
     }
+}
+
+extension CALayer {
+    func fit(rect: CGRect) {
+      frame = rect
+
+      sublayers?.forEach { $0.fit(rect: rect) }
+    }
+}
+
+extension UIView {
+  func fitLayers() {
+    layer.fit(rect: bounds)
+  }
 }
