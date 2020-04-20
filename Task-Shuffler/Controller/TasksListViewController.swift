@@ -78,24 +78,19 @@ class TasksListViewController: AMTabsViewController {
         
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        setupSegmentedController()
-    }
+    // MARK: viewDidAppear
     
-    // MARK: viewWillAppear
-    override func viewWillAppear(_ animated: Bool) {
-        // insert row in table
-//        _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) {_ in
-//            let indexPath = IndexPath(row: 0, section: 0)
-//            self.tableView.insertRows(at: [indexPath], with: UITableView.RowAnimation.fade)
-//            self.tableView.reloadData()
-//            }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidLayoutSubviews()
+        setupSegmentedController()
     }
     
     // MARK: Functions
     
     func setupTableView() {
         tableView.backgroundColor = .naturGreen
+        let nib = UINib(nibName: "TaskCell", bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: "taskCell")
     }
     
     func setupSegmentedController(){
@@ -320,29 +315,34 @@ extension TasksListViewController : UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let zelda = UITableViewCell.init(style: .default, reuseIdentifier: "prueba")
+        let zelda = tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath) as! TaskCell
         zelda.backgroundColor = .pearlWhite
         
-        var cellText = ""
+        var task = Task(name: "", duration: 0, priority: .low, state: .pending)
         switch indexPath.section {
             case 0:
                 if segmentedController.currentSegment == 0{
-                    cellText = "\(pendingTasks[indexPath.row].name) -  \(pendingTasks[indexPath.row].duration) -  \(pendingTasks[indexPath.row].priority.rawValue)"
+//                    cellText = "\(pendingTasks[indexPath.row].name) -  \(pendingTasks[indexPath.row].duration) -  \(pendingTasks[indexPath.row].priority.rawValue)"
+                    task = pendingTasks[indexPath.row]
                 } else {
-                    cellText = "\(completedTasks[indexPath.row].name) -  \(completedTasks[indexPath.row].duration) -  \(completedTasks[indexPath.row].priority.rawValue)"
+//                    cellText = "\(completedTasks[indexPath.row].name) -  \(completedTasks[indexPath.row].duration) -  \(completedTasks[indexPath.row].priority.rawValue)"
+                    task = completedTasks[indexPath.row]
                 }
                 
             case 1:
-                cellText = "\(assignedTasks[indexPath.row].name) -  \(assignedTasks[indexPath.row].duration) -  \(assignedTasks[indexPath.row].priority.rawValue)"
+//                cellText = "\(assignedTasks[indexPath.row].name) -  \(assignedTasks[indexPath.row].duration) -  \(assignedTasks[indexPath.row].priority.rawValue)"
+                task = assignedTasks[indexPath.row]
             
             default:
                 break
             
         }
         
-        zelda.textLabel?.text = cellText
+        zelda.nameLabel.text = task.name
+        zelda.durationLabel.text = String(task.duration)
+        zelda.priorityLabel.text = task.priority.rawValue
         
-        print("\(#function) --- section = \(indexPath.section), row = \(indexPath.row), name = \(zelda.textLabel?.text ?? "default")")
+        //print("\(#function) --- section = \(indexPath.section), row = \(indexPath.row), name = \(zelda.textLabel?.text ?? "default")")
         
         return zelda
     }
@@ -367,6 +367,10 @@ extension TasksListViewController : UITableViewDataSource{
         default:
             return ""
         }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        view.bounds.height / 14
     }
 
     

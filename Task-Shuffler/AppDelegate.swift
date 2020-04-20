@@ -16,6 +16,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyBoard.instantiateViewController(withIdentifier: "ViewController")
+        
         //MARK: AMTabView Customization
         // Customize the colors
         AMTabView.settings.ballColor = .fireOrange
@@ -44,7 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
     
-        self.window!.rootViewController = ViewController()
+        self.window!.rootViewController = vc
         window?.makeKeyAndVisible()
         return true
     }
