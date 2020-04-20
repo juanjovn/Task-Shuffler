@@ -12,7 +12,7 @@ class TaskCell: UITableViewCell {
 
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var durationLabel: UILabel!
-    @IBOutlet weak var priorityLabel: UILabel!
+    @IBOutlet weak var priorityImage: UIImageView!
     
     
     override func awakeFromNib() {

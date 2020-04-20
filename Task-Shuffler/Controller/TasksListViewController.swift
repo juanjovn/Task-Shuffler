@@ -58,8 +58,6 @@ class TasksListViewController: AMTabsViewController {
         
         view.backgroundColor = .naturGreen
         
-        setupTableView()
-        
         newTaskButton.layer.cornerRadius = newTaskButton.bounds.size.width/2
         newTaskButton.layer.shadowOffset = .init(width: 0, height: 1)
         newTaskButtonBottomConstraint.constant = -100
@@ -74,7 +72,7 @@ class TasksListViewController: AMTabsViewController {
         
         //***** Testing code *****
         
-        
+        setupTableView()
         
     }
     
@@ -91,6 +89,7 @@ class TasksListViewController: AMTabsViewController {
         tableView.backgroundColor = .naturGreen
         let nib = UINib(nibName: "TaskCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "taskCell")
+        tableView.estimatedRowHeight = 40.0
     }
     
     func setupSegmentedController(){
@@ -288,7 +287,8 @@ extension TasksListViewController: UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if tableView.headerView(forSection: indexPath.section)?.textLabel?.text?.lowercased() == "pending"{
+        print(indexPath.description)
+        if indexPath.section == 0 && segmentedController.currentSegment == 0{
             isTaskEditing = true
             performSegue(withIdentifier: "newTaskSegue", sender: tableView)
         }
@@ -317,6 +317,7 @@ extension TasksListViewController : UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let zelda = tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath) as! TaskCell
         zelda.backgroundColor = .pearlWhite
+        zelda.nameLabel.font = .avenirDemiBold(ofSize: 20)
         
         var task = Task(name: "", duration: 0, priority: .low, state: .pending)
         switch indexPath.section {
@@ -340,7 +341,15 @@ extension TasksListViewController : UITableViewDataSource{
         
         zelda.nameLabel.text = task.name
         zelda.durationLabel.text = String(task.duration)
-        zelda.priorityLabel.text = task.priority.rawValue
+        
+        switch task.priority {
+            case .low:
+                zelda.priorityImage.image = UIImage(named: "exc_mark_low")
+            case .medium:
+                zelda.priorityImage.image = UIImage(named: "exc_mark_med")
+            case .high:
+                zelda.priorityImage.image = UIImage(named: "exc_mark_high")
+        }
         
         //print("\(#function) --- section = \(indexPath.section), row = \(indexPath.row), name = \(zelda.textLabel?.text ?? "default")")
         
@@ -370,7 +379,7 @@ extension TasksListViewController : UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        view.bounds.height / 14
+        return view.bounds.height / 10
     }
 
     
