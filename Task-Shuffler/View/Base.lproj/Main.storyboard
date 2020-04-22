@@ -318,7 +318,7 @@
                     <connections>
                         <outlet property="newTaskButton" destination="hW7-Hr-s8P" id="yro-Ui-VEo"/>
                         <outlet property="newTaskButtonBottomConstraint" destination="fdP-3U-jPn" id="zxU-1u-z0g"/>
-                        <outlet property="segmentedController" destination="vC2-CB-gc4" id="2Lr-9t-dzL"/>
+                        <outlet property="segmentedControl" destination="vC2-CB-gc4" id="2Lr-9t-dzL"/>
                         <outlet property="tableView" destination="drR-vR-BFd" id="xRp-Tv-v1K"/>
                     </connections>
                 </viewController>

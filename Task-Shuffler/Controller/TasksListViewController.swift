@@ -18,7 +18,7 @@ class TasksListViewController: AMTabsViewController {
     @IBOutlet weak var newTaskButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var newTaskButtonBottomConstraint: NSLayoutConstraint!
-    @IBOutlet weak var segmentedController: SJFluidSegmentedControl!
+    @IBOutlet weak var segmentedControl: SJFluidSegmentedControl!
     
     
     
@@ -53,8 +53,8 @@ class TasksListViewController: AMTabsViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
-        segmentedController.dataSource = self
-        segmentedController.delegate = self
+        segmentedControl.dataSource = self
+        segmentedControl.delegate = self
         
         view.backgroundColor = .naturGreen
         
@@ -93,9 +93,9 @@ class TasksListViewController: AMTabsViewController {
     }
     
     func setupSegmentedController(){
-        segmentedController.cornerRadius = segmentedController.frame.height / 2
-        let currentTextSize = segmentedController.textFont.pointSize
-        segmentedController.textFont = UIFont.avenirMedium(ofSize: currentTextSize)
+        segmentedControl.cornerRadius = segmentedControl.frame.height / 2
+        let currentTextSize = segmentedControl.textFont.pointSize
+        segmentedControl.textFont = UIFont.avenirMedium(ofSize: currentTextSize)
     }
     
     func createTestTasks() {
@@ -266,7 +266,7 @@ extension TasksListViewController: UITableViewDelegate{
         if editingStyle == .delete {
             switch indexPath.section {
                 case 0:
-                    if segmentedController.currentSegment == 0 {
+                    if segmentedControl.currentSegment == 0 {
                         pendingTasks.remove(at: indexPath.row)
                     } else {
                         completedTasks.remove(at: indexPath.row)
@@ -279,16 +279,42 @@ extension TasksListViewController: UITableViewDelegate{
             
             tableView.deleteRows(at: [indexPath], with: .fade)
             
-            if !existTasks(tasks: assignedTasks){
-                tableView.reloadSections(IndexSet(integer: 1), with: .fade)
-            }
+            hideAssignedIfEmpty()
             
         }
     }
     
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        var swipeAction = UIContextualAction()
+        if segmentedControl.currentSegment == 0 {
+            swipeAction = UIContextualAction(style: .normal, title: "✓", handler: {
+                (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
+                self.markCompleted(indexPath: indexPath)
+                print("✅ Marcado completado")
+                success(true)
+            })
+            swipeAction.image = UIGraphicsImageRenderer(size: CGSize(width: 26, height: 20)).image { _ in
+                UIImage(named: "tick")?.draw(in: CGRect(x: 0, y: 0, width: 26, height: 20))
+            }
+            swipeAction.backgroundColor = .powerGreen
+        } else {
+            swipeAction = UIContextualAction(style: .normal, title: "⎌", handler: {
+                (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
+                print("⎌ Marcado restaurar")
+                success(true)
+            })
+            swipeAction.image = UIGraphicsImageRenderer(size: CGSize(width: 26, height: 26)).image { _ in
+                UIImage(named: "restore")?.draw(in: CGRect(x: 0, y: 0, width: 26, height: 26))
+            }
+            swipeAction.backgroundColor = .systemOrange
+        }
+        
+        return UISwipeActionsConfiguration(actions: [swipeAction])
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(indexPath.description)
-        if indexPath.section == 0 && segmentedController.currentSegment == 0{
+        if indexPath.section == 0 && segmentedControl.currentSegment == 0{
             isTaskEditing = true
             performSegue(withIdentifier: "newTaskSegue", sender: tableView)
         }
@@ -296,23 +322,28 @@ extension TasksListViewController: UITableViewDelegate{
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let markCompleted = UIContextualAction(style: .normal, title: "✓", handler: {
-            (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
-            print("✅ Marcado completado")
-            success(true)
-        })
-        markCompleted.image = UIGraphicsImageRenderer(size: CGSize(width: 26, height: 20)).image { _ in
-            UIImage(named: "tick")?.draw(in: CGRect(x: 0, y: 0, width: 26, height: 20))
-        }
-        markCompleted.backgroundColor = .powerGreen
+    func markCompleted(indexPath: IndexPath) {
+        var task: Task
         
-        return UISwipeActionsConfiguration(actions: [markCompleted])
+        if indexPath.section == 0 {
+            task = pendingTasks[indexPath.row]
+            pendingTasks.remove(at: indexPath.row)
+        } else {
+            task = assignedTasks[indexPath.row]
+            assignedTasks.remove(at: indexPath.row)
+        }
+        
+        completedTasks.insert(task, at: 0)
+        tableView.deleteRows(at: [indexPath], with: .fade)
+        hideAssignedIfEmpty()
     }
     
-    
-    
-    
+    func hideAssignedIfEmpty() {
+        if !existTasks(tasks: assignedTasks){
+            tableView.reloadSections(IndexSet(integer: 1), with: .fade)
+        }
+    }
+
     
 }
 
@@ -322,9 +353,9 @@ extension TasksListViewController : UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return segmentedController.currentSegment == 0 ? pendingTasks.count : completedTasks.count
+            return segmentedControl.currentSegment == 0 ? pendingTasks.count : completedTasks.count
         } else {
-            return segmentedController.currentSegment == 0 ? assignedTasks.count : 0
+            return segmentedControl.currentSegment == 0 ? assignedTasks.count : 0
         }
     }
     
@@ -336,7 +367,7 @@ extension TasksListViewController : UITableViewDataSource{
         var task = Task(name: "", duration: 0, priority: .low, state: .pending)
         switch indexPath.section {
             case 0:
-                if segmentedController.currentSegment == 0{
+                if segmentedControl.currentSegment == 0{
 //                    cellText = "\(pendingTasks[indexPath.row].name) -  \(pendingTasks[indexPath.row].duration) -  \(pendingTasks[indexPath.row].priority.rawValue)"
                     task = pendingTasks[indexPath.row]
                 } else {
@@ -376,8 +407,8 @@ extension TasksListViewController : UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let firstSectionTitle: String = segmentedController.currentSegment == 0 ? "Pending" : "Completed"
-        let secondSectionTitle: String = segmentedController.currentSegment == 0 ? "Assigned" : ""
+        let firstSectionTitle: String = segmentedControl.currentSegment == 0 ? "Pending" : "Completed"
+        let secondSectionTitle: String = segmentedControl.currentSegment == 0 ? "Assigned" : ""
         switch section {
         case 0:
             return firstSectionTitle
