@@ -21,26 +21,8 @@ class ViewController: AMTabsViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //***** Testing code *****
-        
-        
-        myTask = Task(name: "Tarea de prueba", duration: 60, priority: .low, state: .pending)
-        
-//        if let task = myTask {
-//            print(task)
-//        } else {
-//            print("Task llegó nulo")
-//        }
-        
-        //***** Testing code *****
-        
-        
-        //AMTabView test code
-        
+    
         setTabsControllers()
-        
-        
     }
     
     

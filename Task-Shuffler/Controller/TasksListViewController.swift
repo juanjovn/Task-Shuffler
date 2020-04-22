@@ -296,6 +296,20 @@ extension TasksListViewController: UITableViewDelegate{
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let markCompleted = UIContextualAction(style: .normal, title: "✓", handler: {
+            (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
+            print("✅ Marcado completado")
+            success(true)
+        })
+        markCompleted.image = UIGraphicsImageRenderer(size: CGSize(width: 26, height: 20)).image { _ in
+            UIImage(named: "tick")?.draw(in: CGRect(x: 0, y: 0, width: 26, height: 20))
+        }
+        markCompleted.backgroundColor = .powerGreen
+        
+        return UISwipeActionsConfiguration(actions: [markCompleted])
+    }
+    
     
     
     
@@ -317,7 +331,7 @@ extension TasksListViewController : UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let zelda = tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath) as! TaskCell
         zelda.backgroundColor = .pearlWhite
-        zelda.nameLabel.font = .avenirDemiBold(ofSize: 20)
+        zelda.nameLabel.font = .avenirMedium(ofSize: 21)
         
         var task = Task(name: "", duration: 0, priority: .low, state: .pending)
         switch indexPath.section {
@@ -340,7 +354,7 @@ extension TasksListViewController : UITableViewDataSource{
         }
         
         zelda.nameLabel.text = task.name
-        zelda.durationLabel.text = String(task.duration)
+        zelda.durationLabel.text = String(task.duration) + "'"
         
         switch task.priority {
             case .low:
@@ -379,7 +393,7 @@ extension TasksListViewController : UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return view.bounds.height / 10
+        return view.bounds.height / 9
     }
 
     
@@ -433,12 +447,6 @@ extension TasksListViewController: SJFluidSegmentedControlDelegate {
 //    }
     
     func segmentedControl(_ segmentedControl: SJFluidSegmentedControl, didChangeFromSegmentAtIndex fromIndex: Int, toSegmentAtIndex toIndex: Int) {
-//        if toIndex == 1 {
-//            //tableView.deleteSections(IndexSet(integer: 1), with: .bottom)
-//            tableView.reloadSections(IndexSet(integer: 0), with: .fade)
-//        } else {
-//            tableView.reloadSections(IndexSet(integersIn: 0...1), with: .fade)
-//        }
         
         tableView.reloadSections(IndexSet(integersIn: 0...1), with: .fade)
     }

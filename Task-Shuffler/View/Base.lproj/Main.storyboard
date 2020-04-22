@@ -251,8 +251,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bouncesZoom="NO" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="drR-vR-BFd">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bouncesZoom="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="drR-vR-BFd">
                                 <rect key="frame" x="0.0" y="137" width="375" height="490"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s5V-zp-QGi">
                                 <rect key="frame" x="0.0" y="96" width="375" height="41"/>
@@ -301,13 +302,13 @@
                         <color key="backgroundColor" red="0.1333333333" green="0.21960784310000001" blue="0.26274509800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="drR-vR-BFd" firstAttribute="top" secondItem="s5V-zp-QGi" secondAttribute="bottom" id="Eoa-SJ-NwL"/>
-                            <constraint firstItem="Oi9-0p-9MJ" firstAttribute="trailing" secondItem="drR-vR-BFd" secondAttribute="trailing" id="KLE-9j-eQc"/>
+                            <constraint firstItem="s5V-zp-QGi" firstAttribute="trailing" secondItem="drR-vR-BFd" secondAttribute="trailing" id="KLE-9j-eQc"/>
                             <constraint firstItem="Oi9-0p-9MJ" firstAttribute="trailing" secondItem="s5V-zp-QGi" secondAttribute="trailing" id="Qw0-v4-q9v"/>
                             <constraint firstItem="Oi9-0p-9MJ" firstAttribute="bottom" secondItem="drR-vR-BFd" secondAttribute="bottom" constant="40" id="Wkr-TV-5Iy"/>
                             <constraint firstItem="s5V-zp-QGi" firstAttribute="top" secondItem="Oi9-0p-9MJ" secondAttribute="top" id="Ygj-Vw-Y8k"/>
                             <constraint firstAttribute="bottom" secondItem="hW7-Hr-s8P" secondAttribute="bottom" constant="80" id="fdP-3U-jPn"/>
                             <constraint firstItem="s5V-zp-QGi" firstAttribute="leading" secondItem="Oi9-0p-9MJ" secondAttribute="leading" id="hSq-wz-Izh"/>
-                            <constraint firstItem="drR-vR-BFd" firstAttribute="leading" secondItem="Oi9-0p-9MJ" secondAttribute="leading" id="lYN-eV-G8A"/>
+                            <constraint firstItem="drR-vR-BFd" firstAttribute="leading" secondItem="s5V-zp-QGi" secondAttribute="leading" id="lYN-eV-G8A"/>
                             <constraint firstItem="s5V-zp-QGi" firstAttribute="height" secondItem="Oi9-0p-9MJ" secondAttribute="height" multiplier="1:14" id="rcV-Ww-6AD"/>
                             <constraint firstItem="hW7-Hr-s8P" firstAttribute="centerX" secondItem="s1Q-l0-V7B" secondAttribute="centerX" id="vcw-vY-q0L"/>
                         </constraints>

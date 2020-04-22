@@ -179,12 +179,12 @@ open class AMTabsViewController: UIViewController {
               let animationDirection: UIView.AnimationOptions
               
               if selectedTabIndex > lastSelectedViewIndex! {
-                animationDirection = .transitionFlipFromLeft
+                animationDirection = .transitionCrossDissolve
               } else {
-                animationDirection = .transitionFlipFromRight
+                animationDirection = .transitionCrossDissolve
               }
               
-            UIView.transition(from: fromView, to: toView, duration: 0.3, options: [animationDirection], completion: nil)
+            UIView.transition(from: fromView, to: toView, duration: 0.2, options: [animationDirection], completion: nil)
           }
       }else{
           currentView?.removeFromSuperview()
