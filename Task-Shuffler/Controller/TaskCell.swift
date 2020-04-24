@@ -45,6 +45,8 @@ class TaskCell: UITableViewCell {
         containerView.layer.shouldRasterize = true
         containerView.layer.rasterizationScale = UIScreen.main.scale
         
+        containerView.backgroundColor = .aliceBlue
+        
     }
     
 }

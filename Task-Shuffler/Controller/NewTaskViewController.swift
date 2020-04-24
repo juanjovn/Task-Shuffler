@@ -15,7 +15,7 @@ import WCLShineButton
 class NewTaskViewController: UIViewController {
     
     deinit {
-        print("⚠️ DEINIT NEWTASKVC ⚠️")
+        //print("⚠️ DEINIT NEWTASKVC ⚠️")
     }
     
     var taskListVC: TasksListViewController?
@@ -125,17 +125,13 @@ class NewTaskViewController: UIViewController {
         newTaskTextName.becomeFirstResponder()
         
         // Responsive resize
-        
-        print("ENTERING SETUP SCREEN SIZE")
         setupForScreenSize()
-        print("VIEW DID LOAD FINISHED")
     }
     
     // MARK: viewWillLayoutSubviews
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        print("🥶🥶🥶🥶🥶🥶🥶🥶🥶🥶🥶🥶🥶")
         priorityButton.fitLayers()
     }
     
@@ -158,8 +154,11 @@ class NewTaskViewController: UIViewController {
         var newTask : Task
         if backButton.titleLabel?.text == "OK"{
             newTask = Task(name: newTaskTextName.text!, duration: Int(slider.attributedTextForFraction(slider.fraction).string)!, priority: taskPriority, state: .pending)
-            
-            taskListVC?.addNewTask(task: newTask)
+            if taskListVC!.isTaskEditing {
+                taskListVC?.replaceTask(task: newTask, position: selectedRow.row)
+            } else {
+                taskListVC?.addNewTask(task: newTask)
+            }
         }
         
         taskListVC?.isTaskEditing = false
@@ -272,7 +271,7 @@ class NewTaskViewController: UIViewController {
     }
     
     func addSlider() {
-        
+        var nobText = ""
         // Nob
         let nobShadow = NSShadow()
         nobShadow.shadowOffset = .init(width: 0, height: 1)
@@ -288,7 +287,11 @@ class NewTaskViewController: UIViewController {
             let formatter = NumberFormatter()
             formatter.maximumIntegerDigits = 3
             formatter.maximumFractionDigits = 0
-            let string = formatter.string(from: 10 + (fraction * (180 - 10)) as NSNumber) ?? ""
+            var string = formatter.string(from: 10 + (fraction * (180 - 10)) as NSNumber) ?? ""
+            if self.taskListVC!.isTaskEditing {
+                string = "\(self.taskListVC?.pendingTasks[self.selectedRow.row].duration ?? 0)"
+                nobText = string
+            }
             let attributedString = NSAttributedString(string: string, attributes: self.sliderNobLabelAttributes)
             return attributedString
         }
@@ -296,6 +299,9 @@ class NewTaskViewController: UIViewController {
         slider.setMinimumLabelAttributedText(NSAttributedString(string: "10", attributes: sliderLabelAttributes))
         slider.setMaximumLabelAttributedText(NSAttributedString(string: "180", attributes: sliderLabelAttributes))
         slider.fraction = 0.295
+        if self.taskListVC!.isTaskEditing {
+            slider.fraction = fromValueToFractionSlider(value: nobText)
+        }
         slider.shadowOffset = CGSize(width: 0, height: 10)
         slider.shadowBlur = 5
         slider.shadowColor = UIColor(white: 0, alpha: 0.1)
@@ -332,13 +338,32 @@ class NewTaskViewController: UIViewController {
     }
     
     
-    func roundTo(n: Float, mult: Int) -> Int{
+    private func roundTo(n: Float, mult: Int) -> Int{
         let result: Float = n / Float(mult)
         return Int(result.rounded()) * mult
     }
     
+    private func fromValueToFractionSlider (value: String) -> (CGFloat) {
+        let num = CGFloat(Double(value) ?? 0)
+        
+        return (num - 10) / 170
+    }
+    
     func addPriorityButton() {
-
+        if let vc = taskListVC {
+            if vc.isTaskEditing {
+                switch vc.pendingTasks[selectedRow.row].priority {
+                case .low:
+                    priorityButtonImageIndex = 0
+                case .medium:
+                    priorityButtonImageIndex = 1
+                case .high:
+                    priorityButtonImageIndex = 2
+                }
+            }
+        } else {
+            print("Missing Task List View Controller")
+        }
         priorityButtonImage = priorityButtomImages[priorityButtonImageIndex]!
         var param1 = WCLShineParams()
         param1.animDuration = 0.8
@@ -402,15 +427,11 @@ class NewTaskViewController: UIViewController {
             sliderNobLabelAttributes[.font] = UIFont.avenirMedium(ofSize: 16)
             let attributedString = NSAttributedString(string: String(resultValue), attributes: sliderNobLabelAttributes)
             slider.attributedTextForFraction = { fractionValue in
-                print("INSIDE THE CLOSURE")
                 return attributedString
             }
             
             // Just for trigger the function updateValueViewText() inside Slider
             slider.fraction = slider.fraction
-            
-            
-            print("SLIDER UPDATED")
         }
         
         func setupPriorityButtonBackground(){
