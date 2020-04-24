@@ -122,7 +122,10 @@ class NewTaskViewController: UIViewController {
         priorityButtonBackgroundView.alpha = 0
         
         // Text Field
-        newTaskTextName.becomeFirstResponder()
+        if !taskListVC!.isTaskEditing {
+            newTaskTextName.becomeFirstResponder()
+        }
+        
         
         // Responsive resize
         setupForScreenSize()
@@ -228,6 +231,16 @@ class NewTaskViewController: UIViewController {
         priorityButtonImage = customizePriorityButtonImage(buttonImage: priorityButtonImage)
         priorityButton.image = .defaultAndSelect(priorityButtonImage, priorityButtonImage)
         
+        fromButtonToPriority()
+        
+    }
+    
+    
+    
+    
+    // MARK: Functions
+    
+    private func fromButtonToPriority(){
         switch priorityButtonImageIndex {
             case 0:
                 taskPriority = .low
@@ -239,11 +252,6 @@ class NewTaskViewController: UIViewController {
             taskPriority = .low
         }
     }
-    
-    
-    
-    
-    // MARK: Functions
     
     func showForm() {
         self.durationLabel.isHidden = false
@@ -360,6 +368,8 @@ class NewTaskViewController: UIViewController {
                 case .high:
                     priorityButtonImageIndex = 2
                 }
+                
+                fromButtonToPriority()
             }
         } else {
             print("Missing Task List View Controller")
