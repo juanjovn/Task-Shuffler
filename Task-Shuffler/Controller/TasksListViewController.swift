@@ -27,18 +27,19 @@ class TasksListViewController: AMTabsViewController {
     let transition = BubbleTransition()
     
     //Variables
-    
-//    var myTasks = [Task]() {
-//        didSet{
-//            groupTasks(myTasks)
-//        }
-//    }
-//    var groupedTasks: [(State, [Task])] = [(.pending, []), (.assigned, [])]
-    
+
     var pendingTasks = [Task]()
     var assignedTasks = [Task]()
     var completedTasks = [Task]()
     var isTaskEditing: Bool = false
+    
+    //Enums
+    
+    private enum SortType: String {
+        case name = "By name"
+        case priority = "By priority"
+        case duration = "By duration"
+    }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -73,6 +74,7 @@ class TasksListViewController: AMTabsViewController {
         //***** Testing code *****
         
         setupTableView()
+        setupNavigationBar()
         
     }
     
@@ -84,6 +86,98 @@ class TasksListViewController: AMTabsViewController {
     }
     
     // MARK: Functions
+    
+    private func setupNavigationBar() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "sort"), style: .plain, target: self, action: #selector(sortButtonAction))
+    }
+    
+    @objc private func sortButtonAction () {
+        let sortMenu = UIAlertController(title: "Sort by", message: nil, preferredStyle: .actionSheet)
+        let sortByPriorityAction = UIAlertAction(title: "Priority", style: .default, handler: {
+            action in
+            self.sortActions(sortType: .priority)
+        })
+        let sortByDurationAction = UIAlertAction(title: "Duration", style: .default, handler: {
+            action in
+            self.sortActions(sortType: .duration)
+        })
+        let sortByNameAction = UIAlertAction(title: "Name", style: .default, handler: {
+            action in
+            self.sortActions(sortType: .name)
+        })
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        
+        sortMenu.addAction(sortByNameAction)
+        sortMenu.addAction(sortByPriorityAction)
+        sortMenu.addAction(sortByDurationAction)
+        sortMenu.addAction(cancelAction)
+        
+        sortMenu.pruneNegativeWidthConstraints()
+        self.present(sortMenu, animated: true, completion: nil)
+        
+    }
+    
+    private func sortActions (sortType: SortType) {
+        switch sortType {
+        case .priority:
+            if segmentedControl.currentSegment == 0 {
+                let sortedTasks = pendingTasks.sorted(by: {$0.priority.rawValue > $1.priority.rawValue})
+                if sortedTasks == pendingTasks {
+                    pendingTasks = sortedTasks.sorted(by: {$0.priority.rawValue < $1.priority.rawValue})
+                    assignedTasks = assignedTasks.sorted(by: {$0.priority.rawValue < $1.priority.rawValue})
+                } else {
+                    pendingTasks = sortedTasks
+                    assignedTasks = assignedTasks.sorted(by: {$0.priority.rawValue > $1.priority.rawValue})
+                }
+            } else {
+                let sortedTasks = completedTasks.sorted(by: {$0.priority.rawValue > $1.priority.rawValue})
+                if sortedTasks == completedTasks {
+                    completedTasks = sortedTasks.sorted(by: {$0.priority.rawValue < $1.priority.rawValue})
+                } else {
+                    completedTasks = sortedTasks
+                }
+            }
+        case .name:
+            if segmentedControl.currentSegment == 0 {
+                let sortedTasks = pendingTasks.sorted(by: {$0.name < $1.name})
+                if sortedTasks == pendingTasks {
+                    pendingTasks = sortedTasks.sorted(by: {$0.name > $1.name})
+                    assignedTasks = assignedTasks.sorted(by: {$0.name > $1.name})
+                } else {
+                    pendingTasks = sortedTasks
+                    assignedTasks = assignedTasks.sorted(by: {$0.name < $1.name})
+                }
+            } else {
+                let sortedTasks = completedTasks.sorted(by: {$0.name < $1.name})
+                if sortedTasks == completedTasks {
+                    completedTasks = sortedTasks.sorted(by: {$0.name > $1.name})
+                } else {
+                    completedTasks = sortedTasks
+                }
+            }
+        case .duration:
+            if segmentedControl.currentSegment == 0 {
+                let sortedTasks = pendingTasks.sorted(by: {$0.duration < $1.duration})
+                if sortedTasks == pendingTasks {
+                    pendingTasks = sortedTasks.sorted(by: {$0.duration > $1.duration})
+                    assignedTasks = assignedTasks.sorted(by: {$0.duration > $1.duration})
+                } else {
+                    pendingTasks = sortedTasks
+                    assignedTasks = assignedTasks.sorted(by: {$0.duration < $1.duration})
+                }
+            } else {
+                let sortedTasks = completedTasks.sorted(by: {$0.duration < $1.duration})
+                if sortedTasks == completedTasks {
+                    completedTasks = sortedTasks.sorted(by: {$0.duration > $1.duration})
+                } else {
+                    completedTasks = sortedTasks
+                }
+            }
+        }
+        
+        tableView.reloadSections(IndexSet(integersIn: 0...tableView.numberOfSections - 1), with: .fade)
+    }
     
     func setupTableView() {
         tableView.backgroundColor = .paleSilver
@@ -113,7 +207,8 @@ class TasksListViewController: AMTabsViewController {
         ]
         assignedTasks = [
             Task(name: "Tarea asignada 1", duration: 60, priority: .medium, state: .assigned),
-            //Task(name: "Tarea asignada 2", duration: 90, priority: .low, state: .assigned)
+            Task(name: "Tarea asignada 2", duration: 90, priority: .low, state: .assigned),
+            Task(name: "Tarea asignada 3", duration: 10, priority: .high, state: .assigned)
         ]
         completedTasks = [
             Task(name: "Tarea completada 1", duration: 60, priority: .medium, state: .completed),
@@ -123,19 +218,6 @@ class TasksListViewController: AMTabsViewController {
             Task(name: "Tarea completada 5", duration: 90, priority: .low, state: .completed)
         ]
     }
-    
-//    func groupTasks (_ tasks:[Task]) -> (){
-//        groupedTasks = [(.pending, []), (.assigned, [])] // Reinitialize array
-//
-//        for t in tasks {
-//            if t.state == .pending{
-//                groupedTasks[0].1.append(t)
-//            }
-//            else {
-//                groupedTasks[1].1.append(t)
-//            }
-//        }
-//    }
     
     func delayReloadSections(section: Int) {
         _ = Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false) {_ in
@@ -180,7 +262,7 @@ extension TasksListViewController: UIViewControllerTransitioningDelegate{
       controller?.transitioningDelegate = self
       controller?.modalPresentationCapturesStatusBarAppearance = true
       controller?.modalPresentationStyle = .custom
-        if let i = (sender as? UIScrollView){
+        if (sender as? UIScrollView) != nil{
             rowIndex = tableView.indexPathForSelectedRow!
             controller?.selectedRow = rowIndex
         }
@@ -389,15 +471,12 @@ extension TasksListViewController : UITableViewDataSource{
         switch indexPath.section {
             case 0:
                 if segmentedControl.currentSegment == 0{
-//                    cellText = "\(pendingTasks[indexPath.row].name) -  \(pendingTasks[indexPath.row].duration) -  \(pendingTasks[indexPath.row].priority.rawValue)"
                     task = pendingTasks[indexPath.row]
                 } else {
-//                    cellText = "\(completedTasks[indexPath.row].name) -  \(completedTasks[indexPath.row].duration) -  \(completedTasks[indexPath.row].priority.rawValue)"
                     task = completedTasks[indexPath.row]
                 }
                 
             case 1:
-//                cellText = "\(assignedTasks[indexPath.row].name) -  \(assignedTasks[indexPath.row].duration) -  \(assignedTasks[indexPath.row].priority.rawValue)"
                 task = assignedTasks[indexPath.row]
             
             default:
@@ -472,5 +551,16 @@ extension TasksListViewController: SJFluidSegmentedControlDelegate {
     func segmentedControl(_ segmentedControl: SJFluidSegmentedControl, didChangeFromSegmentAtIndex fromIndex: Int, toSegmentAtIndex toIndex: Int) {
         
         tableView.reloadSections(IndexSet(integersIn: 0...1), with: .fade)
+    }
+}
+
+//Just for mute a autolayout warning by a bug of iOS: https://stackoverflow.com/questions/55653187/swift-default-alertviewcontroller-breaking-constraints
+extension UIAlertController {
+    func pruneNegativeWidthConstraints() {
+        for subView in self.view.subviews {
+            for constraint in subView.constraints where constraint.debugDescription.contains("width == - 16") {
+                subView.removeConstraint(constraint)
+            }
+        }
     }
 }
