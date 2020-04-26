@@ -53,7 +53,7 @@ class NewTaskViewController: UIViewController {
     
     // MARK: Constants
     
-    let maxTextFieldLength = 40
+    let maxTextFieldLength = 39
     let step: Float = 5
     let priorityButtomImages = [
         UIImage(named: "exc_mark_low"),

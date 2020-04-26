@@ -251,35 +251,38 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bouncesZoom="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="drR-vR-BFd">
-                                <rect key="frame" x="0.0" y="137" width="375" height="490"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="drR-vR-BFd">
+                                <rect key="frame" x="0.0" y="96" width="375" height="571"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s5V-zp-QGi">
-                                <rect key="frame" x="0.0" y="96" width="375" height="41"/>
+                                <rect key="frame" x="0.0" y="96" width="375" height="37.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vC2-CB-gc4" customClass="SJFluidSegmentedControl" customModule="SJFluidSegmentedControl">
-                                        <rect key="frame" x="94" y="4" width="187.5" height="32.5"/>
-                                        <color key="backgroundColor" red="0.21508601918012152" green="0.3075242534419757" blue="0.36775258302056191" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <rect key="frame" x="131.5" y="7.5" width="112.5" height="30"/>
+                                        <color key="backgroundColor" red="0.21508601918012152" green="0.3075242534419757" blue="0.36775258302056191" alpha="0.69540835889570551" colorSpace="custom" customColorSpace="displayP3"/>
                                         <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="selectorViewColor">
-                                                <color key="value" red="0.91372549020000005" green="0.30980392159999998" blue="0.2156862745" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="applyCornerRadiusToSelectorView" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="applyCornerRadiusToSelectorView" value="NO"/>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                 <real key="value" value="25"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="color" keyPath="textColor">
                                                 <color key="value" red="0.75406885150000003" green="0.75408679249999999" blue="0.75407713649999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="shadowHideDuration">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="shadowShowDuration">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" red="0.1333333333" green="0.21960784310000001" blue="0.26274509800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="vC2-CB-gc4" firstAttribute="centerY" secondItem="s5V-zp-QGi" secondAttribute="centerY" id="1S1-7K-mkd"/>
                                     <constraint firstItem="vC2-CB-gc4" firstAttribute="centerX" secondItem="s5V-zp-QGi" secondAttribute="centerX" id="OEf-QF-ehT"/>
-                                    <constraint firstItem="vC2-CB-gc4" firstAttribute="width" secondItem="s5V-zp-QGi" secondAttribute="width" multiplier="0.5" id="b2Y-aZ-RkS"/>
+                                    <constraint firstItem="vC2-CB-gc4" firstAttribute="width" secondItem="s5V-zp-QGi" secondAttribute="width" multiplier="0.3" id="b2Y-aZ-RkS"/>
+                                    <constraint firstAttribute="bottom" secondItem="vC2-CB-gc4" secondAttribute="bottom" id="eF1-Pd-YhW"/>
                                     <constraint firstItem="vC2-CB-gc4" firstAttribute="height" secondItem="s5V-zp-QGi" secondAttribute="height" multiplier="0.8" id="gNw-aP-SdB"/>
                                 </constraints>
                             </view>
@@ -301,15 +304,15 @@
                         </subviews>
                         <color key="backgroundColor" red="0.1333333333" green="0.21960784310000001" blue="0.26274509800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="drR-vR-BFd" firstAttribute="top" secondItem="s5V-zp-QGi" secondAttribute="bottom" id="Eoa-SJ-NwL"/>
+                            <constraint firstItem="drR-vR-BFd" firstAttribute="top" secondItem="s5V-zp-QGi" secondAttribute="top" id="Eoa-SJ-NwL"/>
                             <constraint firstItem="s5V-zp-QGi" firstAttribute="trailing" secondItem="drR-vR-BFd" secondAttribute="trailing" id="KLE-9j-eQc"/>
                             <constraint firstItem="Oi9-0p-9MJ" firstAttribute="trailing" secondItem="s5V-zp-QGi" secondAttribute="trailing" id="Qw0-v4-q9v"/>
-                            <constraint firstItem="Oi9-0p-9MJ" firstAttribute="bottom" secondItem="drR-vR-BFd" secondAttribute="bottom" constant="40" id="Wkr-TV-5Iy"/>
+                            <constraint firstItem="Oi9-0p-9MJ" firstAttribute="bottom" secondItem="drR-vR-BFd" secondAttribute="bottom" id="Wkr-TV-5Iy"/>
                             <constraint firstItem="s5V-zp-QGi" firstAttribute="top" secondItem="Oi9-0p-9MJ" secondAttribute="top" id="Ygj-Vw-Y8k"/>
                             <constraint firstAttribute="bottom" secondItem="hW7-Hr-s8P" secondAttribute="bottom" constant="80" id="fdP-3U-jPn"/>
                             <constraint firstItem="s5V-zp-QGi" firstAttribute="leading" secondItem="Oi9-0p-9MJ" secondAttribute="leading" id="hSq-wz-Izh"/>
                             <constraint firstItem="drR-vR-BFd" firstAttribute="leading" secondItem="s5V-zp-QGi" secondAttribute="leading" id="lYN-eV-G8A"/>
-                            <constraint firstItem="s5V-zp-QGi" firstAttribute="height" secondItem="Oi9-0p-9MJ" secondAttribute="height" multiplier="1:14" id="rcV-Ww-6AD"/>
+                            <constraint firstItem="s5V-zp-QGi" firstAttribute="height" secondItem="s1Q-l0-V7B" secondAttribute="width" multiplier="1:10" id="rcV-Ww-6AD"/>
                             <constraint firstItem="hW7-Hr-s8P" firstAttribute="centerX" secondItem="s1Q-l0-V7B" secondAttribute="centerX" id="vcw-vY-q0L"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Oi9-0p-9MJ"/>
@@ -319,6 +322,7 @@
                         <outlet property="newTaskButton" destination="hW7-Hr-s8P" id="yro-Ui-VEo"/>
                         <outlet property="newTaskButtonBottomConstraint" destination="fdP-3U-jPn" id="zxU-1u-z0g"/>
                         <outlet property="segmentedControl" destination="vC2-CB-gc4" id="2Lr-9t-dzL"/>
+                        <outlet property="segmentedControlBottomConstraint" destination="eF1-Pd-YhW" id="bQA-13-UWF"/>
                         <outlet property="tableView" destination="drR-vR-BFd" id="xRp-Tv-v1K"/>
                     </connections>
                 </viewController>

@@ -18,6 +18,7 @@ class TasksListViewController: AMTabsViewController {
     @IBOutlet weak var newTaskButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var newTaskButtonBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var segmentedControlBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var segmentedControl: SJFluidSegmentedControl!
     
     
@@ -75,14 +76,18 @@ class TasksListViewController: AMTabsViewController {
         
         setupTableView()
         setupNavigationBar()
-        
+        setupSegmentedController()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        //setupSegmentedController()
     }
     
     // MARK: viewDidAppear
     
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidLayoutSubviews()
-        setupSegmentedController()
+        segmentedControl.cornerRadius = segmentedControl.bounds.height / 2
+        tableView.reloadData()
     }
     
     // MARK: Functions
@@ -183,39 +188,65 @@ class TasksListViewController: AMTabsViewController {
         tableView.backgroundColor = .paleSilver
         let nib = UINib(nibName: "TaskCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "taskCell")
-        tableView.estimatedRowHeight = 40.0
         
-        let insets = UIEdgeInsets(top: 0, left: 0, bottom: 90, right: 0)
+        let insets = UIEdgeInsets(top: 18, left: 0, bottom: 120, right: 0)
         tableView.contentInset = insets
+        
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 50
     }
     
     func setupSegmentedController(){
-        segmentedControl.cornerRadius = segmentedControl.frame.height / 2
+        segmentedControl.cornerRadius = segmentedControl.bounds.height / 2
         let currentTextSize = segmentedControl.textFont.pointSize
         segmentedControl.textFont = UIFont.avenirMedium(ofSize: currentTextSize)
+//        segmentedControl.layer.shadowOffset = CGSize(width: 0, height: 2)
+//        segmentedControl.layer.shadowColor = UIColor.black.cgColor
+//        segmentedControl.layer.shadowOpacity = 0.2
+//        segmentedControl.layer.shadowRadius = 3
+//        segmentedControl.layer.shadowPath = UIBezierPath(roundedRect: segmentedControl.bounds, cornerRadius: 3).cgPath
+//        segmentedControl.layer.shouldRasterize = true
+//        segmentedControl.layer.rasterizationScale = UIScreen.main.scale
     }
     
     func createTestTasks() {
         pendingTasks = [
+            
+            Task(name: "Poner la lavadora y tender la ropa hoy", duration: 180, priority: .high, state: .pending),
             Task(name: "Tarea pendiente 1", duration: 60, priority: .medium, state: .pending),
             Task(name: "Tarea pendiente 2", duration: 90, priority: .low, state: .pending),
             Task(name: "Tarea pendiente 3", duration: 15, priority: .low, state: .pending),
             Task(name: "Tarea pendiente 4", duration: 30, priority: .high, state: .pending),
             Task(name: "Tarea pendiente 5", duration: 90, priority: .low, state: .pending),
+            Task(name: "Tarea pendiente 6 Tarea pendiente 6", duration: 180, priority: .medium, state: .pending),
+            Task(name: "Tarea pendiente 7", duration: 120, priority: .low, state: .pending),
+            Task(name: "Tarea pendiente 2", duration: 90, priority: .low, state: .pending),
+            Task(name: "Tarea pendiente 3", duration: 15, priority: .low, state: .pending),
+            Task(name: "Tarea pendiente 6 Tarea pendiente 6", duration: 30, priority: .high, state: .pending),
+            Task(name: "Tarea pendiente 6 Tarea pendiente 6", duration: 90, priority: .low, state: .pending),
             Task(name: "Tarea pendiente 6", duration: 180, priority: .medium, state: .pending),
-            Task(name: "Tarea pendiente 7", duration: 120, priority: .low, state: .pending)
         ]
         assignedTasks = [
             Task(name: "Tarea asignada 1", duration: 60, priority: .medium, state: .assigned),
             Task(name: "Tarea asignada 2", duration: 90, priority: .low, state: .assigned),
-            Task(name: "Tarea asignada 3", duration: 10, priority: .high, state: .assigned)
+            Task(name: "Tarea asignada 3", duration: 10, priority: .high, state: .assigned),
+            Task(name: "Tarea pendiente 2", duration: 90, priority: .low, state: .assigned),
+            Task(name: "Tarea pendiente 3", duration: 15, priority: .low, state: .assigned),
+            Task(name: "Tarea pendiente 6 Tarea pendiente 6", duration: 30, priority: .high, state: .assigned),
+            Task(name: "Tarea pendiente 5", duration: 90, priority: .low, state: .assigned),
+            Task(name: "Tarea pendiente 6", duration: 180, priority: .medium, state: .assigned),
         ]
         completedTasks = [
             Task(name: "Tarea completada 1", duration: 60, priority: .medium, state: .completed),
             Task(name: "Tarea completada 2", duration: 90, priority: .low, state: .completed),
-            Task(name: "Tarea completada 3", duration: 15, priority: .low, state: .completed),
+            Task(name: "Tarea pendiente 6 Tarea pendiente 6", duration: 15, priority: .low, state: .completed),
             Task(name: "Tarea completada 4", duration: 30, priority: .high, state: .completed),
-            Task(name: "Tarea completada 5", duration: 90, priority: .low, state: .completed)
+            Task(name: "Tarea pendiente 6 Tarea pendiente 6", duration: 90, priority: .low, state: .completed),
+            Task(name: "Tarea pendiente 2", duration: 90, priority: .low, state: .completed),
+            Task(name: "Tarea pendiente 6 Tarea pendiente 6", duration: 15, priority: .low, state: .completed),
+            Task(name: "Tarea pendiente 4", duration: 30, priority: .high, state: .completed),
+            Task(name: "Tarea pendiente 5", duration: 90, priority: .low, state: .completed),
+            Task(name: "Tarea pendiente 6", duration: 180, priority: .medium, state: .completed),
         ]
     }
     
@@ -224,12 +255,14 @@ class TasksListViewController: AMTabsViewController {
             UIView.animate(withDuration: 0.5, animations: { [weak self] in
                 guard let `self` = self else { return }
                 self.tableView.reloadSections(IndexSet(integer: section), with: UITableView.RowAnimation.fade)
+                let topIndex = IndexPath(row: 0, section: 0)
+                self.tableView.scrollToRow(at: topIndex, at: .top, animated: true)
             })
         }
     }
     
     public func addNewTask (task: Task) {
-        pendingTasks.append(task)
+        pendingTasks.insert(task, at: 0)
         delayReloadSections(section: 0)
     }
     
@@ -323,6 +356,8 @@ extension TasksListViewController: UITableViewDelegate{
         UIView.animate(withDuration: 0.5) {
             self.newTaskButton.alpha = 0
             self.newTaskButtonBottomConstraint.constant = 0
+            self.segmentedControl.alpha = 0
+            self.segmentedControlBottomConstraint.constant = 30
             
             // This conditional is just for avoid a xcode warning about UITableView:
             // [TableView] Warning once only: UITableView was told to layout its visible cells and other contents without being in the view hierarchy (the table view or one of its superviews has not been added to a window).
@@ -339,6 +374,8 @@ extension TasksListViewController: UITableViewDelegate{
         UIView.animate(withDuration: 0.3) {
             self.newTaskButton.alpha = 1
             self.newTaskButtonBottomConstraint.constant = 80
+            self.segmentedControl.alpha = 1
+            self.segmentedControlBottomConstraint.constant = 0
             
             // This conditional is just for avoid a xcode warning about UITableView:
             // [TableView] Warning once only: UITableView was told to layout its visible cells and other contents without being in the view hierarchy (the table view or one of its superviews has not been added to a window).
@@ -375,7 +412,6 @@ extension TasksListViewController: UITableViewDelegate{
             tableView.deleteRows(at: [indexPath], with: .fade)
             
             hideAssignedIfEmpty()
-            
         }
     }
     
@@ -427,7 +463,7 @@ extension TasksListViewController: UITableViewDelegate{
             task = assignedTasks[indexPath.row]
             assignedTasks.remove(at: indexPath.row)
         }
-        
+        task.state = .completed
         completedTasks.insert(task, at: 0)
         tableView.deleteRows(at: [indexPath], with: .fade)
         hideAssignedIfEmpty()
@@ -443,6 +479,7 @@ extension TasksListViewController: UITableViewDelegate{
         var task: Task
         task = completedTasks[indexPath.row]
         completedTasks.remove(at: indexPath.row)
+        task.state = .pending
         pendingTasks.append(task)
         tableView.deleteRows(at: [indexPath], with: .fade)
     }
@@ -464,8 +501,6 @@ extension TasksListViewController : UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let zelda = tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath) as! TaskCell
-        zelda.backgroundColor = .pearlWhite
-        zelda.nameLabel.font = .avenirMedium(ofSize: 21)
         
         var task = Task(name: "", duration: 0, priority: .low, state: .pending)
         switch indexPath.section {
@@ -488,21 +523,21 @@ extension TasksListViewController : UITableViewDataSource{
         zelda.durationLabel.text = String(task.duration) + "'"
         
         switch task.priority {
-            case .low:
-                zelda.priorityImage.image = UIImage(named: "exc_mark_low")
-            case .medium:
-                zelda.priorityImage.image = UIImage(named: "exc_mark_med")
-            case .high:
-                zelda.priorityImage.image = UIImage(named: "exc_mark_high")
+        case .low:
+            zelda.priorityImage.image = UIImage(named: "exclamationmark.circle")
+            zelda.priorityImage.tintColor = .powerGreen
+        case .medium:
+            zelda.priorityImage.image = UIImage(named: "exclamationmark.circle")
+            zelda.priorityImage.tintColor = .systemOrange
+        case .high:
+            zelda.priorityImage.image = UIImage(named: "exclamationmark.circle")
+            zelda.priorityImage.tintColor = .fireOrange
         }
-        
-        //print("\(#function) --- section = \(indexPath.section), row = \(indexPath.row), name = \(zelda.textLabel?.text ?? "default")")
         
         return zelda
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        //return segmentedController.currentSegment == 0 ? 2 : 1 //In segmented controller index 0 two sections, in index 1 only one section with completed tasks
         return 2
     }
     
@@ -523,8 +558,16 @@ extension TasksListViewController : UITableViewDataSource{
         }
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return view.bounds.height / 9
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return UITableView.automaticDimension
+//    }
+//
+//    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 100
+//    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
     }
     
     func existTasks (tasks: [Task]) -> Bool {
@@ -540,8 +583,26 @@ extension TasksListViewController: SJFluidSegmentedControlDataSource{
         2
     }
     
-    func segmentedControl(_ segmentedControl: SJFluidSegmentedControl, titleForSegmentAtIndex index: Int) -> String? {
-        index == 0 ? "Current" : "Completed"
+//    func segmentedControl(_ segmentedControl: SJFluidSegmentedControl, titleForSegmentAtIndex index: Int) -> String? {
+//        index == 0 ? "Current" : "Completed"
+//    }
+    
+    func segmentedControl(_ segmentedControl: SJFluidSegmentedControl, gradientColorsForSelectedSegmentAtIndex index: Int) -> [UIColor] {
+        if index == 0{
+            return [UIColor.fireOrange]
+        } else {
+            return [UIColor.powerGreen]
+        }
+    }
+    
+    func segmentedControl(_ segmentedControl: SJFluidSegmentedControl,
+                          gradientColorsForBounce bounce: SJFluidSegmentedControlBounce) -> [UIColor] {
+        switch bounce {
+        case .left:
+            return [UIColor(red: 51 / 255.0, green: 149 / 255.0, blue: 182 / 255.0, alpha: 1.0)]
+        case .right:
+            return [UIColor(red: 9 / 255.0, green: 82 / 255.0, blue: 107 / 255.0, alpha: 1.0)]
+        }
     }
 }
 
@@ -551,6 +612,9 @@ extension TasksListViewController: SJFluidSegmentedControlDelegate {
     func segmentedControl(_ segmentedControl: SJFluidSegmentedControl, didChangeFromSegmentAtIndex fromIndex: Int, toSegmentAtIndex toIndex: Int) {
         
         tableView.reloadSections(IndexSet(integersIn: 0...1), with: .fade)
+        let topIndex = IndexPath(row: 0, section: 0)
+        tableView.scrollToRow(at: topIndex, at: .top, animated: true)
+        tableView.reloadData()
     }
 }
 

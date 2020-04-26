@@ -14,6 +14,7 @@ extension UIFont {
         if let font = UIFont(name: "AvenirNext-Medium", size: size){
             return font
         } else {
+            print("😕 SYSTEM FONT rather than MEDIUM")
             return .systemFont(ofSize: size)
         }
     }
@@ -22,6 +23,7 @@ extension UIFont {
         if let font = UIFont(name: "AvenirNext-DemiBold", size: size){
             return font
         } else {
+            print("😕 SYSTEM FONT rather than DEMIBOLD")
             return .systemFont(ofSize: size)
         }
     }
