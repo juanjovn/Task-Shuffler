@@ -12,5 +12,6 @@ target 'Task-Shuffler' do
   pod 'fluid-slider'
   pod 'WCLShineButton'
   pod 'SJFluidSegmentedControl', '~> 1.0'
+  pod 'RealmSwift', '4.4.1'
 
 end
