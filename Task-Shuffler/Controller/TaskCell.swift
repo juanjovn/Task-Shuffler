@@ -58,6 +58,7 @@ class TaskCell: UITableViewCell {
         
     }
     
+    /// Scale text
     private func setupNameLabel() {
         if (UIScreen.main.bounds.width != 375){
             let scaleFactor: Float = Float(UIScreen.main.bounds.width) / 375

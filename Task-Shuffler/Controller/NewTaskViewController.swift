@@ -53,6 +53,7 @@ class NewTaskViewController: UIViewController {
     
     // MARK: Constants
     
+    let db = DatabaseManager()
     let maxTextFieldLength = 39
     let step: Float = 5
     let priorityButtomImages = [
@@ -156,11 +157,19 @@ class NewTaskViewController: UIViewController {
     @IBAction func closeView(_ sender: Any) {
         var newTask : Task
         if backButton.titleLabel?.text == "OK"{
-            newTask = Task(name: newTaskTextName.text!, duration: Int(slider.attributedTextForFraction(slider.fraction).string)!, priority: taskPriority, state: .pending)
+            let taskRealm = TaskRealm()
+            taskRealm.name = newTaskTextName.text!
+            taskRealm.duration = Int(slider.attributedTextForFraction(slider.fraction).string)!
+            taskRealm.priority = taskPriority.rawValue
+        
+            
+            newTask = Task(id: taskRealm.id, name: taskRealm.name, duration: taskRealm.duration, priority: taskPriority, state: .pending)
             if taskListVC!.isTaskEditing {
+                newTask.id = taskListVC!.pendingTasks[selectedRow.row].id
                 taskListVC?.replaceTask(task: newTask, position: selectedRow.row)
             } else {
                 taskListVC?.addNewTask(task: newTask)
+                db.addData(object: taskRealm)
             }
         }
         

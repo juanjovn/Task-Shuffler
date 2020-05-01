@@ -11,6 +11,7 @@ import Foundation
 // Definition of a task element
 
 struct Task {
+    var id: String
     var name: String
     var duration: Int
     var priority: Priority

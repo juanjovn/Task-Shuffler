@@ -10,6 +10,7 @@ import UIKit
 import AMTabView
 import BubbleTransition
 import SJFluidSegmentedControl
+import RealmSwift
 
 class TasksListViewController: AMTabsViewController {
     
@@ -25,6 +26,7 @@ class TasksListViewController: AMTabsViewController {
     
     //Constants
     
+    let db = DatabaseManager()
     let transition = BubbleTransition()
     
     //Variables
@@ -70,7 +72,11 @@ class TasksListViewController: AMTabsViewController {
         
         //***** Testing code *****
         
-        createTestTasks()
+        //createTestTasks()
+        print(try! Realm().configuration.fileURL!)
+        pendingTasks = TaskManager.populateTasks(state: .pending)
+        assignedTasks = TaskManager.populateTasks(state: .assigned)
+        completedTasks = TaskManager.populateTasks(state: .completed)
         
         //***** Testing code *****
         
@@ -94,6 +100,8 @@ class TasksListViewController: AMTabsViewController {
     
     private func setupNavigationBar() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "sort"), style: .plain, target: self, action: #selector(sortButtonAction))
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "gear"), style: .plain, target: self, action: #selector(settingsButtonAction))
     }
     
     @objc private func sortButtonAction () {
@@ -120,6 +128,10 @@ class TasksListViewController: AMTabsViewController {
         
         sortMenu.pruneNegativeWidthConstraints()
         self.present(sortMenu, animated: true, completion: nil)
+        
+    }
+    
+    @objc func settingsButtonAction(){
         
     }
     
@@ -209,46 +221,46 @@ class TasksListViewController: AMTabsViewController {
 //        segmentedControl.layer.rasterizationScale = UIScreen.main.scale
     }
     
-    func createTestTasks() {
-        pendingTasks = [
-            
-            Task(name: "Poner la lavadora y tender la ropa hoy", duration: 180, priority: .high, state: .pending),
-            Task(name: "Tarea pendiente 1", duration: 60, priority: .medium, state: .pending),
-            Task(name: "Tarea pendiente 2", duration: 90, priority: .low, state: .pending),
-            Task(name: "Tarea pendiente 3", duration: 15, priority: .low, state: .pending),
-            Task(name: "Tarea pendiente 4", duration: 30, priority: .high, state: .pending),
-            Task(name: "Tarea pendiente 5", duration: 90, priority: .low, state: .pending),
-            Task(name: "Tarea pendiente 6 Tarea pendiente 6", duration: 180, priority: .medium, state: .pending),
-            Task(name: "Tarea pendiente 7", duration: 120, priority: .low, state: .pending),
-            Task(name: "Tarea pendiente 2", duration: 90, priority: .low, state: .pending),
-            Task(name: "Tarea pendiente 3", duration: 15, priority: .low, state: .pending),
-            Task(name: "Tarea pendiente 6 Tarea pendiente 6", duration: 30, priority: .high, state: .pending),
-            Task(name: "Tarea pendiente 6 Tarea pendiente 6", duration: 90, priority: .low, state: .pending),
-            Task(name: "Tarea pendiente 6", duration: 180, priority: .medium, state: .pending),
-        ]
-        assignedTasks = [
-            Task(name: "Tarea asignada 1", duration: 60, priority: .medium, state: .assigned),
-            Task(name: "Tarea asignada 2", duration: 90, priority: .low, state: .assigned),
-            Task(name: "Tarea asignada 3", duration: 10, priority: .high, state: .assigned),
-            Task(name: "Tarea pendiente 2", duration: 90, priority: .low, state: .assigned),
-            Task(name: "Tarea pendiente 3", duration: 15, priority: .low, state: .assigned),
-            Task(name: "Tarea pendiente 6 Tarea pendiente 6", duration: 30, priority: .high, state: .assigned),
-            Task(name: "Tarea pendiente 5", duration: 90, priority: .low, state: .assigned),
-            Task(name: "Tarea pendiente 6", duration: 180, priority: .medium, state: .assigned),
-        ]
-        completedTasks = [
-            Task(name: "Tarea completada 1", duration: 60, priority: .medium, state: .completed),
-            Task(name: "Tarea completada 2", duration: 90, priority: .low, state: .completed),
-            Task(name: "Tarea pendiente 6 Tarea pendiente 6", duration: 15, priority: .low, state: .completed),
-            Task(name: "Tarea completada 4", duration: 30, priority: .high, state: .completed),
-            Task(name: "Tarea pendiente 6 Tarea pendiente 6", duration: 90, priority: .low, state: .completed),
-            Task(name: "Tarea pendiente 2", duration: 90, priority: .low, state: .completed),
-            Task(name: "Tarea pendiente 6 Tarea pendiente 6", duration: 15, priority: .low, state: .completed),
-            Task(name: "Tarea pendiente 4", duration: 30, priority: .high, state: .completed),
-            Task(name: "Tarea pendiente 5", duration: 90, priority: .low, state: .completed),
-            Task(name: "Tarea pendiente 6", duration: 180, priority: .medium, state: .completed),
-        ]
-    }
+//    func createTestTasks() {
+//        pendingTasks = [
+//            
+//            Task(name: "Poner la lavadora y tender la ropa hoy", duration: 180, priority: .high, state: .pending),
+//            Task(name: "Tarea pendiente 1", duration: 60, priority: .medium, state: .pending),
+//            Task(name: "Tarea pendiente 2", duration: 90, priority: .low, state: .pending),
+//            Task(name: "Tarea pendiente 3", duration: 15, priority: .low, state: .pending),
+//            Task(name: "Tarea pendiente 4", duration: 30, priority: .high, state: .pending),
+//            Task(name: "Tarea pendiente 5", duration: 90, priority: .low, state: .pending),
+//            Task(name: "Tarea pendiente 6 Tarea pendiente 6", duration: 180, priority: .medium, state: .pending),
+//            Task(name: "Tarea pendiente 7", duration: 120, priority: .low, state: .pending),
+//            Task(name: "Tarea pendiente 2", duration: 90, priority: .low, state: .pending),
+//            Task(name: "Tarea pendiente 3", duration: 15, priority: .low, state: .pending),
+//            Task(name: "Tarea pendiente 6 Tarea pendiente 6", duration: 30, priority: .high, state: .pending),
+//            Task(name: "Tarea pendiente 6 Tarea pendiente 6", duration: 90, priority: .low, state: .pending),
+//            Task(name: "Tarea pendiente 6", duration: 180, priority: .medium, state: .pending),
+//        ]
+//        assignedTasks = [
+//            Task(name: "Tarea asignada 1", duration: 60, priority: .medium, state: .assigned),
+//            Task(name: "Tarea asignada 2", duration: 90, priority: .low, state: .assigned),
+//            Task(name: "Tarea asignada 3", duration: 10, priority: .high, state: .assigned),
+//            Task(name: "Tarea pendiente 2", duration: 90, priority: .low, state: .assigned),
+//            Task(name: "Tarea pendiente 3", duration: 15, priority: .low, state: .assigned),
+//            Task(name: "Tarea pendiente 6 Tarea pendiente 6", duration: 30, priority: .high, state: .assigned),
+//            Task(name: "Tarea pendiente 5", duration: 90, priority: .low, state: .assigned),
+//            Task(name: "Tarea pendiente 6", duration: 180, priority: .medium, state: .assigned),
+//        ]
+//        completedTasks = [
+//            Task(name: "Tarea completada 1", duration: 60, priority: .medium, state: .completed),
+//            Task(name: "Tarea completada 2", duration: 90, priority: .low, state: .completed),
+//            Task(name: "Tarea pendiente 6 Tarea pendiente 6", duration: 15, priority: .low, state: .completed),
+//            Task(name: "Tarea completada 4", duration: 30, priority: .high, state: .completed),
+//            Task(name: "Tarea pendiente 6 Tarea pendiente 6", duration: 90, priority: .low, state: .completed),
+//            Task(name: "Tarea pendiente 2", duration: 90, priority: .low, state: .completed),
+//            Task(name: "Tarea pendiente 6 Tarea pendiente 6", duration: 15, priority: .low, state: .completed),
+//            Task(name: "Tarea pendiente 4", duration: 30, priority: .high, state: .completed),
+//            Task(name: "Tarea pendiente 5", duration: 90, priority: .low, state: .completed),
+//            Task(name: "Tarea pendiente 6", duration: 180, priority: .medium, state: .completed),
+//        ]
+//    }
     
     func delayReloadSections(section: Int) {
         _ = Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false) {_ in
@@ -256,7 +268,11 @@ class TasksListViewController: AMTabsViewController {
                 guard let `self` = self else { return }
                 self.tableView.reloadSections(IndexSet(integer: section), with: UITableView.RowAnimation.fade)
                 let topIndex = IndexPath(row: 0, section: 0)
-                self.tableView.scrollToRow(at: topIndex, at: .top, animated: true)
+                
+                if self.tableView.numberOfRows(inSection: 0) > 0{
+                    self.tableView.scrollToRow(at: topIndex, at: .top, animated: true)
+                }
+                
             })
         }
     }
@@ -264,14 +280,32 @@ class TasksListViewController: AMTabsViewController {
     public func addNewTask (task: Task) {
         pendingTasks.insert(task, at: 0)
         delayReloadSections(section: 0)
+        
+        if segmentedControl.currentSegment > 0 {
+            segmentedControl.setCurrentSegmentIndex(0, animated: true)
+        }
     }
     
     public func replaceTask (task: Task, position: Int) {
         pendingTasks[position] = task
         delayReloadSections(section: 0)
+        TaskManager.updateTask(task: task)
     }
     
+    func testDatabaseAdd(){
+        let model = DummyModel()
+        model.name = "Juanjo"
+        db.addData(object: model)
+    }
     
+    func testDatabaseCleanAll(){
+        db.eraseAll()
+    }
+    
+    func testDatabaseRemove(){
+        let models = db.getData(objectClass: DummyModel.self)
+        db.deleteData(object: models[0])
+    }
     
     
 }
@@ -396,20 +430,25 @@ extension TasksListViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            var task = Task(id: "", name: "", duration: 10, priority: .low, state: .pending)
             switch indexPath.section {
                 case 0:
                     if segmentedControl.currentSegment == 0 {
+                        task = pendingTasks[indexPath.row]
                         pendingTasks.remove(at: indexPath.row)
                     } else {
+                        task = completedTasks[indexPath.row]
                         completedTasks.remove(at: indexPath.row)
                 }
                 case 1:
+                    task = assignedTasks[indexPath.row]
                     assignedTasks.remove(at: indexPath.row)
                 default:
                     break
             }
             
             tableView.deleteRows(at: [indexPath], with: .fade)
+            db.deleteByPK(primaryKey: task.id, objectClass: TaskRealm.self)
             
             hideAssignedIfEmpty()
         }
@@ -466,6 +505,7 @@ extension TasksListViewController: UITableViewDelegate{
         task.state = .completed
         completedTasks.insert(task, at: 0)
         tableView.deleteRows(at: [indexPath], with: .fade)
+        TaskManager.updateTask(task: task)
         hideAssignedIfEmpty()
     }
     
@@ -481,6 +521,7 @@ extension TasksListViewController: UITableViewDelegate{
         completedTasks.remove(at: indexPath.row)
         task.state = .pending
         pendingTasks.append(task)
+        TaskManager.updateTask(task: task)
         tableView.deleteRows(at: [indexPath], with: .fade)
     }
 
@@ -502,7 +543,7 @@ extension TasksListViewController : UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let zelda = tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath) as! TaskCell
         
-        var task = Task(name: "", duration: 0, priority: .low, state: .pending)
+        var task = Task(id: "", name: "", duration: 0, priority: .low, state: .pending)
         switch indexPath.section {
             case 0:
                 if segmentedControl.currentSegment == 0{
@@ -612,9 +653,13 @@ extension TasksListViewController: SJFluidSegmentedControlDelegate {
     func segmentedControl(_ segmentedControl: SJFluidSegmentedControl, didChangeFromSegmentAtIndex fromIndex: Int, toSegmentAtIndex toIndex: Int) {
         
         tableView.reloadSections(IndexSet(integersIn: 0...1), with: .fade)
-        let topIndex = IndexPath(row: 0, section: 0)
-        tableView.scrollToRow(at: topIndex, at: .top, animated: true)
-        tableView.reloadData()
+        
+        if tableView.numberOfRows(inSection: 0) > 0{
+            let topIndex = IndexPath(row: 0, section: 0)
+            tableView.scrollToRow(at: topIndex, at: .top, animated: true)
+            tableView.reloadData()
+        }
+        
     }
 }
 
