@@ -132,7 +132,11 @@ class TasksListViewController: AMTabsViewController {
     }
     
     @objc func settingsButtonAction(){
-        
+        print(SettingsValues.testBool)
+        let settingsVC = SettingsVC()
+        let nav = UINavigationController(rootViewController: settingsVC)
+        nav.navigationBar.prefersLargeTitles = true
+        present(nav, animated: true)
     }
     
     private func sortActions (sortType: SortType) {

@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		45562218270AD4C5EFC5B323 /* Pods_Task_Shuffler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C313B2D615F94E260304E37 /* Pods_Task_Shuffler.framework */; };
 		811880A6243515BC00E5FEE1 /* DeviceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811880A5243515BC00E5FEE1 /* DeviceModel.swift */; };
+		816709CE245C9F7D00D94E65 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816709CC245C9F7D00D94E65 /* SettingsVC.swift */; };
+		816709CF245C9F7D00D94E65 /* SettingsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 816709CD245C9F7D00D94E65 /* SettingsVC.xib */; };
+		816709D1245CCC5000D94E65 /* SettingsValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816709D0245CCC5000D94E65 /* SettingsValues.swift */; };
 		81705A81240B1D4E0053A571 /* GapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81705A80240B1D4E0053A571 /* GapsViewController.swift */; };
 		81705A83240B1D890053A571 /* ScheduleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81705A82240B1D890053A571 /* ScheduleViewController.swift */; };
 		8179FDD924580807009A6D4B /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179FDD824580807009A6D4B /* DatabaseManager.swift */; };
@@ -35,6 +38,9 @@
 		5B051BEDE7302552ECBD0BD9 /* Pods-Task-Shuffler.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Task-Shuffler.release.xcconfig"; path = "Target Support Files/Pods-Task-Shuffler/Pods-Task-Shuffler.release.xcconfig"; sourceTree = "<group>"; };
 		5C313B2D615F94E260304E37 /* Pods_Task_Shuffler.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Task_Shuffler.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		811880A5243515BC00E5FEE1 /* DeviceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceModel.swift; sourceTree = "<group>"; };
+		816709CC245C9F7D00D94E65 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
+		816709CD245C9F7D00D94E65 /* SettingsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsVC.xib; sourceTree = "<group>"; };
+		816709D0245CCC5000D94E65 /* SettingsValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsValues.swift; sourceTree = "<group>"; };
 		81705A80240B1D4E0053A571 /* GapsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GapsViewController.swift; sourceTree = "<group>"; };
 		81705A82240B1D890053A571 /* ScheduleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleViewController.swift; sourceTree = "<group>"; };
 		8179FDD824580807009A6D4B /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
@@ -137,6 +143,7 @@
 				8179FDDA24581E9F009A6D4B /* DummyModel.swift */,
 				817E76F5245A084C00305111 /* TaskRealm.swift */,
 				8197F5C1245ACF700052FCC7 /* TaskManager.swift */,
+				816709D0245CCC5000D94E65 /* SettingsValues.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -147,6 +154,7 @@
 				81E9B1442405BEE400BBADB8 /* Main.storyboard */,
 				81ED3A83244DEFD400C36DB8 /* TaskCell.xib */,
 				81E9B1492405BEE600BBADB8 /* LaunchScreen.storyboard */,
+				816709CD245C9F7D00D94E65 /* SettingsVC.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -161,6 +169,7 @@
 				81705A82240B1D890053A571 /* ScheduleViewController.swift */,
 				818DFEE02422B90D007F6682 /* TestViewController.swift */,
 				81ED3A82244DEFD400C36DB8 /* TaskCell.swift */,
+				816709CC245C9F7D00D94E65 /* SettingsVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -229,6 +238,7 @@
 				81E9B14B2405BEE600BBADB8 /* LaunchScreen.storyboard in Resources */,
 				81E9B1482405BEE600BBADB8 /* Assets.xcassets in Resources */,
 				81E9B1462405BEE400BBADB8 /* Main.storyboard in Resources */,
+				816709CF245C9F7D00D94E65 /* SettingsVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,6 +291,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				816709D1245CCC5000D94E65 /* SettingsValues.swift in Sources */,
+				816709CE245C9F7D00D94E65 /* SettingsVC.swift in Sources */,
 				8188D5B9240701AF00CCBA99 /* Task.swift in Sources */,
 				81D0E450240AE7C800B2E5D8 /* TasksListViewController.swift in Sources */,
 				8179FDD924580807009A6D4B /* DatabaseManager.swift in Sources */,
