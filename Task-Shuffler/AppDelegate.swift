@@ -45,7 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UINavigationBar.appearance().barTintColor = .mysticBlue
             
         }
-        UINavigationBar.appearance().isTranslucent = true
+        //UINavigationBar.appearance().isTranslucent = true
         
     
         self.window!.rootViewController = vc

@@ -60,7 +60,7 @@ class TasksListViewController: AMTabsViewController {
         segmentedControl.dataSource = self
         segmentedControl.delegate = self
         
-        view.backgroundColor = .paleSilver
+        view.backgroundColor = .mysticBlue
         
         newTaskButton.layer.cornerRadius = newTaskButton.bounds.size.width/2
         newTaskButton.layer.shadowOffset = .init(width: 0, height: 1)
@@ -83,10 +83,6 @@ class TasksListViewController: AMTabsViewController {
         setupTableView()
         setupNavigationBar()
         setupSegmentedController()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        //setupSegmentedController()
     }
     
     // MARK: viewDidAppear
@@ -132,11 +128,10 @@ class TasksListViewController: AMTabsViewController {
     }
     
     @objc func settingsButtonAction(){
-        print(SettingsValues.testBool)
         let settingsVC = SettingsVC()
-        let nav = UINavigationController(rootViewController: settingsVC)
-        nav.navigationBar.prefersLargeTitles = true
-        present(nav, animated: true)
+
+        present(UINavigationController(rootViewController: settingsVC), animated: true)
+        //present(settingsVC, animated: true)
     }
     
     private func sortActions (sortType: SortType) {

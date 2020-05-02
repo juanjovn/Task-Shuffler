@@ -9,6 +9,8 @@
 import Foundation
 
 class SettingsValues {
-    static var testBool = false
-    static var markCompletedWhenTimeEnds = false
+    static var taskSettings = [true, true] //[markCompletedWhenTimeEnds, confirmDelete]
+    static var notificationsSettings = [true, true] //[notifyTaskStarts, notifyTaskEnds]
+    static var otherSettings = [true] //[hapticFeedback]
+    static var easterEgg = true
 }
