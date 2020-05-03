@@ -430,7 +430,7 @@ extension TasksListViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             if (SettingsValues.taskSettings[1]){
-                Alert.confirmation(title: "Confirm", message: "Are you sure?", vc: self, handler: {_ in
+                Alert.confirmation(title: "Confirm delete?", message: nil, vc: self, handler: {_ in
                     self.deleteTask(indexPath)
                 })
             } else {

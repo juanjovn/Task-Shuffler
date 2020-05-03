@@ -20,7 +20,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let vc = storyBoard.instantiateViewController(withIdentifier: "ViewController")
         
         // MARK: UserDefaults
-        SettingsValues.loadSettings()
+        if SettingsValues.isKeyPresentInUserDefaults(key: "taskSettings"){
+            SettingsValues.loadSettings()
+        } else {
+            SettingsValues.storeSettings()
+        }
+        
         
         //MARK: AMTabView Customization
         // Customize the colors

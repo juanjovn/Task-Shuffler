@@ -13,7 +13,7 @@ class SettingsVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     //Constants
-    let taskSection =   [ "Mark as completed when time ends",
+    let taskSection =   [ "Mark completed when time ends",
                           "Delete confirmation"]
     let notificationsSection =  [ "Notify task starts",
                                   "Notify task ends"]
@@ -116,6 +116,7 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource{
         mySwitch.onTintColor = .powerGreen
         cell.accessoryView = mySwitch
         cell.backgroundColor = #colorLiteral(red: 0.937254902, green: 0.9450980392, blue: 0.9529411765, alpha: 0.85)
+        cell.textLabel?.font = .avenirMedium(ofSize: UIFont.scaleFont(18))
         switch indexPath.section {
         case 0:
             mySwitch.setOn(SettingsValues.taskSettings[indexPath.row], animated: false)

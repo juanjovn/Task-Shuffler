@@ -9,11 +9,10 @@
 import UIKit
 
 enum Alert {
-    static func confirmation(title: String, message: String, vc: UIViewController, handler: ((UIAlertAction) -> Void)?){
+    static func confirmation(title: String, message: String?, vc: UIViewController, handler: ((UIAlertAction) -> Void)?){
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
         let ok = UIAlertAction(title: "OK", style: .destructive, handler: handler)
-        
         let cancel = UIAlertAction(title: "Cancel", style: .cancel)
         
         alert.addAction(cancel)

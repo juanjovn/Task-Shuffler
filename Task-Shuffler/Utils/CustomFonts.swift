@@ -28,4 +28,13 @@ extension UIFont {
         }
     }
     
+    static func scaleFont(_ size: CGFloat) -> CGFloat{
+        if (UIScreen.main.bounds.width != 375){
+            let scaleFactor = UIScreen.main.bounds.width / 375
+            return CGFloat(size * scaleFactor)
+        } else {
+            return size
+        }
+    }
+    
 }

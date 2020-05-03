@@ -30,4 +30,8 @@ class SettingsValues {
         otherSettings = userDefault.array(forKey: "otherSettings") as! [Bool]
         easterEgg = userDefault.bool(forKey: "easterEgg")
     }
+    
+    static func isKeyPresentInUserDefaults(key: String) -> Bool {
+        return UserDefaults.standard.object(forKey: key) != nil
+    }
 }
