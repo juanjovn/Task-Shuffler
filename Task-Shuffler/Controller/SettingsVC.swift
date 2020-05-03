@@ -85,6 +85,8 @@ class SettingsVC: UIViewController {
         default:
             break
         }
+        
+        SettingsValues.storeSettings()
     }
 
 
@@ -111,7 +113,7 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource{
         let mySwitch = MySettingsSwitch()
         mySwitch.indexPath = indexPath
         mySwitch.addTarget(self, action: #selector(switchAction(sender:)), for: .touchUpInside)
-        mySwitch.onTintColor = .forestGreen
+        mySwitch.onTintColor = .powerGreen
         cell.accessoryView = mySwitch
         cell.backgroundColor = #colorLiteral(red: 0.937254902, green: 0.9450980392, blue: 0.9529411765, alpha: 0.85)
         switch indexPath.section {

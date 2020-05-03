@@ -19,6 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyBoard.instantiateViewController(withIdentifier: "ViewController")
         
+        // MARK: UserDefaults
+        SettingsValues.loadSettings()
+        
         //MARK: AMTabView Customization
         // Customize the colors
         AMTabView.settings.ballColor = .fireOrange

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		45562218270AD4C5EFC5B323 /* Pods_Task_Shuffler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C313B2D615F94E260304E37 /* Pods_Task_Shuffler.framework */; };
 		811880A6243515BC00E5FEE1 /* DeviceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811880A5243515BC00E5FEE1 /* DeviceModel.swift */; };
+		815204EF245E9A1E0004510B /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815204EE245E9A1E0004510B /* Alert.swift */; };
 		816709CE245C9F7D00D94E65 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816709CC245C9F7D00D94E65 /* SettingsVC.swift */; };
 		816709CF245C9F7D00D94E65 /* SettingsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 816709CD245C9F7D00D94E65 /* SettingsVC.xib */; };
 		816709D1245CCC5000D94E65 /* SettingsValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816709D0245CCC5000D94E65 /* SettingsValues.swift */; };
@@ -38,6 +39,7 @@
 		5B051BEDE7302552ECBD0BD9 /* Pods-Task-Shuffler.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Task-Shuffler.release.xcconfig"; path = "Target Support Files/Pods-Task-Shuffler/Pods-Task-Shuffler.release.xcconfig"; sourceTree = "<group>"; };
 		5C313B2D615F94E260304E37 /* Pods_Task_Shuffler.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Task_Shuffler.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		811880A5243515BC00E5FEE1 /* DeviceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceModel.swift; sourceTree = "<group>"; };
+		815204EE245E9A1E0004510B /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		816709CC245C9F7D00D94E65 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		816709CD245C9F7D00D94E65 /* SettingsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsVC.xib; sourceTree = "<group>"; };
 		816709D0245CCC5000D94E65 /* SettingsValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsValues.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 				811880A5243515BC00E5FEE1 /* DeviceModel.swift */,
 				81DECAB5243BA410009051A2 /* CustomColors.swift */,
 				81DECAB7243BAE24009051A2 /* CustomFonts.swift */,
+				815204EE245E9A1E0004510B /* Alert.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -296,6 +299,7 @@
 				8188D5B9240701AF00CCBA99 /* Task.swift in Sources */,
 				81D0E450240AE7C800B2E5D8 /* TasksListViewController.swift in Sources */,
 				8179FDD924580807009A6D4B /* DatabaseManager.swift in Sources */,
+				815204EF245E9A1E0004510B /* Alert.swift in Sources */,
 				818DFEE12422B90D007F6682 /* TestViewController.swift in Sources */,
 				8188D5BB2408601800CCBA99 /* NewTaskViewController.swift in Sources */,
 				81ED3A84244DEFD400C36DB8 /* TaskCell.swift in Sources */,

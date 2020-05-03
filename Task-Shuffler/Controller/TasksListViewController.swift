@@ -429,28 +429,38 @@ extension TasksListViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            var task = Task(id: "", name: "", duration: 10, priority: .low, state: .pending)
-            switch indexPath.section {
-                case 0:
-                    if segmentedControl.currentSegment == 0 {
-                        task = pendingTasks[indexPath.row]
-                        pendingTasks.remove(at: indexPath.row)
-                    } else {
-                        task = completedTasks[indexPath.row]
-                        completedTasks.remove(at: indexPath.row)
-                }
-                case 1:
-                    task = assignedTasks[indexPath.row]
-                    assignedTasks.remove(at: indexPath.row)
-                default:
-                    break
+            if (SettingsValues.taskSettings[1]){
+                Alert.confirmation(title: "Confirm", message: "Are you sure?", vc: self, handler: {_ in
+                    self.deleteTask(indexPath)
+                })
+            } else {
+                deleteTask(indexPath)
             }
-            
-            tableView.deleteRows(at: [indexPath], with: .fade)
-            db.deleteByPK(primaryKey: task.id, objectClass: TaskRealm.self)
-            
-            hideAssignedIfEmpty()
         }
+    }
+    
+    func deleteTask (_ indexPath: IndexPath){
+        var task = Task(id: "", name: "", duration: 10, priority: .low, state: .pending)
+        switch indexPath.section {
+        case 0:
+            if segmentedControl.currentSegment == 0 {
+                task = pendingTasks[indexPath.row]
+                pendingTasks.remove(at: indexPath.row)
+            } else {
+                task = completedTasks[indexPath.row]
+                completedTasks.remove(at: indexPath.row)
+            }
+        case 1:
+            task = assignedTasks[indexPath.row]
+            assignedTasks.remove(at: indexPath.row)
+        default:
+            break
+        }
+        
+        tableView.deleteRows(at: [indexPath], with: .fade)
+        db.deleteByPK(primaryKey: task.id, objectClass: TaskRealm.self)
+        
+        hideAssignedIfEmpty()
     }
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
