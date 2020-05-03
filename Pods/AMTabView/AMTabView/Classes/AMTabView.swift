@@ -167,7 +167,7 @@ public class AMTabView: UIView {
     imagesLayers.enumerated().forEach { offset, element in
       let y = offset == Int(selectedTabIndex) ? 0 : (bounds.height / 2) - (iconSize / 2)
       let x =  (CGFloat(offset) * sectionWidth) + (sectionWidth / 2) - (iconSize / 2)
-      element.frame = CGRect(x: x, y: y, width: iconSize, height: iconSize - 5)
+      element.frame = CGRect(x: x, y: y, width: iconSize, height: iconSize - 8)
       element.mask?.frame = element.bounds
     }
 

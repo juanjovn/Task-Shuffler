@@ -54,12 +54,7 @@ class TasksListViewController: AMTabsViewController {
         super.viewDidLoad()
         
         self.setNeedsStatusBarAppearanceUpdate()
-        
-        tableView.delegate = self
-        tableView.dataSource = self
-        segmentedControl.dataSource = self
-        segmentedControl.delegate = self
-        
+
         view.backgroundColor = .mysticBlue
         
         newTaskButton.layer.cornerRadius = newTaskButton.bounds.size.width/2
@@ -82,7 +77,7 @@ class TasksListViewController: AMTabsViewController {
         
         setupTableView()
         setupNavigationBar()
-        setupSegmentedController()
+        setupSegmentedControl()
     }
     
     // MARK: viewDidAppear
@@ -96,7 +91,6 @@ class TasksListViewController: AMTabsViewController {
     
     private func setupNavigationBar() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "sort"), style: .plain, target: self, action: #selector(sortButtonAction))
-        
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "gear"), style: .plain, target: self, action: #selector(settingsButtonAction))
     }
     
@@ -129,9 +123,7 @@ class TasksListViewController: AMTabsViewController {
     
     @objc func settingsButtonAction(){
         let settingsVC = SettingsVC()
-
         present(UINavigationController(rootViewController: settingsVC), animated: true)
-        //present(settingsVC, animated: true)
     }
     
     private func sortActions (sortType: SortType) {
@@ -196,6 +188,8 @@ class TasksListViewController: AMTabsViewController {
     }
     
     func setupTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
         tableView.backgroundColor = .paleSilver
         let nib = UINib(nibName: "TaskCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "taskCell")
@@ -207,17 +201,10 @@ class TasksListViewController: AMTabsViewController {
         tableView.estimatedRowHeight = 50
     }
     
-    func setupSegmentedController(){
+    func setupSegmentedControl(){
+        segmentedControl.dataSource = self
+        segmentedControl.delegate = self
         segmentedControl.cornerRadius = segmentedControl.bounds.height / 2
-        let currentTextSize = segmentedControl.textFont.pointSize
-        segmentedControl.textFont = UIFont.avenirMedium(ofSize: currentTextSize)
-//        segmentedControl.layer.shadowOffset = CGSize(width: 0, height: 2)
-//        segmentedControl.layer.shadowColor = UIColor.black.cgColor
-//        segmentedControl.layer.shadowOpacity = 0.2
-//        segmentedControl.layer.shadowRadius = 3
-//        segmentedControl.layer.shadowPath = UIBezierPath(roundedRect: segmentedControl.bounds, cornerRadius: 3).cgPath
-//        segmentedControl.layer.shouldRasterize = true
-//        segmentedControl.layer.rasterizationScale = UIScreen.main.scale
     }
     
 //    func createTestTasks() {
@@ -312,7 +299,7 @@ class TasksListViewController: AMTabsViewController {
 extension TasksListViewController: TabItem{
     
     var tabImage: UIImage? {
-        return UIImage(named: "task_icon")
+        return UIImage(named: "list")
     }
     
 }
@@ -436,6 +423,8 @@ extension TasksListViewController: UITableViewDelegate{
             } else {
                 deleteTask(indexPath)
             }
+            
+            
         }
     }
     
@@ -606,18 +595,6 @@ extension TasksListViewController : UITableViewDataSource{
         default:
             return ""
         }
-    }
-    
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return UITableView.automaticDimension
-//    }
-//
-//    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 100
-//    }
-    
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        
     }
     
     func existTasks (tasks: [Task]) -> Bool {

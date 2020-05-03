@@ -32,6 +32,7 @@ enum State: String {
     case pending = "Pending"
     case assigned = "Assigned"
     case completed = "Completed"
+    case outdated = "Outdated"
 }
 
 // Extension for compare if two task are the same

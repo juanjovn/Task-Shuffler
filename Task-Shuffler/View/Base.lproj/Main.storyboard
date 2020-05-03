@@ -16,21 +16,71 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gaps View" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S72-w2-QIr">
-                                <rect key="frame" x="100.5" y="310.5" width="174" height="46"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="38"/>
-                                <color key="textColor" red="0.1333333333" green="0.21960784310000001" blue="0.26274509800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="TJ2-4J-f2Y">
+                                <rect key="frame" x="0.0" y="96" width="375" height="571"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2zZ-UP-CUJ" userLabel="FillView">
+                                <rect key="frame" x="0.0" y="657" width="375" height="10"/>
+                                <color key="backgroundColor" red="0.1333333333" green="0.21960784310000001" blue="0.26274509800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="10" id="xTx-0L-4Gt"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FHw-r7-UvB">
+                                <rect key="frame" x="0.0" y="96" width="375" height="37.5"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NUl-ew-JHq" customClass="SJFluidSegmentedControl" customModule="SJFluidSegmentedControl">
+                                        <rect key="frame" x="131.5" y="7.5" width="112.5" height="30"/>
+                                        <color key="backgroundColor" red="0.21508601920000001" green="0.3075242534" blue="0.36775258300000002" alpha="0.69540835889999997" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="applyCornerRadiusToSelectorView" value="NO"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="25"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                                <color key="value" red="0.75406885150000003" green="0.75408679249999999" blue="0.75407713649999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="shadowHideDuration">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="shadowShowDuration">
+                                                <real key="value" value="1"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="NUl-ew-JHq" firstAttribute="height" secondItem="FHw-r7-UvB" secondAttribute="height" multiplier="0.8" id="RPr-at-klm"/>
+                                    <constraint firstItem="NUl-ew-JHq" firstAttribute="centerX" secondItem="FHw-r7-UvB" secondAttribute="centerX" id="dvW-FH-Bpm"/>
+                                    <constraint firstAttribute="bottom" secondItem="NUl-ew-JHq" secondAttribute="bottom" id="pPK-jh-JIm"/>
+                                    <constraint firstItem="NUl-ew-JHq" firstAttribute="width" secondItem="FHw-r7-UvB" secondAttribute="width" multiplier="0.3" id="xe4-L3-M6s"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.79215686269999996" green="0.79215686269999996" blue="0.66666666669999997" alpha="0.85433433219999999" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="S72-w2-QIr" firstAttribute="centerX" secondItem="xoh-fp-SvY" secondAttribute="centerX" id="KtP-cD-ke4"/>
-                            <constraint firstItem="S72-w2-QIr" firstAttribute="centerY" secondItem="xoh-fp-SvY" secondAttribute="centerY" id="uqw-a8-oqD"/>
+                            <constraint firstItem="TJ2-4J-f2Y" firstAttribute="top" secondItem="FHw-r7-UvB" secondAttribute="bottom" constant="-37.5" id="547-lb-bHY"/>
+                            <constraint firstItem="sOJ-LN-tvB" firstAttribute="bottom" secondItem="2zZ-UP-CUJ" secondAttribute="bottom" id="Czw-KV-2Q4"/>
+                            <constraint firstItem="FHw-r7-UvB" firstAttribute="centerX" secondItem="sOJ-LN-tvB" secondAttribute="centerX" id="Das-X4-hft"/>
+                            <constraint firstItem="TJ2-4J-f2Y" firstAttribute="trailing" secondItem="sOJ-LN-tvB" secondAttribute="trailing" id="JYV-K2-SGk"/>
+                            <constraint firstItem="FHw-r7-UvB" firstAttribute="top" secondItem="sOJ-LN-tvB" secondAttribute="top" id="ONB-Yc-Hpp"/>
+                            <constraint firstItem="TJ2-4J-f2Y" firstAttribute="leading" secondItem="sOJ-LN-tvB" secondAttribute="leading" id="Osd-H2-nop"/>
+                            <constraint firstItem="2zZ-UP-CUJ" firstAttribute="width" secondItem="sOJ-LN-tvB" secondAttribute="width" id="PAN-Nr-eXz"/>
+                            <constraint firstAttribute="bottom" secondItem="TJ2-4J-f2Y" secondAttribute="bottom" id="TH9-Qg-NmH"/>
+                            <constraint firstItem="2zZ-UP-CUJ" firstAttribute="centerX" secondItem="sOJ-LN-tvB" secondAttribute="centerX" id="XtX-SP-lR4"/>
+                            <constraint firstItem="FHw-r7-UvB" firstAttribute="width" secondItem="sOJ-LN-tvB" secondAttribute="width" id="bad-w4-dlW"/>
+                            <constraint firstItem="FHw-r7-UvB" firstAttribute="height" secondItem="sOJ-LN-tvB" secondAttribute="width" multiplier="1:10" id="yla-Uc-Mie"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="sOJ-LN-tvB"/>
                     </view>
                     <navigationItem key="navigationItem" title="Gaps" id="oCX-y3-nCK"/>
+                    <connections>
+                        <outlet property="segmentedControl" destination="NUl-ew-JHq" id="97N-5X-9Kp"/>
+                        <outlet property="segmentedControlBottomConstraint" destination="pPK-jh-JIm" id="MrZ-YZ-f46"/>
+                        <outlet property="tableView" destination="TJ2-4J-f2Y" id="ncU-zJ-i0f"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qda-7O-fTs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
