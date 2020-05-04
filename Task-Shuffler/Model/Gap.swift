@@ -17,11 +17,20 @@ class GapRealm: Object{
     @objc dynamic var state = "Pending"
     @objc dynamic var taskid = ""
     
+    convenience init(startDate: Date, endDate: Date, state: String, taskid: String) {
+        self.init()
+        self.startDate = startDate
+        self.endDate = endDate
+        self.state = state
+        self.taskid = taskid
+        self.duration = intervalDateToMinutes(startDate: startDate, endDate: endDate)
+    }
+    
     override class func primaryKey() -> String? {
         return "id"
     }
     
-    static func intervalDateToMinutes (startDate: Date, endDate: Date) -> Int {
+    func intervalDateToMinutes (startDate: Date, endDate: Date) -> Int {
         let diffSeconds = Int(endDate.timeIntervalSince1970 - startDate.timeIntervalSince1970)
         let minutes = diffSeconds / 60
         

@@ -33,10 +33,18 @@ class GapsViewController: AMTabsViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        test()
+        
         setupView()
         setupNavigationItems()
         setupSegmentedControl()
         setupTableView()
+    }
+    
+    func test(){
+        let gap = GapRealm(startDate: Date(), endDate: Date.init(timeIntervalSinceNow: 120), state: "Pending", taskid: "BC64AFD3-43E6-4F88-8665-879DA397E968")
+        pendingGaps.append(gap)
+        db.addData(object: gap)
     }
     
     func setupNavigationItems() {
@@ -176,36 +184,42 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
         if editingStyle == .delete {
             if (SettingsValues.taskSettings[1]){
                 Alert.confirmation(title: "Confirm delete?", message: nil, vc: self, handler: {_ in
-                    //self.deleteTask(indexPath)
+                    self.deleteGap(indexPath)
                 })
             } else {
-                //deleteTask(indexPath)
+                deleteGap(indexPath)
             }
         }
     }
     
-    func deleteTask (_ indexPath: IndexPath){
-//        var task = Task(id: "", name: "", duration: 10, priority: .low, state: .pending)
-//        switch indexPath.section {
-//        case 0:
-//            if segmentedControl.currentSegment == 0 {
-//                task = pendingTasks[indexPath.row]
-//                pendingTasks.remove(at: indexPath.row)
-//            } else {
-//                task = completedTasks[indexPath.row]
-//                completedTasks.remove(at: indexPath.row)
-//            }
-//        case 1:
-//            task = assignedTasks[indexPath.row]
-//            assignedTasks.remove(at: indexPath.row)
-//        default:
-//            break
-//        }
-//
-//        tableView.deleteRows(at: [indexPath], with: .fade)
-//        db.deleteByPK(primaryKey: task.id, objectClass: TaskRealm.self)
-//
-//        hideAssignedIfEmpty()
+    func deleteGap (_ indexPath: IndexPath){
+        var gap = GapRealm()
+        switch indexPath.section {
+        case 0:
+            if segmentedControl.currentSegment == 0 {
+                gap = pendingGaps[indexPath.row]
+                pendingGaps.remove(at: indexPath.row)
+            } else {
+                gap = completedGaps[indexPath.row]
+                completedGaps.remove(at: indexPath.row)
+            }
+        case 1:
+            gap = assignedGaps[indexPath.row]
+            assignedGaps.remove(at: indexPath.row)
+        default:
+            break
+        }
+
+        tableView.deleteRows(at: [indexPath], with: .fade)
+        db.deleteData(object: gap)
+
+        hideAssignedIfEmpty()
+    }
+    
+    private func hideAssignedIfEmpty() {
+        if !existGaps(gaps: assignedGaps){
+            tableView.reloadSections(IndexSet(integer: 1), with: .fade)
+        }
     }
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -213,7 +227,7 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
         if segmentedControl.currentSegment == 0 {
             swipeAction = UIContextualAction(style: .normal, title: "✓", handler: {
                 (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
-                //self.markCompleted(indexPath: indexPath)
+                self.markCompleted(indexPath: indexPath)
                 print("✅ Marcado completado")
                 success(true)
             })
@@ -247,20 +261,21 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     private func markCompleted(indexPath: IndexPath) {
-//        var task: Task
-//
-//        if indexPath.section == 0 {
-//            task = pendingTasks[indexPath.row]
-//            pendingTasks.remove(at: indexPath.row)
-//        } else {
-//            task = assignedTasks[indexPath.row]
-//            assignedTasks.remove(at: indexPath.row)
-//        }
-//        task.state = .completed
-//        completedTasks.insert(task, at: 0)
-//        tableView.deleteRows(at: [indexPath], with: .fade)
-//        TaskManager.updateTask(task: task)
-//        hideAssignedIfEmpty()
+        var gap = GapRealm()
+
+        if indexPath.section == 0 {
+            gap = pendingGaps[indexPath.row]
+            pendingGaps.remove(at: indexPath.row)
+        } else {
+            gap = assignedGaps[indexPath.row]
+            assignedGaps.remove(at: indexPath.row)
+        }
+        gap.state = State.completed.rawValue
+        completedGaps.insert(gap, at: 0)
+        tableView.deleteRows(at: [indexPath], with: .fade)
+        db.deleteByPK(primaryKey: gap.id, objectClass: GapRealm.self)
+        db.addData(object: gap)
+        hideAssignedIfEmpty()
     }
     
     
@@ -275,6 +290,9 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let zelda = tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath) as! TaskCell
+        
+        zelda.durationLabel.text = "\(pendingGaps[indexPath.row].duration)"
+        zelda.nameLabel.text = "\(pendingGaps[indexPath.row].startDate.timeIntervalSinceNow)"
         
 
         
