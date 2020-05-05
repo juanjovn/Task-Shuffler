@@ -16,9 +16,12 @@ class GapManager {
         let predicate = "state = '\(stateValue)'"
         let gapResults = db.getData(objectClass: GapRealm.self).filter(predicate)
         
+        return self.populateArray(results: gapResults)
+    }
+    
+    static func populateArray (results: Results<Object>) -> ([GapRealm]) {
         var gaps = [GapRealm]()
-        
-        for g in gapResults{
+        for g in results{
             gaps.append(g as! GapRealm)
         }
         

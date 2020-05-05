@@ -9,6 +9,7 @@
 import UIKit
 import AMTabView
 import SJFluidSegmentedControl
+import RealmSwift
 
 class GapsViewController: AMTabsViewController {
     
@@ -24,6 +25,7 @@ class GapsViewController: AMTabsViewController {
     var pendingGaps = [GapRealm]()
     var assignedGaps = [GapRealm]()
     var completedGaps = [GapRealm]()
+    var sorted = 0
     
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -42,8 +44,8 @@ class GapsViewController: AMTabsViewController {
     }
     
     private func test(){
-        db.eraseAll()
-        let gap = GapRealm(startDate: Date(), endDate: Date.init(timeIntervalSinceNow: 120), state: "Pending", taskid: "BC64AFD3-43E6-4F88-8665-879DA397E968")
+        //db.eraseAll()
+        let gap = GapRealm(startDate: Date(), endDate: Date.init(timeIntervalSinceNow: 1000), state: "Pending", taskid: "BC64AFD3-43E6-4F88-8665-879DA397E968")
         pendingGaps.append(gap)
         db.addData(object: gap)
     }
@@ -68,6 +70,50 @@ class GapsViewController: AMTabsViewController {
     }
     
     @objc func sortButtonAction(){
+        let sortMenu = UIAlertController(title: "Sort by", message: nil, preferredStyle: .actionSheet)
+        let sortByDateAction = UIAlertAction(title: "Date", style: .default, handler: {
+            action in
+            self.sortActions(sortType: .date)
+        })
+        let sortByDurationAction = UIAlertAction(title: "Duration", style: .default, handler: {
+            action in
+            self.sortActions(sortType: .duration)
+        })
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        
+        
+        sortMenu.addAction(sortByDateAction)
+        sortMenu.addAction(sortByDurationAction)
+        sortMenu.addAction(cancelAction)
+        
+        sortMenu.pruneNegativeWidthConstraints()
+        self.present(sortMenu, animated: true, completion: nil)
+    }
+    
+    private enum SortType: String {
+        case date = "startDate"
+        case duration = "duration"
+    }
+    
+    private func sortActions(sortType: SortType){
+        let gapResults = db.getData(objectClass: GapRealm.self)
+        var sortedResults: Results<Object>
+        if sorted <= 0{
+            sortedResults = db.sortData(data: gapResults, keyPath: sortType.rawValue, asc: true)
+            sorted = 1
+        } else {
+            sortedResults = db.sortData(data: gapResults, keyPath: sortType.rawValue, asc: false)
+            sorted = -1
+        }
+        
+        if segmentedControl.currentSegment == 0{
+            pendingGaps = GapManager.populateArray(results: sortedResults.filter("state == '\(State.pending.rawValue)' "))
+            assignedGaps = GapManager.populateArray(results: sortedResults.filter("state == '\(State.assigned.rawValue)' "))
+        } else {
+            completedGaps = GapManager.populateArray(results: sortedResults.filter("state == '\(State.completed.rawValue)' "))
+        }
+        
+        tableView.reloadSections(IndexSet(integersIn: 0...tableView.numberOfSections - 1), with: .fade)
     }
     
     private func setupSegmentedControl(){

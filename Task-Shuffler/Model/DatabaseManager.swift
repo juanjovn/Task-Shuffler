@@ -17,6 +17,10 @@ class DatabaseManager{
         return realm.objects(objectClass as! Object.Type)
     }
     
+    func sortData (data: Results<Object>, keyPath: String, asc: Bool) -> Results<Object> {
+        return data.sorted(byKeyPath: keyPath, ascending: asc)
+    }
+    
     func addData (object: Object) {
         do {
             try realm.write{
