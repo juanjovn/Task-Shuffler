@@ -23,6 +23,7 @@
 		8188D5BB2408601800CCBA99 /* NewTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8188D5BA2408601800CCBA99 /* NewTaskViewController.swift */; };
 		818DFEE12422B90D007F6682 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818DFEE02422B90D007F6682 /* TestViewController.swift */; };
 		8197F5C2245ACF700052FCC7 /* TaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8197F5C1245ACF700052FCC7 /* TaskManager.swift */; };
+		81C90B5324614F8B001C06B4 /* GapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C90B5224614F8B001C06B4 /* GapManager.swift */; };
 		81D0E450240AE7C800B2E5D8 /* TasksListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D0E44F240AE7C800B2E5D8 /* TasksListViewController.swift */; };
 		81DECAB6243BA410009051A2 /* CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81DECAB5243BA410009051A2 /* CustomColors.swift */; };
 		81DECAB8243BAE24009051A2 /* CustomFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81DECAB7243BAE24009051A2 /* CustomFonts.swift */; };
@@ -54,6 +55,7 @@
 		8188D5BA2408601800CCBA99 /* NewTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskViewController.swift; sourceTree = "<group>"; };
 		818DFEE02422B90D007F6682 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		8197F5C1245ACF700052FCC7 /* TaskManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskManager.swift; sourceTree = "<group>"; };
+		81C90B5224614F8B001C06B4 /* GapManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GapManager.swift; sourceTree = "<group>"; };
 		81D0E44F240AE7C800B2E5D8 /* TasksListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksListViewController.swift; sourceTree = "<group>"; };
 		81DECAB5243BA410009051A2 /* CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColors.swift; sourceTree = "<group>"; };
 		81DECAB7243BAE24009051A2 /* CustomFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFonts.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 				817E76F5245A084C00305111 /* TaskRealm.swift */,
 				8197F5C1245ACF700052FCC7 /* TaskManager.swift */,
 				816709D0245CCC5000D94E65 /* SettingsValues.swift */,
+				81C90B5224614F8B001C06B4 /* GapManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -309,6 +312,7 @@
 				81ED3A84244DEFD400C36DB8 /* TaskCell.swift in Sources */,
 				81705A83240B1D890053A571 /* ScheduleViewController.swift in Sources */,
 				811880A6243515BC00E5FEE1 /* DeviceModel.swift in Sources */,
+				81C90B5324614F8B001C06B4 /* GapManager.swift in Sources */,
 				81DECAB6243BA410009051A2 /* CustomColors.swift in Sources */,
 				8179FDDB24581E9F009A6D4B /* DummyModel.swift in Sources */,
 				8197F5C2245ACF700052FCC7 /* TaskManager.swift in Sources */,

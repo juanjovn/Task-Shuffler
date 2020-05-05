@@ -22,7 +22,17 @@ class DatabaseManager{
             try realm.write{
                 realm.add(object)
                 print("Added object: \(object.description)")
-                print(try! Realm().configuration.fileURL!)
+            }
+        } catch {
+            print("Error writing to database")
+        }
+    }
+    
+    func updateData (object: Object) {
+        do {
+            try realm.write{
+                realm.add(object, update: .modified)
+                print("Updated object: \(object.description)")
             }
         } catch {
             print("Error writing to database")

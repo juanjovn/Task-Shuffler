@@ -68,13 +68,11 @@ class TasksListViewController: AMTabsViewController {
         //***** Testing code *****
         
         //createTestTasks()
-        print(try! Realm().configuration.fileURL!)
-        pendingTasks = TaskManager.populateTasks(state: .pending)
-        assignedTasks = TaskManager.populateTasks(state: .assigned)
-        completedTasks = TaskManager.populateTasks(state: .completed)
+        
         
         //***** Testing code *****
         
+        fillTasks()
         setupTableView()
         setupNavigationBar()
         setupSegmentedControl()
@@ -88,6 +86,13 @@ class TasksListViewController: AMTabsViewController {
     }
     
     // MARK: Functions
+    
+    private func fillTasks(){
+        print(try! Realm().configuration.fileURL!)
+        pendingTasks = TaskManager.populateTasks(state: .pending)
+        assignedTasks = TaskManager.populateTasks(state: .assigned)
+        completedTasks = TaskManager.populateTasks(state: .completed)
+    }
     
     private func setupNavigationBar() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "sort"), style: .plain, target: self, action: #selector(sortButtonAction))

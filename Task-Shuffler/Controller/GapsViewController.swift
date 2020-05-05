@@ -33,26 +33,33 @@ class GapsViewController: AMTabsViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        test()
-        
+        //test()
+        fillGaps()
         setupView()
         setupNavigationItems()
         setupSegmentedControl()
         setupTableView()
     }
     
-    func test(){
+    private func test(){
+        db.eraseAll()
         let gap = GapRealm(startDate: Date(), endDate: Date.init(timeIntervalSinceNow: 120), state: "Pending", taskid: "BC64AFD3-43E6-4F88-8665-879DA397E968")
         pendingGaps.append(gap)
         db.addData(object: gap)
     }
     
-    func setupNavigationItems() {
+    private func fillGaps(){
+        pendingGaps = GapManager.populateGaps(state: .pending)
+        assignedGaps = GapManager.populateGaps(state: .assigned)
+        completedGaps = GapManager.populateGaps(state: .completed)
+    }
+    
+    private func setupNavigationItems() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "sort"), style: .plain, target: self, action: #selector(sortButtonAction))
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "gear"), style: .plain, target: self, action: #selector(settingsButtonAction))
     }
     
-    func setupView(){
+    private func setupView(){
         view.backgroundColor = .paleSilver
     }
     
@@ -63,13 +70,13 @@ class GapsViewController: AMTabsViewController {
     @objc func sortButtonAction(){
     }
     
-    func setupSegmentedControl(){
+    private func setupSegmentedControl(){
         segmentedControl.dataSource = self
         segmentedControl.delegate = self
         segmentedControl.cornerRadius = segmentedControl.bounds.height / 2
     }
     
-    func setupTableView() {
+    private func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = .paleSilver
@@ -262,6 +269,7 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
     
     private func markCompleted(indexPath: IndexPath) {
         var gap = GapRealm()
+        let updatedGap = GapRealm()
 
         if indexPath.section == 0 {
             gap = pendingGaps[indexPath.row]
@@ -270,11 +278,15 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
             gap = assignedGaps[indexPath.row]
             assignedGaps.remove(at: indexPath.row)
         }
-        gap.state = State.completed.rawValue
-        completedGaps.insert(gap, at: 0)
+        
+        updatedGap.id = gap.id
+        updatedGap.duration = gap.duration
+        updatedGap.startDate = gap.startDate
+        updatedGap.endDate = gap.endDate
+        updatedGap.state = State.completed.rawValue
+        completedGaps.insert(updatedGap, at: 0)
         tableView.deleteRows(at: [indexPath], with: .fade)
-        db.deleteByPK(primaryKey: gap.id, objectClass: GapRealm.self)
-        db.addData(object: gap)
+        db.updateData(object: updatedGap)
         hideAssignedIfEmpty()
     }
     
@@ -290,11 +302,26 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let zelda = tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath) as! TaskCell
+        var gap = GapRealm()
         
-        zelda.durationLabel.text = "\(pendingGaps[indexPath.row].duration)"
-        zelda.nameLabel.text = "\(pendingGaps[indexPath.row].startDate.timeIntervalSinceNow)"
+        switch indexPath.section {
+            case 0:
+                if segmentedControl.currentSegment == 0{
+                    gap = pendingGaps[indexPath.row]
+                } else {
+                    gap = completedGaps[indexPath.row]
+                }
+                
+            case 1:
+                gap = assignedGaps[indexPath.row]
+            
+            default:
+                break
+            
+        }
         
-
+        zelda.durationLabel.text = "\(gap.duration)"
+        zelda.nameLabel.text = "\(gap.startDate.timeIntervalSinceNow)"
         
         return zelda
     }
