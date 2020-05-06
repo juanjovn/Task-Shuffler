@@ -19,4 +19,5 @@ extension UIColor {
     static var naturGreen  : UIColor { return #colorLiteral(red: 0.7921568627, green: 0.7921568627, blue: 0.6666666667, alpha: 1) }
     static var powerGreen  : UIColor { return #colorLiteral(red: 0.1254901961, green: 0.7490196078, blue: 0.4196078431, alpha: 1) }
     static var forestGreen : UIColor { return #colorLiteral(red: 0.1176470588, green: 0.6588235294, blue: 0.5882352941, alpha: 1) }
+    static var opalRed     : UIColor { return #colorLiteral(red: 0.9333333333, green: 0.3764705882, blue: 0.3333333333, alpha: 1) }
 }

@@ -43,9 +43,16 @@ class GapsViewController: AMTabsViewController {
         setupTableView()
     }
     
+    // MARK: viewDidAppear
+    
+    override func viewDidAppear(_ animated: Bool) {
+        segmentedControl.cornerRadius = segmentedControl.bounds.height / 2
+        tableView.reloadData()
+    }
+    
     private func test(){
         //db.eraseAll()
-        let gap = GapRealm(startDate: Date(), endDate: Date.init(timeIntervalSinceNow: 1000), state: "Pending", taskid: "BC64AFD3-43E6-4F88-8665-879DA397E968")
+        let gap = GapRealm(startDate: Date(), endDate: Date.init(timeIntervalSinceNow: 500), state: "Pending", taskid: "BC64AFD3-43E6-4F88-8665-879DA397E968")
         pendingGaps.append(gap)
         db.addData(object: gap)
     }
@@ -126,14 +133,13 @@ class GapsViewController: AMTabsViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = .paleSilver
-        let nib = UINib(nibName: "TaskCell", bundle: nil)
-        tableView.register(nib, forCellReuseIdentifier: "taskCell")
+        let nib = UINib(nibName: "GapCell", bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: "gapCell")
         
         let insets = UIEdgeInsets(top: 18, left: 0, bottom: 120, right: 0)
         tableView.contentInset = insets
         
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 50
+        tableView.rowHeight = UIScreen.main.bounds.width / 5
     }
 
 }
@@ -347,7 +353,7 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let zelda = tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath) as! TaskCell
+        let zelda = tableView.dequeueReusableCell(withIdentifier: "gapCell", for: indexPath) as! GapCell
         var gap = GapRealm()
         
         switch indexPath.section {
@@ -366,8 +372,8 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
             
         }
         
-        zelda.durationLabel.text = "\(gap.duration)"
-        zelda.nameLabel.text = "\(gap.startDate.timeIntervalSinceNow)"
+        zelda.dateLabel.text = "Tue 15th Dec"
+        zelda.startTimeLabel.text = "17:30"
         
         return zelda
     }
