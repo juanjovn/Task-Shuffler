@@ -151,6 +151,10 @@ class GapsViewController: AMTabsViewController {
         
         tableView.rowHeight = UIScreen.main.bounds.width / 5
     }
+    
+    @IBAction func newGapAction(_ sender: Any) {
+        present(NewGapVC(), animated: true, completion: nil)
+    }
 
 }
 

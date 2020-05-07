@@ -69,6 +69,9 @@
                                 <state key="normal" title="+">
                                     <color key="titleColor" red="0.24313725489999999" green="0.2666666667" blue="0.16862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="newGapAction:" destination="SIv-r7-qSN" eventType="touchUpInside" id="SUw-b6-lxv"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.79215686269999996" green="0.79215686269999996" blue="0.66666666669999997" alpha="0.85433433219999999" colorSpace="custom" customColorSpace="sRGB"/>
