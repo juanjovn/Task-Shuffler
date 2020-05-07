@@ -28,6 +28,15 @@ extension UIFont {
         }
     }
     
+    static func avenirRegular(ofSize size: CGFloat) -> UIFont {
+        if let font = UIFont(name: "AvenirNext-Regular", size: size){
+            return font
+        } else {
+            print("😕 SYSTEM FONT rather than DEMIBOLD")
+            return .systemFont(ofSize: size)
+        }
+    }
+    
     static func scaleFont(_ size: CGFloat) -> CGFloat{
         if (UIScreen.main.bounds.width != 375){
             let scaleFactor = UIScreen.main.bounds.width / 375

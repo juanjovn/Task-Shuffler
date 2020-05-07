@@ -58,10 +58,23 @@
                                     <constraint firstItem="NUl-ew-JHq" firstAttribute="width" secondItem="FHw-r7-UvB" secondAttribute="width" multiplier="0.3" id="xe4-L3-M6s"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wiO-6O-f3V" userLabel="NewGapButton">
+                                <rect key="frame" x="21" y="527" width="60" height="60"/>
+                                <color key="backgroundColor" red="0.1333333333" green="0.43921568630000002" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="AZ2-yu-9jb"/>
+                                    <constraint firstAttribute="height" constant="60" id="oC2-D4-K5n"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="30"/>
+                                <state key="normal" title="+">
+                                    <color key="titleColor" red="0.24313725489999999" green="0.2666666667" blue="0.16862745100000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.79215686269999996" green="0.79215686269999996" blue="0.66666666669999997" alpha="0.85433433219999999" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="TJ2-4J-f2Y" firstAttribute="top" secondItem="FHw-r7-UvB" secondAttribute="bottom" constant="-37.5" id="547-lb-bHY"/>
+                            <constraint firstItem="sOJ-LN-tvB" firstAttribute="centerX" secondItem="wiO-6O-f3V" secondAttribute="leading" multiplier="9" id="5tH-Qb-c83"/>
                             <constraint firstItem="sOJ-LN-tvB" firstAttribute="bottom" secondItem="2zZ-UP-CUJ" secondAttribute="bottom" id="Czw-KV-2Q4"/>
                             <constraint firstItem="FHw-r7-UvB" firstAttribute="centerX" secondItem="sOJ-LN-tvB" secondAttribute="centerX" id="Das-X4-hft"/>
                             <constraint firstItem="TJ2-4J-f2Y" firstAttribute="trailing" secondItem="sOJ-LN-tvB" secondAttribute="trailing" id="JYV-K2-SGk"/>
@@ -69,6 +82,7 @@
                             <constraint firstItem="TJ2-4J-f2Y" firstAttribute="leading" secondItem="sOJ-LN-tvB" secondAttribute="leading" id="Osd-H2-nop"/>
                             <constraint firstItem="2zZ-UP-CUJ" firstAttribute="width" secondItem="sOJ-LN-tvB" secondAttribute="width" id="PAN-Nr-eXz"/>
                             <constraint firstAttribute="bottom" secondItem="TJ2-4J-f2Y" secondAttribute="bottom" id="TH9-Qg-NmH"/>
+                            <constraint firstItem="sOJ-LN-tvB" firstAttribute="bottom" secondItem="wiO-6O-f3V" secondAttribute="bottom" constant="80" id="UC8-VG-zFu"/>
                             <constraint firstItem="2zZ-UP-CUJ" firstAttribute="centerX" secondItem="sOJ-LN-tvB" secondAttribute="centerX" id="XtX-SP-lR4"/>
                             <constraint firstItem="FHw-r7-UvB" firstAttribute="width" secondItem="sOJ-LN-tvB" secondAttribute="width" id="bad-w4-dlW"/>
                             <constraint firstItem="FHw-r7-UvB" firstAttribute="height" secondItem="sOJ-LN-tvB" secondAttribute="width" multiplier="1:10" id="yla-Uc-Mie"/>
@@ -77,6 +91,8 @@
                     </view>
                     <navigationItem key="navigationItem" title="Gaps" id="oCX-y3-nCK"/>
                     <connections>
+                        <outlet property="newGapButton" destination="wiO-6O-f3V" id="K8C-AV-E6f"/>
+                        <outlet property="newGapButtonBottomConstraint" destination="UC8-VG-zFu" id="qcZ-AB-UQZ"/>
                         <outlet property="segmentedControl" destination="NUl-ew-JHq" id="97N-5X-9Kp"/>
                         <outlet property="segmentedControlBottomConstraint" destination="pPK-jh-JIm" id="MrZ-YZ-f46"/>
                         <outlet property="tableView" destination="TJ2-4J-f2Y" id="ncU-zJ-i0f"/>

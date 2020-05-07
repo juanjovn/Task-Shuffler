@@ -54,24 +54,11 @@ class TasksListViewController: AMTabsViewController {
         super.viewDidLoad()
         
         self.setNeedsStatusBarAppearanceUpdate()
-
-        view.backgroundColor = .mysticBlue
-        
-        newTaskButton.layer.cornerRadius = newTaskButton.bounds.size.width/2
-        newTaskButton.layer.shadowOffset = .init(width: 0, height: 1)
-        newTaskButtonBottomConstraint.constant = -100
-        newTaskButton.backgroundColor = .fireOrange
-        newTaskButton.setTitleColor(.pearlWhite, for: .normal)
-        showButton()
-        
         
         //***** Testing code *****
-        
         //createTestTasks()
-        
-        
         //***** Testing code *****
-        
+        setupNewTaskButton()
         fillTasks()
         setupTableView()
         setupNavigationBar()
@@ -86,6 +73,13 @@ class TasksListViewController: AMTabsViewController {
     }
     
     // MARK: Functions
+    
+    private func setupNewTaskButton() {
+        newTaskButton.layer.cornerRadius = newTaskButton.bounds.size.width/2
+        newTaskButton.layer.shadowOffset = .init(width: 0, height: 1)
+        newTaskButton.backgroundColor = .fireOrange
+        newTaskButton.setTitleColor(.pearlWhite, for: .normal)
+    }
     
     private func fillTasks(){
         print(try! Realm().configuration.fileURL!)

@@ -18,8 +18,10 @@ class GapCell: UITableViewCell {
     @IBOutlet weak var durationBackground: UIView!
     @IBOutlet weak var startTimeBckgLabel: UIView!
     @IBOutlet weak var endTimeBckgLabel: UIView!
+    @IBOutlet weak var monthLabel: UILabel!
     
     let dateFontSize: CGFloat = 21.0
+    let monthFontSize: CGFloat = 20
     let durationFontSize: CGFloat = 22.0
     let timeFontSize: CGFloat = 18.0
     
@@ -57,30 +59,19 @@ class GapCell: UITableViewCell {
         containerView.layer.rasterizationScale = UIScreen.main.scale
         
         containerView.backgroundColor = .aliceBlue
-        
-//        durationBackground.layer.cornerRadius = durationBackground.bounds.height / 2
-//        durationBackground.layer.shadowOffset = CGSize(width: 0, height: 2)
-//        durationBackground.layer.shadowColor = UIColor.black.cgColor
-//        durationBackground.layer.shadowOpacity = 0.2
-//        durationBackground.layer.shadowRadius = 3
-//        
-//        durationBackground.layer.shadowPath = UIBezierPath(roundedRect: durationBackground.bounds, cornerRadius: radius).cgPath
-//        durationBackground.layer.shouldRasterize = true
-//        durationBackground.layer.rasterizationScale = UIScreen.main.scale
-//        durationBackground.backgroundColor = .gray
-//        
+               
     }
     
     private func setupFonts() {
         dateLabel.font = .avenirDemiBold(ofSize: UIFont.scaleFont(dateFontSize))
+        monthLabel.font = .avenirRegular(ofSize: UIFont.scaleFont(dateFontSize))
         startTimeLabel.font = .avenirMedium(ofSize: UIFont.scaleFont(timeFontSize))
         endTimeLabel.font = .avenirMedium(ofSize: UIFont.scaleFont(timeFontSize))
-        //durationLabel.font = .avenirDemiBold(ofSize: UIFont.scaleFont(durationFontSize))
     }
     
     private func setupBackgrounds() {
         startTimeBckgLabel.layer.cornerRadius = startTimeBckgLabel.bounds.height / 2
-        startTimeBckgLabel.backgroundColor = .naturGreen
+        startTimeBckgLabel.backgroundColor = .turquesa
         endTimeBckgLabel.layer.cornerRadius = endTimeBckgLabel.bounds.height / 2
         endTimeBckgLabel.backgroundColor = .opalRed
     }

@@ -17,6 +17,8 @@ class GapsViewController: AMTabsViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var segmentedControl: SJFluidSegmentedControl!
     @IBOutlet weak var segmentedControlBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var newGapButton: UIButton!
+    @IBOutlet weak var newGapButtonBottomConstraint: NSLayoutConstraint!
     
     //Constants
     let db = DatabaseManager()
@@ -36,6 +38,7 @@ class GapsViewController: AMTabsViewController {
         super.viewDidLoad()
         
         //test()
+        setupNewGapButton()
         fillGaps()
         setupView()
         setupNavigationItems()
@@ -52,9 +55,16 @@ class GapsViewController: AMTabsViewController {
     
     private func test(){
         //db.eraseAll()
-        let gap = GapRealm(startDate: Date(), endDate: Date.init(timeIntervalSinceNow: 500), state: "Pending", taskid: "BC64AFD3-43E6-4F88-8665-879DA397E968")
+        let gap = GapRealm(startDate: Date(), endDate: Date.init(timeIntervalSinceNow: 7200), state: "Pending", taskid: "BC64AFD3-43E6-4F88-8665-879DA397E968")
         pendingGaps.append(gap)
         db.addData(object: gap)
+    }
+    
+    private func setupNewGapButton() {
+        newGapButton.layer.cornerRadius = newGapButton.bounds.size.width/2
+        newGapButton.layer.shadowOffset = .init(width: 0, height: 1)
+        newGapButton.backgroundColor = .fireOrange
+        newGapButton.setTitleColor(.pearlWhite, for: .normal)
     }
     
     private func fillGaps(){
@@ -203,8 +213,8 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func hideButton() {
         UIView.animate(withDuration: 0.5) {
-            //self.newTaskButton.alpha = 0
-            //self.newTaskButtonBottomConstraint.constant = 0
+            self.newGapButton.alpha = 0
+            self.newGapButtonBottomConstraint.constant = 0
             self.segmentedControl.alpha = 0
             self.segmentedControlBottomConstraint.constant = 30
             
@@ -218,8 +228,8 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func showButton() {
         UIView.animate(withDuration: 0.3) {
-            //self.newTaskButton.alpha = 1
-            //self.newTaskButtonBottomConstraint.constant = 80
+            self.newGapButton.alpha = 1
+            self.newGapButtonBottomConstraint.constant = 80
             self.segmentedControl.alpha = 1
             self.segmentedControlBottomConstraint.constant = 0
             
@@ -372,8 +382,13 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
             
         }
         
-        zelda.dateLabel.text = "Tue 15th Dec"
-        zelda.startTimeLabel.text = "17:30"
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .ordinal
+        //let ordinal = formatter.string(from: <#T##NSNumber#>)
+        zelda.dateLabel.text = Utils.formatDate(datePattern: "E d", date: gap.startDate)
+        zelda.monthLabel.text = Utils.formatDate(datePattern: "MMM", date: gap.startDate)
+        zelda.startTimeLabel.text = Utils.formatDate(datePattern: "HH:mm", date: gap.startDate)
+        zelda.endTimeLabel.text = Utils.formatDate(datePattern: "HH:mm", date: gap.endDate)
         
         return zelda
     }

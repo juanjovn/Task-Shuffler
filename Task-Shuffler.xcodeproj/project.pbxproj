@@ -27,6 +27,7 @@
 		81C90B552461D080001C06B4 /* GapCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81C90B542461D080001C06B4 /* GapCell.xib */; };
 		81C90B572461D0B2001C06B4 /* GapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C90B562461D0B2001C06B4 /* GapCell.swift */; };
 		81C90B5924632BC9001C06B4 /* GapCell-copy.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81C90B5824632BC9001C06B4 /* GapCell-copy.xib */; };
+		81C90B5B2463DDBA001C06B4 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C90B5A2463DDBA001C06B4 /* Utils.swift */; };
 		81D0E450240AE7C800B2E5D8 /* TasksListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D0E44F240AE7C800B2E5D8 /* TasksListViewController.swift */; };
 		81DECAB6243BA410009051A2 /* CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81DECAB5243BA410009051A2 /* CustomColors.swift */; };
 		81DECAB8243BAE24009051A2 /* CustomFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81DECAB7243BAE24009051A2 /* CustomFonts.swift */; };
@@ -62,6 +63,7 @@
 		81C90B542461D080001C06B4 /* GapCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GapCell.xib; sourceTree = "<group>"; };
 		81C90B562461D0B2001C06B4 /* GapCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GapCell.swift; sourceTree = "<group>"; };
 		81C90B5824632BC9001C06B4 /* GapCell-copy.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "GapCell-copy.xib"; sourceTree = "<group>"; };
+		81C90B5A2463DDBA001C06B4 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		81D0E44F240AE7C800B2E5D8 /* TasksListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksListViewController.swift; sourceTree = "<group>"; };
 		81DECAB5243BA410009051A2 /* CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColors.swift; sourceTree = "<group>"; };
 		81DECAB7243BAE24009051A2 /* CustomFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFonts.swift; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				81DECAB5243BA410009051A2 /* CustomColors.swift */,
 				81DECAB7243BAE24009051A2 /* CustomFonts.swift */,
 				815204EE245E9A1E0004510B /* Alert.swift */,
+				81C90B5A2463DDBA001C06B4 /* Utils.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -326,6 +329,7 @@
 				811880A6243515BC00E5FEE1 /* DeviceModel.swift in Sources */,
 				81C90B5324614F8B001C06B4 /* GapManager.swift in Sources */,
 				81DECAB6243BA410009051A2 /* CustomColors.swift in Sources */,
+				81C90B5B2463DDBA001C06B4 /* Utils.swift in Sources */,
 				8179FDDB24581E9F009A6D4B /* DummyModel.swift in Sources */,
 				8197F5C2245ACF700052FCC7 /* TaskManager.swift in Sources */,
 				81E9B1432405BEE400BBADB8 /* ViewController.swift in Sources */,
