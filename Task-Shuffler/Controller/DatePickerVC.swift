@@ -46,16 +46,16 @@ class DatePickerVC: UIViewController{
         format.topTextColor = UIColor.pearlWhite.withAlphaComponent(1)
         format.mediumTextColor = UIColor.pearlWhite.withAlphaComponent(0.8)
         format.bottomTextColor = UIColor.pearlWhite.withAlphaComponent(0.8)
-        format.topFont = .avenirRegular(ofSize: 20)
-        format.mediumFont = .avenirDemiBold(ofSize: 40)
-        format.bottomFont = .avenirRegular(ofSize: 17)
+        format.topFont = .avenirRegular(ofSize: UIFont.scaleFont(20))
+        format.mediumFont = .avenirDemiBold(ofSize: UIFont.scaleFont(40))
+        format.bottomFont = .avenirRegular(ofSize: UIFont.scaleFont(17))
         format.dayBackgroundColor = UIColor.mysticBlue.withAlphaComponent(0.3)
         format.dayBackgroundSelectedColor = .mysticBlue
         format.separatorTopTextColor = UIColor.white.withAlphaComponent(0.6)
         format.separatorBottomTextColor = UIColor.white.withAlphaComponent(0.6)
         format.separatorBackgroundColor = UIColor.cadetBlue.withAlphaComponent(0.85)
-        format.separatorTopFont = .avenirRegular(ofSize: 22)
-        format.separatorTopFont = .avenirRegular(ofSize: 20)
+        format.separatorTopFont = .avenirRegular(ofSize: UIFont.scaleFont(22))
+        format.separatorTopFont = .avenirRegular(ofSize: UIFont.scaleFont(20))
         format.dayRadius = 15
         format.animatedSelection = true
         format.animationScaleFactor = 1.1
@@ -73,6 +73,7 @@ extension DatePickerVC: DateScrollPickerDelegate {
     func dateScrollPicker(_ dateScrollPicker: DateScrollPicker, didSelectDate date: Date) {
         let text = Utils.formatDate(datePattern: "EEEE dd MMMM", date: date)
         delegate?.updateDateLabel(textDate: text)
+        delegate?.selectedDate(selectedDate: date)
         //detailDateLabel.text = date.format(dateFormat: "EEEE, dd MMMM yyyy")
     }
 }
@@ -80,7 +81,7 @@ extension DatePickerVC: DateScrollPickerDelegate {
 extension DatePickerVC: DateScrollPickerDataSource {
         
     func dateScrollPicker(_ dateScrollPicker: DateScrollPicker, dataAttributedStringByDate date: Date) -> NSAttributedString? {
-            let attributes = [NSAttributedString.Key.font: UIFont.avenirRegular(ofSize: 12), NSAttributedString.Key.foregroundColor: UIColor.white]
+            let attributes = [NSAttributedString.Key.font: UIFont.avenirRegular(ofSize: UIFont.scaleFont(12)), NSAttributedString.Key.foregroundColor: UIColor.white]
             return Date.today() == date ? NSAttributedString(string: "Today", attributes: attributes) : nil
     }
     
@@ -113,5 +114,6 @@ extension Date {
 }
 
 protocol DatePickerVCDelegate {
-    func updateDateLabel (textDate: String) -> ()
+    func updateDateLabel(textDate: String)
+    func selectedDate(selectedDate: Date)
 }
