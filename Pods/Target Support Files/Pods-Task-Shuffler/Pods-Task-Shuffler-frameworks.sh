@@ -199,6 +199,7 @@ fi
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/AMTabView/AMTabView.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/BubbleTransition/BubbleTransition.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/DateScrollPicker/DateScrollPicker.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Realm/Realm.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SJFluidSegmentedControl/SJFluidSegmentedControl.framework"
@@ -210,6 +211,7 @@ fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/AMTabView/AMTabView.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/BubbleTransition/BubbleTransition.framework"
+  install_framework "${BUILT_PRODUCTS_DIR}/DateScrollPicker/DateScrollPicker.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Realm/Realm.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/SJFluidSegmentedControl/SJFluidSegmentedControl.framework"

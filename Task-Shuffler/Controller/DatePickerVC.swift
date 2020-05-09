@@ -1,0 +1,117 @@
+//
+//  DatePickerVC.swift
+//  Task-Shuffler
+//
+//  Created by Juanjo Valiño on 08/05/2020.
+//  Copyright © 2020 Juanjo Valiño. All rights reserved.
+//
+
+import Foundation
+import DateScrollPicker
+
+class DatePickerVC: UIViewController{
+    
+    let dateScrollPicker = DateScrollPicker()
+    var delegate: DatePickerVCDelegate?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setupView()
+        setupDateScrollPicker()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        //dateScrollPicker.selectToday()
+    }
+    
+    private func setupView() {
+        //view.backgroundColor = .systemPink
+    }
+    
+    private func setupDateScrollPicker() {
+        dateScrollPicker.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(dateScrollPicker)
+        
+        dateScrollPicker.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        dateScrollPicker.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        dateScrollPicker.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        dateScrollPicker.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        
+        var format = DateScrollPickerFormat()
+        format.days = 3
+        format.topDateFormat = "E"
+        format.mediumDateFormat = "dd"
+        format.bottomDateFormat = "MMMM"
+        format.topTextColor = UIColor.pearlWhite.withAlphaComponent(1)
+        format.mediumTextColor = UIColor.pearlWhite.withAlphaComponent(0.8)
+        format.bottomTextColor = UIColor.pearlWhite.withAlphaComponent(0.8)
+        format.topFont = .avenirRegular(ofSize: 20)
+        format.mediumFont = .avenirDemiBold(ofSize: 40)
+        format.bottomFont = .avenirRegular(ofSize: 17)
+        format.dayBackgroundColor = UIColor.mysticBlue.withAlphaComponent(0.3)
+        format.dayBackgroundSelectedColor = .mysticBlue
+        format.separatorTopTextColor = UIColor.white.withAlphaComponent(0.6)
+        format.separatorBottomTextColor = UIColor.white.withAlphaComponent(0.6)
+        format.separatorBackgroundColor = UIColor.cadetBlue.withAlphaComponent(0.85)
+        format.separatorTopFont = .avenirRegular(ofSize: 22)
+        format.separatorTopFont = .avenirRegular(ofSize: 20)
+        format.dayRadius = 15
+        format.animatedSelection = true
+        format.animationScaleFactor = 1.1
+        format.dotWidth = 10
+        dateScrollPicker.format = format
+        dateScrollPicker.delegate = self
+        dateScrollPicker.dataSource = self
+    }
+}
+
+// MARK: DELEGATES
+
+extension DatePickerVC: DateScrollPickerDelegate {
+    
+    func dateScrollPicker(_ dateScrollPicker: DateScrollPicker, didSelectDate date: Date) {
+        let text = Utils.formatDate(datePattern: "EEEE dd MMMM", date: date)
+        delegate?.updateDateLabel(textDate: text)
+        //detailDateLabel.text = date.format(dateFormat: "EEEE, dd MMMM yyyy")
+    }
+}
+
+extension DatePickerVC: DateScrollPickerDataSource {
+        
+    func dateScrollPicker(_ dateScrollPicker: DateScrollPicker, dataAttributedStringByDate date: Date) -> NSAttributedString? {
+            let attributes = [NSAttributedString.Key.font: UIFont.avenirRegular(ofSize: 12), NSAttributedString.Key.foregroundColor: UIColor.white]
+            return Date.today() == date ? NSAttributedString(string: "Today", attributes: attributes) : nil
+    }
+    
+    func dateScrollPicker(_ dateScrollPicker: DateScrollPicker, dotColorByDate date: Date) -> UIColor? {
+        if Date.today() == date { return .powerGreen }
+        let weekDay = Calendar.current.component(.weekday, from: date)
+        if weekDay == 2 {
+            return .yellow
+        }
+        return UIColor.clear
+    }
+}
+
+extension Date {
+    
+    static func today() -> Date {
+        let cal = NSCalendar.current
+        let components = cal.dateComponents([.year, .month, .day], from: Date())
+        let today = cal.date(from: components)
+        return today!
+    }
+    
+    func addDays(_ days: Int) -> Date? {
+        let dayComponenet = NSDateComponents()
+        dayComponenet.day = days
+        let theCalendar = NSCalendar.current
+        let nextDate = theCalendar.date(byAdding: dayComponenet as DateComponents, to: self)
+        return nextDate
+    }
+}
+
+protocol DatePickerVCDelegate {
+    func updateDateLabel (textDate: String) -> ()
+}

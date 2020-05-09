@@ -29,6 +29,7 @@
 		81C90B5B2463DDBA001C06B4 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C90B5A2463DDBA001C06B4 /* Utils.swift */; };
 		81C90B5E246492BC001C06B4 /* NewGapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C90B5C246492BC001C06B4 /* NewGapVC.swift */; };
 		81C90B5F246492BC001C06B4 /* NewGapVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81C90B5D246492BC001C06B4 /* NewGapVC.xib */; };
+		81C90B61246530DC001C06B4 /* DatePickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C90B60246530DC001C06B4 /* DatePickerVC.swift */; };
 		81D0E450240AE7C800B2E5D8 /* TasksListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D0E44F240AE7C800B2E5D8 /* TasksListViewController.swift */; };
 		81DECAB6243BA410009051A2 /* CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81DECAB5243BA410009051A2 /* CustomColors.swift */; };
 		81DECAB8243BAE24009051A2 /* CustomFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81DECAB7243BAE24009051A2 /* CustomFonts.swift */; };
@@ -66,6 +67,7 @@
 		81C90B5A2463DDBA001C06B4 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		81C90B5C246492BC001C06B4 /* NewGapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGapVC.swift; sourceTree = "<group>"; };
 		81C90B5D246492BC001C06B4 /* NewGapVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewGapVC.xib; sourceTree = "<group>"; };
+		81C90B60246530DC001C06B4 /* DatePickerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerVC.swift; sourceTree = "<group>"; };
 		81D0E44F240AE7C800B2E5D8 /* TasksListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksListViewController.swift; sourceTree = "<group>"; };
 		81DECAB5243BA410009051A2 /* CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColors.swift; sourceTree = "<group>"; };
 		81DECAB7243BAE24009051A2 /* CustomFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFonts.swift; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 				81ED3A82244DEFD400C36DB8 /* TaskCell.swift */,
 				81C90B562461D0B2001C06B4 /* GapCell.swift */,
 				816709CC245C9F7D00D94E65 /* SettingsVC.swift */,
+				81C90B60246530DC001C06B4 /* DatePickerVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -318,6 +321,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				816709D1245CCC5000D94E65 /* SettingsValues.swift in Sources */,
+				81C90B61246530DC001C06B4 /* DatePickerVC.swift in Sources */,
 				816709CE245C9F7D00D94E65 /* SettingsVC.swift in Sources */,
 				8188D5B9240701AF00CCBA99 /* Task.swift in Sources */,
 				81D0E450240AE7C800B2E5D8 /* TasksListViewController.swift in Sources */,

@@ -13,5 +13,6 @@ target 'Task-Shuffler' do
   pod 'WCLShineButton'
   pod 'SJFluidSegmentedControl', '~> 1.0'
   pod 'RealmSwift', '4.4.1'
+  pod 'DateScrollPicker', '1.1.0'
 
 end

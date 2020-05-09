@@ -55,7 +55,7 @@ class GapsViewController: AMTabsViewController {
     
     private func test(){
         //db.eraseAll()
-        let gap = GapRealm(startDate: Date(), endDate: Date.init(timeIntervalSinceNow: 7200), state: "Pending", taskid: "BC64AFD3-43E6-4F88-8665-879DA397E968")
+        let gap = GapRealm(startDate: Date(), endDate: Date.init(timeIntervalSinceNow: 600), state: "Completed", taskid: "BC64AFD3-43E6-4F88-8665-879DA397E968")
         pendingGaps.append(gap)
         db.addData(object: gap)
     }
