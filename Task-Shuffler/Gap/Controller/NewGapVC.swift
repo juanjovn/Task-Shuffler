@@ -13,6 +13,7 @@ class NewGapVC: UIViewController {
     //MARK: Properties
     let contentView = UIView()
     let datePicker = DatePickerVC()
+    let timePicker = TimePickerVC()
     let screenHeight = UIScreen.main.bounds.height
     let dateLabel = UILabel()
     let newGap = GapRealm()
@@ -113,17 +114,31 @@ class NewGapVC: UIViewController {
         nextButton.setTitleColor(.mysticBlue, for: .normal)
         nextButton.setTitleColor(UIColor.pearlWhite.withAlphaComponent(0.2), for: .highlighted)
         nextButton.setTitle(">", for: .normal)
-        nextButton.titleLabel?.font = .avenirDemiBold(ofSize: UIFont.scaleFont(29))
+        nextButton.titleLabel?.font = .avenirDemiBold(ofSize: UIFont.scaleFont(25))
         
         view.addSubview(nextButton)
         
         nextButton.translatesAutoresizingMaskIntoConstraints = false
         nextButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         nextButton.topAnchor.constraint(equalToSystemSpacingBelow: datePicker.view.bottomAnchor, multiplier: 3.25).isActive = true
-        nextButton.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.15).isActive = true
+        nextButton.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.13).isActive = true
         nextButton.widthAnchor.constraint(equalTo: self.nextButton.heightAnchor).isActive = true
         
         nextButton.addTarget(self, action: #selector(nextButtonAction), for: .touchUpInside)
+    }
+    
+    private func setupTimePicker(){
+        addChild(timePicker)
+        timePicker.view.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(timePicker.view)
+        
+        timePicker.view.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0).isActive = true
+        timePicker.view.topAnchor.constraint(equalTo: contentView.topAnchor, constant: screenHeight / 7).isActive = true
+        timePicker.view.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0).isActive = true
+        timePicker.view.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -screenHeight / 5).isActive = true
+        
+        timePicker.didMove(toParent: self)
+        //timePicker.delegate = self
     }
     
     // MARK: Actions
@@ -132,8 +147,14 @@ class NewGapVC: UIViewController {
     }
     
     @objc private func nextButtonAction() {
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: 0.3,animations: {
             self.datePicker.view.alpha = 0
+            self.dateLabel.topAnchor.constraint(lessThanOrEqualToSystemSpacingBelow: self.contentView.topAnchor, multiplier: 2).isActive = true
+            self.view.layoutIfNeeded()
+        },
+        completion: {
+            sucess in
+                self.setupTimePicker()
         })
     }
     
