@@ -19,6 +19,7 @@ class NewGapVC: UIViewController {
     let newGap = GapRealm()
     let closeButton = UIButton()
     let nextButton = UIButton(type: .custom)
+    var viewTopConstraint = NSLayoutConstraint()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,7 +42,8 @@ class NewGapVC: UIViewController {
         view.addSubview(contentView)
         contentView.translatesAutoresizingMaskIntoConstraints = false
         contentView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0).isActive = true
-        contentView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: screenHeight / 3).isActive = true
+        viewTopConstraint = contentView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: screenHeight / 3)
+        viewTopConstraint.isActive = true
         contentView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0).isActive = true
         contentView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 50).isActive = true
         
@@ -121,7 +123,7 @@ class NewGapVC: UIViewController {
         nextButton.translatesAutoresizingMaskIntoConstraints = false
         nextButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         nextButton.topAnchor.constraint(equalToSystemSpacingBelow: datePicker.view.bottomAnchor, multiplier: 3.25).isActive = true
-        nextButton.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.13).isActive = true
+        nextButton.heightAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.175).isActive = true
         nextButton.widthAnchor.constraint(equalTo: self.nextButton.heightAnchor).isActive = true
         
         nextButton.addTarget(self, action: #selector(nextButtonAction), for: .touchUpInside)
@@ -150,6 +152,9 @@ class NewGapVC: UIViewController {
         UIView.animate(withDuration: 0.3,animations: {
             self.datePicker.view.alpha = 0
             self.dateLabel.topAnchor.constraint(lessThanOrEqualToSystemSpacingBelow: self.contentView.topAnchor, multiplier: 2).isActive = true
+            self.viewTopConstraint.isActive = false
+            self.viewTopConstraint = self.contentView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor)
+            self.viewTopConstraint.isActive = true
             self.view.layoutIfNeeded()
         },
         completion: {
