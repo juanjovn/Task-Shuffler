@@ -144,9 +144,13 @@
 		81E9B13D2405BEE400BBADB8 /* Task-Shuffler */ = {
 			isa = PBXGroup;
 			children = (
-				81ED3A81244DE66700C36DB8 /* Controller */,
-				81ED3A80244DE65500C36DB8 /* View */,
 				81ED3A7F244DE63400C36DB8 /* Model */,
+				81ED3A80244DE65500C36DB8 /* View */,
+				81ED3A81244DE66700C36DB8 /* Controller */,
+				81FFF0BD2467F7600086500A /* Task */,
+				81FFF0BE2467F78A0086500A /* Gap */,
+				81FFF0C62467F80E0086500A /* Schedule */,
+				81FFF0CA2467F8650086500A /* Settings */,
 				811880A42435157E00E5FEE1 /* Utils */,
 				81E9B13E2405BEE400BBADB8 /* AppDelegate.swift */,
 				81E9B1472405BEE600BBADB8 /* Assets.xcassets */,
@@ -158,14 +162,8 @@
 		81ED3A7F244DE63400C36DB8 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				8188D5B8240701AF00CCBA99 /* Task.swift */,
-				815204F0245F46C20004510B /* Gap.swift */,
 				8179FDD824580807009A6D4B /* DatabaseManager.swift */,
 				8179FDDA24581E9F009A6D4B /* DummyModel.swift */,
-				817E76F5245A084C00305111 /* TaskRealm.swift */,
-				8197F5C1245ACF700052FCC7 /* TaskManager.swift */,
-				816709D0245CCC5000D94E65 /* SettingsValues.swift */,
-				81C90B5224614F8B001C06B4 /* GapManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -174,11 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				81E9B1442405BEE400BBADB8 /* Main.storyboard */,
-				81ED3A83244DEFD400C36DB8 /* TaskCell.xib */,
-				81C90B542461D080001C06B4 /* GapCell.xib */,
-				81C90B5D246492BC001C06B4 /* NewGapVC.xib */,
 				81E9B1492405BEE600BBADB8 /* LaunchScreen.storyboard */,
-				816709CD245C9F7D00D94E65 /* SettingsVC.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -187,18 +181,152 @@
 			isa = PBXGroup;
 			children = (
 				81E9B1422405BEE400BBADB8 /* ViewController.swift */,
+				818DFEE02422B90D007F6682 /* TestViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		81FFF0BD2467F7600086500A /* Task */ = {
+			isa = PBXGroup;
+			children = (
+				81FFF0BF2467F79C0086500A /* Model */,
+				81FFF0C02467F7A60086500A /* View */,
+				81FFF0C12467F7AC0086500A /* Controller */,
+			);
+			path = Task;
+			sourceTree = "<group>";
+		};
+		81FFF0BE2467F78A0086500A /* Gap */ = {
+			isa = PBXGroup;
+			children = (
+				81FFF0C22467F7CE0086500A /* Model */,
+				81FFF0C42467F7DD0086500A /* View */,
+				81FFF0C52467F7E50086500A /* Controller */,
+			);
+			path = Gap;
+			sourceTree = "<group>";
+		};
+		81FFF0BF2467F79C0086500A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8188D5B8240701AF00CCBA99 /* Task.swift */,
+				817E76F5245A084C00305111 /* TaskRealm.swift */,
+				8197F5C1245ACF700052FCC7 /* TaskManager.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		81FFF0C02467F7A60086500A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				81ED3A83244DEFD400C36DB8 /* TaskCell.xib */,
+				81ED3A82244DEFD400C36DB8 /* TaskCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		81FFF0C12467F7AC0086500A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
 				81D0E44F240AE7C800B2E5D8 /* TasksListViewController.swift */,
 				8188D5BA2408601800CCBA99 /* NewTaskViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		81FFF0C22467F7CE0086500A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				815204F0245F46C20004510B /* Gap.swift */,
+				81C90B5224614F8B001C06B4 /* GapManager.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		81FFF0C42467F7DD0086500A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				81C90B5D246492BC001C06B4 /* NewGapVC.xib */,
+				81C90B542461D080001C06B4 /* GapCell.xib */,
+				81C90B562461D0B2001C06B4 /* GapCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		81FFF0C52467F7E50086500A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
 				81705A80240B1D4E0053A571 /* GapsViewController.swift */,
 				81C90B5C246492BC001C06B4 /* NewGapVC.swift */,
-				81705A82240B1D890053A571 /* ScheduleViewController.swift */,
-				818DFEE02422B90D007F6682 /* TestViewController.swift */,
-				81ED3A82244DEFD400C36DB8 /* TaskCell.swift */,
-				81C90B562461D0B2001C06B4 /* GapCell.swift */,
-				816709CC245C9F7D00D94E65 /* SettingsVC.swift */,
 				81C90B60246530DC001C06B4 /* DatePickerVC.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		81FFF0C62467F80E0086500A /* Schedule */ = {
+			isa = PBXGroup;
+			children = (
+				81FFF0C72467F8160086500A /* Model */,
+				81FFF0C82467F81E0086500A /* View */,
+				81FFF0C92467F8270086500A /* Controller */,
+			);
+			path = Schedule;
+			sourceTree = "<group>";
+		};
+		81FFF0C72467F8160086500A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		81FFF0C82467F81E0086500A /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		81FFF0C92467F8270086500A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				81705A82240B1D890053A571 /* ScheduleViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		81FFF0CA2467F8650086500A /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				81FFF0CD2467F8F90086500A /* Model */,
+				81FFF0CC2467F8B70086500A /* View */,
+				81FFF0CB2467F8AA0086500A /* Controller */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		81FFF0CB2467F8AA0086500A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				816709CC245C9F7D00D94E65 /* SettingsVC.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		81FFF0CC2467F8B70086500A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				816709CD245C9F7D00D94E65 /* SettingsVC.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		81FFF0CD2467F8F90086500A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				816709D0245CCC5000D94E65 /* SettingsValues.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

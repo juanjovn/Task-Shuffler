@@ -91,7 +91,8 @@ class NewGapVC: UIViewController {
     
     private func setupCloseButton() {
         closeButton.setTitle("Cancel", for: .normal)
-        closeButton.tintColor = .cadetBlue
+        closeButton.setTitleColor(UIColor.bone, for: .normal)
+        closeButton.setTitleColor(UIColor.bone.withAlphaComponent(0.35), for: .highlighted)
         view.addSubview(closeButton)
         
         closeButton.translatesAutoresizingMaskIntoConstraints = false
@@ -104,9 +105,12 @@ class NewGapVC: UIViewController {
     }
     
     private func setupNextButton() {
-        nextButton.layer.shadowOffset = .init(width: 0, height: 1)
-        nextButton.backgroundColor = .fireOrange
-        nextButton.setTitleColor(.pearlWhite, for: .normal)
+        nextButton.layer.shadowColor = UIColor.mysticBlue.cgColor
+        nextButton.layer.shadowOffset = .init(width: 0, height: 2)
+        nextButton.layer.shadowRadius = 5
+        nextButton.layer.shadowOpacity = 0.7
+        nextButton.backgroundColor = .bone
+        nextButton.setTitleColor(.mysticBlue, for: .normal)
         nextButton.setTitleColor(UIColor.pearlWhite.withAlphaComponent(0.2), for: .highlighted)
         nextButton.setTitle(">", for: .normal)
         nextButton.titleLabel?.font = .avenirDemiBold(ofSize: UIFont.scaleFont(29))
@@ -115,15 +119,22 @@ class NewGapVC: UIViewController {
         
         nextButton.translatesAutoresizingMaskIntoConstraints = false
         nextButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        nextButton.topAnchor.constraint(equalToSystemSpacingBelow: datePicker.view.bottomAnchor, multiplier: 4).isActive = true
+        nextButton.topAnchor.constraint(equalToSystemSpacingBelow: datePicker.view.bottomAnchor, multiplier: 3.25).isActive = true
         nextButton.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.15).isActive = true
         nextButton.widthAnchor.constraint(equalTo: self.nextButton.heightAnchor).isActive = true
         
+        nextButton.addTarget(self, action: #selector(nextButtonAction), for: .touchUpInside)
     }
     
     // MARK: Actions
     @objc private func cancelButtonAction() {
         dismiss(animated: true, completion: nil)
+    }
+    
+    @objc private func nextButtonAction() {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.datePicker.view.alpha = 0
+        })
     }
     
 }

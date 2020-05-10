@@ -76,7 +76,10 @@ class TasksListViewController: AMTabsViewController {
     
     private func setupNewTaskButton() {
         newTaskButton.layer.cornerRadius = newTaskButton.bounds.size.width/2
-        newTaskButton.layer.shadowOffset = .init(width: 0, height: 1)
+        newTaskButton.layer.shadowColor = UIColor.mysticBlue.cgColor
+        newTaskButton.layer.shadowOffset = .init(width: 0, height: 2)
+        newTaskButton.layer.shadowRadius = 5
+        newTaskButton.layer.shadowOpacity = 0.7
         newTaskButton.backgroundColor = .fireOrange
         newTaskButton.setTitleColor(.pearlWhite, for: .normal)
     }

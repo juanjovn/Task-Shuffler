@@ -62,7 +62,10 @@ class GapsViewController: AMTabsViewController {
     
     private func setupNewGapButton() {
         newGapButton.layer.cornerRadius = newGapButton.bounds.size.width/2
-        newGapButton.layer.shadowOffset = .init(width: 0, height: 1)
+        newGapButton.layer.shadowColor = UIColor.mysticBlue.cgColor
+        newGapButton.layer.shadowOffset = .init(width: 0, height: 2)
+        newGapButton.layer.shadowRadius = 5
+        newGapButton.layer.shadowOpacity = 0.7
         newGapButton.backgroundColor = .fireOrange
         newGapButton.setTitleColor(.pearlWhite, for: .normal)
     }
