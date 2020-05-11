@@ -24,6 +24,7 @@ class HourCell: UITableViewCell {
     
     private func setupHourLabel() {
         hourLabel.font = .avenirDemiBold(ofSize: UIFont.scaleFont(20))
+        contentView.backgroundColor = .clear
         contentView.addSubview(hourLabel)
         
         hourLabel.translatesAutoresizingMaskIntoConstraints = false

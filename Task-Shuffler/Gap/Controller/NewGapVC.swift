@@ -123,7 +123,7 @@ class NewGapVC: UIViewController {
         nextButton.translatesAutoresizingMaskIntoConstraints = false
         nextButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         nextButton.topAnchor.constraint(equalToSystemSpacingBelow: datePicker.view.bottomAnchor, multiplier: 3.25).isActive = true
-        nextButton.heightAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.175).isActive = true
+        nextButton.heightAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.17).isActive = true
         nextButton.widthAnchor.constraint(equalTo: self.nextButton.heightAnchor).isActive = true
         
         nextButton.addTarget(self, action: #selector(nextButtonAction), for: .touchUpInside)
@@ -135,9 +135,9 @@ class NewGapVC: UIViewController {
         view.addSubview(timePicker.view)
         
         timePicker.view.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0).isActive = true
-        timePicker.view.topAnchor.constraint(equalTo: contentView.topAnchor, constant: screenHeight / 7).isActive = true
+        timePicker.view.topAnchor.constraint(equalTo: contentView.topAnchor, constant: screenHeight / 8).isActive = true
         timePicker.view.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0).isActive = true
-        timePicker.view.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -screenHeight / 5).isActive = true
+        timePicker.view.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -screenHeight / 5.5).isActive = true
         
         timePicker.didMove(toParent: self)
         //timePicker.delegate = self
@@ -152,6 +152,7 @@ class NewGapVC: UIViewController {
         UIView.animate(withDuration: 0.3,animations: {
             self.datePicker.view.alpha = 0
             self.dateLabel.topAnchor.constraint(lessThanOrEqualToSystemSpacingBelow: self.contentView.topAnchor, multiplier: 2).isActive = true
+            self.dateLabel.font = .avenirDemiBold(ofSize: UIFont.scaleFont(25))
             self.viewTopConstraint.isActive = false
             self.viewTopConstraint = self.contentView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor)
             self.viewTopConstraint.isActive = true
