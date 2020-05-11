@@ -20,6 +20,7 @@ class HourCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: true)
+        self.selectionStyle = .none
     }
     
     private func setupHourLabel() {

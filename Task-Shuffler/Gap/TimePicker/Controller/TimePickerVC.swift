@@ -19,6 +19,7 @@ class TimePickerVC: UIViewController {
     var hourView = UIView()
     var hourLabel = UILabel()
     var hLabel = UILabel()
+    var amPmButton = UIButton(type: .system)
     var hourTableView = UITableView()
     var minuteContainerView = UIView()
     var minuteView = UIView()
@@ -77,11 +78,7 @@ class TimePickerVC: UIViewController {
     }
     
     private func setupHourView() {
-        //var point = CGPoint()
         hourView.backgroundColor = UIColor.mysticBlue
-//        point.x = hourView.center.x
-//        point.y = centeredYCoordinate(hourView: hourView, yGesture: 200)
-//        hourView.center = point
         hourContainerView.addSubview(hourView)
         
         hourView.translatesAutoresizingMaskIntoConstraints = false
@@ -92,6 +89,7 @@ class TimePickerVC: UIViewController {
         
         setupHourLabel()
         setupHLabel()
+        setupAmPmButton()
     }
     
     private func setupHourLabel() {
@@ -114,6 +112,20 @@ class TimePickerVC: UIViewController {
         hLabel.translatesAutoresizingMaskIntoConstraints = false
         hLabel.trailingAnchor.constraint(equalTo: hourLabel.leadingAnchor, constant: -10).isActive = true
         hLabel.bottomAnchor.constraint(equalTo: hourLabel.bottomAnchor).isActive = true
+    }
+    
+    private func setupAmPmButton() {
+        amPmButton.setTitleColor(.fireOrange, for: .normal)
+        amPmButton.setTitleColor(.fireOrange, for: .selected)
+        amPmButton.tintColor = .clear
+        amPmButton.setTitle("AM", for: .normal)
+        amPmButton.setTitle("PM", for: .selected)
+        amPmButton.addTarget(self, action: #selector(amPmAction), for: .touchUpInside)
+        hourView.addSubview(amPmButton)
+        
+        amPmButton.translatesAutoresizingMaskIntoConstraints = false
+        amPmButton.centerYAnchor.constraint(equalTo: hourView.centerYAnchor).isActive = true
+        amPmButton.leadingAnchor.constraint(equalTo: hourView.leadingAnchor, constant: 20).isActive = true
     }
     
     private func setupMinuteContainerView() {
@@ -139,7 +151,7 @@ class TimePickerVC: UIViewController {
             point.y = min(max(point.y, hourViewheight / 2), view.frame.size.height - hourViewheight / 2)
             
             if let indexPath = hourTableView.indexPathForRow(at: point) {
-                hour = indexPath.row + 1
+                hour = amPmButton.isSelected ? indexPath.row + 13 : indexPath.row + 1
                 hourLabel.text = "\(hour)"
             }
             
@@ -161,6 +173,13 @@ class TimePickerVC: UIViewController {
             }
         default: break
         }
+    }
+    
+    @objc private func amPmAction() {
+        hLabel.text = amPmButton.isSelected ? "h" : "H"
+        amPmButton.isSelected = !amPmButton.isSelected
+        hourTableView.reloadData()
+        //hourTableView.reloadSections(IndexSet(integersIn: 0...0), with: .fade)
     }
     
     func centeredYCoordinate(hourView: UIView, yGesture: CGFloat) -> CGFloat{
@@ -185,6 +204,7 @@ class TimePickerVC: UIViewController {
         
         return finalY
     }
+    
 }
 
 //MARK: Extensions
@@ -193,7 +213,7 @@ extension TimePickerVC: UITableViewDataSource {
         switch tableView {
         case hourTableView:
             let cell = tableView.dequeueReusableCell(withIdentifier: "hourCell", for: indexPath) as! HourCell
-            cell.hourLabel.text = "\(hour + indexPath.row + 1)"
+            cell.hourLabel.text = amPmButton.isSelected ? "\(indexPath.row + 13)" : "\(indexPath.row + 1)"
             cell.backgroundColor = .clear
             return cell
         default:
@@ -214,3 +234,5 @@ extension TimePickerVC: UITableViewDelegate {
         return tableView.frame.size.height / 12
     }
 }
+
+
