@@ -67,6 +67,7 @@ class TimePickerVC: UIViewController {
         hourTableView.dataSource = self
         hourTableView.register(HourCell.self, forCellReuseIdentifier: "hourCell")
         hourTableView.isScrollEnabled = false
+        hourTableView.separatorStyle = .none
         hourTableView.backgroundColor = .clear
         hourContainerView.addSubview(hourTableView)
         
@@ -117,6 +118,7 @@ class TimePickerVC: UIViewController {
     private func setupAmPmButton() {
         amPmButton.setTitleColor(.fireOrange, for: .normal)
         amPmButton.setTitleColor(.fireOrange, for: .selected)
+        amPmButton.titleLabel?.font = .avenirRegular(ofSize: UIFont.scaleFont(18))
         amPmButton.tintColor = .clear
         amPmButton.setTitle("AM", for: .normal)
         amPmButton.setTitle("PM", for: .selected)
