@@ -24,6 +24,7 @@ class NewGapVC: UIViewController {
     let fromLabel = UILabel()
     let fromHourLabel = UILabel()
     let fromColonLabel = UILabel()
+    let fromTimeContainerView = UILabel()
     let fromMinuteLabel = UILabel()
     let toLabel = UILabel()
     let toTimeLabel = UILabel()
@@ -41,6 +42,11 @@ class NewGapVC: UIViewController {
     
     override func viewDidLayoutSubviews() {
         nextButton.layer.cornerRadius = nextButton.bounds.size.width / 2
+        fromTimeContainerView.layer.cornerRadius = fromTimeContainerView.bounds.size.height / 2
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+       // fromTimeContainerView.layer.cornerRadius = 5
     }
 
     private func setupView() {
@@ -155,7 +161,7 @@ class NewGapVC: UIViewController {
     }
     
     private func setupFromContainerView() {
-        fromContainerView.backgroundColor = .systemPink
+        fromContainerView.backgroundColor = .clear
         view.addSubview(fromContainerView)
         
         fromContainerView.translatesAutoresizingMaskIntoConstraints = false
@@ -164,18 +170,20 @@ class NewGapVC: UIViewController {
         fromContainerView.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 5).isActive = true
         fromContainerView.bottomAnchor.constraint(equalTo: timePicker.view.topAnchor, constant: -5).isActive = true
         
-        setupFromLabel()
         setupFromColonLabel()
+        setupFromTimeContainerView()
         setupFromHourLabel()
+        setupFromMinuteLabel()
+        setupFromLabel()
     }
     
     private func setupFromLabel() {
         fromLabel.font = .avenirMedium(ofSize: UIFont.scaleFont(15))
-        fromLabel.text = "From: "
+        fromLabel.text = "From"
         fromContainerView.addSubview(fromLabel)
         
         fromLabel.translatesAutoresizingMaskIntoConstraints = false
-        fromLabel.leadingAnchor.constraint(equalTo: fromContainerView.leadingAnchor, constant: 10).isActive = true
+        fromLabel.trailingAnchor.constraint(equalTo: fromHourLabel.leadingAnchor, constant: -15).isActive = true
         fromLabel.centerYAnchor.constraint(equalTo: fromContainerView.centerYAnchor).isActive = true
     }
     
@@ -189,15 +197,39 @@ class NewGapVC: UIViewController {
         fromColonLabel.leadingAnchor.constraint(equalTo: fromContainerView.centerXAnchor, constant: screenWidth / 23).isActive = true
     }
     
+    private func setupFromTimeContainerView() {
+        
+        fromTimeContainerView.backgroundColor = UIColor.bone.withAlphaComponent(0.80)
+        fromTimeContainerView.clipsToBounds = true
+        fromContainerView.addSubview(fromTimeContainerView)
+        
+        fromTimeContainerView.translatesAutoresizingMaskIntoConstraints = false
+        fromTimeContainerView.centerXAnchor.constraint(equalTo: fromColonLabel.centerXAnchor).isActive = true
+        fromTimeContainerView.centerYAnchor.constraint(equalTo: fromColonLabel.centerYAnchor).isActive = true
+        fromTimeContainerView.heightAnchor.constraint(equalTo: fromContainerView.heightAnchor).isActive = true
+        fromTimeContainerView.widthAnchor.constraint(equalTo: fromContainerView.widthAnchor, multiplier: 0.40).isActive = true
+        
+        fromContainerView.sendSubviewToBack(fromTimeContainerView)
+    }
+    
     private func setupFromHourLabel() {
-        fromHourLabel.text = "1"
-        fromHourLabel.font = .avenirRegular(ofSize: UIFont.scaleFont(20))
+        fromHourLabel.text = "01"
+        fromHourLabel.font = .avenirRegular(ofSize: UIFont.scaleFont(18))
         fromContainerView.addSubview(fromHourLabel)
         
         fromHourLabel.translatesAutoresizingMaskIntoConstraints = false
         fromHourLabel.centerYAnchor.constraint(equalTo: fromColonLabel.centerYAnchor).isActive = true
-        fromHourLabel.trailingAnchor.constraint(equalTo: fromColonLabel.leadingAnchor, constant: -5).isActive = true
+        fromHourLabel.trailingAnchor.constraint(equalTo: fromColonLabel.leadingAnchor, constant: -2).isActive = true
     }
+    
+    private func setupFromMinuteLabel() {
+        fromMinuteLabel.text = "00"
+        fromMinuteLabel.font = .avenirRegular(ofSize: UIFont.scaleFont(18))
+        fromContainerView.addSubview(fromMinuteLabel)
+        
+        fromMinuteLabel.translatesAutoresizingMaskIntoConstraints = false
+        fromMinuteLabel.centerYAnchor.constraint(equalTo: fromColonLabel.centerYAnchor).isActive = true
+        fromMinuteLabel.leadingAnchor.constraint(equalTo: fromColonLabel.trailingAnchor, constant: 2).isActive = true    }
     
     // MARK: Actions
     @objc private func cancelButtonAction() {
@@ -265,9 +297,11 @@ extension NewGapVC: DatePickerVCDelegate{
 }
 
 extension NewGapVC: TimePickerVCDelegate {
-    func timeDidSelect(hour: Int, minute: Int) {
-        fromHourLabel.text = "\(hour)"
-        fromMinuteLabel.text = "\(minute)"
+    func timeDidSelect(hour: Int?, minute: Int?) {
+        if hour != nil{
+            fromHourLabel.text = String(format: "%02lu", hour!)
+        }
+        fromMinuteLabel.text = String(format: "%02lu", minute!)
     }
     
 }

@@ -9,7 +9,7 @@
 import UIKit
 
 protocol TimePickerVCDelegate {
-    func timeDidSelect(hour: Int, minute: Int)
+    func timeDidSelect(hour: Int?, minute: Int?)
 }
 
 class TimePickerVC: UIViewController {
@@ -266,6 +266,7 @@ class TimePickerVC: UIViewController {
             if SettingsValues.otherSettings[0] && round(minuteView.center.y) != round(point.y) {
                 generator.impactOccurred()
             }
+            delegate?.timeDidSelect(hour: nil, minute: minute)
             UIView.animate(withDuration: 0.1) {
                 self.minuteView.center = point
             }
@@ -278,22 +279,24 @@ class TimePickerVC: UIViewController {
         if amPmButton.isSelected{
             hLabel.text = "h"
             if numericHour != 0 {
+                delegate?.timeDidSelect(hour: numericHour! - 12, minute: minute)
                 hourLabel.text = "\(numericHour! - 12)"
             } else {
+                delegate?.timeDidSelect(hour: 12, minute: minute)
                 hourLabel.text = "12"
             }
         } else {
             hLabel.text = "H"
             if numericHour != 12 {
+                delegate?.timeDidSelect(hour: numericHour! + 12, minute: minute)
                 hourLabel.text = "\(numericHour! + 12)"
             } else {
+                delegate?.timeDidSelect(hour: 00, minute: minute)
                 hourLabel.text = "00"
             }
         }
-        
         amPmButton.isSelected = !amPmButton.isSelected
         hourTableView.reloadData()
-        //hourTableView.reloadSections(IndexSet(integersIn: 0...0), with: .fade)
     }
     
     func centeredYCoordinate(hourView: UIView, yGesture: CGFloat) -> CGFloat{
