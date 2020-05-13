@@ -14,20 +14,13 @@ class NewGapVC: UIViewController {
     let contentView = UIView()
     let datePicker = DatePickerVC()
     let timePicker = TimePickerVC()
+    let fromDisplayTimeView = DisplayTime(text: "From")!
     let screenHeight = UIScreen.main.bounds.height
     let screenWidth = UIScreen.main.bounds.width
     let dateLabel = UILabel()
     let newGap = GapRealm()
     let closeButton = UIButton()
     let nextButton = UIButton(type: .custom)
-    let fromContainerView = UIView()
-    let fromLabel = UILabel()
-    let fromHourLabel = UILabel()
-    let fromColonLabel = UILabel()
-    let fromTimeContainerView = UILabel()
-    let fromMinuteLabel = UILabel()
-    let toLabel = UILabel()
-    let toTimeLabel = UILabel()
     var viewTopConstraint = NSLayoutConstraint()
     var isDateSelected = false
 
@@ -42,11 +35,7 @@ class NewGapVC: UIViewController {
     
     override func viewDidLayoutSubviews() {
         nextButton.layer.cornerRadius = nextButton.bounds.size.width / 2
-        fromTimeContainerView.layer.cornerRadius = fromTimeContainerView.bounds.size.height / 2
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-       // fromTimeContainerView.layer.cornerRadius = 5
+        fromDisplayTimeView.fromTimeContainerView.layer.cornerRadius = fromDisplayTimeView.fromTimeContainerView.bounds.size.height / 2
     }
 
     private func setupView() {
@@ -90,8 +79,6 @@ class NewGapVC: UIViewController {
         
         datePicker.didMove(toParent: self)
         datePicker.delegate = self
-       
-        
         
     }
     
@@ -157,79 +144,19 @@ class NewGapVC: UIViewController {
         timePicker.didMove(toParent: self)
         timePicker.delegate = self
         
-        setupFromContainerView()
+        setupFromDisplayTimeView()
     }
     
-    private func setupFromContainerView() {
-        fromContainerView.backgroundColor = .clear
-        view.addSubview(fromContainerView)
+    private func setupFromDisplayTimeView() {
+        view.addSubview(fromDisplayTimeView)
         
-        fromContainerView.translatesAutoresizingMaskIntoConstraints = false
-        fromContainerView.leadingAnchor.constraint(equalToSystemSpacingAfter: view.safeAreaLayoutGuide.leadingAnchor, multiplier: 1.5).isActive = true
-        fromContainerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
-        fromContainerView.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 5).isActive = true
-        fromContainerView.bottomAnchor.constraint(equalTo: timePicker.view.topAnchor, constant: -5).isActive = true
+        fromDisplayTimeView.translatesAutoresizingMaskIntoConstraints = false
+        fromDisplayTimeView.leadingAnchor.constraint(equalToSystemSpacingAfter: view.safeAreaLayoutGuide.leadingAnchor, multiplier: 1.5).isActive = true
+        fromDisplayTimeView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        fromDisplayTimeView.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 5).isActive = true
+        fromDisplayTimeView.bottomAnchor.constraint(equalTo: timePicker.view.topAnchor, constant: -5).isActive = true
         
-        setupFromColonLabel()
-        setupFromTimeContainerView()
-        setupFromHourLabel()
-        setupFromMinuteLabel()
-        setupFromLabel()
     }
-    
-    private func setupFromLabel() {
-        fromLabel.font = .avenirMedium(ofSize: UIFont.scaleFont(15))
-        fromLabel.text = "From"
-        fromContainerView.addSubview(fromLabel)
-        
-        fromLabel.translatesAutoresizingMaskIntoConstraints = false
-        fromLabel.trailingAnchor.constraint(equalTo: fromHourLabel.leadingAnchor, constant: -15).isActive = true
-        fromLabel.centerYAnchor.constraint(equalTo: fromContainerView.centerYAnchor).isActive = true
-    }
-    
-    private func setupFromColonLabel() {
-        fromColonLabel.text = ":"
-        fromColonLabel.font = .avenirMedium(ofSize: UIFont.scaleFont(15))
-        fromContainerView.addSubview(fromColonLabel)
-        
-        fromColonLabel.translatesAutoresizingMaskIntoConstraints = false
-        fromColonLabel.centerYAnchor.constraint(equalTo: fromContainerView.centerYAnchor).isActive = true
-        fromColonLabel.leadingAnchor.constraint(equalTo: fromContainerView.centerXAnchor, constant: screenWidth / 23).isActive = true
-    }
-    
-    private func setupFromTimeContainerView() {
-        
-        fromTimeContainerView.backgroundColor = UIColor.bone.withAlphaComponent(0.80)
-        fromTimeContainerView.clipsToBounds = true
-        fromContainerView.addSubview(fromTimeContainerView)
-        
-        fromTimeContainerView.translatesAutoresizingMaskIntoConstraints = false
-        fromTimeContainerView.centerXAnchor.constraint(equalTo: fromColonLabel.centerXAnchor).isActive = true
-        fromTimeContainerView.centerYAnchor.constraint(equalTo: fromColonLabel.centerYAnchor).isActive = true
-        fromTimeContainerView.heightAnchor.constraint(equalTo: fromContainerView.heightAnchor).isActive = true
-        fromTimeContainerView.widthAnchor.constraint(equalTo: fromContainerView.widthAnchor, multiplier: 0.40).isActive = true
-        
-        fromContainerView.sendSubviewToBack(fromTimeContainerView)
-    }
-    
-    private func setupFromHourLabel() {
-        fromHourLabel.text = "01"
-        fromHourLabel.font = .avenirRegular(ofSize: UIFont.scaleFont(18))
-        fromContainerView.addSubview(fromHourLabel)
-        
-        fromHourLabel.translatesAutoresizingMaskIntoConstraints = false
-        fromHourLabel.centerYAnchor.constraint(equalTo: fromColonLabel.centerYAnchor).isActive = true
-        fromHourLabel.trailingAnchor.constraint(equalTo: fromColonLabel.leadingAnchor, constant: -2).isActive = true
-    }
-    
-    private func setupFromMinuteLabel() {
-        fromMinuteLabel.text = "00"
-        fromMinuteLabel.font = .avenirRegular(ofSize: UIFont.scaleFont(18))
-        fromContainerView.addSubview(fromMinuteLabel)
-        
-        fromMinuteLabel.translatesAutoresizingMaskIntoConstraints = false
-        fromMinuteLabel.centerYAnchor.constraint(equalTo: fromColonLabel.centerYAnchor).isActive = true
-        fromMinuteLabel.leadingAnchor.constraint(equalTo: fromColonLabel.trailingAnchor, constant: 2).isActive = true    }
     
     // MARK: Actions
     @objc private func cancelButtonAction() {
@@ -299,9 +226,9 @@ extension NewGapVC: DatePickerVCDelegate{
 extension NewGapVC: TimePickerVCDelegate {
     func timeDidSelect(hour: Int?, minute: Int?) {
         if hour != nil{
-            fromHourLabel.text = String(format: "%02lu", hour!)
+            fromDisplayTimeView.fromHourLabel.text = String(format: "%02lu", hour!)
         }
-        fromMinuteLabel.text = String(format: "%02lu", minute!)
+        fromDisplayTimeView.fromMinuteLabel.text = String(format: "%02lu", minute!)
     }
     
 }

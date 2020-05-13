@@ -29,6 +29,7 @@ class DisplayTime: UIView {
     
     private func setupFromContainerView() {
         fromContainerView.backgroundColor = .clear
+        fromContainerView.clipsToBounds = true
         self.addSubview(fromContainerView)
         
         fromContainerView.translatesAutoresizingMaskIntoConstraints = false
