@@ -19,11 +19,14 @@ class TimePickerVC: UIViewController {
     var hourView = UIView()
     var hourLabel = UILabel()
     var hLabel = UILabel()
+    let dotLabel = UILabel()
     var amPmButton = UIButton(type: .system)
     var hourTableView = UITableView()
     var minuteContainerView = UIView()
     var minuteView = UIView()
     var minuteLabel = UILabel()
+    var mLabel = UILabel()
+    let dotLabelM = UILabel()
     var minuteTableView = UITableView()
     
     var hour: Int = 0
@@ -45,6 +48,7 @@ class TimePickerVC: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         hourView.layer.cornerRadius = hourView.layer.bounds.height / 2
+        minuteView.layer.cornerRadius = minuteView.layer.bounds.height / 2
     }
     
     private func setupHourContainerView() {
@@ -91,6 +95,7 @@ class TimePickerVC: UIViewController {
         setupHourLabel()
         setupHLabel()
         setupAmPmButton()
+        setupDotLabel()
     }
     
     private func setupHourLabel() {
@@ -118,7 +123,7 @@ class TimePickerVC: UIViewController {
     private func setupAmPmButton() {
         amPmButton.setTitleColor(.fireOrange, for: .normal)
         amPmButton.setTitleColor(.fireOrange, for: .selected)
-        amPmButton.titleLabel?.font = .avenirRegular(ofSize: UIFont.scaleFont(18))
+        amPmButton.titleLabel?.font = .avenirRegular(ofSize: UIFont.scaleFont(16))
         amPmButton.tintColor = .clear
         amPmButton.setTitle("AM", for: .normal)
         amPmButton.setTitle("PM", for: .selected)
@@ -130,20 +135,100 @@ class TimePickerVC: UIViewController {
         amPmButton.leadingAnchor.constraint(equalTo: hourView.leadingAnchor, constant: 20).isActive = true
     }
     
+    private func setupDotLabel() {
+        dotLabel.text = "·"
+        dotLabel.font = .avenirDemiBold(ofSize: UIFont.scaleFont(30))
+        dotLabel.textColor = UIColor.pearlWhite.withAlphaComponent(0.75)
+        
+        hourView.addSubview(dotLabel)
+        dotLabel.translatesAutoresizingMaskIntoConstraints = false
+        dotLabel.centerYAnchor.constraint(equalTo: hourView.centerYAnchor).isActive = true
+        dotLabel.leadingAnchor.constraint(equalTo: hourView.centerXAnchor, constant: -9).isActive = true
+    }
+    
     private func setupMinuteContainerView() {
-        minuteContainerView.backgroundColor = .systemBlue
+        minuteContainerView.backgroundColor = UIColor.bone.withAlphaComponent(0.80)
+        minuteContainerView.layer.cornerRadius = 20
         view.addSubview(minuteContainerView)
         
         minuteContainerView.translatesAutoresizingMaskIntoConstraints = false
         minuteContainerView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        minuteContainerView.leadingAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        minuteContainerView.leadingAnchor.constraint(equalTo: view.centerXAnchor, constant: 5).isActive = true
         minuteContainerView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        minuteContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        minuteContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
+        
+        setupMinuteTableView()
+        setupMinuteView()
+    }
+    
+    private func setupMinuteTableView() {
+        minuteTableView.delegate = self
+        minuteTableView.dataSource = self
+        minuteTableView.register(MinuteCell.self, forCellReuseIdentifier: "minuteCell")
+        minuteTableView.isScrollEnabled = false
+        minuteTableView.separatorStyle = .none
+        minuteTableView.backgroundColor = .clear
+        minuteContainerView.addSubview(minuteTableView)
+        
+        minuteTableView.translatesAutoresizingMaskIntoConstraints = false
+        minuteTableView.topAnchor.constraint(equalTo: minuteContainerView.topAnchor).isActive = true
+        minuteTableView.bottomAnchor.constraint(equalTo: minuteContainerView.bottomAnchor).isActive = true
+        minuteTableView.leadingAnchor.constraint(equalTo: minuteContainerView.leadingAnchor).isActive = true
+        minuteTableView.trailingAnchor.constraint(equalTo: minuteContainerView.trailingAnchor).isActive = true
+    }
+    
+    private func setupMinuteView() {
+        minuteView.backgroundColor = UIColor.mysticBlue
+        minuteContainerView.addSubview(minuteView)
+        
+        minuteView.translatesAutoresizingMaskIntoConstraints = false
+        minuteView.leadingAnchor.constraint(equalTo: minuteContainerView.leadingAnchor, constant: 1).isActive = true
+        minuteView.trailingAnchor.constraint(equalTo: minuteContainerView.trailingAnchor, constant: -1).isActive = true
+        minuteView.topAnchor.constraint(equalTo: minuteContainerView.topAnchor).isActive = true
+        minuteView.heightAnchor.constraint(equalTo: minuteContainerView.heightAnchor, multiplier: 1/12).isActive = true
+        
+        setupMinuteLabel()
+        setupMLabel()
+        setupDotLabelM()
+    }
+    
+    private func setupMinuteLabel() {
+        minuteLabel.font = .avenirDemiBold(ofSize: UIFont.scaleFont(24))
+        minuteLabel.textColor = .pearlWhite
+        minuteLabel.text = "00"
+        minuteView.addSubview(minuteLabel)
+        
+        minuteLabel.translatesAutoresizingMaskIntoConstraints = false
+        minuteLabel.centerYAnchor.constraint(equalTo: minuteView.centerYAnchor).isActive = true
+        minuteLabel.leadingAnchor.constraint(equalTo: minuteView.leadingAnchor, constant: 20).isActive = true
+    }
+    
+    private func setupMLabel() {
+        mLabel.font = .avenirRegular(ofSize: UIFont.scaleFont(24))
+        mLabel.textColor = .pearlWhite
+        mLabel.text = "m"
+        minuteView.addSubview(mLabel)
+        
+        mLabel.translatesAutoresizingMaskIntoConstraints = false
+        mLabel.leadingAnchor.constraint(equalTo: minuteLabel.trailingAnchor, constant: 10).isActive = true
+        mLabel.bottomAnchor.constraint(equalTo: minuteLabel.bottomAnchor).isActive = true
+    }
+    
+    private func setupDotLabelM() {
+        dotLabelM.text = "·"
+        dotLabelM.font = .avenirDemiBold(ofSize: UIFont.scaleFont(30))
+        dotLabelM.textColor = UIColor.pearlWhite.withAlphaComponent(0.75)
+        
+        minuteView.addSubview(dotLabelM)
+        dotLabelM.translatesAutoresizingMaskIntoConstraints = false
+        dotLabelM.centerYAnchor.constraint(equalTo: minuteView.centerYAnchor).isActive = true
+        dotLabelM.leadingAnchor.constraint(equalTo: minuteView.centerXAnchor, constant: 9).isActive = true
     }
     
     //MARK: Actions
     @objc func gesture(gesture: UIGestureRecognizer) {
         guard let view = gesture.view else { return }
+        let generator = UIImpactFeedbackGenerator(style: .medium)
         switch view {
         case hourContainerView:
             let hourViewheight = hourView.frame.size.height
@@ -155,21 +240,32 @@ class TimePickerVC: UIViewController {
             if let indexPath = hourTableView.indexPathForRow(at: point) {
                 hour = amPmButton.isSelected ? indexPath.row + 13 : indexPath.row + 1
                 hourLabel.text = "\(hour)"
+                delegate?.timeDidSelect(hour: hour, minute: minute)
+                if indexPath.row == 11 && amPmButton.isSelected {
+                    hourLabel.text = "00"
+                    delegate?.timeDidSelect(hour: 00, minute: minute)
+                }
             }
-            
+            if SettingsValues.otherSettings[0] && round(hourView.center.y) != round(point.y) {
+                generator.impactOccurred()
+            }
             UIView.animate(withDuration: 0.1) {
                 self.hourView.center = point
             }
         case minuteContainerView:
+            let minuteViewheight = minuteView.frame.size.height
             var point = gesture.location(in: minuteContainerView)
             point.x = minuteView.center.x
-            point.y = min(max(point.y, 30), view.frame.size.height - 30)
+            point.y = centeredYCoordinate(hourView: minuteView, yGesture: point.y)
+            point.y = min(max(point.y, minuteViewheight / 2), view.frame.size.height - minuteViewheight / 2)
             
             if let indexPath = hourTableView.indexPathForRow(at: point) {
                 minute = indexPath.row * 5
                 minuteLabel.text = String(format: "%02lu", minute)
             }
-            
+            if SettingsValues.otherSettings[0] && round(minuteView.center.y) != round(point.y) {
+                generator.impactOccurred()
+            }
             UIView.animate(withDuration: 0.1) {
                 self.minuteView.center = point
             }
@@ -178,7 +274,23 @@ class TimePickerVC: UIViewController {
     }
     
     @objc private func amPmAction() {
-        hLabel.text = amPmButton.isSelected ? "h" : "H"
+        let numericHour = Int(hourLabel.text!)
+        if amPmButton.isSelected{
+            hLabel.text = "h"
+            if numericHour != 0 {
+                hourLabel.text = "\(numericHour! - 12)"
+            } else {
+                hourLabel.text = "12"
+            }
+        } else {
+            hLabel.text = "H"
+            if numericHour != 12 {
+                hourLabel.text = "\(numericHour! + 12)"
+            } else {
+                hourLabel.text = "00"
+            }
+        }
+        
         amPmButton.isSelected = !amPmButton.isSelected
         hourTableView.reloadData()
         //hourTableView.reloadSections(IndexSet(integersIn: 0...0), with: .fade)
@@ -216,11 +328,15 @@ extension TimePickerVC: UITableViewDataSource {
         case hourTableView:
             let cell = tableView.dequeueReusableCell(withIdentifier: "hourCell", for: indexPath) as! HourCell
             cell.hourLabel.text = amPmButton.isSelected ? "\(indexPath.row + 13)" : "\(indexPath.row + 1)"
+            if indexPath.row == 11 && amPmButton.isSelected {
+                cell.hourLabel.text = "00"
+            }
             cell.backgroundColor = .clear
             return cell
         default:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "MinuteCell", for: indexPath) as! MinuteCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "minuteCell", for: indexPath) as! MinuteCell
             cell.minuteLabel.text = String(format: "%02lu", indexPath.row * 5)
+            cell.backgroundColor = .clear
             return cell
         }
     }

@@ -10,12 +10,14 @@ import UIKit
 
 class HourCell: UITableViewCell {
     let hourLabel = UILabel()
+    let dotLabel = UILabel()
     override class func awakeFromNib() {
         super.awakeFromNib()
     }
     
     override func layoutSubviews() {
         setupHourLabel()
+        setupDotLabel()
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -24,7 +26,8 @@ class HourCell: UITableViewCell {
     }
     
     private func setupHourLabel() {
-        hourLabel.font = .avenirDemiBold(ofSize: UIFont.scaleFont(20))
+        hourLabel.font = .avenirMedium(ofSize: UIFont.scaleFont(20))
+        hourLabel.textColor = UIColor.mysticBlue.withAlphaComponent(0.85)
         contentView.backgroundColor = .clear
         contentView.addSubview(hourLabel)
         
@@ -33,5 +36,14 @@ class HourCell: UITableViewCell {
         hourLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
     }
     
-    
+    private func setupDotLabel() {
+        dotLabel.text = "·"
+        dotLabel.font = .avenirRegular(ofSize: UIFont.scaleFont(30))
+        dotLabel.textColor = UIColor.mysticBlue.withAlphaComponent(0.85)
+        
+        contentView.addSubview(dotLabel)
+        dotLabel.translatesAutoresizingMaskIntoConstraints = false
+        dotLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        dotLabel.leadingAnchor.constraint(equalTo: contentView.centerXAnchor, constant: -9).isActive = true
+    }
 }

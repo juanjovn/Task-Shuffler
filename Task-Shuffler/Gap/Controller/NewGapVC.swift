@@ -15,11 +15,20 @@ class NewGapVC: UIViewController {
     let datePicker = DatePickerVC()
     let timePicker = TimePickerVC()
     let screenHeight = UIScreen.main.bounds.height
+    let screenWidth = UIScreen.main.bounds.width
     let dateLabel = UILabel()
     let newGap = GapRealm()
     let closeButton = UIButton()
     let nextButton = UIButton(type: .custom)
+    let fromContainerView = UIView()
+    let fromLabel = UILabel()
+    let fromHourLabel = UILabel()
+    let fromColonLabel = UILabel()
+    let fromMinuteLabel = UILabel()
+    let toLabel = UILabel()
+    let toTimeLabel = UILabel()
     var viewTopConstraint = NSLayoutConstraint()
+    var isDateSelected = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -113,7 +122,7 @@ class NewGapVC: UIViewController {
         nextButton.layer.shadowRadius = 5
         nextButton.layer.shadowOpacity = 0.7
         nextButton.backgroundColor = .bone
-        nextButton.setTitleColor(.mysticBlue, for: .normal)
+        nextButton.setTitleColor(UIColor.mysticBlue.withAlphaComponent(0.2), for: .normal)
         nextButton.setTitleColor(UIColor.pearlWhite.withAlphaComponent(0.2), for: .highlighted)
         nextButton.setTitle(">", for: .normal)
         nextButton.titleLabel?.font = .avenirDemiBold(ofSize: UIFont.scaleFont(25))
@@ -122,7 +131,7 @@ class NewGapVC: UIViewController {
         
         nextButton.translatesAutoresizingMaskIntoConstraints = false
         nextButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        nextButton.topAnchor.constraint(equalToSystemSpacingBelow: datePicker.view.bottomAnchor, multiplier: 3.25).isActive = true
+        nextButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -15).isActive = true
         nextButton.heightAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.17).isActive = true
         nextButton.widthAnchor.constraint(equalTo: self.nextButton.heightAnchor).isActive = true
         
@@ -137,10 +146,57 @@ class NewGapVC: UIViewController {
         timePicker.view.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0).isActive = true
         timePicker.view.topAnchor.constraint(equalTo: contentView.topAnchor, constant: screenHeight / 8).isActive = true
         timePicker.view.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0).isActive = true
-        timePicker.view.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -screenHeight / 5.5).isActive = true
+        timePicker.view.bottomAnchor.constraint(equalTo: nextButton.topAnchor, constant: -20).isActive = true
         
         timePicker.didMove(toParent: self)
-        //timePicker.delegate = self
+        timePicker.delegate = self
+        
+        setupFromContainerView()
+    }
+    
+    private func setupFromContainerView() {
+        fromContainerView.backgroundColor = .systemPink
+        view.addSubview(fromContainerView)
+        
+        fromContainerView.translatesAutoresizingMaskIntoConstraints = false
+        fromContainerView.leadingAnchor.constraint(equalToSystemSpacingAfter: view.safeAreaLayoutGuide.leadingAnchor, multiplier: 1.5).isActive = true
+        fromContainerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
+        fromContainerView.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 5).isActive = true
+        fromContainerView.bottomAnchor.constraint(equalTo: timePicker.view.topAnchor, constant: -5).isActive = true
+        
+        setupFromLabel()
+        setupFromColonLabel()
+        setupFromHourLabel()
+    }
+    
+    private func setupFromLabel() {
+        fromLabel.font = .avenirMedium(ofSize: UIFont.scaleFont(15))
+        fromLabel.text = "From: "
+        fromContainerView.addSubview(fromLabel)
+        
+        fromLabel.translatesAutoresizingMaskIntoConstraints = false
+        fromLabel.leadingAnchor.constraint(equalTo: fromContainerView.leadingAnchor, constant: 10).isActive = true
+        fromLabel.centerYAnchor.constraint(equalTo: fromContainerView.centerYAnchor).isActive = true
+    }
+    
+    private func setupFromColonLabel() {
+        fromColonLabel.text = ":"
+        fromColonLabel.font = .avenirMedium(ofSize: UIFont.scaleFont(15))
+        fromContainerView.addSubview(fromColonLabel)
+        
+        fromColonLabel.translatesAutoresizingMaskIntoConstraints = false
+        fromColonLabel.centerYAnchor.constraint(equalTo: fromContainerView.centerYAnchor).isActive = true
+        fromColonLabel.leadingAnchor.constraint(equalTo: fromContainerView.centerXAnchor, constant: screenWidth / 23).isActive = true
+    }
+    
+    private func setupFromHourLabel() {
+        fromHourLabel.text = "1"
+        fromHourLabel.font = .avenirRegular(ofSize: UIFont.scaleFont(20))
+        fromContainerView.addSubview(fromHourLabel)
+        
+        fromHourLabel.translatesAutoresizingMaskIntoConstraints = false
+        fromHourLabel.centerYAnchor.constraint(equalTo: fromColonLabel.centerYAnchor).isActive = true
+        fromHourLabel.trailingAnchor.constraint(equalTo: fromColonLabel.leadingAnchor, constant: -5).isActive = true
     }
     
     // MARK: Actions
@@ -149,19 +205,26 @@ class NewGapVC: UIViewController {
     }
     
     @objc private func nextButtonAction() {
-        UIView.animate(withDuration: 0.3,animations: {
-            self.datePicker.view.alpha = 0
-            self.dateLabel.topAnchor.constraint(lessThanOrEqualToSystemSpacingBelow: self.contentView.topAnchor, multiplier: 2).isActive = true
-            self.dateLabel.font = .avenirDemiBold(ofSize: UIFont.scaleFont(25))
-            self.viewTopConstraint.isActive = false
-            self.viewTopConstraint = self.contentView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor)
-            self.viewTopConstraint.isActive = true
-            self.view.layoutIfNeeded()
-        },
-        completion: {
-            sucess in
-                self.setupTimePicker()
-        })
+        if isDateSelected{
+            UIView.animate(withDuration: 0.3,animations: {
+                self.datePicker.view.alpha = 0
+                self.dateLabel.topAnchor.constraint(lessThanOrEqualToSystemSpacingBelow: self.contentView.topAnchor, multiplier: 2).isActive = true
+                self.dateLabel.font = .avenirDemiBold(ofSize: UIFont.scaleFont(20))
+                self.viewTopConstraint.isActive = false
+                self.viewTopConstraint = self.contentView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor)
+                self.viewTopConstraint.isActive = true
+                self.view.layoutIfNeeded()
+            },
+                           completion: {
+                            sucess in
+                            self.setupTimePicker()
+            })
+        } else {
+            if SettingsValues.otherSettings[0]{
+                let generator = UINotificationFeedbackGenerator()
+                generator.notificationOccurred(.error)
+            }
+        }
     }
     
 }
@@ -169,6 +232,15 @@ class NewGapVC: UIViewController {
 //MARK: Extensions
 extension NewGapVC: DatePickerVCDelegate{
     func selectedDate(selectedDate: Date) {
+        if !isDateSelected{
+            UIView.transition(with: nextButton,
+                              duration: 0.3,
+                              options: .transitionCrossDissolve,
+                              animations: { [weak self] in
+                                self?.nextButton.setTitleColor(UIColor.mysticBlue.withAlphaComponent(1), for: .normal)
+            })
+        }
+        isDateSelected = true
         newGap.startDate = selectedDate
         newGap.endDate = selectedDate
         print("\(Utils.formatDate(datePattern: "E dd MMMM", date: newGap.startDate))")
@@ -176,8 +248,12 @@ extension NewGapVC: DatePickerVCDelegate{
     
     func updateDateLabel(textDate: String) {
         UIView.animate(withDuration: 0.1, animations: {
+            let generator = UIImpactFeedbackGenerator(style: .heavy)
             self.dateLabel.alpha = 0
             self.dateLabel.text = textDate
+            if SettingsValues.otherSettings[0] {
+                generator.impactOccurred()
+            }
         })
         UIView.animate(withDuration: 0.3, animations: {
             self.dateLabel.text = textDate
@@ -185,5 +261,13 @@ extension NewGapVC: DatePickerVCDelegate{
         })
     }
     
+    
+}
+
+extension NewGapVC: TimePickerVCDelegate {
+    func timeDidSelect(hour: Int, minute: Int) {
+        fromHourLabel.text = "\(hour)"
+        fromMinuteLabel.text = "\(minute)"
+    }
     
 }
