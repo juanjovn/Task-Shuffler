@@ -74,7 +74,7 @@ class DisplayTime: UIView {
         fromTimeContainerView.centerXAnchor.constraint(equalTo: fromColonLabel.centerXAnchor).isActive = true
         fromTimeContainerView.centerYAnchor.constraint(equalTo: fromColonLabel.centerYAnchor).isActive = true
         fromTimeContainerView.heightAnchor.constraint(equalTo: fromContainerView.heightAnchor).isActive = true
-        fromTimeContainerView.widthAnchor.constraint(equalTo: fromContainerView.widthAnchor, multiplier: 0.40).isActive = true
+        fromTimeContainerView.widthAnchor.constraint(equalTo: fromColonLabel.heightAnchor, multiplier: 3.2).isActive = true
         
         fromContainerView.sendSubviewToBack(fromTimeContainerView)
     }

@@ -23,7 +23,6 @@ class NewGapVC: UIViewController {
     let closeButton = UIButton()
     let nextButton = UIButton(type: .custom)
     var viewTopConstraint = NSLayoutConstraint()
-    var isDateSelected = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -183,7 +182,13 @@ class NewGapVC: UIViewController {
     }
     
     @objc private func nextButtonAction() {
-        if isDateSelected{
+        switch nextButton.tag {
+        case 0:
+            if SettingsValues.otherSettings[0]{
+                let generator = UINotificationFeedbackGenerator()
+                generator.notificationOccurred(.error)
+            }
+        case 1:
             self.setupTimePicker()
             UIView.animate(withDuration: 0.3,animations: {
                 self.datePicker.view.alpha = 0
@@ -195,17 +200,26 @@ class NewGapVC: UIViewController {
                 self.view.layoutIfNeeded()
                 self.timePicker.view.alpha = 1
                 self.fromDisplayTimeView.alpha = 1
-                self.toDisplayTimeView.alpha = 1
             },
-            completion: {success in
-                self.isDateSelected = false
+            completion: { success in
+                self.nextButton.tag = 2
             })
-        } else {
-            if SettingsValues.otherSettings[0]{
-                let generator = UINotificationFeedbackGenerator()
-                generator.notificationOccurred(.error)
-            }
+            
+        case 2:
+            self.toDisplayTimeView.fromHourLabel.text = self.fromDisplayTimeView.fromHourLabel.text
+            self.toDisplayTimeView.fromMinuteLabel.text = self.fromDisplayTimeView.fromMinuteLabel.text
+            UIView.animate(withDuration: 0.3,animations: {
+                self.toDisplayTimeView.alpha = 1
+                self.fromDisplayTimeView.fromTimeContainerView.alpha = 0
+                self.fromDisplayTimeView.alpha = 0.50
+            },
+            completion: { success in
+                self.nextButton.tag = 3
+            })
+        default:
+            break
         }
+        
     }
     
 }
@@ -213,7 +227,7 @@ class NewGapVC: UIViewController {
 //MARK: Extensions
 extension NewGapVC: DatePickerVCDelegate{
     func selectedDate(selectedDate: Date) {
-        if !isDateSelected{
+        if nextButton.tag == 0{
             UIView.transition(with: nextButton,
                               duration: 0.3,
                               options: .transitionCrossDissolve,
@@ -221,7 +235,7 @@ extension NewGapVC: DatePickerVCDelegate{
                                 self?.nextButton.setTitleColor(UIColor.mysticBlue.withAlphaComponent(1), for: .normal)
             })
         }
-        isDateSelected = true
+        nextButton.tag = 1
         newGap.startDate = selectedDate
         newGap.endDate = selectedDate
         print("\(Utils.formatDate(datePattern: "E dd MMMM", date: newGap.startDate))")
@@ -248,9 +262,17 @@ extension NewGapVC: DatePickerVCDelegate{
 extension NewGapVC: TimePickerVCDelegate {
     func timeDidSelect(hour: Int?, minute: Int?) {
         if hour != nil{
-            fromDisplayTimeView.fromHourLabel.text = String(format: "%02lu", hour!)
+            if nextButton.tag == 2{
+                fromDisplayTimeView.fromHourLabel.text = String(format: "%02lu", hour!)
+            } else {
+                toDisplayTimeView.fromHourLabel.text = String(format: "%02lu", hour!)
+            }
         }
-        fromDisplayTimeView.fromMinuteLabel.text = String(format: "%02lu", minute!)
+        if nextButton.tag == 2 {
+            fromDisplayTimeView.fromMinuteLabel.text = String(format: "%02lu", minute!)
+        } else {
+            toDisplayTimeView.fromMinuteLabel.text = String(format: "%02lu", minute!)
+        }
     }
     
 }

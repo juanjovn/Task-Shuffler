@@ -21,12 +21,14 @@ class TimePickerVC: UIViewController {
     var hLabel = UILabel()
     let dotLabel = UILabel()
     var amPmButton = UIButton(type: .system)
+    var amPmButtonCotainerView = UIView()
     var hourTableView = UITableView()
     var minuteContainerView = UIView()
     var minuteView = UIView()
     var minuteLabel = UILabel()
     var mLabel = UILabel()
     let dotLabelM = UILabel()
+    var dragLinesView = UIImageView(image: UIImage(named: "draglines"))
     var minuteTableView = UITableView()
     
     var hour: Int = 0
@@ -49,6 +51,7 @@ class TimePickerVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         hourView.layer.cornerRadius = hourView.layer.bounds.height / 2
         minuteView.layer.cornerRadius = minuteView.layer.bounds.height / 2
+        amPmButtonCotainerView.layer.cornerRadius = amPmButtonCotainerView.bounds.size.height / 2
     }
     
     private func setupHourContainerView() {
@@ -95,6 +98,7 @@ class TimePickerVC: UIViewController {
         setupHourLabel()
         setupHLabel()
         setupAmPmButton()
+        setupAmPmButtonContainerView()
         setupDotLabel()
     }
     
@@ -123,7 +127,7 @@ class TimePickerVC: UIViewController {
     private func setupAmPmButton() {
         amPmButton.setTitleColor(.fireOrange, for: .normal)
         amPmButton.setTitleColor(.fireOrange, for: .selected)
-        amPmButton.titleLabel?.font = .avenirRegular(ofSize: UIFont.scaleFont(16))
+        amPmButton.titleLabel?.font = .avenirMedium(ofSize: UIFont.scaleFont(16))
         amPmButton.tintColor = .clear
         amPmButton.setTitle("AM", for: .normal)
         amPmButton.setTitle("PM", for: .selected)
@@ -133,6 +137,18 @@ class TimePickerVC: UIViewController {
         amPmButton.translatesAutoresizingMaskIntoConstraints = false
         amPmButton.centerYAnchor.constraint(equalTo: hourView.centerYAnchor).isActive = true
         amPmButton.leadingAnchor.constraint(equalTo: hourView.leadingAnchor, constant: 20).isActive = true
+    }
+    
+    private func setupAmPmButtonContainerView() {
+        amPmButtonCotainerView.backgroundColor = UIColor.pearlWhite.withAlphaComponent(0.15)
+        hourView.addSubview(amPmButtonCotainerView)
+        hourView.sendSubviewToBack(amPmButtonCotainerView)
+        
+        amPmButtonCotainerView.translatesAutoresizingMaskIntoConstraints = false
+        amPmButtonCotainerView.centerXAnchor.constraint(equalTo: amPmButton.centerXAnchor).isActive = true
+        amPmButtonCotainerView.centerYAnchor.constraint(equalTo: amPmButton.centerYAnchor).isActive = true
+        amPmButtonCotainerView.widthAnchor.constraint(equalTo: amPmButton.widthAnchor, multiplier: 1.3).isActive = true
+        amPmButtonCotainerView.heightAnchor.constraint(equalTo: amPmButton.heightAnchor, multiplier: 0.7).isActive = true
     }
     
     private func setupDotLabel() {
@@ -190,6 +206,7 @@ class TimePickerVC: UIViewController {
         setupMinuteLabel()
         setupMLabel()
         setupDotLabelM()
+        setupDragLines()
     }
     
     private func setupMinuteLabel() {
@@ -223,6 +240,16 @@ class TimePickerVC: UIViewController {
         dotLabelM.translatesAutoresizingMaskIntoConstraints = false
         dotLabelM.centerYAnchor.constraint(equalTo: minuteView.centerYAnchor).isActive = true
         dotLabelM.leadingAnchor.constraint(equalTo: minuteView.centerXAnchor, constant: 9).isActive = true
+    }
+    
+    private func setupDragLines() {
+        dragLinesView.tintColor = UIColor.pearlWhite.withAlphaComponent(0.80)
+        minuteView.addSubview(dragLinesView)
+        
+        dragLinesView.translatesAutoresizingMaskIntoConstraints = false
+        dragLinesView.trailingAnchor.constraint(equalTo: minuteView.trailingAnchor, constant: -19).isActive = true
+        dragLinesView.centerYAnchor.constraint(equalTo: minuteView.centerYAnchor).isActive = true
+        dragLinesView.heightAnchor.constraint(equalTo: minuteView.heightAnchor, multiplier: 0.7).isActive = true
     }
     
     //MARK: Actions
