@@ -15,6 +15,7 @@ class NewGapVC: UIViewController {
     let datePicker = DatePickerVC()
     let timePicker = TimePickerVC()
     let fromDisplayTimeView = DisplayTime(text: "From")!
+    let toDisplayTimeView = DisplayTime(text: "To")!
     let screenHeight = UIScreen.main.bounds.height
     let screenWidth = UIScreen.main.bounds.width
     let dateLabel = UILabel()
@@ -36,6 +37,7 @@ class NewGapVC: UIViewController {
     override func viewDidLayoutSubviews() {
         nextButton.layer.cornerRadius = nextButton.bounds.size.width / 2
         fromDisplayTimeView.fromTimeContainerView.layer.cornerRadius = fromDisplayTimeView.fromTimeContainerView.bounds.size.height / 2
+        toDisplayTimeView.fromTimeContainerView.layer.cornerRadius = fromDisplayTimeView.fromTimeContainerView.bounds.size.height / 2
     }
 
     private func setupView() {
@@ -132,6 +134,7 @@ class NewGapVC: UIViewController {
     }
     
     private func setupTimePicker(){
+        timePicker.view.alpha = 0
         addChild(timePicker)
         timePicker.view.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(timePicker.view)
@@ -145,16 +148,32 @@ class NewGapVC: UIViewController {
         timePicker.delegate = self
         
         setupFromDisplayTimeView()
+        setupToDisplayTimeView()
     }
     
     private func setupFromDisplayTimeView() {
+        fromDisplayTimeView.alpha = 0
         view.addSubview(fromDisplayTimeView)
         
         fromDisplayTimeView.translatesAutoresizingMaskIntoConstraints = false
         fromDisplayTimeView.leadingAnchor.constraint(equalToSystemSpacingAfter: view.safeAreaLayoutGuide.leadingAnchor, multiplier: 1.5).isActive = true
         fromDisplayTimeView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
-        fromDisplayTimeView.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 5).isActive = true
-        fromDisplayTimeView.bottomAnchor.constraint(equalTo: timePicker.view.topAnchor, constant: -5).isActive = true
+        fromDisplayTimeView.topAnchor.constraint(greaterThanOrEqualToSystemSpacingBelow: dateLabel.bottomAnchor, multiplier: 0.9).isActive = true
+        fromDisplayTimeView.bottomAnchor.constraint(equalTo: timePicker.view.topAnchor, constant: -screenHeight/50).isActive = true
+        fromDisplayTimeView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.04).isActive = true
+        
+    }
+    
+    private func setupToDisplayTimeView() {
+        toDisplayTimeView.alpha = 0
+        view.addSubview(toDisplayTimeView)
+        
+        toDisplayTimeView.translatesAutoresizingMaskIntoConstraints = false
+        toDisplayTimeView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor, constant: 5).isActive = true
+        toDisplayTimeView.trailingAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -screenWidth/11).isActive = true
+        toDisplayTimeView.topAnchor.constraint(greaterThanOrEqualToSystemSpacingBelow: dateLabel.bottomAnchor, multiplier: 0.9).isActive = true
+        toDisplayTimeView.bottomAnchor.constraint(equalTo: timePicker.view.topAnchor, constant: -screenHeight/50).isActive = true
+        toDisplayTimeView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.04).isActive = true
         
     }
     
@@ -165,18 +184,21 @@ class NewGapVC: UIViewController {
     
     @objc private func nextButtonAction() {
         if isDateSelected{
+            self.setupTimePicker()
             UIView.animate(withDuration: 0.3,animations: {
                 self.datePicker.view.alpha = 0
-                self.dateLabel.topAnchor.constraint(lessThanOrEqualToSystemSpacingBelow: self.contentView.topAnchor, multiplier: 2).isActive = true
+                self.dateLabel.topAnchor.constraint(greaterThanOrEqualToSystemSpacingBelow: self.contentView.topAnchor, multiplier: 2).isActive = true
                 self.dateLabel.font = .avenirDemiBold(ofSize: UIFont.scaleFont(20))
                 self.viewTopConstraint.isActive = false
                 self.viewTopConstraint = self.contentView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor)
                 self.viewTopConstraint.isActive = true
                 self.view.layoutIfNeeded()
+                self.timePicker.view.alpha = 1
+                self.fromDisplayTimeView.alpha = 1
+                self.toDisplayTimeView.alpha = 1
             },
-                           completion: {
-                            sucess in
-                            self.setupTimePicker()
+            completion: {success in
+                self.isDateSelected = false
             })
         } else {
             if SettingsValues.otherSettings[0]{
