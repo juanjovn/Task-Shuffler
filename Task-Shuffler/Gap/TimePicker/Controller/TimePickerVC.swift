@@ -301,7 +301,7 @@ class TimePickerVC: UIViewController {
         }
     }
     
-    @objc private func amPmAction() {
+    @objc func amPmAction() {
         let numericHour = Int(hourLabel.text!)
         if amPmButton.isSelected{
             hLabel.text = "h"

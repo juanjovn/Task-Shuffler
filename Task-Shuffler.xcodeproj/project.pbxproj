@@ -10,7 +10,7 @@
 		45562218270AD4C5EFC5B323 /* Pods_Task_Shuffler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C313B2D615F94E260304E37 /* Pods_Task_Shuffler.framework */; };
 		811880A6243515BC00E5FEE1 /* DeviceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811880A5243515BC00E5FEE1 /* DeviceModel.swift */; };
 		815204EF245E9A1E0004510B /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815204EE245E9A1E0004510B /* Alert.swift */; };
-		815204F1245F46C20004510B /* Gap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815204F0245F46C20004510B /* Gap.swift */; };
+		815204F1245F46C20004510B /* GapRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815204F0245F46C20004510B /* GapRealm.swift */; };
 		816709CE245C9F7D00D94E65 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816709CC245C9F7D00D94E65 /* SettingsVC.swift */; };
 		816709CF245C9F7D00D94E65 /* SettingsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 816709CD245C9F7D00D94E65 /* SettingsVC.xib */; };
 		816709D1245CCC5000D94E65 /* SettingsValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816709D0245CCC5000D94E65 /* SettingsValues.swift */; };
@@ -52,7 +52,7 @@
 		5C313B2D615F94E260304E37 /* Pods_Task_Shuffler.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Task_Shuffler.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		811880A5243515BC00E5FEE1 /* DeviceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceModel.swift; sourceTree = "<group>"; };
 		815204EE245E9A1E0004510B /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
-		815204F0245F46C20004510B /* Gap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gap.swift; sourceTree = "<group>"; };
+		815204F0245F46C20004510B /* GapRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GapRealm.swift; sourceTree = "<group>"; };
 		816709CC245C9F7D00D94E65 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		816709CD245C9F7D00D94E65 /* SettingsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsVC.xib; sourceTree = "<group>"; };
 		816709D0245CCC5000D94E65 /* SettingsValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsValues.swift; sourceTree = "<group>"; };
@@ -280,7 +280,7 @@
 		81FFF0C22467F7CE0086500A /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				815204F0245F46C20004510B /* Gap.swift */,
+				815204F0245F46C20004510B /* GapRealm.swift */,
 				81C90B5224614F8B001C06B4 /* GapManager.swift */,
 			);
 			path = Model;
@@ -500,7 +500,7 @@
 				81D0E450240AE7C800B2E5D8 /* TasksListViewController.swift in Sources */,
 				81C90B5E246492BC001C06B4 /* NewGapVC.swift in Sources */,
 				81C90B572461D0B2001C06B4 /* GapCell.swift in Sources */,
-				815204F1245F46C20004510B /* Gap.swift in Sources */,
+				815204F1245F46C20004510B /* GapRealm.swift in Sources */,
 				8179FDD924580807009A6D4B /* DatabaseManager.swift in Sources */,
 				815204EF245E9A1E0004510B /* Alert.swift in Sources */,
 				8170DD792467FEE80060725D /* TimePickerVC.swift in Sources */,

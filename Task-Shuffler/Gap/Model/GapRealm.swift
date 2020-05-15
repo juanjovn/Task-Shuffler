@@ -11,8 +11,16 @@ import RealmSwift
 
 class GapRealm: Object{
     @objc dynamic var id = UUID().uuidString
-    @objc dynamic var startDate = Date()
-    @objc dynamic var endDate = Date()
+    @objc dynamic var startDate = Date() {
+        didSet{
+            self.duration = intervalDateToMinutes(startDate: startDate, endDate: endDate)
+        }
+    }
+    @objc dynamic var endDate = Date() {
+        didSet{
+            self.duration = intervalDateToMinutes(startDate: startDate, endDate: endDate)
+        }
+    }
     @objc dynamic var duration = 0
     @objc dynamic var state = "Pending"
     @objc dynamic var taskid = ""

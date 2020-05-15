@@ -151,6 +151,7 @@ class NewGapVC: UIViewController {
     }
     
     private func setupFromDisplayTimeView() {
+        fromDisplayTimeView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(fromDisplayTimeAction)))
         fromDisplayTimeView.alpha = 0
         view.addSubview(fromDisplayTimeView)
         
@@ -212,14 +213,64 @@ class NewGapVC: UIViewController {
                 self.toDisplayTimeView.alpha = 1
                 self.fromDisplayTimeView.fromTimeContainerView.alpha = 0
                 self.fromDisplayTimeView.alpha = 0.50
+                self.toDisplayTimeView.fromTimeContainerView.alpha = 0.8
             },
             completion: { success in
                 self.nextButton.tag = 3
             })
+        case 3:
+            var startTime = fromDisplayTimeView.fromHourLabel.text
+            startTime?.append(":")
+            startTime?.append(fromDisplayTimeView.fromMinuteLabel.text!)
+            //let endTime = "\(toDisplayTimeView.fromHourLabel.text):\(toDisplayTimeView.fromMinuteLabel.text)"
+            let formatter = DateFormatter()
+            formatter.dateFormat = "HH:mm"
+            print(startTime)
+            newGap.startDate = formatter.date(from: startTime!)!
+            //newGap.endDate = formatter.date(from: endTime)!
+            print(newGap.debugDescription)
         default:
             break
         }
         
+    }
+    
+    @objc private func fromDisplayTimeAction () {
+        switch nextButton.tag {
+        case 3:
+            UIView.animate(withDuration: 0.3,animations: {
+                self.toDisplayTimeView.alpha = 0
+                self.fromDisplayTimeView.fromTimeContainerView.alpha = 0.8
+                self.fromDisplayTimeView.alpha = 1
+            })
+            let hour = Int(fromDisplayTimeView.fromHourLabel.text!)!
+            let minute = Int(fromDisplayTimeView.fromMinuteLabel.text!)! / 5
+            var hourRow = hour > 12 ? hour - 12 - 1 : hour - 1
+            if hourRow < 0 {
+                hourRow = 11
+            }
+            let hourCell = timePicker.hourTableView.cellForRow(at: IndexPath(row: hourRow, section: 0))
+            let minuteCell = timePicker.minuteTableView.cellForRow(at: IndexPath(row: minute, section: 0))
+            
+            UIView.animate(withDuration: 0.1) {
+                self.timePicker.hourView.center = CGPoint(x: self.timePicker.hourView.center.x, y: (hourCell?.frame.midY)!)
+                self.timePicker.minuteView.center = CGPoint(x: self.timePicker.minuteView.center.x, y: (minuteCell?.frame.midY)!)
+                self.timePicker.amPmAction()
+                self.timePicker.hourLabel.text = hour == 0 ? "00" : "\(hour)"
+                self.timePicker.minuteLabel.text = self.fromDisplayTimeView.fromMinuteLabel.text
+                if hour > 12 || hour == 0 {
+                    self.timePicker.amPmButton.isSelected =  true
+                    self.timePicker.hLabel.text = "H"
+                } else {
+                    self.timePicker.amPmButton.isSelected =  false
+                    self.timePicker.hLabel.text = "h"
+                }
+            }
+            nextButton.tag = 2
+            
+        default:
+            break
+        }
     }
     
 }
