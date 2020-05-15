@@ -219,16 +219,17 @@ class NewGapVC: UIViewController {
                 self.nextButton.tag = 3
             })
         case 3:
-            var startTime = fromDisplayTimeView.fromHourLabel.text
-            startTime?.append(":")
-            startTime?.append(fromDisplayTimeView.fromMinuteLabel.text!)
-            //let endTime = "\(toDisplayTimeView.fromHourLabel.text):\(toDisplayTimeView.fromMinuteLabel.text)"
-            let formatter = DateFormatter()
-            formatter.dateFormat = "HH:mm"
-            print(startTime)
-            newGap.startDate = formatter.date(from: startTime!)!
-            //newGap.endDate = formatter.date(from: endTime)!
+            var hour = Int(fromDisplayTimeView.fromHourLabel.text!)!
+            var minute = Int(fromDisplayTimeView.fromMinuteLabel.text!)!
+            newGap.startDate = Calendar.current.date(bySettingHour: hour, minute: minute, second: 0, of: newGap.startDate)!
+            print(Utils.formatDate(datePattern: "E dd MMMM - HH:mm", date: newGap.startDate))
+            hour = Int(toDisplayTimeView.fromHourLabel.text!)!
+            minute = Int(toDisplayTimeView.fromMinuteLabel.text!)!
+            newGap.endDate = Calendar.current.date(bySettingHour: hour, minute: minute, second: 0, of: newGap.endDate)!
             print(newGap.debugDescription)
+            if newGap.duration < 10 {
+                Alert.errorInformation(title: "Error", message: "The gap must end later than start time", vc: self, handler: nil)
+            }
         default:
             break
         }

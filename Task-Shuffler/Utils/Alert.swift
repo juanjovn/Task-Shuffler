@@ -21,6 +21,14 @@ enum Alert {
         vc.present(alert, animated: true)
     }
     
+    static func errorInformation(title: String, message: String?, vc: UIViewController, handler: ((UIAlertAction) -> Void)?){
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let ok = UIAlertAction(title: "OK", style: .destructive, handler: handler)
+        alert.addAction(ok)
+        
+        vc.present(alert, animated: true)
+    }
+    
 }
 
 //, confirmationCode: () -> ((UIAlertAction) -> Void)?
