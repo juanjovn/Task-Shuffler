@@ -53,6 +53,24 @@ class GapsViewController: AMTabsViewController {
         tableView.reloadData()
     }
     
+    //MARK: PUBLIC
+    
+    public func addNewGap (gap: GapRealm) {
+        db.addData(object: gap)
+        pendingGaps.insert(gap, at: 0)
+        tableView.reloadSections(IndexSet(integer: 0), with: .fade)
+        let topIndex = IndexPath(row: 0, section: 0)
+        
+        if self.tableView.numberOfRows(inSection: 0) > 0{
+            self.tableView.scrollToRow(at: topIndex, at: .top, animated: true)
+        }
+        
+        
+        if segmentedControl.currentSegment > 0 {
+            segmentedControl.setCurrentSegmentIndex(0, animated: true)
+        }
+    }
+    
     private func test(){
         //db.eraseAll()
         let gap = GapRealm(startDate: Date(), endDate: Date.init(timeIntervalSinceNow: 600), state: "Completed", taskid: "BC64AFD3-43E6-4F88-8665-879DA397E968")
@@ -156,7 +174,9 @@ class GapsViewController: AMTabsViewController {
     }
     
     @IBAction func newGapAction(_ sender: Any) {
-        present(NewGapVC(), animated: true, completion: nil)
+        let newGapVC = NewGapVC()
+        newGapVC.gapsVC = self
+        present(newGapVC, animated: true, completion: nil)
     }
 
 }
