@@ -234,7 +234,7 @@ class NewGapVC: UIViewController {
             if newGap.duration < 10 {
                 Alert.errorInformation(title: "Error", message: "The gap must end later than start time", vc: self, handler: nil)
             } else {
-                let predicate = NSPredicate(format: "startDate <= %@ AND endDate >= %@ OR startDate >= %@ and endDate >= %@ OR startDate >= %@ AND endDate <= %@ OR startDate >= %@ AND endDate >= %@", newGap.startDate as CVarArg, newGap.startDate as CVarArg, newGap.endDate as CVarArg, newGap.endDate as CVarArg, newGap.startDate as CVarArg, newGap.endDate as CVarArg, newGap.startDate as CVarArg, newGap.endDate as CVarArg)
+                let predicate = NSPredicate(format: "startDate < %@ AND %@ < endDate", newGap.endDate as CVarArg, newGap.startDate as CVarArg)
                 let results = gapsVC?.db.getData(objectClass: GapRealm.self).filter(predicate)
                 if results!.count > 0 {
                     Alert.errorInformation(title: "Error", message: "A gap of time already exists in that time", vc: self, handler: nil)
