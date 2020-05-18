@@ -209,19 +209,27 @@ class NewGapVC: UIViewController {
             })
             
         case 2:
-            nextButton.setTitle(">", for: .normal)
-            self.toDisplayTimeView.fromHourLabel.text = self.fromDisplayTimeView.fromHourLabel.text
-            self.toDisplayTimeView.fromMinuteLabel.text = self.fromDisplayTimeView.fromMinuteLabel.text
-            UIView.animate(withDuration: 0.3,animations: {
-                self.toDisplayTimeView.alpha = 1
-                self.fromDisplayTimeView.fromTimeContainerView.alpha = 0
-                self.fromDisplayTimeView.alpha = 0.50
-                self.toDisplayTimeView.fromTimeContainerView.alpha = 0.8
-            },
-            completion: { success in
-                self.nextButton.tag = 3
-                self.nextButton.setTitle("OK", for: .normal)
-            })
+            let hour = Int(fromDisplayTimeView.fromHourLabel.text!)!
+            let minute = Int(fromDisplayTimeView.fromMinuteLabel.text!)!
+            
+            let startDate = Calendar.current.date(bySettingHour: hour, minute: minute, second: 0, of: newGap.startDate)!
+            if startDate < Date() {
+                Alert.errorInformation(title: "Error", message: "The gap must start later than current time", vc: self, handler: nil)
+            } else {
+                nextButton.setTitle(">", for: .normal)
+                self.toDisplayTimeView.fromHourLabel.text = self.fromDisplayTimeView.fromHourLabel.text
+                self.toDisplayTimeView.fromMinuteLabel.text = self.fromDisplayTimeView.fromMinuteLabel.text
+                UIView.animate(withDuration: 0.3,animations: {
+                    self.toDisplayTimeView.alpha = 1
+                    self.fromDisplayTimeView.fromTimeContainerView.alpha = 0
+                    self.fromDisplayTimeView.alpha = 0.50
+                    self.toDisplayTimeView.fromTimeContainerView.alpha = 0.8
+                },
+                completion: { success in
+                    self.nextButton.tag = 3
+                    self.nextButton.setTitle("OK", for: .normal)
+                })
+            }
         case 3:
             nextButton.setTitle("OK", for: .normal)
             var hour = Int(fromDisplayTimeView.fromHourLabel.text!)!
