@@ -11,7 +11,7 @@ import RealmSwift
 
 class DatabaseManager{
     
-    private let realm = try! Realm()
+    let realm = try! Realm()
     
     func getData (objectClass: AnyClass) -> Results<Object> {
         return realm.objects(objectClass as! Object.Type)

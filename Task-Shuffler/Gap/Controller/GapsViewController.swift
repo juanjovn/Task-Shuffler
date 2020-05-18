@@ -19,6 +19,7 @@ class GapsViewController: AMTabsViewController {
     @IBOutlet weak var segmentedControlBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var newGapButton: UIButton!
     @IBOutlet weak var newGapButtonBottomConstraint: NSLayoutConstraint!
+    var pullcontrol = UIRefreshControl()
     
     //Constants
     let db = DatabaseManager()
@@ -46,6 +47,11 @@ class GapsViewController: AMTabsViewController {
         setupTableView()
     }
     
+    //MARK: viewWillAppear
+    override func viewWillAppear(_ animated: Bool) {
+        refreshOutdated()
+    }
+    
     // MARK: viewDidAppear
     
     override func viewDidAppear(_ animated: Bool) {
@@ -69,6 +75,10 @@ class GapsViewController: AMTabsViewController {
         if segmentedControl.currentSegment > 0 {
             segmentedControl.setCurrentSegmentIndex(0, animated: true)
         }
+    }
+    
+    public func checkOutdated(currentGap: GapRealm) -> Bool{
+        return Date() > currentGap.endDate
     }
     
     private func test(){
@@ -171,6 +181,40 @@ class GapsViewController: AMTabsViewController {
         tableView.contentInset = insets
         
         tableView.rowHeight = UIScreen.main.bounds.width / 5
+        
+        //Refresh control
+        pullcontrol.addTarget(self, action: #selector(pullRefreshControl), for: UIControl.Event.valueChanged)
+        tableView.addSubview(pullcontrol)
+    }
+    
+    @objc private func pullRefreshControl() {
+        refreshOutdated()
+        tableView.reloadSections(IndexSet(integersIn: 0...0), with: .fade)
+        self.pullcontrol.endRefreshing()
+//        if checkOutdated(currentGap: gap) {
+//            zelda.dateLabel.text = "OUTDATED"
+//        }
+    }
+    
+    private func refreshOutdated() {
+        var isChanged = false
+        for gap in pendingGaps {
+            if checkOutdated(currentGap: gap) {
+                isChanged = true
+                do {
+                    try db.realm.write{
+                        gap.state = State.completed.rawValue
+                    }
+                } catch {
+                    print("Error updating to database")
+                }
+            }
+        }
+        
+        if isChanged {
+            fillGaps()
+        }
+        
     }
     
     @IBAction func newGapAction(_ sender: Any) {
@@ -208,8 +252,8 @@ extension GapsViewController: SJFluidSegmentedControlDataSource, SJFluidSegmente
     
     func segmentedControl(_ segmentedControl: SJFluidSegmentedControl, didChangeFromSegmentAtIndex fromIndex: Int, toSegmentAtIndex toIndex: Int) {
         
+        refreshOutdated()
         tableView.reloadSections(IndexSet(integersIn: 0...1), with: .fade)
-        
         if tableView.numberOfRows(inSection: 0) > 0{
             let topIndex = IndexPath(row: 0, section: 0)
             tableView.scrollToRow(at: topIndex, at: .top, animated: true)
@@ -409,9 +453,6 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
             
         }
         
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .ordinal
-        //let ordinal = formatter.string(from: <#T##NSNumber#>)
         zelda.dateLabel.text = Utils.formatDate(datePattern: "E d", date: gap.startDate)
         zelda.monthLabel.text = Utils.formatDate(datePattern: "MMM", date: gap.startDate)
         zelda.startTimeLabel.text = Utils.formatDate(datePattern: "HH:mm", date: gap.startDate)
