@@ -21,16 +21,23 @@ class NewGapVC: UIViewController {
     let screenHeight = UIScreen.main.bounds.height
     let screenWidth = UIScreen.main.bounds.width
     let dateLabel = UILabel()
-    let newGap = GapRealm()
+    let dateEditLabel = UILabel()
+    let strikeThroughLine = UIView()
+    var newGap = GapRealm()
+    var editedGap = GapRealm()
     let closeButton = UIButton()
     let nextButton = UIButton(type: .custom)
     var viewTopConstraint = NSLayoutConstraint()
+    var strikeThroughTrailingConstraint = NSLayoutConstraint()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         setupDatePicker()
         setupDateLabel()
+        if isEditing {
+            setupDateEditLabel()
+        }
         setupCloseButton()
         setupNextButton()
     }
@@ -86,7 +93,7 @@ class NewGapVC: UIViewController {
     }
     
     private func setupDateLabel() {
-        dateLabel.text = "Select a day"
+        dateLabel.text = isEditing ? "Edit gap:" : "Select a day"
         dateLabel.font = .avenirDemiBold(ofSize: UIFont.scaleFont(30))
         view.addSubview(dateLabel)
         
@@ -95,6 +102,31 @@ class NewGapVC: UIViewController {
         dateLabel.trailingAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
         dateLabel.topAnchor.constraint(lessThanOrEqualToSystemSpacingBelow: contentView.topAnchor, multiplier: 5).isActive = true
         dateLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+    }
+    
+    private func setupDateEditLabel() {
+        dateEditLabel.text = "\(Utils.formatDate(datePattern: "E dd MMMM", date: editedGap.startDate))"
+        dateEditLabel.font = .avenirRegular(ofSize: UIFont.scaleFont(18))
+        view.addSubview(dateEditLabel)
+        
+        dateEditLabel.translatesAutoresizingMaskIntoConstraints = false
+        dateEditLabel.centerXAnchor.constraint(equalTo: dateLabel.centerXAnchor).isActive = true
+        dateEditLabel.bottomAnchor.constraint(equalTo: datePicker.view.topAnchor, constant: -15).isActive = true
+        dateEditLabel.topAnchor.constraint(equalTo: dateLabel.bottomAnchor, constant: 5).isActive = true
+        
+        func setupStrikeThroughLine() {
+            strikeThroughLine.backgroundColor = UIColor.black.withAlphaComponent(0)
+            dateEditLabel.addSubview(strikeThroughLine)
+            
+            strikeThroughLine.translatesAutoresizingMaskIntoConstraints = false
+            strikeThroughLine.heightAnchor.constraint(equalToConstant: 1).isActive = true
+            strikeThroughLine.centerYAnchor.constraint(equalTo: dateEditLabel.centerYAnchor).isActive = true
+            strikeThroughLine.leadingAnchor.constraint(equalTo: dateEditLabel.leadingAnchor, constant: -5).isActive = true
+            strikeThroughTrailingConstraint = strikeThroughLine.trailingAnchor.constraint(equalTo: dateEditLabel.trailingAnchor, constant: -90)
+            strikeThroughTrailingConstraint.isActive = true
+        }
+        
+        setupStrikeThroughLine()
     }
     
     private func setupCloseButton() {
@@ -194,6 +226,7 @@ class NewGapVC: UIViewController {
         case 1:
             self.setupTimePicker()
             UIView.animate(withDuration: 0.3,animations: {
+                if self.isEditing {self.dateEditLabel.removeFromSuperview()}
                 self.datePicker.view.alpha = 0
                 self.dateLabel.topAnchor.constraint(greaterThanOrEqualToSystemSpacingBelow: self.contentView.topAnchor, multiplier: 2).isActive = true
                 self.dateLabel.font = .avenirDemiBold(ofSize: UIFont.scaleFont(20))
@@ -313,7 +346,14 @@ extension NewGapVC: DatePickerVCDelegate{
         nextButton.tag = 1
         newGap.startDate = selectedDate
         newGap.endDate = selectedDate
-        print("\(Utils.formatDate(datePattern: "E dd MMMM", date: newGap.startDate))")
+        if isEditing {
+            dateEditLabel.textColor = dateEditLabel.textColor.withAlphaComponent(0.30)
+            strikeThroughLine.backgroundColor = UIColor.black.withAlphaComponent(0.30)
+            UIView.animate(withDuration: 0.4, animations: {
+                self.strikeThroughTrailingConstraint.constant = 5
+                self.dateEditLabel.layoutIfNeeded()
+            })
+        }
     }
     
     func updateDateLabel(textDate: String) {

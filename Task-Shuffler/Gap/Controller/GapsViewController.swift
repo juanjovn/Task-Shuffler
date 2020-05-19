@@ -398,6 +398,16 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
 //        }
 //
         tableView.deselectRow(at: indexPath, animated: true)
+        let newGapVC = NewGapVC()
+        newGapVC.gapsVC = self
+        newGapVC.isEditing = true
+        switch segmentedControl.currentSegment {
+        case 1:
+            newGapVC.editedGap = completedGaps[indexPath.row]
+        default:
+            newGapVC.editedGap = pendingGaps[indexPath.row]
+        }
+        present(newGapVC, animated: true, completion: nil)
     }
     
     private func markCompleted(indexPath: IndexPath) {
