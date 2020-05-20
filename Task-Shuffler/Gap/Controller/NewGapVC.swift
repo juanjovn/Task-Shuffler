@@ -94,6 +94,7 @@ class NewGapVC: UIViewController {
     
     private func setupDateLabel() {
         dateLabel.text = isEditing ? "Edit gap:" : "Select a day"
+        //print(self.editedGap.description)
         dateLabel.font = .avenirDemiBold(ofSize: UIFont.scaleFont(30))
         view.addSubview(dateLabel)
         
@@ -268,7 +269,6 @@ class NewGapVC: UIViewController {
             var hour = Int(fromDisplayTimeView.fromHourLabel.text!)!
             var minute = Int(fromDisplayTimeView.fromMinuteLabel.text!)!
             newGap.startDate = Calendar.current.date(bySettingHour: hour, minute: minute, second: 0, of: newGap.startDate)!
-            print(Utils.formatDate(datePattern: "E dd MMMM - HH:mm", date: newGap.startDate))
             hour = Int(toDisplayTimeView.fromHourLabel.text!)!
             minute = Int(toDisplayTimeView.fromMinuteLabel.text!)!
             newGap.endDate = Calendar.current.date(bySettingHour: hour, minute: minute, second: 0, of: newGap.endDate)!
@@ -277,13 +277,55 @@ class NewGapVC: UIViewController {
             } else {
                 let predicate = NSPredicate(format: "startDate < %@ AND %@ < endDate", newGap.endDate as CVarArg, newGap.startDate as CVarArg)
                 let results = gapsVC?.db.getData(objectClass: GapRealm.self).filter(predicate)
-                if results!.count > 0 {
-                    Alert.errorInformation(title: "Error", message: "A gap of time already exists in that time", vc: self, handler: nil)
+                if let overlapedGap = results?.first as? GapRealm {
+                    if isEditing {
+                        if overlapedGap.id != editedGap.id {
+                            Alert.errorInformation(title: "Error", message: "The current gap overlaps with an existing gap at \(Utils.formatDate(datePattern: "HH:mm", date: overlapedGap.startDate)) - \(Utils.formatDate(datePattern: "HH:mm", date: overlapedGap.endDate))", vc: self, handler: nil)
+                        } else {
+                            do {
+                                try gapsVC?.db.realm.write{
+                                    editedGap.startDate = newGap.startDate
+                                    editedGap.endDate = newGap.endDate
+                                    editedGap.state = newGap.state
+                                    editedGap.duration = newGap.duration
+                                }
+                            } catch {
+                                print("Error updating to database")
+                            }
+                            dismiss(animated: true, completion: {
+                                self.gapsVC?.tableView.reloadSections(IndexSet(integer: 0), with: .fade)
+                            })
+                        }
+                        
+                    } else {
+                        
+                        Alert.errorInformation(title: "Error", message: "The current gap overlaps with an existing gap at \(Utils.formatDate(datePattern: "HH:mm", date: overlapedGap.startDate)) - \(Utils.formatDate(datePattern: "HH:mm", date: overlapedGap.endDate))", vc: self, handler: nil)
+                    }
                 } else {
-                    gapsVC?.addNewGap(gap: newGap)
-                    print("🤩 GAP Added! \(newGap.debugDescription)")
-                    dismiss(animated: true, completion: nil)
+                    if isEditing {
+                        do {
+                            try gapsVC?.db.realm.write{
+                                editedGap.startDate = newGap.startDate
+                                editedGap.endDate = newGap.endDate
+                                editedGap.state = newGap.state
+                                editedGap.duration = newGap.duration
+                            }
+                        } catch {
+                            print("Error updating to database")
+                        }
+                        
+                        //print("🔶 Edited gap: \(editedGap)")
+                        //print("🔴 New gap: \(newGap)")
+                    } else {
+                        gapsVC?.addNewGap(gap: newGap)
+                        //print("🤩 GAP Added! \(newGap.debugDescription)")
+                    }
+                    
+                    dismiss(animated: true, completion: {
+                        self.gapsVC?.tableView.reloadSections(IndexSet(integer: 0), with: .fade)
+                    })
                 }
+                
             }
         default:
             break
