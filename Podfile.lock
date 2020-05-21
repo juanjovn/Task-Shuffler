@@ -2,6 +2,7 @@ PODS:
   - AMTabView (0.1.1)
   - BubbleTransition (3.2.0)
   - DateScrollPicker (1.1.0)
+  - Elliotable (1.2.5)
   - fluid-slider (1.1.0):
     - pop
   - pop (1.0.12)
@@ -18,6 +19,7 @@ DEPENDENCIES:
   - AMTabView
   - BubbleTransition (~> 3.2.0)
   - DateScrollPicker (= 1.1.0)
+  - Elliotable (= 1.2.5)
   - fluid-slider
   - RealmSwift (= 4.4.1)
   - SJFluidSegmentedControl (~> 1.0)
@@ -29,6 +31,7 @@ SPEC REPOS:
     - AMTabView
     - BubbleTransition
     - DateScrollPicker
+    - Elliotable
     - fluid-slider
     - pop
     - Realm
@@ -41,6 +44,7 @@ SPEC CHECKSUMS:
   AMTabView: 86e156d6d9ab42d091e46466648ac5ce00abe615
   BubbleTransition: 2f112cc19772d9ab199bc850de92f5eb34744bce
   DateScrollPicker: 95cbb220b28a5dd95c97018dd278c074842c7e21
+  Elliotable: e669fa7a974658c4e0ee4be4b335f6a561f1b2cb
   fluid-slider: 68037ac7247f16a89f3e24ff5d0167c8eea6f50b
   pop: d582054913807fd11fd50bfe6a539d91c7e1a55a
   Realm: 4eb04d7487bd43c0581256f40b424eafb711deff
@@ -49,6 +53,6 @@ SPEC CHECKSUMS:
   SkyFloatingLabelTextField: 5a338412114808e961fe2d14ea2c5452c8b6e4aa
   WCLShineButton: 315ee9b0024b1cc56dba34fb6a8878937eb8d0b1
 
-PODFILE CHECKSUM: abebb97c0c3ab26dd6955260511e4d38c1b10ce8
+PODFILE CHECKSUM: e37b94e4f3ebf604ccfdd2eaa52584c4c53644ad
 
 COCOAPODS: 1.9.0

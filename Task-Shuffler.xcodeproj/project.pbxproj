@@ -26,6 +26,7 @@
 		8188D5BB2408601800CCBA99 /* NewTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8188D5BA2408601800CCBA99 /* NewTaskViewController.swift */; };
 		818DFEE12422B90D007F6682 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818DFEE02422B90D007F6682 /* TestViewController.swift */; };
 		8197F5C2245ACF700052FCC7 /* TaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8197F5C1245ACF700052FCC7 /* TaskManager.swift */; };
+		8198F26324763D5F00F547BC /* CalendarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8198F26224763D5F00F547BC /* CalendarVC.swift */; };
 		81C90B5324614F8B001C06B4 /* GapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C90B5224614F8B001C06B4 /* GapManager.swift */; };
 		81C90B552461D080001C06B4 /* GapCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81C90B542461D080001C06B4 /* GapCell.xib */; };
 		81C90B572461D0B2001C06B4 /* GapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C90B562461D0B2001C06B4 /* GapCell.swift */; };
@@ -68,6 +69,7 @@
 		8188D5BA2408601800CCBA99 /* NewTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskViewController.swift; sourceTree = "<group>"; };
 		818DFEE02422B90D007F6682 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		8197F5C1245ACF700052FCC7 /* TaskManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskManager.swift; sourceTree = "<group>"; };
+		8198F26224763D5F00F547BC /* CalendarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarVC.swift; sourceTree = "<group>"; };
 		81C90B5224614F8B001C06B4 /* GapManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GapManager.swift; sourceTree = "<group>"; };
 		81C90B542461D080001C06B4 /* GapCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GapCell.xib; sourceTree = "<group>"; };
 		81C90B562461D0B2001C06B4 /* GapCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GapCell.swift; sourceTree = "<group>"; };
@@ -161,6 +163,22 @@
 			isa = PBXGroup;
 			children = (
 				8170DD782467FEE80060725D /* TimePickerVC.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		8198F26024763D1B00F547BC /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				8198F26124763D3000F547BC /* Controller */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
+		8198F26124763D3000F547BC /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8198F26224763D5F00F547BC /* CalendarVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -310,6 +328,7 @@
 		81FFF0C62467F80E0086500A /* Schedule */ = {
 			isa = PBXGroup;
 			children = (
+				8198F26024763D1B00F547BC /* Calendar */,
 				81FFF0C72467F8160086500A /* Model */,
 				81FFF0C82467F81E0086500A /* View */,
 				81FFF0C92467F8270086500A /* Controller */,
@@ -512,6 +531,7 @@
 				81705A83240B1D890053A571 /* ScheduleViewController.swift in Sources */,
 				811880A6243515BC00E5FEE1 /* DeviceModel.swift in Sources */,
 				81C90B5324614F8B001C06B4 /* GapManager.swift in Sources */,
+				8198F26324763D5F00F547BC /* CalendarVC.swift in Sources */,
 				81DECAB6243BA410009051A2 /* CustomColors.swift in Sources */,
 				81C90B5B2463DDBA001C06B4 /* Utils.swift in Sources */,
 				8179FDDB24581E9F009A6D4B /* DummyModel.swift in Sources */,
