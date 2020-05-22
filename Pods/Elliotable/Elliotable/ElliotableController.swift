@@ -13,7 +13,7 @@ private let reuseIdentifier = "Cell"
 
 class ElliotableController: UIViewController {
     weak var elliotable: Elliotable!
-    weak var collectionView: UICollectionView! {
+    weak var collectionView: SharedOffsetCollectionView! {
         didSet {
             collectionView.isScrollEnabled = true
             collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 120, right: 0)

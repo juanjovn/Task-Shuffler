@@ -10,43 +10,48 @@ import UIKit
 import AMTabView
 
 class ScheduleViewController: AMTabsViewController {
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupView()
         setupNavigationItems()
-        setupCalendarView()
+        setupCollectionView()
     }
     
-    func setupNavigationItems() {
+    private func setupNavigationItems() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "gear"), style: .plain, target: self, action: #selector(settingsButtonAction))
     }
     
-    func setupView() {
+    private func setupView() {
         view.backgroundColor = .paleSilver
         navigationController?.navigationBar.prefersLargeTitles = false
     }
     
-    func setupCalendarView() {
-        let calendarVC = CalendarVC()
-        addChild(calendarVC)
-        let calendarView = calendarVC.view!
-        view.addSubview(calendarView)
+    private func setupCollectionView() {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        let collectionViewVC = HorizontalCollectionVC(collectionViewLayout: layout)
+        self.addChild(collectionViewVC)
+        let collectionView = collectionViewVC.view!
+        collectionViewVC.collectionView.backgroundColor = .paleSilver
+        view.addSubview(collectionView)
         
-        calendarView.translatesAutoresizingMaskIntoConstraints = false
-        calendarView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        calendarView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        calendarView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        calendarView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         
-        calendarVC.didMove(toParent: self)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        
+        collectionViewVC.didMove(toParent: self)
+        
+        
     }
+    
     
     @objc func settingsButtonAction() {
         present(UINavigationController(rootViewController: SettingsVC()), animated: true)
     }
-
 
 }
 

@@ -182,6 +182,7 @@
 		7F91E347D1CDCC342F28CE918CCE71E7 /* WCLShineBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CEA20298C63D87F24D0B87A55F3BD2 /* WCLShineBundle.swift */; };
 		8146B70FAB2BF5F31B73452B2A0A4D15 /* RLMSyncUtil_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B328C994173F701B0EF93982C6F967C /* RLMSyncUtil_Private.h */; };
 		8147EE1E224EBC5203CCC80690D6F11B /* DateScrollItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA4C0A609602126FFAA317ACB1929B2 /* DateScrollItem.swift */; };
+		815034A3247827A400F17A54 /* SharedOffsetCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815034A2247827A400F17A54 /* SharedOffsetCollectionView.swift */; };
 		81682B927DFC5E1832BCE866242E0FB3 /* RLMSyncPermission.mm in Sources */ = {isa = PBXBuildFile; fileRef = 742D4AE0FC024FF3798C5E0FA872DD14 /* RLMSyncPermission.mm */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"4.4.1\"' -D__ASSERTMACROS__ -DREALM_ENABLE_SYNC"; }; };
 		81C5970752ECC7F9F8EEEF690B02D61E /* system_configuration.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6E775F3442127BBA4F82AB3D02C8D0AA /* system_configuration.cpp */; settings = {COMPILER_FLAGS = "-DREALM_HAVE_CONFIG -DREALM_COCOA_VERSION='@\"4.4.1\"' -D__ASSERTMACROS__ -DREALM_ENABLE_SYNC"; }; };
 		82FD19E901B1CA44502C6D11812982E1 /* WCLShineAngleLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0432614DF42B818B4DAB0E130426F950 /* WCLShineAngleLayer.swift */; };
@@ -693,6 +694,7 @@
 		809656684D4672EBCAD6222873C1D607 /* RLMObservation.mm */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.objcpp; name = RLMObservation.mm; path = Realm/RLMObservation.mm; sourceTree = "<group>"; };
 		80A199F7D1520F6F2859E83550B0EFF7 /* Date+Days.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Date+Days.swift"; path = "DateScrollPicker/Classes/Extensions/Date+Days.swift"; sourceTree = "<group>"; };
 		814F02FF091A0C21E3CDF44A4F2F6400 /* binding_callback_thread_observer.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = binding_callback_thread_observer.cpp; path = Realm/ObjectStore/src/binding_callback_thread_observer.cpp; sourceTree = "<group>"; };
+		815034A2247827A400F17A54 /* SharedOffsetCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedOffsetCollectionView.swift; sourceTree = "<group>"; };
 		815E4E66E3C7148030E3CCE5B6020F61 /* external_commit_helper.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = external_commit_helper.cpp; path = Realm/ObjectStore/src/impl/apple/external_commit_helper.cpp; sourceTree = "<group>"; };
 		8187272FB18A6F519AFDC9C499A81A3F /* fluid-slider.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "fluid-slider.debug.xcconfig"; sourceTree = "<group>"; };
 		826C9CCF084D54ED7BA1E32888870C5B /* DateScrollPicker-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "DateScrollPicker-Info.plist"; sourceTree = "<group>"; };
@@ -960,6 +962,7 @@
 		1920ED50AB7005E64718CEA709386D44 /* Elliotable */ = {
 			isa = PBXGroup;
 			children = (
+				815034A2247827A400F17A54 /* SharedOffsetCollectionView.swift */,
 				096F63E6CA8625AB7A4EB0A4121DA578 /* Elliotable.h */,
 				6485280A5A46D5A73F188633DCB22D06 /* Elliotable.swift */,
 				A09E26B2281903AF076F4DA888BA7C1D /* ElliotableCell.swift */,
@@ -2124,6 +2127,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				815034A3247827A400F17A54 /* SharedOffsetCollectionView.swift in Sources */,
 				6B6D093D6F981AEC565A6A4EFA438321 /* Elliotable-dummy.m in Sources */,
 				A01A3744E5997DD2239676875DD4E1DE /* Elliotable.swift in Sources */,
 				60F7C004CF5AD4E5D0AEF09DB855F60C /* ElliotableCell.swift in Sources */,

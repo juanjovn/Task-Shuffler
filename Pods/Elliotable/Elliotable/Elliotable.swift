@@ -32,7 +32,7 @@ public enum roundOption: Int {
 
 @IBDesignable public class Elliotable: UIView {
     private let controller     = ElliotableController()
-    private let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
+    private let collectionView = SharedOffsetCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
     
     public let defaultMinHour: Int = 9
     public let defaultMaxEnd : Int = 17

@@ -27,6 +27,8 @@
 		818DFEE12422B90D007F6682 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818DFEE02422B90D007F6682 /* TestViewController.swift */; };
 		8197F5C2245ACF700052FCC7 /* TaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8197F5C1245ACF700052FCC7 /* TaskManager.swift */; };
 		8198F26324763D5F00F547BC /* CalendarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8198F26224763D5F00F547BC /* CalendarVC.swift */; };
+		81AB5D6A2476F915009ADB97 /* HorizontalCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB5D692476F915009ADB97 /* HorizontalCollectionVC.swift */; };
+		81AB5D6C24770D01009ADB97 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB5D6B24770D01009ADB97 /* CollectionViewCell.swift */; };
 		81C90B5324614F8B001C06B4 /* GapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C90B5224614F8B001C06B4 /* GapManager.swift */; };
 		81C90B552461D080001C06B4 /* GapCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81C90B542461D080001C06B4 /* GapCell.xib */; };
 		81C90B572461D0B2001C06B4 /* GapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C90B562461D0B2001C06B4 /* GapCell.swift */; };
@@ -70,6 +72,8 @@
 		818DFEE02422B90D007F6682 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		8197F5C1245ACF700052FCC7 /* TaskManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskManager.swift; sourceTree = "<group>"; };
 		8198F26224763D5F00F547BC /* CalendarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarVC.swift; sourceTree = "<group>"; };
+		81AB5D692476F915009ADB97 /* HorizontalCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCollectionVC.swift; sourceTree = "<group>"; };
+		81AB5D6B24770D01009ADB97 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		81C90B5224614F8B001C06B4 /* GapManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GapManager.swift; sourceTree = "<group>"; };
 		81C90B542461D080001C06B4 /* GapCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GapCell.xib; sourceTree = "<group>"; };
 		81C90B562461D0B2001C06B4 /* GapCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GapCell.swift; sourceTree = "<group>"; };
@@ -346,6 +350,7 @@
 		81FFF0C82467F81E0086500A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				81AB5D6B24770D01009ADB97 /* CollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -354,6 +359,7 @@
 			isa = PBXGroup;
 			children = (
 				81705A82240B1D890053A571 /* ScheduleViewController.swift */,
+				81AB5D692476F915009ADB97 /* HorizontalCollectionVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -524,6 +530,7 @@
 				815204EF245E9A1E0004510B /* Alert.swift in Sources */,
 				8170DD792467FEE80060725D /* TimePickerVC.swift in Sources */,
 				818DFEE12422B90D007F6682 /* TestViewController.swift in Sources */,
+				81AB5D6A2476F915009ADB97 /* HorizontalCollectionVC.swift in Sources */,
 				8170DD812468001C0060725D /* MinuteCell.swift in Sources */,
 				8188D5BB2408601800CCBA99 /* NewTaskViewController.swift in Sources */,
 				81DC259E246C752E00926034 /* DisplayTime.swift in Sources */,
@@ -536,6 +543,7 @@
 				81C90B5B2463DDBA001C06B4 /* Utils.swift in Sources */,
 				8179FDDB24581E9F009A6D4B /* DummyModel.swift in Sources */,
 				8197F5C2245ACF700052FCC7 /* TaskManager.swift in Sources */,
+				81AB5D6C24770D01009ADB97 /* CollectionViewCell.swift in Sources */,
 				81E9B1432405BEE400BBADB8 /* ViewController.swift in Sources */,
 				81DECAB8243BAE24009051A2 /* CustomFonts.swift in Sources */,
 				81E9B13F2405BEE400BBADB8 /* AppDelegate.swift in Sources */,

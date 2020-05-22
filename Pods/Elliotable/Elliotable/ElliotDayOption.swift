@@ -15,7 +15,7 @@ public enum ElliotDay: Int {
     case thursday  = 4
     case friday    = 5
     case saturday  = 6
-    case sunday = 7
+    case sunday    = 7
 }
 
 public enum ElliotDayType: Int {
