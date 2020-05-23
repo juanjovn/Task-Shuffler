@@ -16,7 +16,7 @@ class ElliotableController: UIViewController {
     weak var collectionView: SharedOffsetCollectionView! {
         didSet {
             collectionView.isScrollEnabled = true
-            collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 120, right: 0)
+            collectionView.contentInset = UIEdgeInsets(top: 50, left: 0, bottom: 120, right: 0)
             collectionView.register(ElliotableCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         }
     }

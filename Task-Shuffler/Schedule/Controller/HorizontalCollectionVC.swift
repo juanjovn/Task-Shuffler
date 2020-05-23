@@ -35,7 +35,9 @@ class HorizontalCollectionVC: UICollectionViewController {
         case 0:
             return collectionView.dequeueReusableCell(withReuseIdentifier: currentWeekReuseIdentifier, for: indexPath)
         case 1:
-            return collectionView.dequeueReusableCell(withReuseIdentifier: nextWeekReuseIdentifier, for: indexPath)
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: nextWeekReuseIdentifier, for: indexPath) as! CollectionViewCell
+            cell.weekLabel.text = "Next week"
+            return cell
         default:
             return collectionView.dequeueReusableCell(withReuseIdentifier: currentWeekReuseIdentifier, for: indexPath)
         }
