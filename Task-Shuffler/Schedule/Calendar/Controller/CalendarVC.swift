@@ -54,6 +54,7 @@ class CalendarVC: UIViewController {
         timeTable.symbolBackgroundColor = UIColor.pearlWhite.withAlphaComponent(0.20)
         timeTable.symbolTimeFontSize = 15
         timeTable.symbolFontSize = 14
+        timeTable.isFullBorder = true
         
         view.addSubview(timeTable)
         

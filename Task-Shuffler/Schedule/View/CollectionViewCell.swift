@@ -12,6 +12,8 @@ class CollectionViewCell: UICollectionViewCell {
     let calendarVC = CalendarVC()
     let weekLabel = UILabel()
     let labelView = UIView()
+    let navigationLabel = UILabel()
+    let navigatonLabelView = UIView()
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -27,8 +29,12 @@ class CollectionViewCell: UICollectionViewCell {
         setupLabel()
         setupLabelView()
         setupBlurView()
+        setupNavigationLabel()
+        setupNavigationLabelView()
+        setupNavigationBlurView()
         
         bringSubviewToFront(weekLabel)
+        bringSubviewToFront(navigationLabel)
     }
     
     private func setupViews() {
@@ -78,6 +84,46 @@ class CollectionViewCell: UICollectionViewCell {
         blurEffectView.leadingAnchor.constraint(equalTo: labelView.leadingAnchor).isActive = true
         blurEffectView.trailingAnchor.constraint(equalTo: labelView.trailingAnchor).isActive = true
         blurEffectView.bottomAnchor.constraint(equalTo: labelView.bottomAnchor).isActive = true
+        
+    }
+    
+    private func setupNavigationLabel() {
+        navigationLabel.text = ">"
+        navigationLabel.font = .avenirMedium(ofSize: UIFont.scaleFont(25))
+        addSubview(navigationLabel)
+        
+        navigationLabel.translatesAutoresizingMaskIntoConstraints = false
+        navigationLabel.centerYAnchor.constraint(equalTo: weekLabel.centerYAnchor).isActive = true
+        navigationLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -25).isActive = true
+    }
+    
+    private func setupNavigationLabelView() {
+        navigatonLabelView.backgroundColor = .clear
+        addSubview(navigatonLabelView)
+        navigatonLabelView.layer.cornerRadius = labelView.layer.bounds.size.height / 2
+        
+        navigatonLabelView.translatesAutoresizingMaskIntoConstraints = false
+        navigatonLabelView.centerYAnchor.constraint(equalTo: navigationLabel.centerYAnchor).isActive = true
+        navigatonLabelView.centerXAnchor.constraint(equalTo: navigationLabel.centerXAnchor).isActive = true
+        navigatonLabelView.widthAnchor.constraint(equalTo: navigationLabel.widthAnchor, constant: 18).isActive = true
+        navigatonLabelView.heightAnchor.constraint(equalTo: navigationLabel.heightAnchor, constant: 7).isActive = true
+        
+    }
+    
+    
+    private func setupNavigationBlurView() {
+        let blurEffect = UIBlurEffect(style: .regular)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        navigatonLabelView.addSubview(blurEffectView)
+        navigatonLabelView.layoutIfNeeded()
+        blurEffectView.layer.cornerRadius = navigatonLabelView.layer.bounds.size.height / 2
+        blurEffectView.clipsToBounds = true
+        
+        blurEffectView.translatesAutoresizingMaskIntoConstraints = false
+        blurEffectView.topAnchor.constraint(equalTo: navigatonLabelView.topAnchor).isActive = true
+        blurEffectView.leadingAnchor.constraint(equalTo: navigatonLabelView.leadingAnchor).isActive = true
+        blurEffectView.trailingAnchor.constraint(equalTo: navigatonLabelView.trailingAnchor).isActive = true
+        blurEffectView.bottomAnchor.constraint(equalTo: navigatonLabelView.bottomAnchor).isActive = true
         
     }
     
