@@ -33,7 +33,9 @@ class HorizontalCollectionVC: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.row {
         case 0:
-            return collectionView.dequeueReusableCell(withReuseIdentifier: currentWeekReuseIdentifier, for: indexPath)
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: currentWeekReuseIdentifier, for: indexPath) as! CollectionViewCell
+            cell.navigationLabel.target(forAction: #selector(navigationButtonAction), withSender: self)
+            return cell
         case 1:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: nextWeekReuseIdentifier, for: indexPath) as! CollectionViewCell
             cell.weekLabel.text = "Next week"
@@ -100,6 +102,10 @@ class HorizontalCollectionVC: UICollectionViewController {
             let indexPath = IndexPath(row: indexOfMajorCell, section: 0)
             collectionViewLayout.collectionView!.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         }
+    }
+    
+    @objc private func navigationButtonAction () {
+        print ("Next Week touched!")
     }
     
 
