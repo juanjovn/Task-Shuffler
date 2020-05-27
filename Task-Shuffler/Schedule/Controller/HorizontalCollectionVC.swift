@@ -34,7 +34,7 @@ class HorizontalCollectionVC: UICollectionViewController {
         switch indexPath.row {
         case 0:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: currentWeekReuseIdentifier, for: indexPath) as! CollectionViewCell
-            cell.navigationLabel.target(forAction: #selector(navigationButtonAction), withSender: self)
+            cell.navigationButton.addTarget(self, action: #selector(navigationButtonAction), for: .touchUpInside)
             return cell
         case 1:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: nextWeekReuseIdentifier, for: indexPath) as! CollectionViewCell

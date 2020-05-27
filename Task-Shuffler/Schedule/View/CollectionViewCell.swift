@@ -12,7 +12,7 @@ class CollectionViewCell: UICollectionViewCell {
     let calendarVC = CalendarVC()
     let weekLabel = UILabel()
     let labelView = UIView()
-    let navigationLabel = UILabel()
+    let navigationButton = UIButton(type: .custom)
     let navigatonLabelView = UIView()
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -29,12 +29,12 @@ class CollectionViewCell: UICollectionViewCell {
         setupLabel()
         setupLabelView()
         setupBlurView()
-        setupNavigationLabel()
+        setupNavigationButton()
         setupNavigationLabelView()
         setupNavigationBlurView()
         
         bringSubviewToFront(weekLabel)
-        bringSubviewToFront(navigationLabel)
+        bringSubviewToFront(navigationButton)
     }
     
     private func setupViews() {
@@ -87,14 +87,15 @@ class CollectionViewCell: UICollectionViewCell {
         
     }
     
-    private func setupNavigationLabel() {
-        navigationLabel.text = ">"
-        navigationLabel.font = .avenirMedium(ofSize: UIFont.scaleFont(25))
-        addSubview(navigationLabel)
+    private func setupNavigationButton() {
+        navigationButton.setTitle(">", for: .normal)
+        navigationButton.titleLabel?.font = .avenirMedium(ofSize: UIFont.scaleFont(25))
+        navigationButton.titleLabel?.textColor = .black
+        addSubview(navigationButton)
         
-        navigationLabel.translatesAutoresizingMaskIntoConstraints = false
-        navigationLabel.centerYAnchor.constraint(equalTo: weekLabel.centerYAnchor).isActive = true
-        navigationLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -25).isActive = true
+        navigationButton.translatesAutoresizingMaskIntoConstraints = false
+        navigationButton.centerYAnchor.constraint(equalTo: weekLabel.centerYAnchor).isActive = true
+        navigationButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -25).isActive = true
     }
     
     private func setupNavigationLabelView() {
@@ -103,10 +104,10 @@ class CollectionViewCell: UICollectionViewCell {
         navigatonLabelView.layer.cornerRadius = labelView.layer.bounds.size.height / 2
         
         navigatonLabelView.translatesAutoresizingMaskIntoConstraints = false
-        navigatonLabelView.centerYAnchor.constraint(equalTo: navigationLabel.centerYAnchor).isActive = true
-        navigatonLabelView.centerXAnchor.constraint(equalTo: navigationLabel.centerXAnchor).isActive = true
-        navigatonLabelView.widthAnchor.constraint(equalTo: navigationLabel.widthAnchor, constant: 18).isActive = true
-        navigatonLabelView.heightAnchor.constraint(equalTo: navigationLabel.heightAnchor, constant: 7).isActive = true
+        navigatonLabelView.centerYAnchor.constraint(equalTo: navigationButton.centerYAnchor).isActive = true
+        navigatonLabelView.centerXAnchor.constraint(equalTo: navigationButton.centerXAnchor).isActive = true
+        navigatonLabelView.widthAnchor.constraint(equalTo: navigationButton.widthAnchor, constant: 18).isActive = true
+        navigatonLabelView.heightAnchor.constraint(equalTo: labelView.heightAnchor).isActive = true
         
     }
     
