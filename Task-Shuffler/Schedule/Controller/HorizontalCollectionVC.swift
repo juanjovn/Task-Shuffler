@@ -34,11 +34,21 @@ class HorizontalCollectionVC: UICollectionViewController {
         switch indexPath.row {
         case 0:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: currentWeekReuseIdentifier, for: indexPath) as! CollectionViewCell
-            cell.navigationButton.addTarget(self, action: #selector(navigationButtonAction), for: .touchUpInside)
+            cell.labelText = "This Week"
+            cell.nextButton.addTarget(self, action: #selector(nextButtonAction), for: .touchUpInside)
+            cell.backButton.isHidden = true
+            cell.nextButton.isHidden = false
+            cell.backView.isHidden = true
+            cell.nextView.isHidden = false
             return cell
         case 1:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: nextWeekReuseIdentifier, for: indexPath) as! CollectionViewCell
-            cell.weekLabel.text = "Next week"
+            cell.labelText = "Next Week"
+            cell.backButton.addTarget(self, action: #selector(backButtonAction), for: .touchUpInside)
+            cell.backButton.isHidden = false
+            cell.nextButton.isHidden = true
+            cell.backView.isHidden = false
+            cell.nextView.isHidden = true
             return cell
         default:
             return collectionView.dequeueReusableCell(withReuseIdentifier: currentWeekReuseIdentifier, for: indexPath)
@@ -104,8 +114,22 @@ class HorizontalCollectionVC: UICollectionViewController {
         }
     }
     
-    @objc private func navigationButtonAction () {
+    @objc private func nextButtonAction () {
         print ("Next Week touched!")
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        if SettingsValues.otherSettings[0] {
+            generator.impactOccurred()
+        }
+        self.collectionView.scrollToItem(at: IndexPath(item: 1, section: 0), at: .right, animated: true)
+    }
+    
+    @objc private func backButtonAction () {
+        print ("Previous Week touched!")
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        if SettingsValues.otherSettings[0] {
+            generator.impactOccurred()
+        }
+        self.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .right, animated: true)
     }
     
 

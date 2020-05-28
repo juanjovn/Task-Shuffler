@@ -12,8 +12,16 @@ class CollectionViewCell: UICollectionViewCell {
     let calendarVC = CalendarVC()
     let weekLabel = UILabel()
     let labelView = UIView()
-    let navigationButton = UIButton(type: .custom)
-    let navigatonLabelView = UIView()
+    let nextButton = UIButton(type: .system)
+    let nextView = UIView()
+    let backButton = UIButton(type: .system)
+    let backView = UIView()
+    var labelText: String = "" {
+        didSet {
+            weekLabel.text = labelText
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -29,12 +37,16 @@ class CollectionViewCell: UICollectionViewCell {
         setupLabel()
         setupLabelView()
         setupBlurView()
-        setupNavigationButton()
-        setupNavigationLabelView()
-        setupNavigationBlurView()
+        setupNextButton()
+        setupNextView()
+        setupNextBlurView()
+        setupBackButton()
+        setupBackView()
+        setupBackBlurView()
         
         bringSubviewToFront(weekLabel)
-        bringSubviewToFront(navigationButton)
+        bringSubviewToFront(nextButton)
+        bringSubviewToFront(backButton)
     }
     
     private func setupViews() {
@@ -48,7 +60,6 @@ class CollectionViewCell: UICollectionViewCell {
     }
     
     private func setupLabel() {
-        weekLabel.text = "Current week"
         weekLabel.font = .avenirRegular(ofSize: UIFont.scaleFont(20))
         addSubview(weekLabel)
         
@@ -87,44 +98,85 @@ class CollectionViewCell: UICollectionViewCell {
         
     }
     
-    private func setupNavigationButton() {
-        navigationButton.setTitle(">", for: .normal)
-        navigationButton.titleLabel?.font = .avenirMedium(ofSize: UIFont.scaleFont(25))
-        navigationButton.titleLabel?.textColor = .black
-        addSubview(navigationButton)
+    private func setupNextButton() {
+        nextButton.setTitle(">", for: .normal)
+        nextButton.titleLabel?.font = .avenirMedium(ofSize: UIFont.scaleFont(25))
+        nextButton.setTitleColor(UIColor.black, for: .normal)
+        addSubview(nextButton)
         
-        navigationButton.translatesAutoresizingMaskIntoConstraints = false
-        navigationButton.centerYAnchor.constraint(equalTo: weekLabel.centerYAnchor).isActive = true
-        navigationButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -25).isActive = true
+        nextButton.translatesAutoresizingMaskIntoConstraints = false
+        nextButton.centerYAnchor.constraint(equalTo: weekLabel.centerYAnchor).isActive = true
+        nextButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -25).isActive = true
     }
     
-    private func setupNavigationLabelView() {
-        navigatonLabelView.backgroundColor = .clear
-        addSubview(navigatonLabelView)
-        navigatonLabelView.layer.cornerRadius = labelView.layer.bounds.size.height / 2
+    private func setupNextView() {
+        nextView.backgroundColor = .clear
+        addSubview(nextView)
+        nextView.layer.cornerRadius = labelView.layer.bounds.size.height / 2
         
-        navigatonLabelView.translatesAutoresizingMaskIntoConstraints = false
-        navigatonLabelView.centerYAnchor.constraint(equalTo: navigationButton.centerYAnchor).isActive = true
-        navigatonLabelView.centerXAnchor.constraint(equalTo: navigationButton.centerXAnchor).isActive = true
-        navigatonLabelView.widthAnchor.constraint(equalTo: navigationButton.widthAnchor, constant: 18).isActive = true
-        navigatonLabelView.heightAnchor.constraint(equalTo: labelView.heightAnchor).isActive = true
+        nextView.translatesAutoresizingMaskIntoConstraints = false
+        nextView.centerYAnchor.constraint(equalTo: nextButton.centerYAnchor).isActive = true
+        nextView.centerXAnchor.constraint(equalTo: nextButton.centerXAnchor).isActive = true
+        nextView.widthAnchor.constraint(equalTo: nextButton.widthAnchor, constant: 18).isActive = true
+        nextView.heightAnchor.constraint(equalTo: labelView.heightAnchor).isActive = true
         
     }
     
     
-    private func setupNavigationBlurView() {
+    private func setupNextBlurView() {
         let blurEffect = UIBlurEffect(style: .regular)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        navigatonLabelView.addSubview(blurEffectView)
-        navigatonLabelView.layoutIfNeeded()
-        blurEffectView.layer.cornerRadius = navigatonLabelView.layer.bounds.size.height / 2
+        nextView.addSubview(blurEffectView)
+        nextView.layoutIfNeeded()
+        blurEffectView.layer.cornerRadius = nextView.layer.bounds.size.height / 2
         blurEffectView.clipsToBounds = true
         
         blurEffectView.translatesAutoresizingMaskIntoConstraints = false
-        blurEffectView.topAnchor.constraint(equalTo: navigatonLabelView.topAnchor).isActive = true
-        blurEffectView.leadingAnchor.constraint(equalTo: navigatonLabelView.leadingAnchor).isActive = true
-        blurEffectView.trailingAnchor.constraint(equalTo: navigatonLabelView.trailingAnchor).isActive = true
-        blurEffectView.bottomAnchor.constraint(equalTo: navigatonLabelView.bottomAnchor).isActive = true
+        blurEffectView.topAnchor.constraint(equalTo: nextView.topAnchor).isActive = true
+        blurEffectView.leadingAnchor.constraint(equalTo: nextView.leadingAnchor).isActive = true
+        blurEffectView.trailingAnchor.constraint(equalTo: nextView.trailingAnchor).isActive = true
+        blurEffectView.bottomAnchor.constraint(equalTo: nextView.bottomAnchor).isActive = true
+        
+    }
+    
+    private func setupBackButton() {
+        backButton.setTitle("<", for: .normal)
+        backButton.titleLabel?.font = .avenirMedium(ofSize: UIFont.scaleFont(25))
+        backButton.setTitleColor(UIColor.black, for: .normal)
+        addSubview(backButton)
+        
+        backButton.translatesAutoresizingMaskIntoConstraints = false
+        backButton.centerYAnchor.constraint(equalTo: weekLabel.centerYAnchor).isActive = true
+        backButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 25).isActive = true
+    }
+    
+    private func setupBackView() {
+        backView.backgroundColor = .clear
+        addSubview(backView)
+        backView.layer.cornerRadius = labelView.layer.bounds.size.height / 2
+        
+        backView.translatesAutoresizingMaskIntoConstraints = false
+        backView.centerYAnchor.constraint(equalTo: backButton.centerYAnchor).isActive = true
+        backView.centerXAnchor.constraint(equalTo: backButton.centerXAnchor).isActive = true
+        backView.widthAnchor.constraint(equalTo: backButton.widthAnchor, constant: 18).isActive = true
+        backView.heightAnchor.constraint(equalTo: labelView.heightAnchor).isActive = true
+        
+    }
+    
+    
+    private func setupBackBlurView() {
+        let blurEffect = UIBlurEffect(style: .regular)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        backView.addSubview(blurEffectView)
+        backView.layoutIfNeeded()
+        blurEffectView.layer.cornerRadius = backView.layer.bounds.size.height / 2
+        blurEffectView.clipsToBounds = true
+        
+        blurEffectView.translatesAutoresizingMaskIntoConstraints = false
+        blurEffectView.topAnchor.constraint(equalTo: backView.topAnchor).isActive = true
+        blurEffectView.leadingAnchor.constraint(equalTo: backView.leadingAnchor).isActive = true
+        blurEffectView.trailingAnchor.constraint(equalTo: backView.trailingAnchor).isActive = true
+        blurEffectView.bottomAnchor.constraint(equalTo: backView.bottomAnchor).isActive = true
         
     }
     
