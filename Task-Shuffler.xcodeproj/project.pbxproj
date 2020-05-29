@@ -29,6 +29,7 @@
 		8198F26324763D5F00F547BC /* CalendarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8198F26224763D5F00F547BC /* CalendarVC.swift */; };
 		81AB5D6A2476F915009ADB97 /* HorizontalCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB5D692476F915009ADB97 /* HorizontalCollectionVC.swift */; };
 		81AB5D6C24770D01009ADB97 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB5D6B24770D01009ADB97 /* CollectionViewCell.swift */; };
+		81C451C824818E350086B806 /* EventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C451C724818E350086B806 /* EventType.swift */; };
 		81C90B5324614F8B001C06B4 /* GapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C90B5224614F8B001C06B4 /* GapManager.swift */; };
 		81C90B552461D080001C06B4 /* GapCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81C90B542461D080001C06B4 /* GapCell.xib */; };
 		81C90B572461D0B2001C06B4 /* GapCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C90B562461D0B2001C06B4 /* GapCell.swift */; };
@@ -74,6 +75,7 @@
 		8198F26224763D5F00F547BC /* CalendarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarVC.swift; sourceTree = "<group>"; };
 		81AB5D692476F915009ADB97 /* HorizontalCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCollectionVC.swift; sourceTree = "<group>"; };
 		81AB5D6B24770D01009ADB97 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		81C451C724818E350086B806 /* EventType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventType.swift; sourceTree = "<group>"; };
 		81C90B5224614F8B001C06B4 /* GapManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GapManager.swift; sourceTree = "<group>"; };
 		81C90B542461D080001C06B4 /* GapCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GapCell.xib; sourceTree = "<group>"; };
 		81C90B562461D0B2001C06B4 /* GapCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GapCell.swift; sourceTree = "<group>"; };
@@ -343,6 +345,7 @@
 		81FFF0C72467F8160086500A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				81C451C724818E350086B806 /* EventType.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -542,6 +545,7 @@
 				81DECAB6243BA410009051A2 /* CustomColors.swift in Sources */,
 				81C90B5B2463DDBA001C06B4 /* Utils.swift in Sources */,
 				8179FDDB24581E9F009A6D4B /* DummyModel.swift in Sources */,
+				81C451C824818E350086B806 /* EventType.swift in Sources */,
 				8197F5C2245ACF700052FCC7 /* TaskManager.swift in Sources */,
 				81AB5D6C24770D01009ADB97 /* CollectionViewCell.swift in Sources */,
 				81E9B1432405BEE400BBADB8 /* ViewController.swift in Sources */,

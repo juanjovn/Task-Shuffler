@@ -12,12 +12,42 @@ import Elliotable
 class CalendarVC: UIViewController {
     let timeTable = Elliotable()
     private let daySymbol = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
-    private var courseList = [ElliottEvent]()
+    var courseList = [ElliottEvent]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupElliottEvents()
+//        setupElliottEvents()
+        
         setupTimetable()
+        
+        let minute:TimeInterval = 60.0
+        let hour:TimeInterval = 60.0 * minute
+        insertEvent(stardDate: Date(), endDate: Date(timeInterval: hour, since: Date()), type: EventType.Gap)
+        insertEvent(stardDate: Date(), endDate: Date(timeInterval: hour * -2, since: Date()), type: EventType.Task)
+        print(Date())
+        print(Date(timeInterval: hour * 6, since: Date()))
+    }
+    
+    //MARK: Public
+    
+    public func insertEvent(stardDate: Date, endDate: Date, type: EventType) {
+        let startTime = Utils.formatDate(datePattern: "HH:mm", date: stardDate)
+        let endTime = Utils.formatDate(datePattern: "HH:mm", date: endDate)
+        let day = Calendar.current.component(.weekday, from: stardDate)
+        
+        switch type {
+        case .Gap:
+            let event = ElliottEvent(courseId: "1", courseName: "prueba de gap", roomName: "", professor: "", courseDay: ElliotDay(rawValue: day)!, startTime: startTime, endTime: endTime, backgroundColor: UIColor.pearlWhite.withAlphaComponent(0.40))
+            
+            courseList.append(event)
+        case .Task:
+            let event = ElliottEvent(courseId: "1", courseName: "prueba de task", roomName: "", professor: "", courseDay: ElliotDay(rawValue: day)!, startTime: startTime, endTime: endTime, backgroundColor: UIColor.fireOrange)
+            courseList.append(event)
+        }
+        
+        timeTable.reloadData()
+        
+        
     }
     
     private func setupElliottEvents() {
