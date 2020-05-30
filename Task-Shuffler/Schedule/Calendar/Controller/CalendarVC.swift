@@ -23,9 +23,13 @@ class CalendarVC: UIViewController {
         let minute:TimeInterval = 60.0
         let hour:TimeInterval = 60.0 * minute
         insertEvent(stardDate: Date(), endDate: Date(timeInterval: hour, since: Date()), type: EventType.Gap)
-        insertEvent(stardDate: Date(), endDate: Date(timeInterval: hour * -2, since: Date()), type: EventType.Task)
-        print(Date())
-        print(Date(timeInterval: hour * 6, since: Date()))
+        insertEvent(stardDate: Date(), endDate: Date(timeInterval: hour * 2, since: Date()), type: EventType.Task)
+        insertEvent(stardDate: Date(timeInterval: hour * 15, since: Date()), endDate: Date(timeInterval: hour * 26, since: Date()), type: EventType.Gap)
+        insertEvent(stardDate: Date(timeInterval: hour * 15, since: Date()), endDate: Date(timeInterval: hour * 17, since: Date()), type: EventType.Task)
+        insertEvent(stardDate: Date(timeInterval: hour * 18, since: Date()), endDate: Date(timeInterval: hour * 19, since: Date()), type: EventType.Task)
+        
+//        print(Date())
+//        print(Date(timeInterval: hour * 6, since: Date()))
     }
     
     //MARK: Public
@@ -33,6 +37,8 @@ class CalendarVC: UIViewController {
     public func insertEvent(stardDate: Date, endDate: Date, type: EventType) {
         let startTime = Utils.formatDate(datePattern: "HH:mm", date: stardDate)
         let endTime = Utils.formatDate(datePattern: "HH:mm", date: endDate)
+        print(startTime)
+        print(endTime)
         let day = Calendar.current.component(.weekday, from: stardDate)
         
         switch type {
