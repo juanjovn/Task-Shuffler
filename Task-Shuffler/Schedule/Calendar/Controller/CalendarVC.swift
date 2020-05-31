@@ -27,6 +27,10 @@ class CalendarVC: UIViewController {
         insertEvent(stardDate: Date(timeInterval: hour * 15, since: Date()), endDate: Date(timeInterval: hour * 26, since: Date()), type: EventType.Gap)
         insertEvent(stardDate: Date(timeInterval: hour * 15, since: Date()), endDate: Date(timeInterval: hour * 17, since: Date()), type: EventType.Task)
         insertEvent(stardDate: Date(timeInterval: hour * 18, since: Date()), endDate: Date(timeInterval: hour * 19, since: Date()), type: EventType.Task)
+        insertEvent(stardDate: Date(timeInterval: hour * 65, since: Date()), endDate: Date(timeInterval: hour * 68, since: Date()), type: EventType.Gap)
+        insertEvent(stardDate: Date(timeInterval: hour * 65, since: Date()), endDate: Date(timeInterval: hour * 67, since: Date()), type: EventType.Task)
+        insertEvent(stardDate: Date(timeInterval: hour * 110, since: Date()), endDate: Date(timeInterval: hour * 115, since: Date()), type: EventType.Gap)
+        insertEvent(stardDate: Date(timeInterval: hour * 110, since: Date()), endDate: Date(timeInterval: hour * 114, since: Date()), type: EventType.Task)
         
 //        print(Date())
 //        print(Date(timeInterval: hour * 6, since: Date()))
