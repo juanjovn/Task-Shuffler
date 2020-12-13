@@ -4,7 +4,6 @@
 //
 //  Created by Juanjo Valiño on 07/05/2020.
 //  Copyright © 2020 Juanjo Valiño. All rights reserved.
-//  TESTING ACCESS TOKEN
 //
 
 import Foundation
