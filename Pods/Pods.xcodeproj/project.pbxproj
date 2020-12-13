@@ -195,8 +195,8 @@
 		7E978945DB721518C002B6B1C4153EC1 /* Realm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493F328B1D7BBFCBF2FC69265C3790BC /* Realm.swift */; };
 		7F91E347D1CDCC342F28CE918CCE71E7 /* WCLShineBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676C36B12136C21615E8E0A38B8D5374 /* WCLShineBundle.swift */; };
 		80A444704CE5CE018DA62ADC894EF15D /* RLMMongoCollection.h in Copy . Public Headers */ = {isa = PBXBuildFile; fileRef = FF43252630006EC621843100265614DF /* RLMMongoCollection.h */; };
-		813E13992582BB4D00F03B2A /* SharedOffsetCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813E13982582BB4D00F03B2A /* SharedOffsetCollectionView.swift */; };
 		8147EE1E224EBC5203CCC80690D6F11B /* DateScrollItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E845958DAF4B8C9CF8C5F7F98ACE46B9 /* DateScrollItem.swift */; };
+		81EB820925869F23003AE4BA /* SharedOffsetCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EB820825869F22003AE4BA /* SharedOffsetCollectionView.swift */; };
 		823BB968085ABE8681F39894196C00F5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A1A7C46B901057D872AAE63AC45E731 /* Foundation.framework */; };
 		82FD19E901B1CA44502C6D11812982E1 /* WCLShineAngleLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F7A8AB2EE827DF0BC7BC67765D6A45 /* WCLShineAngleLayer.swift */; };
 		8319F032C30E865BB82260208EF0F346 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A1A7C46B901057D872AAE63AC45E731 /* Foundation.framework */; };
@@ -785,9 +785,9 @@
 		804BA71D8E18214C21A82436FF1E19A4 /* RLMRealmConfiguration+Sync.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "RLMRealmConfiguration+Sync.h"; path = "include/RLMRealmConfiguration+Sync.h"; sourceTree = "<group>"; };
 		8053CE87579ED0555AC1E4400B990589 /* fluid-slider.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "fluid-slider.modulemap"; sourceTree = "<group>"; };
 		80D7D5B21CABF0A4611389C5861A9551 /* RLMObjectStore.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = RLMObjectStore.h; path = include/RLMObjectStore.h; sourceTree = "<group>"; };
-		813E13982582BB4D00F03B2A /* SharedOffsetCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedOffsetCollectionView.swift; sourceTree = "<group>"; };
 		816A864BD1295DCF7401294909C34D8B /* AMTabView-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "AMTabView-Info.plist"; sourceTree = "<group>"; };
 		818AB8CC1F719A923BD5CBD9A4DCBB78 /* DateScrollPicker-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "DateScrollPicker-umbrella.h"; sourceTree = "<group>"; };
+		81EB820825869F22003AE4BA /* SharedOffsetCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedOffsetCollectionView.swift; sourceTree = "<group>"; };
 		82A1B048E8078C38056D1DA5AE962C6C /* ElliottEvent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ElliottEvent.swift; path = Elliotable/ElliottEvent.swift; sourceTree = "<group>"; };
 		82D23CC9264378EA054C244226EAEDBD /* app_credentials.cpp */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.cpp.cpp; name = app_credentials.cpp; path = Realm/ObjectStore/src/sync/app_credentials.cpp; sourceTree = "<group>"; };
 		82F7D86C938765D6753E6BC7E566A5EA /* pop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = pop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1621,7 +1621,7 @@
 		DBF8D570588BBEABCADC691ADD310AEA /* Elliotable */ = {
 			isa = PBXGroup;
 			children = (
-				813E13982582BB4D00F03B2A /* SharedOffsetCollectionView.swift */,
+				81EB820825869F22003AE4BA /* SharedOffsetCollectionView.swift */,
 				F5C2578104B7504E1822991E3E6C918C /* Elliotable.h */,
 				6DDC2B54E806C98FC8DAC416B8098716 /* Elliotable.swift */,
 				7DBF03471739C663BE3F8F48FC374781 /* ElliotableCell.swift */,
@@ -2398,7 +2398,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				813E13992582BB4D00F03B2A /* SharedOffsetCollectionView.swift in Sources */,
+				81EB820925869F23003AE4BA /* SharedOffsetCollectionView.swift in Sources */,
 				6B6D093D6F981AEC565A6A4EFA438321 /* Elliotable-dummy.m in Sources */,
 				A01A3744E5997DD2239676875DD4E1DE /* Elliotable.swift in Sources */,
 				60F7C004CF5AD4E5D0AEF09DB855F60C /* ElliotableCell.swift in Sources */,
@@ -3373,6 +3373,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
