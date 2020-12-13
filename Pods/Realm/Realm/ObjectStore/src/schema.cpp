@@ -24,33 +24,36 @@
 #include "property.hpp"
 
 #include <algorithm>
+#include <queue>
+#include <unordered_set>
 
 using namespace realm;
 
 namespace realm {
-bool operator==(Schema const& a, Schema const& b)
+bool operator==(Schema const& a, Schema const& b) noexcept
 {
     return static_cast<Schema::base const&>(a) == static_cast<Schema::base const&>(b);
 }
 }
 
-Schema::Schema() = default;
+Schema::Schema() noexcept = default;
 Schema::~Schema() = default;
 Schema::Schema(Schema const&) = default;
-Schema::Schema(Schema &&) = default;
+Schema::Schema(Schema &&) noexcept = default;
 Schema& Schema::operator=(Schema const&) = default;
-Schema& Schema::operator=(Schema&&) = default;
+Schema& Schema::operator=(Schema&&) noexcept = default;
 
 Schema::Schema(std::initializer_list<ObjectSchema> types) : Schema(base(types)) { }
 
-Schema::Schema(base types) : base(std::move(types))
+Schema::Schema(base types) noexcept
+: base(std::move(types))
 {
     std::sort(begin(), end(), [](ObjectSchema const& lft, ObjectSchema const& rgt) {
         return lft.name < rgt.name;
     });
 }
 
-Schema::iterator Schema::find(StringData name)
+Schema::iterator Schema::find(StringData name) noexcept
 {
     auto it = std::lower_bound(begin(), end(), name, [](ObjectSchema const& lft, StringData rgt) {
         return lft.name < rgt;
@@ -61,7 +64,7 @@ Schema::iterator Schema::find(StringData name)
     return it;
 }
 
-Schema::const_iterator Schema::find(StringData name) const
+Schema::const_iterator Schema::find(StringData name) const noexcept
 {
     return const_cast<Schema *>(this)->find(name);
 }
@@ -76,7 +79,62 @@ Schema::const_iterator Schema::find(ObjectSchema const& object) const noexcept
     return const_cast<Schema *>(this)->find(object);
 }
 
-void Schema::validate() const
+namespace {
+
+struct CheckObjectPath {
+    const ObjectSchema& object; // the schema to check
+    std::string path; // a printable path for error messaging
+    std::unordered_set<std::string> visited; // the list of object types encountered along this path so far
+};
+
+// a non-recursive search that returns a property path to the first embedded object cycle detected
+std::string do_check(Schema const& schema, const ObjectSchema& start)
+{
+    std::queue<CheckObjectPath> to_visit;
+    to_visit.push(CheckObjectPath{start, start.name, {start.name}});
+
+    while (to_visit.size() > 0) {
+        auto current = to_visit.front();
+        for (auto& prop : current.object.persisted_properties) {
+            if (prop.type == PropertyType::Object) {
+                auto it = schema.find(prop.object_type);
+                REALM_ASSERT(it != schema.end()); // this succeeds if the schema is otherwise valid
+                if (!it->is_embedded) {
+                    // the server does support links to top level objects (serialized as a PK)
+                    // so if we encounter this type of link, no need to check further along this path
+                    continue;
+                }
+                auto next_path = current.path + "." + prop.name;
+                if (current.visited.find(prop.object_type) != current.visited.end()) {
+                    return next_path;
+                }
+                auto visited_copy = current.visited;
+                visited_copy.insert(current.object.name);
+                to_visit.push(CheckObjectPath{*it, next_path, std::move(visited_copy)});
+            }
+        }
+        to_visit.pop();
+    }
+    return "";
+}
+
+void check_for_embedded_objects_loop(Schema const& schema, std::vector<ObjectSchemaValidationException>& exceptions)
+{
+    // A prerequisite for an embedded object loop is that there are links orginating from an embedded object
+    // so we only need to run this check from embedded objects. This is an optimization to exclude entire
+    // object graphs which do not contain embedded objects.
+    for (auto const& object : schema) {
+        if (object.is_embedded) {
+            std::string loop = do_check(schema, object);
+            if (!loop.empty()) {
+                exceptions.push_back(util::format("Cycles containing embedded objects are not currently supported: '%1'", loop));
+            }
+        }
+    }
+}
+}
+
+void Schema::validate(bool for_sync) const
 {
     std::vector<ObjectSchemaValidationException> exceptions;
 
@@ -93,25 +151,20 @@ void Schema::validate() const
     }
 
     for (auto const& object : *this) {
-        object.validate(*this, exceptions);
+        object.validate(*this, exceptions, for_sync);
+    }
+
+    // TODO: remove this client side check once the server supports it
+    // or generates a better error message.
+    if (exceptions.empty()) {
+        // only attempt to check for loops if the rest of the schema is valid
+        // because we rely on all link types being defined
+        check_for_embedded_objects_loop(*this, exceptions);
     }
 
     if (exceptions.size()) {
         throw SchemaValidationException(exceptions);
     }
-}
-
-namespace {
-struct IsNotRemoveProperty {
-    bool operator()(SchemaChange sc) const { return sc.visit(*this); }
-    bool operator()(schema_change::RemoveProperty) const { return false; }
-    template<typename T> bool operator()(T) const { return true; }
-};
-struct GetRemovedColumn {
-    size_t operator()(SchemaChange sc) const { return sc.visit(*this); }
-    size_t operator()(schema_change::RemoveProperty p) const { return p.property->table_column; }
-    template<typename T> size_t operator()(T) const { REALM_COMPILER_HINT_UNREACHABLE(); }
-};
 }
 
 static void compare(ObjectSchema const& existing_schema,
@@ -151,25 +204,19 @@ static void compare(ObjectSchema const& existing_schema,
         }
     }
 
-    if (existing_schema.primary_key != target_schema.primary_key) {
-        changes.emplace_back(schema_change::ChangePrimaryKey{&existing_schema, target_schema.primary_key_property()});
-    }
-
     for (auto& target_prop : target_schema.persisted_properties) {
         if (!existing_schema.property_for_name(target_prop.name)) {
             changes.emplace_back(schema_change::AddProperty{&existing_schema, &target_prop});
         }
     }
 
-    // Move all RemovePropertys to the end and sort in descending order of
-    // column index, as removing a column will shift all columns after that one
-    auto it = std::partition(begin(changes), end(changes), IsNotRemoveProperty{});
-    std::sort(it, end(changes),
-              [](auto a, auto b) { return GetRemovedColumn()(a) > GetRemovedColumn()(b); });
+    if (existing_schema.primary_key != target_schema.primary_key) {
+        changes.emplace_back(schema_change::ChangePrimaryKey{&existing_schema, target_schema.primary_key_property()});
+    }
 }
 
 template<typename T, typename U, typename Func>
-void Schema::zip_matching(T&& a, U&& b, Func&& func)
+void Schema::zip_matching(T&& a, U&& b, Func&& func) noexcept
 {
     size_t i = 0, j = 0;
     while (i < a.size() && j < b.size()) {
@@ -206,9 +253,12 @@ std::vector<SchemaChange> Schema::compare(Schema const& target_schema, bool incl
         if (target && !existing) {
             changes.emplace_back(schema_change::AddTable{target});
         }
-        else if (include_table_removals && existing && !target) {
-            changes.emplace_back(schema_change::RemoveTable{existing});
+        else if (existing && !target) {
+            if (include_table_removals)
+                changes.emplace_back(schema_change::RemoveTable{existing});
         }
+        else if (existing->is_embedded != target->is_embedded)
+            changes.emplace_back(schema_change::ChangeTableType{target});
     });
 
     // Modify columns
@@ -224,23 +274,24 @@ std::vector<SchemaChange> Schema::compare(Schema const& target_schema, bool incl
     return changes;
 }
 
-void Schema::copy_table_columns_from(realm::Schema const& other)
+void Schema::copy_keys_from(realm::Schema const& other) noexcept
 {
     zip_matching(*this, other, [&](ObjectSchema* existing, const ObjectSchema* other) {
         if (!existing || !other)
             return;
 
+        existing->table_key = other->table_key;
         for (auto& current_prop : other->persisted_properties) {
             auto target_prop = existing->property_for_name(current_prop.name);
             if (target_prop) {
-                target_prop->table_column = current_prop.table_column;
+                target_prop->column_key = current_prop.column_key;
             }
         }
     });
 }
 
 namespace realm {
-bool operator==(SchemaChange const& lft, SchemaChange const& rgt)
+bool operator==(SchemaChange const& lft, SchemaChange const& rgt) noexcept
 {
     if (lft.m_kind != rgt.m_kind)
         return false;
@@ -261,6 +312,7 @@ bool operator==(SchemaChange const& lft, SchemaChange const& rgt)
         REALM_SC_COMPARE(AddInitialProperties, v.object)
         REALM_SC_COMPARE(AddTable, v.object)
         REALM_SC_COMPARE(RemoveTable, v.object)
+        REALM_SC_COMPARE(ChangeTableType, v.object)
         REALM_SC_COMPARE(ChangePrimaryKey, v.object, v.property)
         REALM_SC_COMPARE(ChangePropertyType, v.object, v.old_property, v.new_property)
         REALM_SC_COMPARE(MakePropertyNullable, v.object, v.property)

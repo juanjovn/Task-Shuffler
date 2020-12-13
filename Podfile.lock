@@ -6,11 +6,11 @@ PODS:
   - fluid-slider (1.1.0):
     - pop
   - pop (1.0.12)
-  - Realm (4.4.1):
-    - Realm/Headers (= 4.4.1)
-  - Realm/Headers (4.4.1)
-  - RealmSwift (4.4.1):
-    - Realm (= 4.4.1)
+  - Realm (10.3.0):
+    - Realm/Headers (= 10.3.0)
+  - Realm/Headers (10.3.0)
+  - RealmSwift (10.3.0):
+    - Realm (= 10.3.0)
   - SJFluidSegmentedControl (1.1.2)
   - SkyFloatingLabelTextField (3.8.0)
   - WCLShineButton (1.0.8)
@@ -21,7 +21,7 @@ DEPENDENCIES:
   - DateScrollPicker (= 1.1.0)
   - Elliotable (= 1.2.5)
   - fluid-slider
-  - RealmSwift (= 4.4.1)
+  - RealmSwift (>= 4.4.1)
   - SJFluidSegmentedControl (~> 1.0)
   - SkyFloatingLabelTextField (~> 3.0)
   - WCLShineButton
@@ -47,12 +47,12 @@ SPEC CHECKSUMS:
   Elliotable: e669fa7a974658c4e0ee4be4b335f6a561f1b2cb
   fluid-slider: 68037ac7247f16a89f3e24ff5d0167c8eea6f50b
   pop: d582054913807fd11fd50bfe6a539d91c7e1a55a
-  Realm: 4eb04d7487bd43c0581256f40b424eafb711deff
-  RealmSwift: 3eb8924ff7100df5928c7602f71d0fec51e7c9c5
+  Realm: 7957567daedece88d04866cdea419a5975f78e1b
+  RealmSwift: 8cc707e87a4ed4f36e76312ae4f53cc1265d9bad
   SJFluidSegmentedControl: efd26ea5f0832c715e2750314a2dc0cc81e39ae5
   SkyFloatingLabelTextField: 5a338412114808e961fe2d14ea2c5452c8b6e4aa
   WCLShineButton: 315ee9b0024b1cc56dba34fb6a8878937eb8d0b1
 
-PODFILE CHECKSUM: e37b94e4f3ebf604ccfdd2eaa52584c4c53644ad
+PODFILE CHECKSUM: 3bf94ff0cefbeb247a3b678635d2879e320a581f
 
-COCOAPODS: 1.9.0
+COCOAPODS: 1.10.0

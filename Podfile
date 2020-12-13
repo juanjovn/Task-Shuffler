@@ -12,7 +12,7 @@ target 'Task-Shuffler' do
   pod 'fluid-slider'
   pod 'WCLShineButton'
   pod 'SJFluidSegmentedControl', '~> 1.0'
-  pod 'RealmSwift', '4.4.1'
+  pod 'RealmSwift', '>=4.4.1'
   pod 'DateScrollPicker', '1.1.0'
   pod 'Elliotable', '1.2.5'
 
