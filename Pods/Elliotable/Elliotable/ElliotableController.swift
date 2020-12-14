@@ -175,11 +175,17 @@ extension ElliotableController: UICollectionViewDelegateFlowLayout {
         
         if indexPath.row == 0 {
             return CGSize(width: elliotable.widthOfTimeAxis, height: elliotable.heightOfDaySection)
-        } else if indexPath.row < (elliotable.daySymbols.count + 1) {
-            return CGSize(width: elliotable.averageWidth, height: elliotable.heightOfDaySection)
         } else if indexPath.row % (elliotable.daySymbols.count + 1) == 0 {
             return CGSize(width: elliotable.widthOfTimeAxis, height: elliotable.courseItemHeight)
-        } else {
+        }
+        else if indexPath.row % (elliotable.daySymbols.count) == 0 {
+            if indexPath.row == 7 {
+                return CGSize(width: elliotable.averageWidth - 0.0000005, height: elliotable.heightOfDaySection) //Problems fitting size on iPhone 12. This substraction in the last column fixes it
+            }
+            return CGSize(width: elliotable.averageWidth - 0.0000005, height: elliotable.courseItemHeight) //Problems fitting size on iPhone 12. This substraction in the last column fixes it
+        } else if indexPath.row < (elliotable.daySymbols.count + 1) {
+            return CGSize(width: elliotable.averageWidth, height: elliotable.heightOfDaySection)
+        }  else {
             return CGSize(width: elliotable.averageWidth, height: elliotable.courseItemHeight)
         }
     }
