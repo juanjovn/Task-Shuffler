@@ -467,6 +467,10 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
         zelda.monthLabel.text = Utils.formatDate(datePattern: "MMM", date: gap.startDate)
         zelda.startTimeLabel.text = Utils.formatDate(datePattern: "HH:mm", date: gap.startDate)
         zelda.endTimeLabel.text = Utils.formatDate(datePattern: "HH:mm", date: gap.endDate)
+        zelda.backgroundColor = UIColor.clear
+        let onTapBackground = UIView()
+        onTapBackground.backgroundColor = UIColor.iron.withAlphaComponent(0.25)
+        zelda.selectedBackgroundView = onTapBackground
         
         return zelda
     }

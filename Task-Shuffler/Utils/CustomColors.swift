@@ -21,4 +21,5 @@ extension UIColor {
     static var forestGreen : UIColor { return #colorLiteral(red: 0.1176470588, green: 0.6588235294, blue: 0.5882352941, alpha: 1) }
     static var opalRed     : UIColor { return #colorLiteral(red: 0.9333333333, green: 0.3764705882, blue: 0.3333333333, alpha: 1) }
     static var turquesa    : UIColor { return #colorLiteral(red: 0.1294117647, green: 0.537254902, blue: 0.4941176471, alpha: 1) }
+    static var iron        : UIColor { return #colorLiteral(red: 0.370555222, green: 0.3705646992, blue: 0.3705595732, alpha: 0.2536734272) }
 }

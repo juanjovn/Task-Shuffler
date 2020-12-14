@@ -562,6 +562,10 @@ extension TasksListViewController : UITableViewDataSource{
         
         zelda.nameLabel.text = task.name
         zelda.durationLabel.text = String(task.duration) + "'"
+        zelda.backgroundColor = UIColor.clear
+        let onTapBackground = UIView()
+        onTapBackground.backgroundColor = UIColor.iron.withAlphaComponent(0.25)
+        zelda.selectedBackgroundView = onTapBackground
         
         switch task.priority {
         case .low:
