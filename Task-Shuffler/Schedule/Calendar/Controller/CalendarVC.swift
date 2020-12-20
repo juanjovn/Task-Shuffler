@@ -10,8 +10,12 @@ import UIKit
 import Elliotable
 
 class CalendarVC: UIViewController {
+    
+    //Constants
     let timeTable = Elliotable()
-    private let daySymbol = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+    private let daySymbol = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+    
+    //Variables
     var courseList = [ElliottEvent]()
 
     override func viewDidLoad() {
@@ -20,17 +24,17 @@ class CalendarVC: UIViewController {
         
         setupTimetable()
         
-        let minute:TimeInterval = 60.0
-        let hour:TimeInterval = 60.0 * minute
-        insertEvent(stardDate: Date(), endDate: Date(timeInterval: hour, since: Date()), type: EventType.Gap)
-        insertEvent(stardDate: Date(), endDate: Date(timeInterval: hour * 2, since: Date()), type: EventType.Task)
-        insertEvent(stardDate: Date(timeInterval: hour * 15, since: Date()), endDate: Date(timeInterval: hour * 26, since: Date()), type: EventType.Gap)
-        insertEvent(stardDate: Date(timeInterval: hour * 15, since: Date()), endDate: Date(timeInterval: hour * 17, since: Date()), type: EventType.Task)
-        insertEvent(stardDate: Date(timeInterval: hour * 18, since: Date()), endDate: Date(timeInterval: hour * 19, since: Date()), type: EventType.Task)
-        insertEvent(stardDate: Date(timeInterval: hour * 65, since: Date()), endDate: Date(timeInterval: hour * 68, since: Date()), type: EventType.Gap)
-        insertEvent(stardDate: Date(timeInterval: hour * 65, since: Date()), endDate: Date(timeInterval: hour * 67, since: Date()), type: EventType.Task)
-        insertEvent(stardDate: Date(timeInterval: hour * 110, since: Date()), endDate: Date(timeInterval: hour * 115, since: Date()), type: EventType.Gap)
-        insertEvent(stardDate: Date(timeInterval: hour * 110, since: Date()), endDate: Date(timeInterval: hour * 114, since: Date()), type: EventType.Task)
+//        let minute:TimeInterval = 60.0
+//        let hour:TimeInterval = 60.0 * minute
+//        insertEvent(stardDate: Date(), endDate: Date(timeInterval: hour, since: Date()), type: EventType.Gap)
+//        insertEvent(stardDate: Date(), endDate: Date(timeInterval: hour * 2, since: Date()), type: EventType.Task)
+//        insertEvent(stardDate: Date(timeInterval: hour * 15, since: Date()), endDate: Date(timeInterval: hour * 26, since: Date()), type: EventType.Gap)
+//        insertEvent(stardDate: Date(timeInterval: hour * 15, since: Date()), endDate: Date(timeInterval: hour * 17, since: Date()), type: EventType.Task)
+//        insertEvent(stardDate: Date(timeInterval: hour * 18, since: Date()), endDate: Date(timeInterval: hour * 19, since: Date()), type: EventType.Task)
+//        insertEvent(stardDate: Date(timeInterval: hour * 65, since: Date()), endDate: Date(timeInterval: hour * 68, since: Date()), type: EventType.Gap)
+//        insertEvent(stardDate: Date(timeInterval: hour * 65, since: Date()), endDate: Date(timeInterval: hour * 67, since: Date()), type: EventType.Task)
+//        insertEvent(stardDate: Date(timeInterval: hour * 110, since: Date()), endDate: Date(timeInterval: hour * 115, since: Date()), type: EventType.Gap)
+//        insertEvent(stardDate: Date(timeInterval: hour * 110, since: Date()), endDate: Date(timeInterval: hour * 114, since: Date()), type: EventType.Task)
         
 //        print(Date())
 //        print(Date(timeInterval: hour * 6, since: Date()))
@@ -38,20 +42,20 @@ class CalendarVC: UIViewController {
     
     //MARK: Public
     
-    public func insertEvent(stardDate: Date, endDate: Date, type: EventType) {
-        let startTime = Utils.formatDate(datePattern: "HH:mm", date: stardDate)
+    public func insertEvent(eventName: String, startDate: Date, endDate: Date, type: EventType) {
+        let startTime = Utils.formatDate(datePattern: "HH:mm", date: startDate)
         let endTime = Utils.formatDate(datePattern: "HH:mm", date: endDate)
-        print(startTime)
-        print(endTime)
-        let day = Calendar.current.component(.weekday, from: stardDate)
+        //print(startTime)
+        //print(endTime)
+        let day = Calendar.current.component(.weekday, from: startDate)
         
         switch type {
         case .Gap:
-            let event = ElliottEvent(courseId: "1", courseName: "prueba de gap", roomName: "", professor: "", courseDay: ElliotDay(rawValue: day)!, startTime: startTime, endTime: endTime, backgroundColor: UIColor.pearlWhite.withAlphaComponent(0.40))
+            let event = ElliottEvent(courseId: "1", courseName: eventName, roomName: "", professor: "", courseDay: ElliotDay(rawValue: day)!, startTime: startTime, endTime: endTime, backgroundColor: UIColor.darkGray.withAlphaComponent(0.15))
             
             courseList.append(event)
         case .Task:
-            let event = ElliottEvent(courseId: "1", courseName: "prueba de task", roomName: "", professor: "", courseDay: ElliotDay(rawValue: day)!, startTime: startTime, endTime: endTime, backgroundColor: UIColor.fireOrange)
+            let event = ElliottEvent(courseId: "1", courseName: eventName, roomName: "", professor: "", courseDay: ElliotDay(rawValue: day)!, startTime: startTime, endTime: endTime, backgroundColor: UIColor.fireOrange)
             courseList.append(event)
         }
         
@@ -60,6 +64,7 @@ class CalendarVC: UIViewController {
         
     }
     
+    //MARK: Private
     private func setupElliottEvents() {
         let course_1 = ElliottEvent(courseId: "1", courseName: "", roomName: "", professor: "", courseDay: .tuesday, startTime: "10:00", endTime: "13:00", backgroundColor: UIColor.pearlWhite.withAlphaComponent(0.40))
         let course_1_1 = ElliottEvent(courseId: "1", courseName: "Poner la lavadora bla bla bla", roomName: "", professor: "", courseDay: .tuesday, startTime: "10:00", endTime: "11:00", backgroundColor: .fireOrange)

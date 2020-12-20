@@ -24,7 +24,7 @@ class GapsViewController: AMTabsViewController {
     //Constants
     let db = DatabaseManager()
     
-    //Variable
+    //Variables
     var pendingGaps = [GapRealm]()
     var assignedGaps = [GapRealm]()
     var completedGaps = [GapRealm]()
@@ -80,6 +80,8 @@ class GapsViewController: AMTabsViewController {
     public func checkOutdated(currentGap: GapRealm) -> Bool{
         return Date() > currentGap.endDate
     }
+    
+    //MARK: PRIVATE
     
     private func test(){
         //db.eraseAll()

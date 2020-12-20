@@ -12,17 +12,31 @@ private let currentWeekReuseIdentifier = "currentWeekCell"
 private let nextWeekReuseIdentifier = "nextWeekCell"
 
 class HorizontalCollectionVC: UICollectionViewController {
-    let screenWidth = UIScreen.main.bounds.size.width
-    let screenHeight = UIScreen.main.bounds.size.height
+    
+    
+    //MARK: Constants
+    
+    let db = DatabaseManager()
+    let currentWeekNumber = Calendar.current.component(.weekOfYear, from: Date())
+    
+    //MARK: Variables
+    
     private var indexOfCellBeforeDragging = 0
     private var collectionViewFlowLayout: UICollectionViewFlowLayout {
         return collectionViewLayout as! UICollectionViewFlowLayout
     }
+    
+    var pendingGaps = [GapRealm]()
+    var assignedGaps = [GapRealm]()
+    var completedGaps = [GapRealm]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.collectionView!.register(CollectionViewCell.self, forCellWithReuseIdentifier: currentWeekReuseIdentifier)
         self.collectionView!.register(CollectionViewCell.self, forCellWithReuseIdentifier: nextWeekReuseIdentifier)
         collectionViewFlowLayout.minimumLineSpacing = 0
+        collectionView.allowsSelection = false //With this True the WeekLabel tinted to yellow in every touch. Setting it to false prevent it.
+        fillGaps()
 
     }
 
@@ -40,6 +54,15 @@ class HorizontalCollectionVC: UICollectionViewController {
             cell.nextButton.isHidden = false
             cell.backView.isHidden = true
             cell.nextView.isHidden = false
+            
+            for gap in pendingGaps{
+                let gapWeekNumber = Calendar.current.component(.weekOfYear, from: gap.startDate)
+                if currentWeekNumber == gapWeekNumber {
+                    cell.calendarVC.insertEvent(eventName: "gap", startDate: gap.startDate, endDate: gap.endDate, type: EventType.Gap)
+                }
+                
+            }
+            
             return cell
         case 1:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: nextWeekReuseIdentifier, for: indexPath) as! CollectionViewCell
@@ -49,14 +72,43 @@ class HorizontalCollectionVC: UICollectionViewController {
             cell.nextButton.isHidden = true
             cell.backView.isHidden = false
             cell.nextView.isHidden = true
+            
+            for gap in pendingGaps{
+                let gapWeekNumber = Calendar.current.component(.weekOfYear, from: gap.startDate)
+                if currentWeekNumber != gapWeekNumber {
+                    cell.calendarVC.insertEvent(eventName: "gap", startDate: gap.startDate, endDate: gap.endDate, type: EventType.Gap)
+                }
+                
+            }
+            
             return cell
         default:
             return collectionView.dequeueReusableCell(withReuseIdentifier: currentWeekReuseIdentifier, for: indexPath)
         }
     }
 
+    //MARK: Private
     
-    func calculateSectionInset() -> CGFloat { // should be overridden
+    private func fillGaps(){
+        pendingGaps = GapManager.populateGaps(state: .pending)
+        assignedGaps = GapManager.populateGaps(state: .assigned)
+        completedGaps = GapManager.populateGaps(state: .completed)
+    }
+    
+    private func populateCalendarGaps(cell: CollectionViewCell){
+        for gap in pendingGaps{
+            cell.calendarVC.insertEvent(eventName: "gap", startDate: gap.startDate, endDate: gap.endDate, type: EventType.Gap)
+        }
+    }
+    
+//    private func isDateInNextWeek(_ date: Date) -> Bool {
+//        guard let nextWeek = Calendar.current.date(byAdding: DateComponents(weekOfYear: 1), to: Date()) else {
+//          return false
+//        }
+//        return Calendar.current.isDate(date, equalTo: nextWeek, toGranularity: .weekOfYear)
+//    }
+    
+    private func calculateSectionInset() -> CGFloat { // should be overridden
         return 0
     }
     
