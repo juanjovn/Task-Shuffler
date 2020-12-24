@@ -26,9 +26,6 @@ class HorizontalCollectionVC: UICollectionViewController {
         return collectionViewLayout as! UICollectionViewFlowLayout
     }
     
-    var pendingGaps = [GapRealm]()
-    var assignedGaps = [GapRealm]()
-    var completedGaps = [GapRealm]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +33,6 @@ class HorizontalCollectionVC: UICollectionViewController {
         self.collectionView!.register(CollectionViewCell.self, forCellWithReuseIdentifier: nextWeekReuseIdentifier)
         collectionViewFlowLayout.minimumLineSpacing = 0
         collectionView.allowsSelection = false //With this True the WeekLabel tinted to yellow in every touch. Setting it to false prevent it.
-        fillGaps()
         
     }
 
@@ -55,14 +51,13 @@ class HorizontalCollectionVC: UICollectionViewController {
             cell.backView.isHidden = true
             cell.nextView.isHidden = false
             
-            for gap in pendingGaps{
+            for gap in gapManager.pendingGaps{
                 let gapWeekNumber = Calendar.current.component(.weekOfYear, from: gap.startDate)
                 if currentWeekNumber == gapWeekNumber {
                     cell.calendarVC.insertEvent(eventName: "gap", startDate: gap.startDate, endDate: gap.endDate, type: EventType.Gap)
                 }
                 
             }
-            
             return cell
         case 1:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: nextWeekReuseIdentifier, for: indexPath) as! CollectionViewCell
@@ -73,7 +68,7 @@ class HorizontalCollectionVC: UICollectionViewController {
             cell.backView.isHidden = false
             cell.nextView.isHidden = true
             
-            for gap in pendingGaps{
+            for gap in gapManager.pendingGaps{
                 let gapWeekNumber = Calendar.current.component(.weekOfYear, from: gap.startDate)
                 if currentWeekNumber != gapWeekNumber {
                     cell.calendarVC.insertEvent(eventName: "gap", startDate: gap.startDate, endDate: gap.endDate, type: EventType.Gap)
@@ -89,14 +84,8 @@ class HorizontalCollectionVC: UICollectionViewController {
 
     //MARK: Private
     
-    private func fillGaps(){
-        pendingGaps = gapManager.populateGaps(state: .pending)
-        assignedGaps = gapManager.populateGaps(state: .assigned)
-        completedGaps = gapManager.populateGaps(state: .completed)
-    }
-    
     private func populateCalendarGaps(cell: CollectionViewCell){
-        for gap in pendingGaps{
+        for gap in gapManager.pendingGaps{
             cell.calendarVC.insertEvent(eventName: "gap", startDate: gap.startDate, endDate: gap.endDate, type: EventType.Gap)
         }
     }

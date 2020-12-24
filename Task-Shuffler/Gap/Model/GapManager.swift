@@ -12,6 +12,10 @@ import RealmSwift
 class GapManager {
     static let instance = GapManager() //Singleton
     
+    var pendingGaps = [GapRealm]()
+    var assignedGaps = [GapRealm]()
+    var completedGaps = [GapRealm]()
+    
     func populateGaps(state: State) -> [GapRealm]{
         let db = DatabaseManager()
         let stateValue = state.rawValue
@@ -28,5 +32,15 @@ class GapManager {
         }
         
         return gaps
+    }
+    
+    func fillGaps () {
+        pendingGaps = populateGaps(state: .pending)
+        assignedGaps = populateGaps(state: .assigned)
+        completedGaps = populateGaps(state: .completed)
+    }
+    
+    init() {
+        fillGaps()
     }
 }
