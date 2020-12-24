@@ -23,6 +23,7 @@ class GapsViewController: AMTabsViewController {
     
     //Constants
     let db = DatabaseManager()
+    let gapManager = GapManager.instance
     
     //Variables
     var pendingGaps = [GapRealm]()
@@ -101,9 +102,9 @@ class GapsViewController: AMTabsViewController {
     }
     
     private func fillGaps(){
-        pendingGaps = GapManager.populateGaps(state: .pending)
-        assignedGaps = GapManager.populateGaps(state: .assigned)
-        completedGaps = GapManager.populateGaps(state: .completed)
+        pendingGaps = gapManager.populateGaps(state: .pending)
+        assignedGaps = gapManager.populateGaps(state: .assigned)
+        completedGaps = gapManager.populateGaps(state: .completed)
     }
     
     private func setupNavigationItems() {
@@ -157,10 +158,10 @@ class GapsViewController: AMTabsViewController {
         }
         
         if segmentedControl.currentSegment == 0{
-            pendingGaps = GapManager.populateArray(results: sortedResults.filter("state == '\(State.pending.rawValue)' "))
-            assignedGaps = GapManager.populateArray(results: sortedResults.filter("state == '\(State.assigned.rawValue)' "))
+            pendingGaps = gapManager.populateArray(results: sortedResults.filter("state == '\(State.pending.rawValue)' "))
+            assignedGaps = gapManager.populateArray(results: sortedResults.filter("state == '\(State.assigned.rawValue)' "))
         } else {
-            completedGaps = GapManager.populateArray(results: sortedResults.filter("state == '\(State.completed.rawValue)' "))
+            completedGaps = gapManager.populateArray(results: sortedResults.filter("state == '\(State.completed.rawValue)' "))
         }
         
         tableView.reloadSections(IndexSet(integersIn: 0...tableView.numberOfSections - 1), with: .fade)

@@ -10,7 +10,9 @@ import Foundation
 import RealmSwift
 
 class GapManager {
-    static func populateGaps(state: State) -> [GapRealm]{
+    static let instance = GapManager() //Singleton
+    
+    func populateGaps(state: State) -> [GapRealm]{
         let db = DatabaseManager()
         let stateValue = state.rawValue
         let predicate = "state = '\(stateValue)'"
@@ -19,7 +21,7 @@ class GapManager {
         return self.populateArray(results: gapResults)
     }
     
-    static func populateArray (results: Results<Object>) -> ([GapRealm]) {
+    func populateArray (results: Results<Object>) -> ([GapRealm]) {
         var gaps = [GapRealm]()
         for g in results{
             gaps.append(g as! GapRealm)

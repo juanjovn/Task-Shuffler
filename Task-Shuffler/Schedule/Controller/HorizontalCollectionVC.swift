@@ -17,6 +17,7 @@ class HorizontalCollectionVC: UICollectionViewController {
     //MARK: Constants
     
     let currentWeekNumber = Calendar.current.component(.weekOfYear, from: Date())
+    let gapManager = GapManager.instance
     
     //MARK: Variables
     
@@ -89,9 +90,9 @@ class HorizontalCollectionVC: UICollectionViewController {
     //MARK: Private
     
     private func fillGaps(){
-        pendingGaps = GapManager.populateGaps(state: .pending)
-        assignedGaps = GapManager.populateGaps(state: .assigned)
-        completedGaps = GapManager.populateGaps(state: .completed)
+        pendingGaps = gapManager.populateGaps(state: .pending)
+        assignedGaps = gapManager.populateGaps(state: .assigned)
+        completedGaps = gapManager.populateGaps(state: .completed)
     }
     
     private func populateCalendarGaps(cell: CollectionViewCell){
