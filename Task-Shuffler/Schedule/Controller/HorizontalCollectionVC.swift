@@ -16,7 +16,6 @@ class HorizontalCollectionVC: UICollectionViewController {
     
     //MARK: Constants
     
-    let db = DatabaseManager()
     let currentWeekNumber = Calendar.current.component(.weekOfYear, from: Date())
     
     //MARK: Variables
@@ -37,7 +36,7 @@ class HorizontalCollectionVC: UICollectionViewController {
         collectionViewFlowLayout.minimumLineSpacing = 0
         collectionView.allowsSelection = false //With this True the WeekLabel tinted to yellow in every touch. Setting it to false prevent it.
         fillGaps()
-
+        
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
