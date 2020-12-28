@@ -23,7 +23,7 @@ class ViewController: AMTabsViewController {
         super.viewDidLoad()
     
         setTabsControllers()
-        selectedTabIndex = 2
+        selectedTabIndex = 0
     }
     
     
@@ -36,12 +36,15 @@ class ViewController: AMTabsViewController {
 //        let scheduleViewController = storyboard.instantiateViewController(withIdentifier: "ScheduleViewController")
         let tasksNavigationController = storyboard.instantiateViewController(withIdentifier: "TasksNavigationController")
         let gapsNavigationController = storyboard.instantiateViewController(withIdentifier: "GapsNavigationController")
+        let shuffleViewController = ShuffleVC()
+        let shuffleNavigationController = UINavigationController(rootViewController: shuffleViewController)
         let scheduleNavigationController = storyboard.instantiateViewController(withIdentifier: "ScheduleNavigationController")
         
         
         viewControllers = [
         tasksNavigationController,
         gapsNavigationController,
+        shuffleNavigationController,
         scheduleNavigationController
       ]
     }

@@ -49,6 +49,8 @@
 		81ED3A84244DEFD400C36DB8 /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81ED3A82244DEFD400C36DB8 /* TaskCell.swift */; };
 		81ED3A85244DEFD400C36DB8 /* TaskCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81ED3A83244DEFD400C36DB8 /* TaskCell.xib */; };
 		81EE66E425990926007B9D87 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EE66E325990926007B9D87 /* Notifications.swift */; };
+		81EE6753259A33D5007B9D87 /* ShuffleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EE6752259A33D5007B9D87 /* ShuffleView.swift */; };
+		81EE6756259A35D9007B9D87 /* ShuffleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EE6755259A35D9007B9D87 /* ShuffleVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -98,6 +100,8 @@
 		81ED3A82244DEFD400C36DB8 /* TaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
 		81ED3A83244DEFD400C36DB8 /* TaskCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskCell.xib; sourceTree = "<group>"; };
 		81EE66E325990926007B9D87 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		81EE6752259A33D5007B9D87 /* ShuffleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShuffleView.swift; sourceTree = "<group>"; };
+		81EE6755259A35D9007B9D87 /* ShuffleVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShuffleVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,6 +222,7 @@
 				81ED3A81244DE66700C36DB8 /* Controller */,
 				81FFF0BD2467F7600086500A /* Task */,
 				81FFF0BE2467F78A0086500A /* Gap */,
+				81EE674E259A3346007B9D87 /* Shuffle */,
 				81FFF0C62467F80E0086500A /* Schedule */,
 				81FFF0CA2467F8650086500A /* Settings */,
 				811880A42435157E00E5FEE1 /* Utils */,
@@ -251,6 +256,39 @@
 			children = (
 				81E9B1422405BEE400BBADB8 /* ViewController.swift */,
 				818DFEE02422B90D007F6682 /* TestViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		81EE674E259A3346007B9D87 /* Shuffle */ = {
+			isa = PBXGroup;
+			children = (
+				81EE674F259A3361007B9D87 /* Model */,
+				81EE6750259A336C007B9D87 /* View */,
+				81EE6751259A3376007B9D87 /* Controller */,
+			);
+			path = Shuffle;
+			sourceTree = "<group>";
+		};
+		81EE674F259A3361007B9D87 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		81EE6750259A336C007B9D87 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				81EE6752259A33D5007B9D87 /* ShuffleView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		81EE6751259A3376007B9D87 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				81EE6755259A35D9007B9D87 /* ShuffleVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -543,6 +581,7 @@
 				81ED3A84244DEFD400C36DB8 /* TaskCell.swift in Sources */,
 				81705A83240B1D890053A571 /* ScheduleViewController.swift in Sources */,
 				811880A6243515BC00E5FEE1 /* DeviceModel.swift in Sources */,
+				81EE6756259A35D9007B9D87 /* ShuffleVC.swift in Sources */,
 				81C90B5324614F8B001C06B4 /* GapManager.swift in Sources */,
 				8198F26324763D5F00F547BC /* CalendarVC.swift in Sources */,
 				81DECAB6243BA410009051A2 /* CustomColors.swift in Sources */,
@@ -552,6 +591,7 @@
 				8197F5C2245ACF700052FCC7 /* TaskManager.swift in Sources */,
 				81AB5D6C24770D01009ADB97 /* CollectionViewCell.swift in Sources */,
 				81E9B1432405BEE400BBADB8 /* ViewController.swift in Sources */,
+				81EE6753259A33D5007B9D87 /* ShuffleView.swift in Sources */,
 				81DECAB8243BAE24009051A2 /* CustomFonts.swift in Sources */,
 				81EE66E425990926007B9D87 /* Notifications.swift in Sources */,
 				81E9B13F2405BEE400BBADB8 /* AppDelegate.swift in Sources */,
