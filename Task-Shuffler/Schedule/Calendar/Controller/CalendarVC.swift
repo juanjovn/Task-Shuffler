@@ -22,8 +22,9 @@ class CalendarVC: UIViewController {
         super.viewDidLoad()
 //        setupElliottEvents()
         
-        setupTimetable()
         setupFakeEvent()
+        setupTimetable()
+        insertDummyTask()
         
 //        let minute:TimeInterval = 60.0
 //        let hour:TimeInterval = 60.0 * minute
@@ -48,6 +49,7 @@ class CalendarVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         setupFakeEvent()
+        //insertDummyTask()
     }
     
     //MARK: Public
@@ -60,12 +62,13 @@ class CalendarVC: UIViewController {
         let day = Calendar.current.component(.weekday, from: startDate)
         
         switch type {
+        //courseId == 1 for gap events. courseId == 2 for task events
         case .Gap:
             let event = ElliottEvent(courseId: "1", courseName: eventName, roomName: "", professor: "", courseDay: ElliotDay(rawValue: day)!, startTime: startTime, endTime: endTime, backgroundColor: UIColor.darkGray.withAlphaComponent(0.15))
             
             courseList.append(event)
         case .Task:
-            let event = ElliottEvent(courseId: "1", courseName: eventName, roomName: "", professor: "", courseDay: ElliotDay(rawValue: day)!, startTime: startTime, endTime: endTime, backgroundColor: UIColor.fireOrange)
+            let event = ElliottEvent(courseId: "2", courseName: eventName, roomName: "", professor: "", courseDay: ElliotDay(rawValue: day)!, startTime: startTime, endTime: endTime, backgroundColor: UIColor.fireOrange)
             courseList.append(event)
         case .Fake:
             let event = ElliottEvent(courseId: "-1", courseName: eventName, roomName: "", professor: "", courseDay: ElliotDay(rawValue: day)!, startTime: "00:00", endTime: "23:59", backgroundColor: UIColor.fireOrange.withAlphaComponent(0.05))
@@ -100,6 +103,12 @@ class CalendarVC: UIViewController {
         
         
         
+    }
+    
+    public func insertDummyTask() {
+        let minute:TimeInterval = 60.0
+        let hour:TimeInterval = 60.0 * minute
+        insertEvent(eventName: "Dummy Task for testing purposes", startDate: Date(), endDate: Date(timeInterval: hour * 2, since: Date()), type: .Task)
     }
     
     
@@ -151,10 +160,22 @@ class CalendarVC: UIViewController {
 
 extension CalendarVC: ElliotableDelegate, ElliotableDataSource {
     func elliotable(elliotable: Elliotable, didSelectCourse selectedCourse: ElliottEvent) {
-        if Int(selectedCourse.courseId) != -1 { //-1 is the id of Fake events
-            Alert.errorInformation(title: "Celda tocada", message: selectedCourse.courseName
-                                   , vc: self, handler: nil)
+        switch Int(selectedCourse.courseId) {
+        //courseId == 1 for gap events. courseId == 2 for task events
+        case 1:
+            if Int(selectedCourse.courseId) != -1 { //-1 is the id of Fake events
+                Alert.errorInformation(title: "Gap of time", message: "\nStarting at: \(selectedCourse.startTime) \nFinishing at: \(selectedCourse.endTime)"
+                                       , vc: self, handler: nil)
+            }
+        case 2:
+            if Int(selectedCourse.courseId) != -1 { //-1 is the id of Fake events
+                Alert.errorInformation(title: selectedCourse.courseName, message: "\nStarting at: \(selectedCourse.startTime) \nFinishing at: \(selectedCourse.endTime)"
+                                       , vc: self, handler: nil)
+            }
+        default:
+            break
         }
+        
     }
     
     func elliotable(elliotable: Elliotable, didLongSelectCourse longSelectedCourse: ElliottEvent) {

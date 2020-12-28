@@ -58,10 +58,12 @@ class HorizontalCollectionVC: UICollectionViewController {
             for gap in gapManager.pendingGaps{
                 let gapWeekNumber = Calendar.current.component(.weekOfYear, from: gap.startDate)
                 if currentWeekNumber == gapWeekNumber {
-                    cell.calendarVC.insertEvent(eventName: "gap", startDate: gap.startDate, endDate: gap.endDate, type: EventType.Gap)
+                    cell.calendarVC.insertEvent(eventName: "", startDate: gap.startDate, endDate: gap.endDate, type: EventType.Gap)
                 }
 
             }
+            
+            cell.calendarVC.insertDummyTask()
             return cell
         case 1:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: weekCellReuseIdentifier, for: indexPath) as! CollectionViewCell
