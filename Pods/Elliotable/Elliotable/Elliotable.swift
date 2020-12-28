@@ -34,8 +34,8 @@ public enum roundOption: Int {
     private let controller     = ElliotableController()
     private let collectionView = SharedOffsetCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
     
-    public let defaultMinHour: Int = 9
-    public let defaultMaxEnd : Int = 17
+    public let defaultMinHour: Int = 00
+    public let defaultMaxEnd : Int = 23
     
     public var userDaySymbol: [String]?
     public var delegate: ElliotableDelegate?
@@ -237,8 +237,8 @@ public enum roundOption: Int {
     }
     
     private func makeTimeTable() {
-        var minStartTimeHour: Int = 24
-        var maxEndTimeHour: Int = 0
+        var minStartTimeHour: Int = 00
+        var maxEndTimeHour: Int = 23
         
 //        collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .top, animated: false)
         collectionView.reloadData()
@@ -264,8 +264,8 @@ public enum roundOption: Int {
         } else {
             // Calculate Min StartTime
             for (index, courseItem) in courseItems.enumerated() {
-                let tempStartTimeHour = Int(courseItem.startTime.split(separator: ":")[0]) ?? 24
-                let tempEndTimeHour   = Int(courseItem.endTime.split(separator: ":")[0]) ?? 00
+                let tempStartTimeHour = Int(courseItem.startTime.split(separator: ":")[0]) ?? 00
+                let tempEndTimeHour   = Int(courseItem.endTime.split(separator: ":")[0]) ?? 23
                 
                 if index < 1 {
                     minStartTimeHour = tempStartTimeHour

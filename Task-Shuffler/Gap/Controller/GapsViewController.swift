@@ -26,9 +26,6 @@ class GapsViewController: AMTabsViewController {
     let gapManager = GapManager.instance
     
     //Variables
-    var pendingGaps = [GapRealm]()
-    var assignedGaps = [GapRealm]()
-    var completedGaps = [GapRealm]()
     var sorted = 0
     
     
@@ -41,11 +38,13 @@ class GapsViewController: AMTabsViewController {
         
         //test()
         setupNewGapButton()
-        fillGaps()
+        gapManager.fillGaps()
         setupView()
         setupNavigationItems()
         setupSegmentedControl()
         setupTableView()
+        
+        print("Number of pending gaps = \(gapManager.pendingGaps.count)")
     }
     
     //MARK: viewWillAppear
@@ -64,7 +63,7 @@ class GapsViewController: AMTabsViewController {
     
     public func addNewGap (gap: GapRealm) {
         db.addData(object: gap)
-        pendingGaps.insert(gap, at: 0)
+        gapManager.pendingGaps.insert(gap, at: 0)
         tableView.reloadSections(IndexSet(integer: 0), with: .fade)
         let topIndex = IndexPath(row: 0, section: 0)
         
@@ -76,6 +75,11 @@ class GapsViewController: AMTabsViewController {
         if segmentedControl.currentSegment > 0 {
             segmentedControl.setCurrentSegmentIndex(0, animated: true)
         }
+        
+        gapManager.fillGaps()
+        print("GapManager refilled ⬆️")
+        print("Number of pending gaps = \(gapManager.pendingGaps.count)")
+        NotificationCenter.default.post(name: .didModifiedData, object: nil)
     }
     
     public func checkOutdated(currentGap: GapRealm) -> Bool{
@@ -87,7 +91,7 @@ class GapsViewController: AMTabsViewController {
     private func test(){
         //db.eraseAll()
         let gap = GapRealm(startDate: Date(), endDate: Date.init(timeIntervalSinceNow: 600), state: "Completed", taskid: "BC64AFD3-43E6-4F88-8665-879DA397E968")
-        pendingGaps.append(gap)
+        gapManager.pendingGaps.append(gap)
         db.addData(object: gap)
     }
     
@@ -101,11 +105,11 @@ class GapsViewController: AMTabsViewController {
         newGapButton.setTitleColor(.pearlWhite, for: .normal)
     }
     
-    private func fillGaps(){
-        pendingGaps = gapManager.populateGaps(state: .pending)
-        assignedGaps = gapManager.populateGaps(state: .assigned)
-        completedGaps = gapManager.populateGaps(state: .completed)
-    }
+//    private func gapManager.fillGaps(){
+//        pendingGaps = gapManager.populateGaps(state: .pending)
+//        gapManager.assignedGaps = gapManager.populateGaps(state: .assigned)
+//        gapManager.completedGaps = gapManager.populateGaps(state: .completed)
+//    }
     
     private func setupNavigationItems() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "sort"), style: .plain, target: self, action: #selector(sortButtonAction))
@@ -158,10 +162,10 @@ class GapsViewController: AMTabsViewController {
         }
         
         if segmentedControl.currentSegment == 0{
-            pendingGaps = gapManager.populateArray(results: sortedResults.filter("state == '\(State.pending.rawValue)' "))
-            assignedGaps = gapManager.populateArray(results: sortedResults.filter("state == '\(State.assigned.rawValue)' "))
+            gapManager.pendingGaps = gapManager.populateArray(results: sortedResults.filter("state == '\(State.pending.rawValue)' "))
+            gapManager.assignedGaps = gapManager.populateArray(results: sortedResults.filter("state == '\(State.assigned.rawValue)' "))
         } else {
-            completedGaps = gapManager.populateArray(results: sortedResults.filter("state == '\(State.completed.rawValue)' "))
+            gapManager.completedGaps = gapManager.populateArray(results: sortedResults.filter("state == '\(State.completed.rawValue)' "))
         }
         
         tableView.reloadSections(IndexSet(integersIn: 0...tableView.numberOfSections - 1), with: .fade)
@@ -201,7 +205,7 @@ class GapsViewController: AMTabsViewController {
     
     private func refreshOutdated() {
         var isChanged = false
-        for gap in pendingGaps {
+        for gap in gapManager.pendingGaps {
             if checkOutdated(currentGap: gap) {
                 isChanged = true
                 do {
@@ -215,7 +219,7 @@ class GapsViewController: AMTabsViewController {
         }
         
         if isChanged {
-            fillGaps()
+            gapManager.fillGaps()
         }
         
     }
@@ -340,27 +344,30 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
         switch indexPath.section {
         case 0:
             if segmentedControl.currentSegment == 0 {
-                gap = pendingGaps[indexPath.row]
-                pendingGaps.remove(at: indexPath.row)
+                gap = gapManager.pendingGaps[indexPath.row]
+                print(gap.description)
+                gapManager.pendingGaps.remove(at: indexPath.row)
             } else {
-                gap = completedGaps[indexPath.row]
-                completedGaps.remove(at: indexPath.row)
+                gap = gapManager.completedGaps[indexPath.row]
+                gapManager.completedGaps.remove(at: indexPath.row)
             }
         case 1:
-            gap = assignedGaps[indexPath.row]
-            assignedGaps.remove(at: indexPath.row)
+            gap = gapManager.assignedGaps[indexPath.row]
+            gapManager.assignedGaps.remove(at: indexPath.row)
         default:
             break
         }
 
         tableView.deleteRows(at: [indexPath], with: .fade)
         db.deleteData(object: gap)
+        print("Number of pending gaps = \(gapManager.pendingGaps.count)")
+        NotificationCenter.default.post(name: .didModifiedData, object: nil)
 
         hideAssignedIfEmpty()
     }
     
     private func hideAssignedIfEmpty() {
-        if !existGaps(gaps: assignedGaps){
+        if !existGaps(gaps: gapManager.assignedGaps){
             tableView.reloadSections(IndexSet(integer: 1), with: .fade)
         }
     }
@@ -406,9 +413,9 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
         newGapVC.isEditing = true
         switch segmentedControl.currentSegment {
         case 1:
-            newGapVC.editedGap = completedGaps[indexPath.row]
+            newGapVC.editedGap = gapManager.completedGaps[indexPath.row]
         default:
-            newGapVC.editedGap = pendingGaps[indexPath.row]
+            newGapVC.editedGap = gapManager.pendingGaps[indexPath.row]
         }
         present(newGapVC, animated: true, completion: nil)
     }
@@ -418,11 +425,11 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
         let updatedGap = GapRealm()
 
         if indexPath.section == 0 {
-            gap = pendingGaps[indexPath.row]
-            pendingGaps.remove(at: indexPath.row)
+            gap = gapManager.pendingGaps[indexPath.row]
+            gapManager.pendingGaps.remove(at: indexPath.row)
         } else {
-            gap = assignedGaps[indexPath.row]
-            assignedGaps.remove(at: indexPath.row)
+            gap = gapManager.assignedGaps[indexPath.row]
+            gapManager.assignedGaps.remove(at: indexPath.row)
         }
         
         updatedGap.id = gap.id
@@ -430,7 +437,7 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
         updatedGap.startDate = gap.startDate
         updatedGap.endDate = gap.endDate
         updatedGap.state = State.completed.rawValue
-        completedGaps.insert(updatedGap, at: 0)
+        gapManager.completedGaps.insert(updatedGap, at: 0)
         tableView.deleteRows(at: [indexPath], with: .fade)
         db.updateData(object: updatedGap)
         hideAssignedIfEmpty()
@@ -440,9 +447,9 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return segmentedControl.currentSegment == 0 ? pendingGaps.count : completedGaps.count
+            return segmentedControl.currentSegment == 0 ? gapManager.pendingGaps.count : gapManager.completedGaps.count
         } else {
-            return segmentedControl.currentSegment == 0 ? assignedGaps.count : 0
+            return segmentedControl.currentSegment == 0 ? gapManager.assignedGaps.count : 0
         }
     }
     
@@ -453,13 +460,13 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
         switch indexPath.section {
             case 0:
                 if segmentedControl.currentSegment == 0{
-                    gap = pendingGaps[indexPath.row]
+                    gap = gapManager.pendingGaps[indexPath.row]
                 } else {
-                    gap = completedGaps[indexPath.row]
+                    gap = gapManager.completedGaps[indexPath.row]
                 }
                 
             case 1:
-                gap = assignedGaps[indexPath.row]
+                gap = gapManager.assignedGaps[indexPath.row]
             
             default:
                 break
@@ -489,7 +496,7 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
         case 0:
             return firstSectionTitle
         case 1:
-            if existGaps(gaps: assignedGaps){
+            if existGaps(gaps: gapManager.assignedGaps){
                 return secondSectionTitle
             } else{
                 return nil

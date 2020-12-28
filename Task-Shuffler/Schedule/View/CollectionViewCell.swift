@@ -16,6 +16,10 @@ class CollectionViewCell: UICollectionViewCell {
     let nextView = UIView()
     let backButton = UIButton(type: .system)
     let backView = UIView()
+    let blurEffect = UIBlurEffect(style: .regular)
+    var blurEffectLabelView = UIVisualEffectView()
+    var blurEffectNextView = UIVisualEffectView()
+    var blurEffectBackView = UIVisualEffectView()
     var labelText: String = "" {
         didSet {
             weekLabel.text = labelText
@@ -24,7 +28,9 @@ class CollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+        setupBlurView()
+        setupNextBlurView()
+        setupBackBlurView()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -36,13 +42,13 @@ class CollectionViewCell: UICollectionViewCell {
         setupViews()
         setupLabel()
         setupLabelView()
-        setupBlurView()
+        //setupBlurView()
         setupNextButton()
         setupNextView()
-        setupNextBlurView()
+        //setupNextBlurView()
         setupBackButton()
         setupBackView()
-        setupBackBlurView()
+        //setupBackBlurView()
         
         bringSubviewToFront(weekLabel)
         bringSubviewToFront(nextButton)
@@ -80,21 +86,23 @@ class CollectionViewCell: UICollectionViewCell {
         labelView.widthAnchor.constraint(equalTo: weekLabel.widthAnchor, constant: 18).isActive = true
         labelView.heightAnchor.constraint(equalTo: weekLabel.heightAnchor, constant: 7).isActive = true
         
+        blurEffectLabelView.layer.cornerRadius = labelView.layer.bounds.size.height / 2
+        
     }
     
     private func setupBlurView() {
-        let blurEffect = UIBlurEffect(style: .regular)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        labelView.addSubview(blurEffectView)
+        //let blurEffect = UIBlurEffect(style: .regular)
+        blurEffectLabelView = UIVisualEffectView(effect: blurEffect)
+        labelView.addSubview(blurEffectLabelView)
         labelView.layoutIfNeeded()
-        blurEffectView.layer.cornerRadius = labelView.layer.bounds.size.height / 2
-        blurEffectView.clipsToBounds = true
+        blurEffectLabelView.layer.cornerRadius = labelView.layer.bounds.size.height / 2
+        blurEffectLabelView.clipsToBounds = true
         
-        blurEffectView.translatesAutoresizingMaskIntoConstraints = false
-        blurEffectView.topAnchor.constraint(equalTo: labelView.topAnchor).isActive = true
-        blurEffectView.leadingAnchor.constraint(equalTo: labelView.leadingAnchor).isActive = true
-        blurEffectView.trailingAnchor.constraint(equalTo: labelView.trailingAnchor).isActive = true
-        blurEffectView.bottomAnchor.constraint(equalTo: labelView.bottomAnchor).isActive = true
+        blurEffectLabelView.translatesAutoresizingMaskIntoConstraints = false
+        blurEffectLabelView.topAnchor.constraint(equalTo: labelView.topAnchor).isActive = true
+        blurEffectLabelView.leadingAnchor.constraint(equalTo: labelView.leadingAnchor).isActive = true
+        blurEffectLabelView.trailingAnchor.constraint(equalTo: labelView.trailingAnchor).isActive = true
+        blurEffectLabelView.bottomAnchor.constraint(equalTo: labelView.bottomAnchor).isActive = true
         
     }
     
@@ -120,22 +128,24 @@ class CollectionViewCell: UICollectionViewCell {
         nextView.widthAnchor.constraint(equalTo: nextButton.widthAnchor, constant: 18).isActive = true
         nextView.heightAnchor.constraint(equalTo: labelView.heightAnchor).isActive = true
         
+        blurEffectNextView.layer.cornerRadius = nextView.layer.bounds.size.height / 2
+        
     }
     
     
     private func setupNextBlurView() {
-        let blurEffect = UIBlurEffect(style: .regular)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        nextView.addSubview(blurEffectView)
+        //let blurEffect = UIBlurEffect(style: .regular)
+        blurEffectNextView = UIVisualEffectView(effect: blurEffect)
+        nextView.addSubview(blurEffectNextView)
         nextView.layoutIfNeeded()
-        blurEffectView.layer.cornerRadius = nextView.layer.bounds.size.height / 2
-        blurEffectView.clipsToBounds = true
+        blurEffectNextView.layer.cornerRadius = nextView.layer.bounds.size.height / 2
+        blurEffectNextView.clipsToBounds = true
         
-        blurEffectView.translatesAutoresizingMaskIntoConstraints = false
-        blurEffectView.topAnchor.constraint(equalTo: nextView.topAnchor).isActive = true
-        blurEffectView.leadingAnchor.constraint(equalTo: nextView.leadingAnchor).isActive = true
-        blurEffectView.trailingAnchor.constraint(equalTo: nextView.trailingAnchor).isActive = true
-        blurEffectView.bottomAnchor.constraint(equalTo: nextView.bottomAnchor).isActive = true
+        blurEffectNextView.translatesAutoresizingMaskIntoConstraints = false
+        blurEffectNextView.topAnchor.constraint(equalTo: nextView.topAnchor).isActive = true
+        blurEffectNextView.leadingAnchor.constraint(equalTo: nextView.leadingAnchor).isActive = true
+        blurEffectNextView.trailingAnchor.constraint(equalTo: nextView.trailingAnchor).isActive = true
+        blurEffectNextView.bottomAnchor.constraint(equalTo: nextView.bottomAnchor).isActive = true
         
     }
     
@@ -161,22 +171,23 @@ class CollectionViewCell: UICollectionViewCell {
         backView.widthAnchor.constraint(equalTo: backButton.widthAnchor, constant: 18).isActive = true
         backView.heightAnchor.constraint(equalTo: labelView.heightAnchor).isActive = true
         
+        blurEffectBackView.layer.cornerRadius = backView.layer.bounds.size.height / 2
     }
     
     
     private func setupBackBlurView() {
-        let blurEffect = UIBlurEffect(style: .regular)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        backView.addSubview(blurEffectView)
+        //let blurEffect = UIBlurEffect(style: .regular)
+        blurEffectBackView = UIVisualEffectView(effect: blurEffect)
+        backView.addSubview(blurEffectBackView)
         backView.layoutIfNeeded()
-        blurEffectView.layer.cornerRadius = backView.layer.bounds.size.height / 2
-        blurEffectView.clipsToBounds = true
+        blurEffectBackView.layer.cornerRadius = backView.layer.bounds.size.height / 2
+        blurEffectBackView.clipsToBounds = true
         
-        blurEffectView.translatesAutoresizingMaskIntoConstraints = false
-        blurEffectView.topAnchor.constraint(equalTo: backView.topAnchor).isActive = true
-        blurEffectView.leadingAnchor.constraint(equalTo: backView.leadingAnchor).isActive = true
-        blurEffectView.trailingAnchor.constraint(equalTo: backView.trailingAnchor).isActive = true
-        blurEffectView.bottomAnchor.constraint(equalTo: backView.bottomAnchor).isActive = true
+        blurEffectBackView.translatesAutoresizingMaskIntoConstraints = false
+        blurEffectBackView.topAnchor.constraint(equalTo: backView.topAnchor).isActive = true
+        blurEffectBackView.leadingAnchor.constraint(equalTo: backView.leadingAnchor).isActive = true
+        blurEffectBackView.trailingAnchor.constraint(equalTo: backView.trailingAnchor).isActive = true
+        blurEffectBackView.bottomAnchor.constraint(equalTo: backView.bottomAnchor).isActive = true
         
     }
     

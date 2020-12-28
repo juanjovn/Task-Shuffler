@@ -8,8 +8,7 @@
 
 import UIKit
 
-private let currentWeekReuseIdentifier = "currentWeekCell"
-private let nextWeekReuseIdentifier = "nextWeekCell"
+private let weekCellReuseIdentifier = "weekCell"
 
 class HorizontalCollectionVC: UICollectionViewController {
     
@@ -29,11 +28,16 @@ class HorizontalCollectionVC: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.collectionView!.register(CollectionViewCell.self, forCellWithReuseIdentifier: currentWeekReuseIdentifier)
-        self.collectionView!.register(CollectionViewCell.self, forCellWithReuseIdentifier: nextWeekReuseIdentifier)
+        self.collectionView!.register(CollectionViewCell.self, forCellWithReuseIdentifier: weekCellReuseIdentifier)
+        //self.collectionView!.register(CollectionViewCell.self, forCellWithReuseIdentifier: nextWeekReuseIdentifier)
         collectionViewFlowLayout.minimumLineSpacing = 0
         collectionView.allowsSelection = false //With this True the WeekLabel tinted to yellow in every touch. Setting it to false prevent it.
+        setupNotificationCenter()
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.collectionView.reloadData()
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -43,42 +47,41 @@ class HorizontalCollectionVC: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.row {
         case 0:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: currentWeekReuseIdentifier, for: indexPath) as! CollectionViewCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: weekCellReuseIdentifier, for: indexPath) as! CollectionViewCell
             cell.labelText = "This Week"
             cell.nextButton.addTarget(self, action: #selector(nextButtonAction), for: .touchUpInside)
             cell.backButton.isHidden = true
             cell.nextButton.isHidden = false
             cell.backView.isHidden = true
             cell.nextView.isHidden = false
-            
+
             for gap in gapManager.pendingGaps{
                 let gapWeekNumber = Calendar.current.component(.weekOfYear, from: gap.startDate)
                 if currentWeekNumber == gapWeekNumber {
                     cell.calendarVC.insertEvent(eventName: "gap", startDate: gap.startDate, endDate: gap.endDate, type: EventType.Gap)
                 }
-                
+
             }
             return cell
         case 1:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: nextWeekReuseIdentifier, for: indexPath) as! CollectionViewCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: weekCellReuseIdentifier, for: indexPath) as! CollectionViewCell
             cell.labelText = "Next Week"
             cell.backButton.addTarget(self, action: #selector(backButtonAction), for: .touchUpInside)
             cell.backButton.isHidden = false
             cell.nextButton.isHidden = true
             cell.backView.isHidden = false
             cell.nextView.isHidden = true
-            
+
             for gap in gapManager.pendingGaps{
                 let gapWeekNumber = Calendar.current.component(.weekOfYear, from: gap.startDate)
                 if currentWeekNumber != gapWeekNumber {
                     cell.calendarVC.insertEvent(eventName: "gap", startDate: gap.startDate, endDate: gap.endDate, type: EventType.Gap)
                 }
-                
             }
             
             return cell
         default:
-            return collectionView.dequeueReusableCell(withReuseIdentifier: currentWeekReuseIdentifier, for: indexPath)
+            return collectionView.dequeueReusableCell(withReuseIdentifier: weekCellReuseIdentifier, for: indexPath)
         }
     }
 
@@ -173,7 +176,14 @@ class HorizontalCollectionVC: UICollectionViewController {
         self.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .right, animated: true)
     }
     
-
+    private func setupNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(onDataModified), name: .didModifiedData, object: nil)
+    }
+    
+    @objc func onDataModified () {
+        self.collectionView.reloadData()
+        //print("Collection's view data reloaded from notification ❗️")
+    }
 
 }
 

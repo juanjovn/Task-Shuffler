@@ -33,7 +33,7 @@ extension ElliotableController: UICollectionViewDataSource {
         } else {
             
             for (index, courseItem) in elliotable.courseItems.enumerated() {
-                let tempStartTimeHour = Int(courseItem.startTime.split(separator: ":")[0]) ?? 24
+                let tempStartTimeHour = Int(courseItem.startTime.split(separator: ":")[0]) ?? 23
                 let tempEndTimeHour   = Int(courseItem.endTime.split(separator: ":")[0]) ?? 00
                 
                 if index < 1 {
@@ -49,7 +49,7 @@ extension ElliotableController: UICollectionViewDataSource {
                     }
                 }
             }
-            maxEndTimeHour += 1
+            //maxEndTimeHour += 1
         }
         
         // The number of rows in timetable
@@ -146,7 +146,7 @@ extension ElliotableController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         // Calculate average Height
-        var minStartTimeHour: Int = 24
+        var minStartTimeHour: Int = 23
         var maxEndTimeHour: Int = 0
         
         if elliotable.courseItems.count < 1 {
@@ -154,7 +154,7 @@ extension ElliotableController: UICollectionViewDelegateFlowLayout {
             maxEndTimeHour = elliotable.defaultMaxEnd
         } else {
             for (index, courseItem) in elliotable.courseItems.enumerated() {
-                let tempStartTimeHour = Int(courseItem.startTime.split(separator: ":")[0]) ?? 24
+                let tempStartTimeHour = Int(courseItem.startTime.split(separator: ":")[0]) ?? 23
                 let tempEndTimeHour   = Int(courseItem.endTime.split(separator: ":")[0]) ?? 00
                 
                 if index < 1 {

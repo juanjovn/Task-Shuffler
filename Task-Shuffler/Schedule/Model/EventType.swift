@@ -11,4 +11,5 @@ import Foundation
 public enum EventType {
     case Gap
     case Task
+    case Fake
 }

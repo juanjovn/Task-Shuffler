@@ -23,6 +23,7 @@ class CalendarVC: UIViewController {
 //        setupElliottEvents()
         
         setupTimetable()
+        setupFakeEvent()
         
 //        let minute:TimeInterval = 60.0
 //        let hour:TimeInterval = 60.0 * minute
@@ -38,6 +39,15 @@ class CalendarVC: UIViewController {
         
 //        print(Date())
 //        print(Date(timeInterval: hour * 6, since: Date()))
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        deleteAllEvents()
+        //deleteFakeEvent()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        setupFakeEvent()
     }
     
     //MARK: Public
@@ -57,6 +67,9 @@ class CalendarVC: UIViewController {
         case .Task:
             let event = ElliottEvent(courseId: "1", courseName: eventName, roomName: "", professor: "", courseDay: ElliotDay(rawValue: day)!, startTime: startTime, endTime: endTime, backgroundColor: UIColor.fireOrange)
             courseList.append(event)
+        case .Fake:
+            let event = ElliottEvent(courseId: "-1", courseName: eventName, roomName: "", professor: "", courseDay: ElliotDay(rawValue: day)!, startTime: "00:00", endTime: "23:59", backgroundColor: UIColor.fireOrange.withAlphaComponent(0.05))
+            courseList.append(event)
         }
         
         timeTable.reloadData()
@@ -64,21 +77,27 @@ class CalendarVC: UIViewController {
         
     }
     
+    public func deleteAllEvents () {
+        courseList.removeAll()
+        //print("All events deleted 🗑")
+    }
+    
     //MARK: Private
     private func setupElliottEvents() {
-        let course_1 = ElliottEvent(courseId: "1", courseName: "", roomName: "", professor: "", courseDay: .tuesday, startTime: "10:00", endTime: "13:00", backgroundColor: UIColor.pearlWhite.withAlphaComponent(0.40))
-        let course_1_1 = ElliottEvent(courseId: "1", courseName: "Poner la lavadora bla bla bla", roomName: "", professor: "", courseDay: .tuesday, startTime: "10:00", endTime: "11:00", backgroundColor: .fireOrange)
-
-        let course_2 = ElliottEvent(courseId: "2", courseName: "Renovar el DNI", roomName: "", professor: "", courseDay: .thursday, startTime: "20:00", endTime: "23:30", textColor: UIColor.white, backgroundColor: .turquesa)
+//        let course_1 = ElliottEvent(courseId: "1", courseName: "", roomName: "", professor: "", courseDay: .tuesday, startTime: "10:00", endTime: "13:00", backgroundColor: UIColor.pearlWhite.withAlphaComponent(0.40))
+//        let course_1_1 = ElliottEvent(courseId: "1", courseName: "Poner la lavadora bla bla bla", roomName: "", professor: "", courseDay: .tuesday, startTime: "10:00", endTime: "11:00", backgroundColor: .fireOrange)
+//
+//        let course_2 = ElliottEvent(courseId: "2", courseName: "Renovar el DNI", roomName: "", professor: "", courseDay: .thursday, startTime: "20:00", endTime: "23:30", textColor: UIColor.white, backgroundColor: .turquesa)
+//
+//        let course_3 = ElliottEvent(courseId: "3", courseName: "Lavar el coche", roomName: "", professor: "", courseDay: .saturday, startTime: "18:00", endTime: "22:30", textColor: UIColor.white, backgroundColor: .turquesa)
+//        let course_4 = ElliottEvent(courseId: "4", courseName: "Vacunarme del COVID-19 bla bla bla", roomName: "", professor: "", courseDay: .sunday, startTime: "16:00", endTime: "18:00", textColor: UIColor.white, backgroundColor: .turquesa)
+//
+//        courseList.append(course_1)
+//        courseList.append(course_1_1)
+//        courseList.append(course_2)
+//        courseList.append(course_3)
+//        courseList.append(course_4)
         
-        let course_3 = ElliottEvent(courseId: "3", courseName: "Lavar el coche", roomName: "", professor: "", courseDay: .saturday, startTime: "18:00", endTime: "22:30", textColor: UIColor.white, backgroundColor: .turquesa)
-        let course_4 = ElliottEvent(courseId: "4", courseName: "Vacunarme del COVID-19 bla bla bla", roomName: "", professor: "", courseDay: .sunday, startTime: "16:00", endTime: "18:00", textColor: UIColor.white, backgroundColor: .turquesa)
-        
-        courseList.append(course_1)
-        courseList.append(course_1_1)
-        courseList.append(course_2)
-        courseList.append(course_3)
-        courseList.append(course_4)
         
         
     }
@@ -111,18 +130,38 @@ class CalendarVC: UIViewController {
         timeTable.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         timeTable.reloadData()
     }
+    
+    // Create a event that fills the whole day to cheat ElliotTable and show all day hours in the schedule
+    private func setupFakeEvent() {
+        insertEvent(eventName: "FAKE", startDate: Date() , endDate: Date(), type: .Fake)
+    }
+    
+    private func deleteFakeEvent() {
+        var fakeIndex = 0
+        for i in 0..<courseList.count {
+            if Int(courseList[i].courseId) == -1 {
+                fakeIndex = i
+            }
+        }
+        
+        courseList.remove(at: fakeIndex)
+    }
 
 }
 
 extension CalendarVC: ElliotableDelegate, ElliotableDataSource {
     func elliotable(elliotable: Elliotable, didSelectCourse selectedCourse: ElliottEvent) {
-        Alert.errorInformation(title: "Celda tocada", message: selectedCourse.courseName
-            , vc: self, handler: nil)
+        if Int(selectedCourse.courseId) != -1 { //-1 is the id of Fake events
+            Alert.errorInformation(title: "Celda tocada", message: selectedCourse.courseName
+                                   , vc: self, handler: nil)
+        }
     }
     
     func elliotable(elliotable: Elliotable, didLongSelectCourse longSelectedCourse: ElliottEvent) {
-        Alert.errorInformation(title: "Celda long touch", message: "\(longSelectedCourse.startTime) - \(longSelectedCourse.endTime)"
-        , vc: self, handler: nil)
+        if Int(longSelectedCourse.courseId) != -1 { //-1 is the id of Fake events
+            Alert.errorInformation(title: "Celda long touch", message: "\(longSelectedCourse.startTime) - \(longSelectedCourse.endTime)"
+                                   , vc: self, handler: nil)
+        }
     }
     
     func elliotable(elliotable: Elliotable, at dayPerIndex: Int) -> String {
