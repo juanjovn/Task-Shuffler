@@ -38,6 +38,8 @@ class ViewController: AMTabsViewController {
         let gapsNavigationController = storyboard.instantiateViewController(withIdentifier: "GapsNavigationController")
         let shuffleViewController = ShuffleVC()
         let shuffleNavigationController = UINavigationController(rootViewController: shuffleViewController)
+        let nextToDoViewController = NextToDoVC()
+        let nextToDoNavigationController = UINavigationController(rootViewController: nextToDoViewController)
         let scheduleNavigationController = storyboard.instantiateViewController(withIdentifier: "ScheduleNavigationController")
         
         
@@ -45,6 +47,7 @@ class ViewController: AMTabsViewController {
         tasksNavigationController,
         gapsNavigationController,
         shuffleNavigationController,
+        nextToDoNavigationController,
         scheduleNavigationController
       ]
     }

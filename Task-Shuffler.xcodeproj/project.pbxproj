@@ -51,6 +51,8 @@
 		81EE66E425990926007B9D87 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EE66E325990926007B9D87 /* Notifications.swift */; };
 		81EE6753259A33D5007B9D87 /* ShuffleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EE6752259A33D5007B9D87 /* ShuffleView.swift */; };
 		81EE6756259A35D9007B9D87 /* ShuffleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EE6755259A35D9007B9D87 /* ShuffleVC.swift */; };
+		81EE6778259A4254007B9D87 /* NextToDoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EE6777259A4254007B9D87 /* NextToDoVC.swift */; };
+		81EE677B259A428E007B9D87 /* NextToDoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EE677A259A428E007B9D87 /* NextToDoView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -102,6 +104,8 @@
 		81EE66E325990926007B9D87 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		81EE6752259A33D5007B9D87 /* ShuffleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShuffleView.swift; sourceTree = "<group>"; };
 		81EE6755259A35D9007B9D87 /* ShuffleVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShuffleVC.swift; sourceTree = "<group>"; };
+		81EE6777259A4254007B9D87 /* NextToDoVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NextToDoVC.swift; path = "Task-Shuffler/Shuffle/Controller/NextToDoVC.swift"; sourceTree = SOURCE_ROOT; };
+		81EE677A259A428E007B9D87 /* NextToDoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NextToDoView.swift; path = "Task-Shuffler/Shuffle/View/NextToDoView.swift"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,6 +227,7 @@
 				81FFF0BD2467F7600086500A /* Task */,
 				81FFF0BE2467F78A0086500A /* Gap */,
 				81EE674E259A3346007B9D87 /* Shuffle */,
+				81EE6772259A4124007B9D87 /* NextToDo */,
 				81FFF0C62467F80E0086500A /* Schedule */,
 				81FFF0CA2467F8650086500A /* Settings */,
 				811880A42435157E00E5FEE1 /* Utils */,
@@ -289,6 +294,39 @@
 			isa = PBXGroup;
 			children = (
 				81EE6755259A35D9007B9D87 /* ShuffleVC.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		81EE6772259A4124007B9D87 /* NextToDo */ = {
+			isa = PBXGroup;
+			children = (
+				81EE6773259A4149007B9D87 /* Model */,
+				81EE6775259A4169007B9D87 /* View */,
+				81EE6776259A416E007B9D87 /* Controller */,
+			);
+			path = NextToDo;
+			sourceTree = "<group>";
+		};
+		81EE6773259A4149007B9D87 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		81EE6775259A4169007B9D87 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				81EE677A259A428E007B9D87 /* NextToDoView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		81EE6776259A416E007B9D87 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				81EE6777259A4254007B9D87 /* NextToDoVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -570,6 +608,7 @@
 				81C90B5E246492BC001C06B4 /* NewGapVC.swift in Sources */,
 				81C90B572461D0B2001C06B4 /* GapCell.swift in Sources */,
 				815204F1245F46C20004510B /* GapRealm.swift in Sources */,
+				81EE677B259A428E007B9D87 /* NextToDoView.swift in Sources */,
 				8179FDD924580807009A6D4B /* DatabaseManager.swift in Sources */,
 				815204EF245E9A1E0004510B /* Alert.swift in Sources */,
 				8170DD792467FEE80060725D /* TimePickerVC.swift in Sources */,
@@ -592,6 +631,7 @@
 				81AB5D6C24770D01009ADB97 /* CollectionViewCell.swift in Sources */,
 				81E9B1432405BEE400BBADB8 /* ViewController.swift in Sources */,
 				81EE6753259A33D5007B9D87 /* ShuffleView.swift in Sources */,
+				81EE6778259A4254007B9D87 /* NextToDoVC.swift in Sources */,
 				81DECAB8243BAE24009051A2 /* CustomFonts.swift in Sources */,
 				81EE66E425990926007B9D87 /* Notifications.swift in Sources */,
 				81E9B13F2405BEE400BBADB8 /* AppDelegate.swift in Sources */,
