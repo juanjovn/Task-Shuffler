@@ -90,7 +90,7 @@ public class AMTabView: UIView {
     return height > ballSize ? ballSize : height
   }
   private var ballSize: CGFloat {
-    itemWidth / 2
+    itemWidth / 1.8
   }
   private var iconSize: CGFloat {
     ballSize / 1.5
