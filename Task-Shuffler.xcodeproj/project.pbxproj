@@ -53,6 +53,7 @@
 		81EE6756259A35D9007B9D87 /* ShuffleVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EE6755259A35D9007B9D87 /* ShuffleVC.swift */; };
 		81EE6778259A4254007B9D87 /* NextToDoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EE6777259A4254007B9D87 /* NextToDoVC.swift */; };
 		81EE677B259A428E007B9D87 /* NextToDoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EE677A259A428E007B9D87 /* NextToDoView.swift */; };
+		81EE67A7259B810F007B9D87 /* MTSlideToOpenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EE67A6259B810F007B9D87 /* MTSlideToOpenView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -106,6 +107,7 @@
 		81EE6755259A35D9007B9D87 /* ShuffleVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShuffleVC.swift; sourceTree = "<group>"; };
 		81EE6777259A4254007B9D87 /* NextToDoVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NextToDoVC.swift; path = "Task-Shuffler/Shuffle/Controller/NextToDoVC.swift"; sourceTree = SOURCE_ROOT; };
 		81EE677A259A428E007B9D87 /* NextToDoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NextToDoView.swift; path = "Task-Shuffler/Shuffle/View/NextToDoView.swift"; sourceTree = SOURCE_ROOT; };
+		81EE67A6259B810F007B9D87 /* MTSlideToOpenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTSlideToOpenView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -285,6 +287,7 @@
 		81EE6750259A336C007B9D87 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				81EE67A6259B810F007B9D87 /* MTSlideToOpenView.swift */,
 				81EE6752259A33D5007B9D87 /* ShuffleView.swift */,
 			);
 			path = View;
@@ -623,6 +626,7 @@
 				81EE6756259A35D9007B9D87 /* ShuffleVC.swift in Sources */,
 				81C90B5324614F8B001C06B4 /* GapManager.swift in Sources */,
 				8198F26324763D5F00F547BC /* CalendarVC.swift in Sources */,
+				81EE67A7259B810F007B9D87 /* MTSlideToOpenView.swift in Sources */,
 				81DECAB6243BA410009051A2 /* CustomColors.swift in Sources */,
 				81C90B5B2463DDBA001C06B4 /* Utils.swift in Sources */,
 				8179FDDB24581E9F009A6D4B /* DummyModel.swift in Sources */,

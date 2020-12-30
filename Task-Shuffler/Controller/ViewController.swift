@@ -23,7 +23,7 @@ class ViewController: AMTabsViewController {
         super.viewDidLoad()
     
         setTabsControllers()
-        selectedTabIndex = 0
+        selectedTabIndex = 2
     }
     
     
