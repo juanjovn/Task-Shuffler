@@ -54,6 +54,7 @@
 		81EE6778259A4254007B9D87 /* NextToDoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EE6777259A4254007B9D87 /* NextToDoVC.swift */; };
 		81EE677B259A428E007B9D87 /* NextToDoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EE677A259A428E007B9D87 /* NextToDoView.swift */; };
 		81EE67A7259B810F007B9D87 /* MTSlideToOpenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EE67A6259B810F007B9D87 /* MTSlideToOpenView.swift */; };
+		81EE67AA259E5093007B9D87 /* ShuffleModes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EE67A9259E5092007B9D87 /* ShuffleModes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -108,6 +109,7 @@
 		81EE6777259A4254007B9D87 /* NextToDoVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NextToDoVC.swift; path = "Task-Shuffler/Shuffle/Controller/NextToDoVC.swift"; sourceTree = SOURCE_ROOT; };
 		81EE677A259A428E007B9D87 /* NextToDoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NextToDoView.swift; path = "Task-Shuffler/Shuffle/View/NextToDoView.swift"; sourceTree = SOURCE_ROOT; };
 		81EE67A6259B810F007B9D87 /* MTSlideToOpenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTSlideToOpenView.swift; sourceTree = "<group>"; };
+		81EE67A9259E5092007B9D87 /* ShuffleModes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShuffleModes.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -280,6 +282,7 @@
 		81EE674F259A3361007B9D87 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				81EE67A9259E5092007B9D87 /* ShuffleModes.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -633,6 +636,7 @@
 				81C451C824818E350086B806 /* EventType.swift in Sources */,
 				8197F5C2245ACF700052FCC7 /* TaskManager.swift in Sources */,
 				81AB5D6C24770D01009ADB97 /* CollectionViewCell.swift in Sources */,
+				81EE67AA259E5093007B9D87 /* ShuffleModes.swift in Sources */,
 				81E9B1432405BEE400BBADB8 /* ViewController.swift in Sources */,
 				81EE6753259A33D5007B9D87 /* ShuffleView.swift in Sources */,
 				81EE6778259A4254007B9D87 /* NextToDoVC.swift in Sources */,
