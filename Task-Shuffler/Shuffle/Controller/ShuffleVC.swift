@@ -21,12 +21,14 @@ class ShuffleVC: AMTabsViewController {
         setupShuffleSlider()
         setupShuffleButton()
         shuffleView.howSegmentedControl.dataSource = self
+        shuffleView.whenSegmentedControl.dataSource = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
         shuffleSlider.sliderCornerRadius = shuffleSlider.bounds.size.height / 2
         shuffleView.shuffleButton.layer.cornerRadius =  shuffleView.shuffleButton.bounds.size.width / 2
         shuffleView.howSegmentedControl.layer.cornerRadius = shuffleView.howSegmentedControl.bounds.size.height / 2
+        shuffleView.whenSegmentedControl.layer.cornerRadius = shuffleView.howSegmentedControl.bounds.size.height / 2
     }
     
     override func viewWillLayoutSubviews() {
@@ -118,19 +120,44 @@ extension ShuffleVC: MTSlideToOpenDelegate {
 
 extension ShuffleVC: SJFluidSegmentedControlDataSource {
     func numberOfSegmentsInSegmentedControl(_ segmentedControl: SJFluidSegmentedControl) -> Int {
-        ShuffleModes.howModes.count
+        switch segmentedControl {
+        case shuffleView.howSegmentedControl:
+            return ShuffleModes.howModes.count
+        case shuffleView.whenSegmentedControl:
+            return ShuffleModes.whenModes.count
+        default:
+            return 3
+        }
+        
     }
     
     func segmentedControl(_ segmentedControl: SJFluidSegmentedControl, titleForSegmentAtIndex index: Int) -> String? {
-        switch index {
-        case 0:
-            return ShuffleModes.howModes[index]
-        case 1:
-            return ShuffleModes.howModes[index]
-        case 2:
-            return ShuffleModes.howModes[index]
+        switch segmentedControl {
+        case shuffleView.howSegmentedControl:
+            switch index {
+            case 0:
+                return ShuffleModes.howModes[index]
+            case 1:
+                return ShuffleModes.howModes[index]
+            case 2:
+                return ShuffleModes.howModes[index]
+            default:
+                return "How to shuffle"
+            }
+        case shuffleView.whenSegmentedControl:
+            switch index {
+            case 0:
+                return ShuffleModes.whenModes[index]
+            case 1:
+                return ShuffleModes.whenModes[index]
+            case 2:
+                return ShuffleModes.whenModes[index]
+            default:
+                return "How to shuffle"
+            }
         default:
             return "How to shuffle"
         }
+        
     }
 }

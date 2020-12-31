@@ -18,6 +18,8 @@ class ShuffleView: UIView {
     let shuffleButtonImage = UIImage(systemName: "shuffle")?.tinted(color: .clear)
     let howLabel = UILabel()
     let howSegmentedControl = SJFluidSegmentedControl()
+    let whenLabel = UILabel()
+    let whenSegmentedControl = SJFluidSegmentedControl()
     
     //MARK: Variables
     
@@ -26,7 +28,9 @@ class ShuffleView: UIView {
         backgroundColor = .paleSilver
         setupShuffleButton()
         setupHowLabel()
-        setupSegmentedControl()
+        setupHowSegmentedControl()
+        setupWhenLabel()
+        setupWhenSegmentedControl()
     }
     
     //Shuffle button is only necessary for creating the particles exploding animation when slider is actioned
@@ -58,8 +62,22 @@ class ShuffleView: UIView {
         
     }
     
-    private func setupSegmentedControl() {
+    private func setupWhenLabel() {
+        whenLabel.text = "When"
+        whenLabel.font = .avenirDemiBold(ofSize: UIFont.scaleFont(35))
+        self.addSubview(whenLabel)
+        
+        whenLabel.translatesAutoresizingMaskIntoConstraints = false
+        whenLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15).isActive = true
+        whenLabel.trailingAnchor.constraint(greaterThanOrEqualTo: self.trailingAnchor, constant: -20).isActive = true
+        whenLabel.topAnchor.constraint(equalTo: howSegmentedControl.bottomAnchor, constant: 30).isActive = true
+        
+    }
+    
+    private func setupHowSegmentedControl() {
         howSegmentedControl.selectorViewColor = .fireOrange
+        howSegmentedControl.textColor = .mysticBlue
+        howSegmentedControl.selectedSegmentTextColor = .pearlWhite
         howSegmentedControl.backgroundColor = UIColor.mysticBlue.withAlphaComponent(0.3)
         
         self.addSubview(howSegmentedControl)
@@ -68,6 +86,18 @@ class ShuffleView: UIView {
         howSegmentedControl.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 30).isActive = true
         howSegmentedControl.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -30).isActive = true
         howSegmentedControl.heightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.widthAnchor, multiplier: 0.1).isActive = true
+    }
+    
+    private func setupWhenSegmentedControl() {
+        whenSegmentedControl.selectorViewColor = .fireOrange
+        whenSegmentedControl.backgroundColor = UIColor.mysticBlue.withAlphaComponent(0.3)
+        
+        self.addSubview(whenSegmentedControl)
+        whenSegmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        whenSegmentedControl.topAnchor.constraint(equalTo: whenLabel.bottomAnchor, constant: 10).isActive = true
+        whenSegmentedControl.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 30).isActive = true
+        whenSegmentedControl.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -30).isActive = true
+        whenSegmentedControl.heightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.widthAnchor, multiplier: 0.1).isActive = true
     }
     
     required init?(coder: NSCoder) {
