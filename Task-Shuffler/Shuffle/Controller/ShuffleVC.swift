@@ -98,13 +98,16 @@ extension ShuffleVC: MTSlideToOpenDelegate {
             generator.impactOccurred()
         }
         shuffleView.shuffleButton.setClicked(true)
-        let alertController = UIAlertController(title: "", message: "Shuffled!", preferredStyle: .alert)
-        let doneAction = UIAlertAction(title: "OK", style: .default) { (action) in
-            sender.resetStateWithAnimation(false)
+        _ = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) {_ in
             self.shuffleView.shuffleButton.setClicked(false)
-        }
-        alertController.addAction(doneAction)
-        self.present(alertController, animated: true, completion: nil)
+            }
+//        let alertController = UIAlertController(title: "", message: "Shuffled!", preferredStyle: .alert)
+//        let doneAction = UIAlertAction(title: "OK", style: .default) { (action) in
+            sender.resetStateWithAnimation(true)
+            
+//        }
+//        alertController.addAction(doneAction)
+//        self.present(alertController, animated: true, completion: nil)
         
     }
     
