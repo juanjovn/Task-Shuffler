@@ -20,6 +20,9 @@ class ShuffleView: UIView {
     let howSegmentedControl = SJFluidSegmentedControl()
     let whenLabel = UILabel()
     let whenSegmentedControl = SJFluidSegmentedControl()
+    let shuffleBackImageView = UIImageView()
+    var shuffleBackImage = UIImage(systemName: "shuffle.circle")
+    let detailLabel = UILabel()
     
     //MARK: Variables
     
@@ -31,6 +34,8 @@ class ShuffleView: UIView {
         setupHowSegmentedControl()
         setupWhenLabel()
         setupWhenSegmentedControl()
+        setupShuffleBackImageView()
+        setupDetailLabel()
     }
     
     //Shuffle button is only necessary for creating the particles exploding animation when slider is actioned
@@ -98,6 +103,33 @@ class ShuffleView: UIView {
         whenSegmentedControl.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 30).isActive = true
         whenSegmentedControl.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -30).isActive = true
         whenSegmentedControl.heightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.widthAnchor, multiplier: 0.1).isActive = true
+    }
+    
+    private func setupShuffleBackImageView() {
+        shuffleBackImageView.image = shuffleBackImage
+        shuffleBackImageView.tintColor = UIColor.mysticBlue.withAlphaComponent(0.07)
+        self.addSubview(shuffleBackImageView)
+        self.sendSubviewToBack(shuffleBackImageView)
+        shuffleBackImageView.translatesAutoresizingMaskIntoConstraints = false
+        shuffleBackImageView.topAnchor.constraint(equalTo: whenSegmentedControl.bottomAnchor, constant: 10).isActive = true
+        shuffleBackImageView.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.55).isActive = true
+        shuffleBackImageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.55).isActive = true
+        shuffleBackImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        
+        
+    }
+    
+    private func setupDetailLabel() {
+        detailLabel.text = "12 tasks will be shuffled in 15 gaps"
+        detailLabel.font = .avenirDemiBold(ofSize: 20)
+        detailLabel.textColor = .mysticBlue
+        detailLabel.shadowOffset = CGSize(width: 0, height: 1)
+        detailLabel.shadowColor = UIColor.darkGray.withAlphaComponent(0.2)
+        self.addSubview(detailLabel)
+        detailLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        detailLabel.centerXAnchor.constraint(equalTo: shuffleBackImageView.centerXAnchor).isActive = true
+        detailLabel.centerYAnchor.constraint(equalTo: shuffleBackImageView.centerYAnchor).isActive = true
     }
     
     required init?(coder: NSCoder) {
