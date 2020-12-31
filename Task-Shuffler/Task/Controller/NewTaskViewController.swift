@@ -49,6 +49,7 @@ class NewTaskViewController: UIViewController {
     @IBOutlet weak var priorityButtonBackgroundTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var priorityLabelTopConstraint: NSLayoutConstraint!
     var sliderHeightConstraint = NSLayoutConstraint()
+    var sliderValue = 0
     
     
     // MARK: Constants
@@ -194,6 +195,17 @@ class NewTaskViewController: UIViewController {
         slider.attributedTextForFraction = { fractionValue in
             return attributedString
         }
+        
+        let generator = UIImpactFeedbackGenerator(style: .light)
+        if SettingsValues.otherSettings[0] {
+            if sliderValue != resultValue {
+                generator.impactOccurred()
+            }
+        }
+        
+        sliderValue = resultValue
+        
+        
     }
     
     @objc func dismissKeyboard (_ sender: Any) {
@@ -242,6 +254,10 @@ class NewTaskViewController: UIViewController {
         
         fromButtonToPriority()
         
+        let generator = UIImpactFeedbackGenerator(style: .medium)
+        if SettingsValues.otherSettings[0] {
+                generator.impactOccurred()
+        }
     }
     
     
