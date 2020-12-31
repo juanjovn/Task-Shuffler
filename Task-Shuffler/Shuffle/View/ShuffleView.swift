@@ -8,6 +8,7 @@
 
 import UIKit
 import WCLShineButton
+import SJFluidSegmentedControl
 
 class ShuffleView: UIView {
     
@@ -15,6 +16,8 @@ class ShuffleView: UIView {
     
     let shuffleButton = WCLShineButton(frame: .init(x: 100, y: 100, width: 60, height: 60))
     let shuffleButtonImage = UIImage(systemName: "shuffle")?.tinted(color: .clear)
+    let howLabel = UILabel()
+    let howSegmentedControl = SJFluidSegmentedControl()
     
     //MARK: Variables
     
@@ -22,13 +25,15 @@ class ShuffleView: UIView {
         super.init(frame: frame)
         backgroundColor = .paleSilver
         setupShuffleButton()
+        setupHowLabel()
+        setupSegmentedControl()
     }
     
-    
+    //Shuffle button is only necessary for creating the particles exploding animation when slider is actioned
     private func setupShuffleButton() {
         shuffleButton.isEnabled = false
         var shuffleButtonParams = WCLShineParams()
-        shuffleButtonParams.animDuration = 1
+        shuffleButtonParams.animDuration = 0.5
         shuffleButtonParams.allowRandomColor = true
         shuffleButton.image = .defaultAndSelect(shuffleButtonImage!, shuffleButtonImage!)
         shuffleButton.color = .clear
@@ -39,6 +44,30 @@ class ShuffleView: UIView {
         shuffleButton.translatesAutoresizingMaskIntoConstraints = false
         shuffleButton.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.1).isActive = true
         shuffleButton.widthAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.1).isActive = true
+    }
+    
+    private func setupHowLabel() {
+        howLabel.text = "How"
+        howLabel.font = .avenirDemiBold(ofSize: UIFont.scaleFont(35))
+        self.addSubview(howLabel)
+        
+        howLabel.translatesAutoresizingMaskIntoConstraints = false
+        howLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15).isActive = true
+        howLabel.trailingAnchor.constraint(greaterThanOrEqualTo: self.trailingAnchor, constant: -20).isActive = true
+        howLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 20).isActive = true
+        
+    }
+    
+    private func setupSegmentedControl() {
+        howSegmentedControl.selectorViewColor = .fireOrange
+        howSegmentedControl.backgroundColor = UIColor.mysticBlue.withAlphaComponent(0.3)
+        
+        self.addSubview(howSegmentedControl)
+        howSegmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        howSegmentedControl.topAnchor.constraint(equalTo: howLabel.bottomAnchor, constant: 10).isActive = true
+        howSegmentedControl.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 30).isActive = true
+        howSegmentedControl.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -30).isActive = true
+        howSegmentedControl.heightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.widthAnchor, multiplier: 0.1).isActive = true
     }
     
     required init?(coder: NSCoder) {

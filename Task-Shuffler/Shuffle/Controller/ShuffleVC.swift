@@ -8,6 +8,7 @@
 
 import UIKit
 import AMTabView
+import SJFluidSegmentedControl
 
 class ShuffleVC: AMTabsViewController {
     let shuffleView = ShuffleView()
@@ -19,11 +20,13 @@ class ShuffleVC: AMTabsViewController {
         setupNavigationBar()
         setupShuffleSlider()
         setupShuffleButton()
+        shuffleView.howSegmentedControl.dataSource = self
     }
     
     override func viewDidAppear(_ animated: Bool) {
         shuffleSlider.sliderCornerRadius = shuffleSlider.bounds.size.height / 2
-        shuffleView.shuffleButton.layer.cornerRadius =  shuffleView.shuffleButton.bounds.size.width/2
+        shuffleView.shuffleButton.layer.cornerRadius =  shuffleView.shuffleButton.bounds.size.width / 2
+        shuffleView.howSegmentedControl.layer.cornerRadius = shuffleView.howSegmentedControl.bounds.size.height / 2
     }
     
     override func viewWillLayoutSubviews() {
@@ -35,10 +38,10 @@ class ShuffleVC: AMTabsViewController {
         view.addSubview(shuffleView)
         
         shuffleView.translatesAutoresizingMaskIntoConstraints = false
-        shuffleView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        shuffleView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        shuffleView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        shuffleView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        shuffleView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        shuffleView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor).isActive = true
+        shuffleView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor).isActive = true
+        shuffleView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
     
     private func setupNavigationBar() {
@@ -53,16 +56,16 @@ class ShuffleVC: AMTabsViewController {
         shuffleSlider.thumbnailImageView.backgroundColor  = .fireOrange
         shuffleSlider.draggedView.backgroundColor = .fireOrange
         shuffleSlider.delegate = self
-        shuffleSlider.thumbnailViewStartingDistance = 10
+        shuffleSlider.thumbnailViewStartingDistance = 15
         shuffleSlider.labelText = "Slide to shuffle"
         shuffleSlider.thumbnailImageView.image = UIImage(systemName: "shuffle")?.tinted(color: .pearlWhite)
-        shuffleSlider.sliderBackgroundColor = UIColor.mysticBlue.withAlphaComponent(0.5)
+        shuffleSlider.sliderBackgroundColor = UIColor.mysticBlue.withAlphaComponent(0.3)
         shuffleSlider.textColor = .pearlWhite
         
         shuffleView.addSubview(shuffleSlider)
         
         shuffleSlider.translatesAutoresizingMaskIntoConstraints = false
-        shuffleSlider.heightAnchor.constraint(equalTo: shuffleView.heightAnchor, multiplier: 0.07).isActive = true
+        shuffleSlider.heightAnchor.constraint(equalTo: shuffleView.heightAnchor, multiplier: 0.09).isActive = true
         shuffleSlider.leadingAnchor.constraint(equalTo: shuffleView.leadingAnchor, constant: 30).isActive = true
         shuffleSlider.trailingAnchor.constraint(equalTo: shuffleView.trailingAnchor, constant: -30).isActive = true
         shuffleSlider.bottomAnchor.constraint(equalTo: shuffleView.bottomAnchor, constant: -120).isActive = true
@@ -111,4 +114,23 @@ extension ShuffleVC: MTSlideToOpenDelegate {
         
     }
     
+}
+
+extension ShuffleVC: SJFluidSegmentedControlDataSource {
+    func numberOfSegmentsInSegmentedControl(_ segmentedControl: SJFluidSegmentedControl) -> Int {
+        ShuffleModes.howModes.count
+    }
+    
+    func segmentedControl(_ segmentedControl: SJFluidSegmentedControl, titleForSegmentAtIndex index: Int) -> String? {
+        switch index {
+        case 0:
+            return ShuffleModes.howModes[index]
+        case 1:
+            return ShuffleModes.howModes[index]
+        case 2:
+            return ShuffleModes.howModes[index]
+        default:
+            return "How to shuffle"
+        }
+    }
 }
