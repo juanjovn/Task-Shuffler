@@ -107,13 +107,14 @@ class ShuffleView: UIView {
     
     private func setupShuffleBackImageView() {
         shuffleBackImageView.image = shuffleBackImage
+        shuffleBackImageView.contentMode = .scaleAspectFit
         shuffleBackImageView.tintColor = UIColor.mysticBlue.withAlphaComponent(0.07)
         self.addSubview(shuffleBackImageView)
         self.sendSubviewToBack(shuffleBackImageView)
         shuffleBackImageView.translatesAutoresizingMaskIntoConstraints = false
         shuffleBackImageView.topAnchor.constraint(equalTo: whenSegmentedControl.bottomAnchor, constant: 10).isActive = true
-        shuffleBackImageView.heightAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.55).isActive = true
-        shuffleBackImageView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.55).isActive = true
+        shuffleBackImageView.heightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.widthAnchor, multiplier: 0.5).isActive = true
+        shuffleBackImageView.widthAnchor.constraint(equalTo: shuffleBackImageView.heightAnchor).isActive = true
         shuffleBackImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         
         

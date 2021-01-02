@@ -10,6 +10,9 @@ import UIKit
 
 @objc public protocol MTSlideToOpenDelegate {
     func mtSlideToOpenDelegateDidFinish(_ sender: MTSlideToOpenView)
+    func mtSlideToOpenDelegateDidIncrease(_ sender: MTSlideToOpenView, _ translatedPoint: Int)
+    func mtSlideToOpenDelegateDidDecrease(_ sender: MTSlideToOpenView, _ translatedPoint: Int)
+    func mtSlideToOpenDelegateDidTouchUp(_ sender: MTSlideToOpenView, _ translatedPoint: Int)
 }
 
 @objcMembers public class MTSlideToOpenView: UIView {
@@ -249,6 +252,10 @@ import UIKit
         let translatedPoint = sender.translation(in: view).x * (self.isOnRightToLeftLanguage() ? -1 : 1)
         switch sender.state {
         case .began:
+            if SettingsValues.otherSettings[0] {
+                let generator = UIImpactFeedbackGenerator(style: .light)
+                generator.impactOccurred()
+            }
             break
         case .changed:
             if translatedPoint >= xEndingPoint {
@@ -260,10 +267,17 @@ import UIKit
                 updateThumbnailXPosition(thumbnailViewStartingDistance)
                 return
             }
+            if sender.velocity(in: view).x > 0 {
+                delegate?.mtSlideToOpenDelegateDidIncrease(self, Int(translatedPoint))
+            } else {
+                delegate?.mtSlideToOpenDelegateDidDecrease(self, Int(translatedPoint))
+            }
+        
             updateThumbnailXPosition(translatedPoint)
             textLabel.alpha = (xEndingPoint - translatedPoint) / xEndingPoint
             break
         case .ended:
+            delegate?.mtSlideToOpenDelegateDidTouchUp(self, Int(translatedPoint))
             if translatedPoint >= xEndingPoint {
                 textLabel.alpha = 0
                 updateThumbnailXPosition(xEndingPoint)

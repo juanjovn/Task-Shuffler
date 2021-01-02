@@ -13,6 +13,7 @@ class ShuffleVC: AMTabsViewController {
     let shuffleView = ShuffleView()
     lazy var shuffleSegmentedControllersDataSource = ShuffleSegmentedControllersDataSource(shuffleView: shuffleView)
     var shuffleSlider = MTSlideToOpenView(frame: CGRect(x: 26, y: 200, width: 317, height: 56))
+    var shuffleImageRotation = CGFloat()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -109,17 +110,40 @@ extension ShuffleVC: MTSlideToOpenDelegate {
         shuffleView.shuffleButton.setClicked(true)
         _ = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) {_ in
             self.shuffleView.shuffleButton.setClicked(false)
-            }
-//        let alertController = UIAlertController(title: "", message: "Shuffled!", preferredStyle: .alert)
-//        let doneAction = UIAlertAction(title: "OK", style: .default) { (action) in
-            sender.resetStateWithAnimation(true)
-            
-//        }
-//        alertController.addAction(doneAction)
-//        self.present(alertController, animated: true, completion: nil)
+        }
+        //        let alertController = UIAlertController(title: "", message: "Shuffled!", preferredStyle: .alert)
+        //        let doneAction = UIAlertAction(title: "OK", style: .default) { (action) in
+        sender.resetStateWithAnimation(true)
+        
+        //        }
+        //        alertController.addAction(doneAction)
+        //        self.present(alertController, animated: true, completion: nil)
         
     }
     
+    func mtSlideToOpenDelegateDidIncrease(_ sender: MTSlideToOpenView, _ translatedPoint: Int ) {
+        //print("ROTATION APPLIED to the RIGHT >>>>>>> \(translatedPoint)")
+        shuffleImageRotation = atan2(shuffleView.shuffleBackImageView.transform.b, shuffleView.shuffleBackImageView.transform.a)
+        UIView.animate(withDuration: 0.05) {
+            self.shuffleView.shuffleBackImageView.transform = CGAffineTransform(rotationAngle: self.shuffleImageRotation + ((20 * CGFloat.pi) / 180))
+        }
+    }
+    
+    func mtSlideToOpenDelegateDidDecrease(_ sender: MTSlideToOpenView, _ translatedPoint: Int ) {
+        //print("ROTATION APPLIED to the LEFT <<<<<<< \(translatedPoint)")
+        shuffleImageRotation = atan2(shuffleView.shuffleBackImageView.transform.b, shuffleView.shuffleBackImageView.transform.a)
+        UIView.animate(withDuration: 0.05) {
+            self.shuffleView.shuffleBackImageView.transform = CGAffineTransform(rotationAngle: self.shuffleImageRotation - ((20 * CGFloat.pi) / 180))
+        }
+    }
+    
+    func mtSlideToOpenDelegateDidTouchUp(_ sender: MTSlideToOpenView, _ translatedPoint: Int ) {
+        UIView.animate(withDuration: 0.3) {
+            self.shuffleView.shuffleBackImageView.transform = CGAffineTransform.identity
+        }
+    }
+    
 }
+
 
 
