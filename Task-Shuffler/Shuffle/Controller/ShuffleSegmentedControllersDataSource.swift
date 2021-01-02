@@ -1,0 +1,58 @@
+//
+//  ShuffleSegmentedControllersDataSource.swift
+//  Task-Shuffler
+//
+//  Created by Juanjo Valiño on 2/1/21.
+//  Copyright © 2021 Juanjo Valiño. All rights reserved.
+//
+
+import Foundation
+import SJFluidSegmentedControl
+class ShuffleSegmentedControllersDataSource: SJFluidSegmentedControlDataSource {
+    let shuffleView: ShuffleView
+    init(shuffleView: ShuffleView) {
+        self.shuffleView = shuffleView
+    }
+    
+    func numberOfSegmentsInSegmentedControl(_ segmentedControl: SJFluidSegmentedControl) -> Int {
+        switch segmentedControl {
+        case shuffleView.howSegmentedControl:
+            return ShuffleModes.howModes.count
+        case shuffleView.whenSegmentedControl:
+            return ShuffleModes.whenModes.count
+        default:
+            return 3
+        }
+        
+    }
+    
+    func segmentedControl(_ segmentedControl: SJFluidSegmentedControl, titleForSegmentAtIndex index: Int) -> String? {
+        switch segmentedControl {
+        case shuffleView.howSegmentedControl:
+            switch index {
+            case 0:
+                return ShuffleModes.howModes[index]
+            case 1:
+                return ShuffleModes.howModes[index]
+            case 2:
+                return ShuffleModes.howModes[index]
+            default:
+                return "How to shuffle"
+            }
+        case shuffleView.whenSegmentedControl:
+            switch index {
+            case 0:
+                return ShuffleModes.whenModes[index]
+            case 1:
+                return ShuffleModes.whenModes[index]
+            case 2:
+                return ShuffleModes.whenModes[index]
+            default:
+                return "How to shuffle"
+            }
+        default:
+            return "How to shuffle"
+        }
+        
+    }
+}

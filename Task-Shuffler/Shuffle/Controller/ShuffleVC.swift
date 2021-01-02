@@ -8,10 +8,10 @@
 
 import UIKit
 import AMTabView
-import SJFluidSegmentedControl
 
 class ShuffleVC: AMTabsViewController {
     let shuffleView = ShuffleView()
+    lazy var shuffleSegmentedControllersDataSource = ShuffleSegmentedControllersDataSource(shuffleView: shuffleView)
     var shuffleSlider = MTSlideToOpenView(frame: CGRect(x: 26, y: 200, width: 317, height: 56))
     
     override func viewDidLoad() {
@@ -20,15 +20,12 @@ class ShuffleVC: AMTabsViewController {
         setupNavigationBar()
         setupShuffleSlider()
         setupShuffleButton()
-        shuffleView.howSegmentedControl.dataSource = self
-        shuffleView.whenSegmentedControl.dataSource = self
+        shuffleView.howSegmentedControl.dataSource = shuffleSegmentedControllersDataSource
+        shuffleView.whenSegmentedControl.dataSource = shuffleSegmentedControllersDataSource
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        shuffleSlider.sliderCornerRadius = shuffleSlider.bounds.size.height / 2
-        shuffleView.shuffleButton.layer.cornerRadius =  shuffleView.shuffleButton.bounds.size.width / 2
-        shuffleView.howSegmentedControl.layer.cornerRadius = shuffleView.howSegmentedControl.bounds.size.height / 2
-        shuffleView.whenSegmentedControl.layer.cornerRadius = shuffleView.howSegmentedControl.bounds.size.height / 2
+        setupViewsCornerRadius()
     }
     
     override func viewWillLayoutSubviews() {
@@ -80,6 +77,13 @@ class ShuffleVC: AMTabsViewController {
         shuffleView.shuffleButton.layoutIfNeeded()
     }
     
+    private func setupViewsCornerRadius() {
+        shuffleSlider.sliderCornerRadius = shuffleSlider.bounds.size.height / 2
+        shuffleView.shuffleButton.layer.cornerRadius =  shuffleView.shuffleButton.bounds.size.width / 2
+        shuffleView.howSegmentedControl.layer.cornerRadius = shuffleView.howSegmentedControl.bounds.size.height / 2
+        shuffleView.whenSegmentedControl.layer.cornerRadius = shuffleView.howSegmentedControl.bounds.size.height / 2
+    }
+    
     @objc func settingsButtonAction() {
         present(UINavigationController(rootViewController: SettingsVC()), animated: true)
     }
@@ -118,46 +122,4 @@ extension ShuffleVC: MTSlideToOpenDelegate {
     
 }
 
-extension ShuffleVC: SJFluidSegmentedControlDataSource {
-    func numberOfSegmentsInSegmentedControl(_ segmentedControl: SJFluidSegmentedControl) -> Int {
-        switch segmentedControl {
-        case shuffleView.howSegmentedControl:
-            return ShuffleModes.howModes.count
-        case shuffleView.whenSegmentedControl:
-            return ShuffleModes.whenModes.count
-        default:
-            return 3
-        }
-        
-    }
-    
-    func segmentedControl(_ segmentedControl: SJFluidSegmentedControl, titleForSegmentAtIndex index: Int) -> String? {
-        switch segmentedControl {
-        case shuffleView.howSegmentedControl:
-            switch index {
-            case 0:
-                return ShuffleModes.howModes[index]
-            case 1:
-                return ShuffleModes.howModes[index]
-            case 2:
-                return ShuffleModes.howModes[index]
-            default:
-                return "How to shuffle"
-            }
-        case shuffleView.whenSegmentedControl:
-            switch index {
-            case 0:
-                return ShuffleModes.whenModes[index]
-            case 1:
-                return ShuffleModes.whenModes[index]
-            case 2:
-                return ShuffleModes.whenModes[index]
-            default:
-                return "How to shuffle"
-            }
-        default:
-            return "How to shuffle"
-        }
-        
-    }
-}
+
