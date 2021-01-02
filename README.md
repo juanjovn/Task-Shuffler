@@ -1,6 +1,6 @@
 # Task-Shuffler
 This is an iOS app that random fills the spare time gaps with tasks defined by users.  
-The target is to __avoid the procrastination__ by choosing for you what you have to do rather than struggling with decisions that ends in doing absolutely nothing.
+The target is to __avoid the procrastination__ by choosing for you what you have to do rather than struggling with decisions that end in doing absolutely nothing.
 
 ## App tour
 
