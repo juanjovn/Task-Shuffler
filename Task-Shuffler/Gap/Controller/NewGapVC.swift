@@ -336,12 +336,12 @@ class NewGapVC: UIViewController {
     @objc private func fromDisplayTimeAction () {
         switch nextButton.tag {
         case 3:
-            UIView.animate(withDuration: 0.3,animations: {
+            UIView.animate(withDuration: 0.3) {
                 self.toDisplayTimeView.alpha = 0
                 self.fromDisplayTimeView.fromTimeContainerView.alpha = 0.8
                 self.fromDisplayTimeView.alpha = 1
                 self.nextButton.setTitle(">", for: .normal)
-            })
+            }
             let hour = Int(fromDisplayTimeView.fromHourLabel.text!)!
             let minute = Int(fromDisplayTimeView.fromMinuteLabel.text!)! / 5
             var hourRow = hour > 12 ? hour - 12 - 1 : hour - 1
@@ -391,26 +391,26 @@ extension NewGapVC: DatePickerVCDelegate{
         if isEditing {
             dateEditLabel.textColor = dateEditLabel.textColor.withAlphaComponent(0.30)
             strikeThroughLine.backgroundColor = UIColor.black.withAlphaComponent(0.30)
-            UIView.animate(withDuration: 0.4, animations: {
+            UIView.animate(withDuration: 0.4) {
                 self.strikeThroughTrailingConstraint.constant = 5
                 self.dateEditLabel.layoutIfNeeded()
-            })
+            }
         }
     }
     
     func updateDateLabel(textDate: String) {
-        UIView.animate(withDuration: 0.1, animations: {
+        UIView.animate(withDuration: 0.1) {
             let generator = UIImpactFeedbackGenerator(style: .heavy)
             self.dateLabel.alpha = 0
             self.dateLabel.text = textDate
             if SettingsValues.otherSettings[0] {
                 generator.impactOccurred()
             }
-        })
-        UIView.animate(withDuration: 0.3, animations: {
+        }
+        UIView.animate(withDuration: 0.3) {
             self.dateLabel.text = textDate
             self.dateLabel.alpha = 1
-        })
+        }
     }
     
     

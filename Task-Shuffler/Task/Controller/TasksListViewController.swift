@@ -252,7 +252,7 @@ class TasksListViewController: AMTabsViewController {
     
     func delayReloadSections(section: Int) {
         _ = Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false) {_ in
-            UIView.animate(withDuration: 0.5, animations: { [weak self] in
+            UIView.animate(withDuration: 0.5) { [weak self] in
                 guard let `self` = self else { return }
                 self.tableView.reloadSections(IndexSet(integer: section), with: UITableView.RowAnimation.fade)
                 let topIndex = IndexPath(row: 0, section: 0)
@@ -261,7 +261,7 @@ class TasksListViewController: AMTabsViewController {
                     self.tableView.scrollToRow(at: topIndex, at: .top, animated: true)
                 }
                 
-            })
+            }
         }
     }
     

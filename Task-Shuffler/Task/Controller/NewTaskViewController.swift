@@ -215,13 +215,13 @@ class NewTaskViewController: UIViewController {
                 showForm()
             }
             else{
-                UIView.animate(withDuration: 0.5, animations: {self.priorityLabel.alpha = 0})
-                UIView.animate(withDuration: 0.5, animations: {
+                UIView.animate(withDuration: 0.5) {self.priorityLabel.alpha = 0}
+                UIView.animate(withDuration: 0.5) {
                     self.priorityButton.alpha = 0
                     self.priorityButtonBackgroundView.alpha = 0
-                })
-                UIView.animate(withDuration: 0.5, animations: {self.durationLabel.alpha = 0})
-                UIView.animate(withDuration: 0.5, animations: {self.slider.alpha = 0})
+                }
+                UIView.animate(withDuration: 0.5) {self.durationLabel.alpha = 0}
+                UIView.animate(withDuration: 0.5) {self.slider.alpha = 0}
                 
                 _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: false) {_ in
                     self.durationLabel.isHidden = true
@@ -285,13 +285,13 @@ class NewTaskViewController: UIViewController {
         self.priorityButton.isHidden = false
         self.priorityButtonBackgroundView.isHidden = false
         backButton.setTitle("OK", for: .normal)
-        UIView.animate(withDuration: 0.7, animations: {self.durationLabel.alpha = 1})
-        UIView.animate(withDuration: 0.7, animations: {self.slider.alpha = 1})
+        UIView.animate(withDuration: 0.7) {self.durationLabel.alpha = 1}
+        UIView.animate(withDuration: 0.7) {self.slider.alpha = 1}
         _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) {_ in
-            UIView.animate(withDuration: 0.7, animations: {self.priorityLabel.alpha = 1})
-            UIView.animate(withDuration: 0.7, animations: { self.priorityButton.alpha = 1
+            UIView.animate(withDuration: 0.7) {self.priorityLabel.alpha = 1}
+            UIView.animate(withDuration: 0.7) { self.priorityButton.alpha = 1
                 self.priorityButtonBackgroundView.alpha = 1
-            })
+            }
         }
     }
     
@@ -522,18 +522,18 @@ extension NewTaskViewController: UITextFieldDelegate{
         if newString.length > maxTextFieldLength{
             //let textValue = self.newTaskTextName.text
             
-            UIView.animate(withDuration: 0.5, animations: {
+            UIView.animate(withDuration: 0.5) {
                 self.newTaskTextName.errorMessage = "MAX LENGTH"
                 self.newTaskTextName.selectedLineHeight = 5
                 self.newTaskTextName.errorMessage = ""
                 self.maxLengthLabel.alpha = 1
-            })
+            }
             
-            UIView.animate(withDuration: 0.5, delay: 0.1, animations: {
+            UIView.animate(withDuration: 0.5, delay: 0.1) {
                 self.newTaskTextName.selectedLineHeight = 2
                 self.newTaskTextName.errorMessage = ""
                 self.maxLengthLabel.alpha = 0
-            })
+            }
             
         }
         else {
