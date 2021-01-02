@@ -28,6 +28,8 @@
 		8197F5C2245ACF700052FCC7 /* TaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8197F5C1245ACF700052FCC7 /* TaskManager.swift */; };
 		8198F26324763D5F00F547BC /* CalendarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8198F26224763D5F00F547BC /* CalendarVC.swift */; };
 		819970A225A09BCF004D48C3 /* ShuffleSegmentedControllersDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819970A125A09BCF004D48C3 /* ShuffleSegmentedControllersDataSource.swift */; };
+		819970A525A0F958004D48C3 /* ModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819970A425A0F958004D48C3 /* ModalView.swift */; };
+		819970A825A0FEDA004D48C3 /* ShuffleResultsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819970A725A0FEDA004D48C3 /* ShuffleResultsVC.swift */; };
 		81AB5D6A2476F915009ADB97 /* HorizontalCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB5D692476F915009ADB97 /* HorizontalCollectionVC.swift */; };
 		81AB5D6C24770D01009ADB97 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB5D6B24770D01009ADB97 /* CollectionViewCell.swift */; };
 		81C451C824818E350086B806 /* EventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C451C724818E350086B806 /* EventType.swift */; };
@@ -82,6 +84,8 @@
 		8197F5C1245ACF700052FCC7 /* TaskManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskManager.swift; sourceTree = "<group>"; };
 		8198F26224763D5F00F547BC /* CalendarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarVC.swift; sourceTree = "<group>"; };
 		819970A125A09BCF004D48C3 /* ShuffleSegmentedControllersDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShuffleSegmentedControllersDataSource.swift; sourceTree = "<group>"; };
+		819970A425A0F958004D48C3 /* ModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalView.swift; sourceTree = "<group>"; };
+		819970A725A0FEDA004D48C3 /* ShuffleResultsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShuffleResultsVC.swift; sourceTree = "<group>"; };
 		81AB5D692476F915009ADB97 /* HorizontalCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCollectionVC.swift; sourceTree = "<group>"; };
 		81AB5D6B24770D01009ADB97 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		81C451C724818E350086B806 /* EventType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventType.swift; sourceTree = "<group>"; };
@@ -258,6 +262,7 @@
 			children = (
 				81E9B1442405BEE400BBADB8 /* Main.storyboard */,
 				81E9B1492405BEE600BBADB8 /* LaunchScreen.storyboard */,
+				819970A425A0F958004D48C3 /* ModalView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -303,6 +308,7 @@
 			children = (
 				81EE6755259A35D9007B9D87 /* ShuffleVC.swift */,
 				819970A125A09BCF004D48C3 /* ShuffleSegmentedControllersDataSource.swift */,
+				819970A725A0FEDA004D48C3 /* ShuffleResultsVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -626,10 +632,12 @@
 				81AB5D6A2476F915009ADB97 /* HorizontalCollectionVC.swift in Sources */,
 				8170DD812468001C0060725D /* MinuteCell.swift in Sources */,
 				8188D5BB2408601800CCBA99 /* NewTaskViewController.swift in Sources */,
+				819970A525A0F958004D48C3 /* ModalView.swift in Sources */,
 				81DC259E246C752E00926034 /* DisplayTime.swift in Sources */,
 				81ED3A84244DEFD400C36DB8 /* TaskCell.swift in Sources */,
 				81705A83240B1D890053A571 /* ScheduleViewController.swift in Sources */,
 				811880A6243515BC00E5FEE1 /* DeviceModel.swift in Sources */,
+				819970A825A0FEDA004D48C3 /* ShuffleResultsVC.swift in Sources */,
 				81EE6756259A35D9007B9D87 /* ShuffleVC.swift in Sources */,
 				81C90B5324614F8B001C06B4 /* GapManager.swift in Sources */,
 				8198F26324763D5F00F547BC /* CalendarVC.swift in Sources */,
