@@ -17,35 +17,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SHUFFLER" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sAz-yy-31X">
-                                <rect key="frame" x="61" y="530" width="292.5" height="82"/>
-                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="60"/>
-                                <color key="textColor" red="0.93725490199999995" green="0.94509803920000002" blue="0.95294117649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="i04-C3-Ewf">
-                                <rect key="frame" x="145" y="389" width="124" height="128"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="i04-C3-Ewf">
+                                <rect key="frame" x="103.5" y="349.5" width="207" height="207"/>
                                 <color key="tintColor" red="0.93725490199999995" green="0.94509803920000002" blue="0.95294117649999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <imageReference key="image" image="shuffle.circle.fill" catalog="system" symbolScale="large"/>
+                                <imageReference key="image" image="shuffle.circle" symbolScale="large"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="task" textAlignment="center" lineBreakMode="clip" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1QD-vG-sRa">
-                                <rect key="frame" x="143.5" y="281" width="127.5" height="95"/>
-                                <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="69"/>
-                                <color key="textColor" red="0.93725490196078431" green="0.94509803921568625" blue="0.95294117647058818" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="0.13333333333333333" green="0.2196078431372549" blue="0.2627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="i04-C3-Ewf" firstAttribute="top" secondItem="1QD-vG-sRa" secondAttribute="bottom" constant="15" id="CWg-fb-aGe"/>
                             <constraint firstItem="i04-C3-Ewf" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="D0w-36-mEB"/>
-                            <constraint firstItem="i04-C3-Ewf" firstAttribute="height" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.3" id="WrC-n5-BQS"/>
-                            <constraint firstItem="i04-C3-Ewf" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.3" id="Y30-f7-prG"/>
-                            <constraint firstItem="1QD-vG-sRa" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="aud-ml-3Oa"/>
+                            <constraint firstItem="i04-C3-Ewf" firstAttribute="height" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.5" id="WrC-n5-BQS"/>
+                            <constraint firstItem="i04-C3-Ewf" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.5" id="Y30-f7-prG"/>
                             <constraint firstItem="i04-C3-Ewf" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="d38-HO-b0c"/>
-                            <constraint firstItem="sAz-yy-31X" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="p8n-q0-T6P"/>
-                            <constraint firstItem="sAz-yy-31X" firstAttribute="top" secondItem="i04-C3-Ewf" secondAttribute="bottom" constant="15" id="w6a-MH-uxJ"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -55,6 +39,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="shuffle.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="shuffle.circle" width="13" height="13"/>
     </resources>
 </document>
