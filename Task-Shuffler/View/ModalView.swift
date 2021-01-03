@@ -12,7 +12,9 @@ class ModalView: UIView {
     let screenHeight = UIScreen.main.bounds.height
     let screenWidth = UIScreen.main.bounds.width
     let contentView = UIView()
+    let titleLabel = UILabel()
     let cancelButton = UIButton()
+    let cancelBackgroundView = UIView()
     let okButton = UIButton(type: .custom)
     
     override init(frame: CGRect) {
@@ -20,7 +22,9 @@ class ModalView: UIView {
         setupView()
         setupContentView()
         setupBlur()
+        setupTitleLabel()
         setupCancelButton()
+        setupCancelButtonBackground()
     }
     
     private func setupView() {
@@ -36,7 +40,7 @@ class ModalView: UIView {
         contentView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor).isActive = true
         contentView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: screenHeight / 3).isActive = true
         contentView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor).isActive = true
-        contentView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: 50).isActive = true
     }
     
     private func setupBlur() {
@@ -54,15 +58,51 @@ class ModalView: UIView {
         blurEffectView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
     }
     
+    private func setupTitleLabel() {
+        titleLabel.text = "Are you happy?"
+        //print(self.editedGap.description)
+        titleLabel.font = .avenirDemiBold(ofSize: UIFont.scaleFont(30))
+        contentView.addSubview(titleLabel)
+        
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.leadingAnchor.constraint(greaterThanOrEqualTo: contentView.leadingAnchor, constant: 10).isActive = true
+        titleLabel.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor, constant: -10).isActive = true
+        titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20).isActive = true
+        titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
+    }
+    
     private func setupCancelButton() {
-        cancelButton.setTitle("Cancel", for: .normal)
+        //cancelButton.setTitle("Cancel", for: .normal)
         cancelButton.setTitleColor(UIColor.bone, for: .normal)
         cancelButton.setTitleColor(UIColor.bone.withAlphaComponent(0.35), for: .highlighted)
+        guard let closeImage = UIImage(systemName: "xmark") else {
+            return print("Not found that image")
+        }
+        cancelButton.setImage(closeImage, for: .normal)
+        cancelButton.tintColor = .red
         contentView.addSubview(cancelButton)
         cancelButton.translatesAutoresizingMaskIntoConstraints = false
         
         cancelButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -25).isActive = true
         cancelButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15).isActive = true
+    }
+    
+    private func setupCancelButtonBackground() {
+        cancelBackgroundView.bounds.size = CGSize(width: screenWidth * 0.06, height: screenWidth * 0.06)
+        cancelBackgroundView.backgroundColor = UIColor.green.withAlphaComponent(0.8)
+        cancelBackgroundView.layer.cornerRadius = cancelBackgroundView.bounds.width / 2
+        contentView.addSubview(cancelBackgroundView)
+        contentView.sendSubviewToBack(cancelBackgroundView)
+        
+        cancelBackgroundView.translatesAutoresizingMaskIntoConstraints = false
+//        cancelBackgroundView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 50).isActive = true
+//        cancelBackgroundView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
+//        cancelBackgroundView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.06).isActive = true
+//        cancelBackgroundView.heightAnchor.constraint(equalTo: cancelBackgroundView.widthAnchor).isActive = true
+        cancelBackgroundView.centerXAnchor.constraint(equalTo: cancelButton.centerXAnchor).isActive = true
+        cancelBackgroundView.centerYAnchor.constraint(equalTo: cancelButton.centerYAnchor).isActive = true
+        cancelBackgroundView.widthAnchor.constraint(equalToConstant: screenWidth * 0.06).isActive = true
+        cancelBackgroundView.heightAnchor.constraint(equalTo: cancelBackgroundView.widthAnchor).isActive = true
     }
     
     required init?(coder: NSCoder) {
