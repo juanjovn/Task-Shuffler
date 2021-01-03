@@ -14,6 +14,7 @@ class ShuffleView: UIView {
     
     //MARK: Constants
     
+    let fillView = UIView() //Hides the very thin line created at the bottom when dismissing the modal view that I cannot solve how to avoid
     let shuffleButton = WCLShineButton(frame: .init(x: 100, y: 100, width: 60, height: 60))
     let shuffleButtonImage = UIImage(systemName: "shuffle")?.tinted(color: .clear)
     let howLabel = UILabel()
@@ -21,7 +22,7 @@ class ShuffleView: UIView {
     let whenLabel = UILabel()
     let whenSegmentedControl = SJFluidSegmentedControl()
     let shuffleBackImageView = UIImageView()
-    var shuffleBackImage = UIImage(systemName: "shuffle.circle")
+    var shuffleBackImage = UIImage(named: "shuffle.circle")
     let detailLabel = UILabel()
     
     //MARK: Variables
@@ -29,6 +30,7 @@ class ShuffleView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         backgroundColor = .paleSilver
+        setupFillView()
         setupShuffleButton()
         setupHowLabel()
         setupHowSegmentedControl()
@@ -36,6 +38,16 @@ class ShuffleView: UIView {
         setupWhenSegmentedControl()
         setupShuffleBackImageView()
         setupDetailLabel()
+    }
+    
+    private func setupFillView() {
+        fillView.backgroundColor = .mysticBlue
+        self.addSubview(fillView)
+        self.sendSubviewToBack(fillView)
+        fillView.translatesAutoresizingMaskIntoConstraints = false
+        fillView.widthAnchor.constraint(equalTo: self.safeAreaLayoutGuide.widthAnchor).isActive = true
+        fillView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        fillView.heightAnchor.constraint(equalToConstant: 20).isActive = true
     }
     
     //Shuffle button is only necessary for creating the particles exploding animation when slider is actioned
@@ -95,6 +107,8 @@ class ShuffleView: UIView {
     
     private func setupWhenSegmentedControl() {
         whenSegmentedControl.selectorViewColor = .fireOrange
+        whenSegmentedControl.textColor = .mysticBlue
+        whenSegmentedControl.selectedSegmentTextColor = .pearlWhite
         whenSegmentedControl.backgroundColor = UIColor.mysticBlue.withAlphaComponent(0.3)
         
         self.addSubview(whenSegmentedControl)

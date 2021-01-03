@@ -45,9 +45,15 @@ class ShuffleVC: AMTabsViewController {
     }
     
     private func setupNavigationBar() {
+        let deviceType = UIDevice().type
+        
+        if deviceType != .iPhoneSE {
+            navigationController?.navigationBar.prefersLargeTitles = true
+        } else {
+            navigationController?.navigationBar.prefersLargeTitles = false
+        }
         navigationItem.title = "Shuffle"
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "gear"), style: .plain, target: self, action: #selector(settingsButtonAction))
-        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     private func setupShuffleSlider() {
@@ -81,8 +87,8 @@ class ShuffleVC: AMTabsViewController {
     private func setupViewsCornerRadius() {
         shuffleSlider.sliderCornerRadius = shuffleSlider.bounds.size.height / 2
         shuffleView.shuffleButton.layer.cornerRadius =  shuffleView.shuffleButton.bounds.size.width / 2
-        shuffleView.howSegmentedControl.layer.cornerRadius = shuffleView.howSegmentedControl.bounds.size.height / 2
-        shuffleView.whenSegmentedControl.layer.cornerRadius = shuffleView.howSegmentedControl.bounds.size.height / 2
+        shuffleView.howSegmentedControl.cornerRadius = shuffleView.howSegmentedControl.bounds.size.height / 2
+        shuffleView.whenSegmentedControl.cornerRadius = shuffleView.whenSegmentedControl.bounds.size.height / 2
     }
     
     @objc func settingsButtonAction() {
@@ -93,8 +99,7 @@ class ShuffleVC: AMTabsViewController {
 extension ShuffleVC: TabItem{
     
     var tabImage: UIImage? {
-        let symbolConfiguration = UIImage.SymbolConfiguration(weight: .regular)
-        return UIImage(systemName: "shuffle.circle", withConfiguration: symbolConfiguration)
+        return UIImage(named: "shuffle.circle")
     }
     
 }
