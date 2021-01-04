@@ -34,6 +34,7 @@
 		81AB5D6C24770D01009ADB97 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB5D6B24770D01009ADB97 /* CollectionViewCell.swift */; };
 		81C2A17D25A38B1D00F9A53F /* ShuffleConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C2A17C25A38B1D00F9A53F /* ShuffleConfiguration.swift */; };
 		81C2A18025A38FE300F9A53F /* ShuffleSegmentedControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C2A17F25A38FE300F9A53F /* ShuffleSegmentedControllerDelegate.swift */; };
+		81C2A19E25A3A3E200F9A53F /* FillGapsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C2A19D25A3A3E200F9A53F /* FillGapsController.swift */; };
 		81C451C824818E350086B806 /* EventType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C451C724818E350086B806 /* EventType.swift */; };
 		81C90B5324614F8B001C06B4 /* GapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C90B5224614F8B001C06B4 /* GapManager.swift */; };
 		81C90B552461D080001C06B4 /* GapCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81C90B542461D080001C06B4 /* GapCell.xib */; };
@@ -92,6 +93,7 @@
 		81AB5D6B24770D01009ADB97 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		81C2A17C25A38B1D00F9A53F /* ShuffleConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShuffleConfiguration.swift; sourceTree = "<group>"; };
 		81C2A17F25A38FE300F9A53F /* ShuffleSegmentedControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShuffleSegmentedControllerDelegate.swift; sourceTree = "<group>"; };
+		81C2A19D25A3A3E200F9A53F /* FillGapsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FillGapsController.swift; sourceTree = "<group>"; };
 		81C451C724818E350086B806 /* EventType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventType.swift; sourceTree = "<group>"; };
 		81C90B5224614F8B001C06B4 /* GapManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GapManager.swift; sourceTree = "<group>"; };
 		81C90B542461D080001C06B4 /* GapCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GapCell.xib; sourceTree = "<group>"; };
@@ -315,6 +317,7 @@
 				819970A125A09BCF004D48C3 /* ShuffleSegmentedControllersDataSource.swift */,
 				819970A725A0FEDA004D48C3 /* ShuffleResultsVC.swift */,
 				81C2A17F25A38FE300F9A53F /* ShuffleSegmentedControllerDelegate.swift */,
+				81C2A19D25A3A3E200F9A53F /* FillGapsController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -649,6 +652,7 @@
 				81EE6756259A35D9007B9D87 /* ShuffleVC.swift in Sources */,
 				81C90B5324614F8B001C06B4 /* GapManager.swift in Sources */,
 				8198F26324763D5F00F547BC /* CalendarVC.swift in Sources */,
+				81C2A19E25A3A3E200F9A53F /* FillGapsController.swift in Sources */,
 				81EE67A7259B810F007B9D87 /* MTSlideToOpenView.swift in Sources */,
 				81DECAB6243BA410009051A2 /* CustomColors.swift in Sources */,
 				81C90B5B2463DDBA001C06B4 /* Utils.swift in Sources */,

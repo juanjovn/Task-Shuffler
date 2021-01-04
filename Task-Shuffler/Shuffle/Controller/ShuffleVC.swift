@@ -125,7 +125,8 @@ extension ShuffleVC: MTSlideToOpenDelegate {
         //        let doneAction = UIAlertAction(title: "OK", style: .default) { (action) in
         sender.resetStateWithAnimation(true)
         
-        print(shuffleConfiguration)
+        let fillGapsController = FillGapsController.instance
+        fillGapsController.shuffleTask(mode: shuffleConfiguration)
         let shuffleResultsVC = ShuffleResultsVC()
         present(shuffleResultsVC, animated: true, completion: nil)
         
