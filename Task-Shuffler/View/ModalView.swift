@@ -14,6 +14,8 @@ class ModalView: UIView {
     let cancelButton = UIButton()
     let cancelBackgroundView = UIView()
     let okButton = UIButton(type: .custom)
+    let bottomView = UIView()
+    var messageLabel = UILabel()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -23,6 +25,8 @@ class ModalView: UIView {
         setupTitleLabel()
         setupCancelButton()
         setupCancelButtonBackground()
+        setupBottomView()
+        setupMessageLabel()
     }
     
     private func setupView() {
@@ -97,6 +101,32 @@ class ModalView: UIView {
         cancelBackgroundView.centerYAnchor.constraint(equalTo: cancelButton.centerYAnchor).isActive = true
         cancelBackgroundView.widthAnchor.constraint(equalToConstant: 28).isActive = true
         cancelBackgroundView.heightAnchor.constraint(equalTo: cancelBackgroundView.widthAnchor).isActive = true
+    }
+    
+    //A container view for laying out the elements under the title label
+    private func setupBottomView() {
+        bottomView.backgroundColor = UIColor.darkGray.withAlphaComponent(0.15)
+        bottomView.layer.cornerRadius = 20
+        contentView.addSubview(bottomView)
+        bottomView.translatesAutoresizingMaskIntoConstraints = false
+        bottomView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 15).isActive = true
+        bottomView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15).isActive = true
+        bottomView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -15).isActive = true
+        bottomView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15).isActive = true
+    }
+    
+    private func setupMessageLabel() {
+        messageLabel.text = "Placeholder text"
+        messageLabel.lineBreakMode = .byWordWrapping
+        messageLabel.numberOfLines = 3
+        messageLabel.font = .avenirRegular(ofSize: UIFont.scaleFont(30))
+        bottomView.addSubview(messageLabel)
+        
+        messageLabel.translatesAutoresizingMaskIntoConstraints = false
+        messageLabel.leadingAnchor.constraint(greaterThanOrEqualTo: bottomView.leadingAnchor).isActive = true
+        messageLabel.trailingAnchor.constraint(lessThanOrEqualTo: bottomView.trailingAnchor).isActive = true
+        messageLabel.centerYAnchor.constraint(equalTo: bottomView.centerYAnchor).isActive = true
+        messageLabel.centerXAnchor.constraint(equalTo: bottomView.centerXAnchor).isActive = true
     }
     
     required init?(coder: NSCoder) {
