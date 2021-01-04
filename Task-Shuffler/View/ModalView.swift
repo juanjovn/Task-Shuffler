@@ -9,8 +9,6 @@
 import UIKit
 
 class ModalView: UIView {
-    let screenHeight = UIScreen.main.bounds.height
-    let screenWidth = UIScreen.main.bounds.width
     let contentView = UIView()
     let titleLabel = UILabel()
     let cancelButton = UIButton()
@@ -38,7 +36,7 @@ class ModalView: UIView {
         addSubview(contentView)
         contentView.translatesAutoresizingMaskIntoConstraints = false
         contentView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor).isActive = true
-        contentView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: screenHeight / 3).isActive = true
+        contentView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: Utils.screenHeight / 3).isActive = true
         contentView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor).isActive = true
         contentView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: 50).isActive = true
     }
@@ -79,7 +77,7 @@ class ModalView: UIView {
             return print("Not found that image")
         }
         cancelButton.setImage(closeImage, for: .normal)
-        cancelButton.tintColor = .red
+        cancelButton.tintColor = .bone
         contentView.addSubview(cancelButton)
         cancelButton.translatesAutoresizingMaskIntoConstraints = false
         
@@ -88,20 +86,16 @@ class ModalView: UIView {
     }
     
     private func setupCancelButtonBackground() {
-        cancelBackgroundView.bounds.size = CGSize(width: screenWidth * 0.06, height: screenWidth * 0.06)
-        cancelBackgroundView.backgroundColor = UIColor.green.withAlphaComponent(0.8)
+        cancelBackgroundView.bounds.size = CGSize(width: 28, height: 28)
+        cancelBackgroundView.backgroundColor = UIColor.darkGray.withAlphaComponent(0.2)
         cancelBackgroundView.layer.cornerRadius = cancelBackgroundView.bounds.width / 2
         contentView.addSubview(cancelBackgroundView)
         contentView.sendSubviewToBack(cancelBackgroundView)
         
         cancelBackgroundView.translatesAutoresizingMaskIntoConstraints = false
-//        cancelBackgroundView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 50).isActive = true
-//        cancelBackgroundView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20).isActive = true
-//        cancelBackgroundView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.06).isActive = true
-//        cancelBackgroundView.heightAnchor.constraint(equalTo: cancelBackgroundView.widthAnchor).isActive = true
         cancelBackgroundView.centerXAnchor.constraint(equalTo: cancelButton.centerXAnchor).isActive = true
         cancelBackgroundView.centerYAnchor.constraint(equalTo: cancelButton.centerYAnchor).isActive = true
-        cancelBackgroundView.widthAnchor.constraint(equalToConstant: screenWidth * 0.06).isActive = true
+        cancelBackgroundView.widthAnchor.constraint(equalToConstant: 28).isActive = true
         cancelBackgroundView.heightAnchor.constraint(equalTo: cancelBackgroundView.widthAnchor).isActive = true
     }
     

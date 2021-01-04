@@ -15,7 +15,6 @@ class DisplayTime: UIView {
     let fromColonLabel = UILabel()
     let fromTimeContainerView = UILabel()
     let fromMinuteLabel = UILabel()
-    let screenWidth = UIScreen.main.bounds.size.width
     
     required init?(text: String) {
         super.init(frame: .zero)
@@ -61,7 +60,7 @@ class DisplayTime: UIView {
         
         fromColonLabel.translatesAutoresizingMaskIntoConstraints = false
         fromColonLabel.centerYAnchor.constraint(equalTo: fromContainerView.centerYAnchor).isActive = true
-        fromColonLabel.leadingAnchor.constraint(equalTo: fromContainerView.centerXAnchor, constant: screenWidth / 23).isActive = true
+        fromColonLabel.leadingAnchor.constraint(equalTo: fromContainerView.centerXAnchor, constant: Utils.screenWidth / 23).isActive = true
     }
     
     private func setupFromTimeContainerView() {

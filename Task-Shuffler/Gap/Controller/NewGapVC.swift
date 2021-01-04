@@ -18,8 +18,6 @@ class NewGapVC: UIViewController {
     let timePicker = TimePickerVC()
     let fromDisplayTimeView = DisplayTime(text: "From")!
     let toDisplayTimeView = DisplayTime(text: "To")!
-    let screenHeight = UIScreen.main.bounds.height
-    let screenWidth = UIScreen.main.bounds.width
     let dateLabel = UILabel()
     let dateEditLabel = UILabel()
     let strikeThroughLine = UIView()
@@ -56,7 +54,7 @@ class NewGapVC: UIViewController {
         view.addSubview(contentView)
         contentView.translatesAutoresizingMaskIntoConstraints = false
         contentView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0).isActive = true
-        viewTopConstraint = contentView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: screenHeight / 3)
+        viewTopConstraint = contentView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Utils.screenHeight / 3)
         viewTopConstraint.isActive = true
         contentView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0).isActive = true
         contentView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 50).isActive = true
@@ -83,9 +81,9 @@ class NewGapVC: UIViewController {
         view.addSubview(datePicker.view)
         
         datePicker.view.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10).isActive = true
-        datePicker.view.topAnchor.constraint(equalTo: contentView.topAnchor, constant: screenHeight / 6).isActive = true
+        datePicker.view.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Utils.screenHeight / 6).isActive = true
         datePicker.view.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
-        datePicker.view.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -screenHeight / 5).isActive = true
+        datePicker.view.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -Utils.screenHeight / 5).isActive = true
         
         datePicker.didMove(toParent: self)
         datePicker.delegate = self
@@ -174,7 +172,7 @@ class NewGapVC: UIViewController {
         view.addSubview(timePicker.view)
         
         timePicker.view.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0).isActive = true
-        timePicker.view.topAnchor.constraint(equalTo: contentView.topAnchor, constant: screenHeight / 8).isActive = true
+        timePicker.view.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Utils.screenHeight / 8).isActive = true
         timePicker.view.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0).isActive = true
         timePicker.view.bottomAnchor.constraint(equalTo: nextButton.topAnchor, constant: -20).isActive = true
         
@@ -194,7 +192,7 @@ class NewGapVC: UIViewController {
         fromDisplayTimeView.leadingAnchor.constraint(equalToSystemSpacingAfter: view.safeAreaLayoutGuide.leadingAnchor, multiplier: 1.5).isActive = true
         fromDisplayTimeView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor).isActive = true
         fromDisplayTimeView.topAnchor.constraint(greaterThanOrEqualToSystemSpacingBelow: dateLabel.bottomAnchor, multiplier: 0.9).isActive = true
-        fromDisplayTimeView.bottomAnchor.constraint(equalTo: timePicker.view.topAnchor, constant: -screenHeight/50).isActive = true
+        fromDisplayTimeView.bottomAnchor.constraint(equalTo: timePicker.view.topAnchor, constant: -Utils.screenHeight/50).isActive = true
         fromDisplayTimeView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.04).isActive = true
         
     }
@@ -205,9 +203,9 @@ class NewGapVC: UIViewController {
         
         toDisplayTimeView.translatesAutoresizingMaskIntoConstraints = false
         toDisplayTimeView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor, constant: 5).isActive = true
-        toDisplayTimeView.trailingAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -screenWidth/11).isActive = true
+        toDisplayTimeView.trailingAnchor.constraint(greaterThanOrEqualTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Utils.screenWidth/11).isActive = true
         toDisplayTimeView.topAnchor.constraint(greaterThanOrEqualToSystemSpacingBelow: dateLabel.bottomAnchor, multiplier: 0.9).isActive = true
-        toDisplayTimeView.bottomAnchor.constraint(equalTo: timePicker.view.topAnchor, constant: -screenHeight/50).isActive = true
+        toDisplayTimeView.bottomAnchor.constraint(equalTo: timePicker.view.topAnchor, constant: -Utils.screenHeight/50).isActive = true
         toDisplayTimeView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.04).isActive = true
         
     }

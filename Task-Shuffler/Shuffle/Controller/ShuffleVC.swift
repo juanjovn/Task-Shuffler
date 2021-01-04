@@ -45,9 +45,8 @@ class ShuffleVC: AMTabsViewController {
     }
     
     private func setupNavigationBar() {
-        let deviceType = UIDevice().type
         
-        if deviceType != .iPhoneSE {
+        if Int(Utils.screenHeight) > Utils.iPhone8ScreenHeight {
             navigationController?.navigationBar.prefersLargeTitles = true
         } else {
             navigationController?.navigationBar.prefersLargeTitles = false
@@ -71,10 +70,12 @@ class ShuffleVC: AMTabsViewController {
         shuffleView.addSubview(shuffleSlider)
         
         shuffleSlider.translatesAutoresizingMaskIntoConstraints = false
-        shuffleSlider.heightAnchor.constraint(equalTo: shuffleView.heightAnchor, multiplier: 0.09).isActive = true
+        shuffleSlider.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.09).isActive = true
         shuffleSlider.leadingAnchor.constraint(equalTo: shuffleView.leadingAnchor, constant: 30).isActive = true
         shuffleSlider.trailingAnchor.constraint(equalTo: shuffleView.trailingAnchor, constant: -30).isActive = true
-        shuffleSlider.bottomAnchor.constraint(equalTo: shuffleView.bottomAnchor, constant: -120).isActive = true
+        shuffleSlider.bottomAnchor.constraint(equalTo: shuffleView.bottomAnchor, constant: Utils.screenHeight / -7).isActive = true
+        
+        //shuffleView.shuffleBackImageView.bottomAnchor.constraint(equalTo: shuffleSlider.topAnchor, constant: -10).isActive = true
     }
     
     private func setupShuffleButton() {

@@ -55,4 +55,28 @@ class ShuffleSegmentedControllersDataSource: SJFluidSegmentedControlDataSource {
         }
         
     }
+    
+    func segmentedControl(_ segmentedControl: SJFluidSegmentedControl, gradientColorsForSelectedSegmentAtIndex index: Int) -> [UIColor] {
+        switch index {
+        case 0:
+            return [UIColor.fireOrange]
+        case 1:
+            return [UIColor.mysticBlue]
+        case 2:
+            return [UIColor.forestGreen]
+        default:
+            return [UIColor.fireOrange]
+        }
+    }
+    
+    func segmentedControl(_ segmentedControl: SJFluidSegmentedControl,
+                          gradientColorsForBounce bounce: SJFluidSegmentedControlBounce) -> [UIColor] {
+        switch bounce {
+        case .left:
+            return [UIColor(red: 51 / 255.0, green: 149 / 255.0, blue: 182 / 255.0, alpha: 1.0)]
+        case .right:
+            return [UIColor(red: 9 / 255.0, green: 82 / 255.0, blue: 107 / 255.0, alpha: 1.0)]
+        }
+    }
+    
 }

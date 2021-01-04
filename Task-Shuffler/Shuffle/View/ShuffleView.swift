@@ -24,6 +24,7 @@ class ShuffleView: UIView {
     let shuffleBackImageView = UIImageView()
     var shuffleBackImage = UIImage(named: "shuffle.circle")
     let detailLabel = UILabel()
+    let backgroundImageContainerView = UIView()
     
     //MARK: Variables
     
@@ -36,6 +37,7 @@ class ShuffleView: UIView {
         setupHowSegmentedControl()
         setupWhenLabel()
         setupWhenSegmentedControl()
+        setupBackgroundImageContainerView()
         setupShuffleBackImageView()
         setupDetailLabel()
     }
@@ -87,12 +89,12 @@ class ShuffleView: UIView {
         whenLabel.translatesAutoresizingMaskIntoConstraints = false
         whenLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15).isActive = true
         whenLabel.trailingAnchor.constraint(greaterThanOrEqualTo: self.trailingAnchor, constant: -20).isActive = true
-        whenLabel.topAnchor.constraint(equalTo: howSegmentedControl.bottomAnchor, constant: 30).isActive = true
+        whenLabel.topAnchor.constraint(equalTo: howSegmentedControl.bottomAnchor, constant: Utils.screenHeight / 50).isActive = true
         
     }
     
     private func setupHowSegmentedControl() {
-        howSegmentedControl.selectorViewColor = .fireOrange
+        //howSegmentedControl.selectorViewColor = .fireOrange // if gradientColorsForSelectedSegmentAtIndex this should be commented
         howSegmentedControl.textColor = .mysticBlue
         howSegmentedControl.selectedSegmentTextColor = .pearlWhite
         howSegmentedControl.backgroundColor = UIColor.mysticBlue.withAlphaComponent(0.3)
@@ -102,11 +104,11 @@ class ShuffleView: UIView {
         howSegmentedControl.topAnchor.constraint(equalTo: howLabel.bottomAnchor, constant: 10).isActive = true
         howSegmentedControl.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 30).isActive = true
         howSegmentedControl.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -30).isActive = true
-        howSegmentedControl.heightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.widthAnchor, multiplier: 0.1).isActive = true
+        howSegmentedControl.heightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.heightAnchor, multiplier: 0.07).isActive = true
     }
     
     private func setupWhenSegmentedControl() {
-        whenSegmentedControl.selectorViewColor = .fireOrange
+        //whenSegmentedControl.selectorViewColor = .fireOrange
         whenSegmentedControl.textColor = .mysticBlue
         whenSegmentedControl.selectedSegmentTextColor = .pearlWhite
         whenSegmentedControl.backgroundColor = UIColor.mysticBlue.withAlphaComponent(0.3)
@@ -116,31 +118,45 @@ class ShuffleView: UIView {
         whenSegmentedControl.topAnchor.constraint(equalTo: whenLabel.bottomAnchor, constant: 10).isActive = true
         whenSegmentedControl.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 30).isActive = true
         whenSegmentedControl.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -30).isActive = true
-        whenSegmentedControl.heightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.widthAnchor, multiplier: 0.1).isActive = true
+        whenSegmentedControl.heightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.heightAnchor, multiplier: 0.07).isActive = true
     }
     
     private func setupShuffleBackImageView() {
         shuffleBackImageView.image = shuffleBackImage
+        //shuffleBackImageView.backgroundColor = .clear
         shuffleBackImageView.contentMode = .scaleAspectFit
         shuffleBackImageView.tintColor = UIColor.mysticBlue.withAlphaComponent(0.07)
-        self.addSubview(shuffleBackImageView)
-        self.sendSubviewToBack(shuffleBackImageView)
+        backgroundImageContainerView.addSubview(shuffleBackImageView)
+        //self.sendSubviewToBack(shuffleBackImageView)
         shuffleBackImageView.translatesAutoresizingMaskIntoConstraints = false
-        shuffleBackImageView.topAnchor.constraint(equalTo: whenSegmentedControl.bottomAnchor, constant: 10).isActive = true
-        shuffleBackImageView.heightAnchor.constraint(equalTo: self.safeAreaLayoutGuide.widthAnchor, multiplier: 0.5).isActive = true
-        shuffleBackImageView.widthAnchor.constraint(equalTo: shuffleBackImageView.heightAnchor).isActive = true
-        shuffleBackImageView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        shuffleBackImageView.topAnchor.constraint(equalTo: backgroundImageContainerView.topAnchor).isActive = true
+        shuffleBackImageView.bottomAnchor.constraint(equalTo: backgroundImageContainerView.bottomAnchor).isActive = true
+        shuffleBackImageView.leadingAnchor.constraint(equalTo: backgroundImageContainerView.leadingAnchor).isActive = true
+        shuffleBackImageView.trailingAnchor.constraint(equalTo: backgroundImageContainerView.trailingAnchor).isActive = true
+//        shuffleBackImageView.heightAnchor.constraint(equalTo: backgroundImageContainerView.heightAnchor).isActive = true
+//        shuffleBackImageView.widthAnchor.constraint(equalTo: shuffleBackImageView.heightAnchor).isActive = true
+//        shuffleBackImageView.centerXAnchor.constraint(equalTo: backgroundImageContainerView.centerXAnchor).isActive = true
+//        shuffleBackImageView.centerYAnchor.constraint(equalTo: backgroundImageContainerView.centerYAnchor).isActive = true
         
-        
+    }
+    
+    private func setupBackgroundImageContainerView() {
+        backgroundImageContainerView.backgroundColor = .clear
+        addSubview(backgroundImageContainerView)
+        backgroundImageContainerView.translatesAutoresizingMaskIntoConstraints = false
+        backgroundImageContainerView.topAnchor.constraint(equalTo: whenSegmentedControl.bottomAnchor, constant: 15).isActive = true
+        backgroundImageContainerView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 15).isActive = true
+        backgroundImageContainerView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -15).isActive = true
+        backgroundImageContainerView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: Utils.screenHeight / -4.5).isActive = true
     }
     
     private func setupDetailLabel() {
         detailLabel.text = "12 tasks will be shuffled in 15 gaps"
-        detailLabel.font = .avenirDemiBold(ofSize: 20)
+        detailLabel.font = .avenirDemiBold(ofSize: UIFont.scaleFont(20))
         detailLabel.textColor = .mysticBlue
         detailLabel.shadowOffset = CGSize(width: 0, height: 1)
         detailLabel.shadowColor = UIColor.darkGray.withAlphaComponent(0.2)
-        self.addSubview(detailLabel)
+        backgroundImageContainerView.addSubview(detailLabel)
         detailLabel.translatesAutoresizingMaskIntoConstraints = false
         
         detailLabel.centerXAnchor.constraint(equalTo: shuffleBackImageView.centerXAnchor).isActive = true

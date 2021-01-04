@@ -38,8 +38,8 @@ extension UIFont {
     }
     
     static func scaleFont(_ size: CGFloat) -> CGFloat{
-        if (UIScreen.main.bounds.width != 375){
-            let scaleFactor = UIScreen.main.bounds.width / 375
+        if (Int(Utils.screenWidth) != Utils.iPhone8ScreenWidth){
+            let scaleFactor = Utils.screenWidth / CGFloat(Utils.iPhone8ScreenWidth)
             return CGFloat(size * scaleFactor)
         } else {
             return size
