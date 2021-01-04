@@ -16,6 +16,7 @@ struct Task {
     var duration: Int
     var priority: Priority
     var state: State
+    var gapid: String
 }
 
 // Enumeration of priority levels
@@ -33,12 +34,13 @@ enum State: String {
     case assigned = "Assigned"
     case completed = "Completed"
     case outdated = "Outdated"
+    case filled = "Filled"
 }
 
 // Extension for compare if two task are the same
 
 extension Task: Equatable {
     static func == (lhs: Task, rhs: Task) -> Bool {
-        return lhs.name == rhs.name && lhs.duration == rhs.duration && lhs.priority == rhs.priority
+        return lhs.name == rhs.name && lhs.duration == rhs.duration && lhs.priority == rhs.priority && lhs.id == rhs.id
     }
 }

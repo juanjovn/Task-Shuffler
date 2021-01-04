@@ -431,7 +431,7 @@ extension TasksListViewController: UITableViewDelegate{
     }
     
     func deleteTask (_ indexPath: IndexPath){
-        var task = Task(id: "", name: "", duration: 10, priority: .low, state: .pending)
+        var task = Task(id: "", name: "", duration: 10, priority: .low, state: .pending, gapid: "")
         switch indexPath.section {
         case 0:
             if segmentedControl.currentSegment == 0 {
@@ -543,7 +543,7 @@ extension TasksListViewController : UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let zelda = tableView.dequeueReusableCell(withIdentifier: "taskCell", for: indexPath) as! TaskCell
         
-        var task = Task(id: "", name: "", duration: 0, priority: .low, state: .pending)
+        var task = Task(id: "", name: "", duration: 0, priority: .low, state: .pending, gapid: "")
         switch indexPath.section {
             case 0:
                 if segmentedControl.currentSegment == 0{

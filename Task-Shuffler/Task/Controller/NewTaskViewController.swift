@@ -164,7 +164,7 @@ class NewTaskViewController: UIViewController {
             taskRealm.priority = taskPriority.rawValue
         
             
-            newTask = Task(id: taskRealm.id, name: taskRealm.name, duration: taskRealm.duration, priority: taskPriority, state: .pending)
+            newTask = Task(id: taskRealm.id, name: taskRealm.name, duration: taskRealm.duration, priority: taskPriority, state: .pending, gapid: "")
             if taskListVC!.isTaskEditing {
                 newTask.id = taskListVC!.pendingTasks[selectedRow.row].id
                 taskListVC?.replaceTask(task: newTask, position: selectedRow.row)

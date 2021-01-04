@@ -15,6 +15,7 @@ class TaskRealm: Object{
     @objc dynamic var duration = 10
     @objc dynamic var priority = 1
     @objc dynamic var state = "Pending"
+    @objc dynamic var gapid = ""
     
     override class func primaryKey() -> String? {
         return "id"

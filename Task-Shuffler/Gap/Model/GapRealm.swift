@@ -23,14 +23,12 @@ class GapRealm: Object{
     }
     @objc dynamic var duration = 0
     @objc dynamic var state = "Pending"
-    @objc dynamic var taskid = ""
     
     convenience init(startDate: Date, endDate: Date, state: String, taskid: String) {
         self.init()
         self.startDate = startDate
         self.endDate = endDate
         self.state = state
-        self.taskid = taskid
         self.duration = intervalDateToMinutes(startDate: startDate, endDate: endDate)
     }
     

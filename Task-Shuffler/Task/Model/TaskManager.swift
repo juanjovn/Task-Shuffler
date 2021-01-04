@@ -23,7 +23,7 @@ class TaskManager {
         var tasks = [Task]()
         for t in tasksResults {
             let taskRealm = t as! TaskRealm
-            let task = Task(id: taskRealm.id, name: taskRealm.name, duration: taskRealm.duration, priority: Priority(rawValue: taskRealm.priority)!, state: State(rawValue: taskRealm.state)!)
+            let task = Task(id: taskRealm.id, name: taskRealm.name, duration: taskRealm.duration, priority: Priority(rawValue: taskRealm.priority)!, state: State(rawValue: taskRealm.state)!, gapid: taskRealm.gapid)
             tasks.append(task)
         }
         

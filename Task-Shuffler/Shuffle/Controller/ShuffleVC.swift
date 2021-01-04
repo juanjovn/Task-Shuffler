@@ -12,8 +12,10 @@ import AMTabView
 class ShuffleVC: AMTabsViewController {
     let shuffleView = ShuffleView()
     lazy var shuffleSegmentedControllersDataSource = ShuffleSegmentedControllersDataSource(shuffleView: shuffleView)
+    lazy var shuffleSegmentedControllersDelegate = ShuffleSegmentedControllersDelegate(shuffleView: shuffleView, shuffleController: self)
     var shuffleSlider = MTSlideToOpenView(frame: CGRect(x: 26, y: 200, width: 317, height: 56))
     var shuffleImageRotation = CGFloat()
+    var shuffleConfiguration = ShuffleConfiguration(how: .Smart, when: .All)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +25,8 @@ class ShuffleVC: AMTabsViewController {
         setupShuffleButton()
         shuffleView.howSegmentedControl.dataSource = shuffleSegmentedControllersDataSource
         shuffleView.whenSegmentedControl.dataSource = shuffleSegmentedControllersDataSource
+        shuffleView.howSegmentedControl.delegate = shuffleSegmentedControllersDelegate
+        shuffleView.whenSegmentedControl.delegate = shuffleSegmentedControllersDelegate
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -121,6 +125,7 @@ extension ShuffleVC: MTSlideToOpenDelegate {
         //        let doneAction = UIAlertAction(title: "OK", style: .default) { (action) in
         sender.resetStateWithAnimation(true)
         
+        print(shuffleConfiguration)
         let shuffleResultsVC = ShuffleResultsVC()
         present(shuffleResultsVC, animated: true, completion: nil)
         
