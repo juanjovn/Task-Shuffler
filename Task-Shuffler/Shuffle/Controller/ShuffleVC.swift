@@ -110,30 +110,29 @@ extension ShuffleVC: TabItem{
 }
 
 
-// MARK: MTSlideToOpenDelegate
+// MARK: MTSlideToOpenDelegate: Slider's delegate
 extension ShuffleVC: MTSlideToOpenDelegate {
+    //Actions that will be performed when the slider activates
     func mtSlideToOpenDelegateDidFinish(_ sender: MTSlideToOpenView) {
-        let generator = UIImpactFeedbackGenerator(style: .heavy)
+        
         if SettingsValues.otherSettings[0] {
+            let generator = UIImpactFeedbackGenerator(style: .heavy)
             generator.impactOccurred()
         }
+        
         shuffleView.shuffleButton.setClicked(true)
         _ = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) {_ in
             self.shuffleView.shuffleButton.setClicked(false)
         }
-        //        let alertController = UIAlertController(title: "", message: "Shuffled!", preferredStyle: .alert)
-        //        let doneAction = UIAlertAction(title: "OK", style: .default) { (action) in
         sender.resetStateWithAnimation(true)
         
         let fillGapsController = FillGapsController(shuffleMode: shuffleConfiguration, shuffleVC: self)
         let task = fillGapsController.shuffleTask()
-        let shuffleResultsVC = ShuffleResultsVC()
-        shuffleResultsVC.modalView.messageLabel.text = "\(task.name) in gap id: \(task.gapid)"
-        present(shuffleResultsVC, animated: true, completion: nil)
-        
-        //        }
-        //        alertController.addAction(doneAction)
-        //        self.present(alertController, animated: true, completion: nil)
+        if task.id != "" { //If this is empty means there were a problem during the task shuffler and returned an empty task. Prevents errors in console due to have an alert presented and intend to present another view controller (the results modal in this case)
+            let shuffleResultsVC = ShuffleResultsVC()
+            shuffleResultsVC.modalView.messageLabel.text = "\(task.name) in gap id: \(task.gapid)"
+            present(shuffleResultsVC, animated: true, completion: nil)
+        }
         
     }
     

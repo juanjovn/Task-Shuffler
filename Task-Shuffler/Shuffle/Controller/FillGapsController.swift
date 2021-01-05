@@ -13,46 +13,30 @@ class FillGapsController {
     var pendingGaps = GapManager.instance.pendingGaps
     var shuffleMode = ShuffleConfiguration.init(how: .Smart, when: .All)
     var shuffleVC: ShuffleVC?
-    var prunedTasks = [String: Task]()
+    var randomizedCandidateTasks = [Task]()
     
     init(shuffleMode: ShuffleConfiguration, shuffleVC: ShuffleVC?) {
         self.shuffleMode = shuffleMode
         self.shuffleVC = shuffleVC
-        
-        for t in pendingTasks {
-            prunedTasks.updateValue(t, forKey: t.id)
-        }
     }
     
     
     
     public func shuffleTask() -> Task {
-        let task = getAssignedTask()
+        let task = getAssignedTask(tasks: getCandidateTasks())
         print("You have to do \(task.name) in gap \(task.gapid)")
         return task
     }
     
     
-    private func getSomeTask(triedTasks: [Task]) -> Task {
-        let task = Task(id: "", name: "", duration: 0, priority: .low, state: .pending, gapid: "")
-        
-        if existFreeTask(pendingTasks: pendingTasks) && existSuitableGap(){
-            if triedTasks.count > 0 {
-                for triedTask in triedTasks {
-                    prunedTasks.removeValue(forKey: triedTask.id)
-                    getSomeTask(triedTasks: triedTasks)
-                }
-            }
+    private func getCandidateTasks() -> [Task] {
+        if existFreeTask(pendingTasks: pendingTasks) {
             
             switch shuffleMode.how {
             case .Smart:
                 break
             case .Random:
-                guard let newTask = pendingTasks.randomElement() else {
-                    print("Cannot obtain a random Task")
-                    return task
-                }
-                return newTask
+                randomizedCandidateTasks = getRandomizedCandidateTasks(tasks: pendingTasks)
             case .Single:
                 break
             }
@@ -63,43 +47,29 @@ class FillGapsController {
             }
         }
         
-        return task
+        return randomizedCandidateTasks
     }
     
-    private func getAssignedTask() -> Task {
-        var triedTasks = [Task]()
+    private func getAssignedTask(tasks: [Task]) -> Task {
+        
         var task = Task(id: "", name: "", duration: 0, priority: .low, state: .pending, gapid: "")
-        var foundTask = false
         
         if existFreeGap(pendingGaps: pendingGaps) {
             
-            task = getSomeTask(triedTasks: triedTasks)
-            
-            for gap in pendingGaps {
-                if gap.duration >= task.duration {
-                    foundTask = true
-                    break
-                } else {
-                    triedTasks.append(task)
-                    task = getSomeTask(triedTasks: triedTasks)
-                }
-            }
-            
             switch shuffleMode.when {
+            
             case .All:
-                var validGaps = [GapRealm]()
-                for gap in pendingGaps {
-                    if gap.duration >= task.duration {
-                        validGaps.append(gap)
+               
+                let shuffledGaps = pendingGaps.shuffled()
+                for t in tasks {
+                    for g in shuffledGaps {
+                        if t.duration <= g.duration {
+                            task = t
+                            task.gapid = g.id
+                            return task
+                        }
                     }
                 }
-                
-                if validGaps
-                guard let gap = validGaps.randomElement() else {
-                    break
-                }
-                task.gapid = gap.id
-                return task
             case .This:
                 return task
             case .Next:
@@ -137,11 +107,23 @@ class FillGapsController {
             for g in pendingGaps {
                 if t.duration <= g.duration {
                     return true
-                    break
                 }
             }
         }
         return false
+    }
+    
+    private func getRandomizedCandidateTasks(tasks: [Task]) -> [Task] {
+        var candidateTasks = [Task]()
+        for task in tasks {
+            for gap in pendingGaps {
+                if task.duration <= gap.duration {
+                    candidateTasks.append(task)
+                    break
+                }
+            }
+        }
+        return candidateTasks.shuffled()
     }
     
 }
