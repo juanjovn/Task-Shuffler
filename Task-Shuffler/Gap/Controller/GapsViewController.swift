@@ -210,7 +210,7 @@ class GapsViewController: AMTabsViewController {
                 isChanged = true
                 do {
                     try db.realm.write{
-                        gap.state = State.completed.rawValue
+                        gap.state = State.outdated.rawValue
                     }
                 } catch {
                     print("Error updating to database")

@@ -125,8 +125,8 @@ extension ShuffleVC: MTSlideToOpenDelegate {
         //        let doneAction = UIAlertAction(title: "OK", style: .default) { (action) in
         sender.resetStateWithAnimation(true)
         
-        let fillGapsController = FillGapsController.instance
-        let task = fillGapsController.shuffleTask(mode: shuffleConfiguration)
+        let fillGapsController = FillGapsController(shuffleMode: shuffleConfiguration, shuffleVC: self)
+        let task = fillGapsController.shuffleTask()
         let shuffleResultsVC = ShuffleResultsVC()
         shuffleResultsVC.modalView.messageLabel.text = "\(task.name) in gap id: \(task.gapid)"
         present(shuffleResultsVC, animated: true, completion: nil)
