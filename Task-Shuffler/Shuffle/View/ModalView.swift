@@ -12,8 +12,12 @@ class ModalView: UIView {
     let contentView = UIView()
     let titleLabel = UILabel()
     let cancelButton = UIButton()
-    let cancelBackgroundView = UIView()
-    let okButton = UIButton(type: .custom)
+    let cancelBackgroundView = UIView() //Crossmark icon. Dismiss the view controller.
+    let buttonsContainerView = UIView()
+    let okButtonView = UIView()
+    let okButton = RoundedModalActionButton()
+    let reshuffleButtonView = UIView()
+    let reshuffleButton = RoundedModalActionButton()
     let bottomView = UIView()
     var messageLabel = UILabel()
     
@@ -25,8 +29,19 @@ class ModalView: UIView {
         setupTitleLabel()
         setupCancelButton()
         setupCancelButtonBackground()
+        setupButtonsContainerView()
+        setupOkButton()
+        setupReshuffleButton()
         setupBottomView()
         setupMessageLabel()
+    }
+    
+    //Necessary for updating rounded corners.
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        //Creates rounded corners
+        okButtonView.layer.cornerRadius = okButtonView.bounds.size.height / 2
+        reshuffleButtonView.layer.cornerRadius = reshuffleButtonView.bounds.size.height / 2
     }
     
     private func setupView() {
@@ -36,8 +51,8 @@ class ModalView: UIView {
     private func setupContentView() {
         contentView.backgroundColor = #colorLiteral(red: 0.7764705882, green: 0.7725490196, blue: 0.7254901961, alpha: 0.85)
         contentView.layer.cornerRadius = 20
-        
         addSubview(contentView)
+        //CONSTRAINTS
         contentView.translatesAutoresizingMaskIntoConstraints = false
         contentView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor).isActive = true
         contentView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: Utils.screenHeight / 3).isActive = true
@@ -52,7 +67,7 @@ class ModalView: UIView {
         blurEffectView.clipsToBounds = true
         addSubview(blurEffectView)
         sendSubviewToBack(blurEffectView)
-        
+        //CONSTRAINTS
         blurEffectView.translatesAutoresizingMaskIntoConstraints = false
         blurEffectView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
         blurEffectView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
@@ -65,7 +80,7 @@ class ModalView: UIView {
         //print(self.editedGap.description)
         titleLabel.font = .avenirDemiBold(ofSize: UIFont.scaleFont(30))
         contentView.addSubview(titleLabel)
-        
+        //CONSTRAINTS
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.leadingAnchor.constraint(greaterThanOrEqualTo: contentView.leadingAnchor, constant: 10).isActive = true
         titleLabel.trailingAnchor.constraint(lessThanOrEqualTo: contentView.trailingAnchor, constant: -10).isActive = true
@@ -83,8 +98,8 @@ class ModalView: UIView {
         cancelButton.setImage(closeImage, for: .normal)
         cancelButton.tintColor = .bone
         contentView.addSubview(cancelButton)
+        //CONSTRAINTS
         cancelButton.translatesAutoresizingMaskIntoConstraints = false
-        
         cancelButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -25).isActive = true
         cancelButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 15).isActive = true
     }
@@ -95,7 +110,7 @@ class ModalView: UIView {
         cancelBackgroundView.layer.cornerRadius = cancelBackgroundView.bounds.width / 2
         contentView.addSubview(cancelBackgroundView)
         contentView.sendSubviewToBack(cancelBackgroundView)
-        
+        //CONSTRAINTS
         cancelBackgroundView.translatesAutoresizingMaskIntoConstraints = false
         cancelBackgroundView.centerXAnchor.constraint(equalTo: cancelButton.centerXAnchor).isActive = true
         cancelBackgroundView.centerYAnchor.constraint(equalTo: cancelButton.centerYAnchor).isActive = true
@@ -103,15 +118,70 @@ class ModalView: UIView {
         cancelBackgroundView.heightAnchor.constraint(equalTo: cancelBackgroundView.widthAnchor).isActive = true
     }
     
+    private func setupButtonsContainerView() {
+        buttonsContainerView.backgroundColor = .clear
+        contentView.addSubview(buttonsContainerView)
+        //CONSTRAINTS
+        buttonsContainerView.translatesAutoresizingMaskIntoConstraints = false
+        buttonsContainerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 30).isActive = true
+        buttonsContainerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -30).isActive = true
+        buttonsContainerView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -15).isActive = true
+        buttonsContainerView.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.10).isActive = true
+    }
+    
+    private func setupOkButtonView() {
+        buttonsContainerView.addSubview(okButtonView)
+        okButtonView.backgroundColor = .powerGreen
+        okButtonView.layer.shadowColor = UIColor.mysticBlue.cgColor
+        okButtonView.layer.shadowOffset = .init(width: 0, height: 2)
+        okButtonView.layer.shadowRadius = 5
+        okButtonView.layer.shadowOpacity = 0.7
+        //CONSTRAINTS
+        okButtonView.translatesAutoresizingMaskIntoConstraints = false
+        okButtonView.leadingAnchor.constraint(equalTo: buttonsContainerView.centerXAnchor, constant: 15).isActive = true
+        okButtonView.topAnchor.constraint(equalTo: buttonsContainerView.topAnchor).isActive = true
+        okButtonView.trailingAnchor.constraint(equalTo: buttonsContainerView.trailingAnchor).isActive = true
+        okButtonView.bottomAnchor.constraint(equalTo: buttonsContainerView.bottomAnchor).isActive = true
+        
+    }
+    
+    private func setupOkButton() {
+        buttonsContainerView.addSubview(okButton)
+        okButton.backgroundColor = .powerGreen
+        okButton.setTitle("OK", for: .normal)
+        okButton.setTitleColor(.pearlWhite, for: .normal)
+        //CONSTRAINTS
+        okButton.translatesAutoresizingMaskIntoConstraints = false
+        okButton.leadingAnchor.constraint(equalTo: buttonsContainerView.centerXAnchor, constant: 15).isActive = true
+        okButton.topAnchor.constraint(equalTo: buttonsContainerView.topAnchor).isActive = true
+        okButton.trailingAnchor.constraint(equalTo: buttonsContainerView.trailingAnchor).isActive = true
+        okButton.bottomAnchor.constraint(equalTo: buttonsContainerView.bottomAnchor).isActive = true
+        
+    }
+    
+    private func setupReshuffleButton() {
+        buttonsContainerView.addSubview(reshuffleButton)
+        reshuffleButton.backgroundColor = .opalRed
+        reshuffleButton.setTitle("RESHUFFLE", for: .normal)
+        reshuffleButton.setTitleColor(.pearlWhite, for: .normal)
+        //CONSTRAINTS
+        reshuffleButton.translatesAutoresizingMaskIntoConstraints = false
+        reshuffleButton.leadingAnchor.constraint(equalTo: buttonsContainerView.leadingAnchor).isActive = true
+        reshuffleButton.topAnchor.constraint(equalTo: buttonsContainerView.topAnchor).isActive = true
+        reshuffleButton.trailingAnchor.constraint(equalTo: buttonsContainerView.centerXAnchor, constant: -15).isActive = true
+        reshuffleButton.bottomAnchor.constraint(equalTo: buttonsContainerView.bottomAnchor).isActive = true
+    }
+    
     //A container view for laying out the elements under the title label
     private func setupBottomView() {
         bottomView.backgroundColor = UIColor.darkGray.withAlphaComponent(0.15)
         bottomView.layer.cornerRadius = 20
         contentView.addSubview(bottomView)
+        //CONSTRAINTS
         bottomView.translatesAutoresizingMaskIntoConstraints = false
         bottomView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 15).isActive = true
         bottomView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15).isActive = true
-        bottomView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -15).isActive = true
+        bottomView.bottomAnchor.constraint(equalTo: buttonsContainerView.topAnchor, constant: -15).isActive = true
         bottomView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15).isActive = true
     }
     
@@ -121,7 +191,7 @@ class ModalView: UIView {
         messageLabel.numberOfLines = 3
         messageLabel.font = .avenirRegular(ofSize: UIFont.scaleFont(30))
         bottomView.addSubview(messageLabel)
-        
+        //CONSTRAINTS
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
         messageLabel.leadingAnchor.constraint(greaterThanOrEqualTo: bottomView.leadingAnchor).isActive = true
         messageLabel.trailingAnchor.constraint(lessThanOrEqualTo: bottomView.trailingAnchor).isActive = true

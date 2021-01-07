@@ -11,10 +11,17 @@ import UIKit
 class ShuffleResultsVC: ViewController {
     let modalView = ModalView()
     lazy var cancelButton = modalView.cancelButton
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view = modalView
         setupCancelButton()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        //Update rounded corners
+        modalView.buttonsContainerView.layoutIfNeeded()
     }
     
     private func setupCancelButton() {

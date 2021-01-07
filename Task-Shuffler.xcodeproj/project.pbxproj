@@ -11,6 +11,7 @@
 		8146988B25865C3E00D7BCE1 /* Pods_Task_Shuffler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C313B2D615F94E260304E37 /* Pods_Task_Shuffler.framework */; };
 		815204EF245E9A1E0004510B /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815204EE245E9A1E0004510B /* Alert.swift */; };
 		815204F1245F46C20004510B /* GapRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815204F0245F46C20004510B /* GapRealm.swift */; };
+		8164ED3925A70C2C00454D76 /* RoundedModalActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8164ED3825A70C2B00454D76 /* RoundedModalActionButton.swift */; };
 		816709CE245C9F7D00D94E65 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816709CC245C9F7D00D94E65 /* SettingsVC.swift */; };
 		816709CF245C9F7D00D94E65 /* SettingsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 816709CD245C9F7D00D94E65 /* SettingsVC.xib */; };
 		816709D1245CCC5000D94E65 /* SettingsValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816709D0245CCC5000D94E65 /* SettingsValues.swift */; };
@@ -70,6 +71,7 @@
 		811880A5243515BC00E5FEE1 /* DeviceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceModel.swift; sourceTree = "<group>"; };
 		815204EE245E9A1E0004510B /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		815204F0245F46C20004510B /* GapRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GapRealm.swift; sourceTree = "<group>"; };
+		8164ED3825A70C2B00454D76 /* RoundedModalActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedModalActionButton.swift; sourceTree = "<group>"; };
 		816709CC245C9F7D00D94E65 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		816709CD245C9F7D00D94E65 /* SettingsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsVC.xib; sourceTree = "<group>"; };
 		816709D0245CCC5000D94E65 /* SettingsValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsValues.swift; sourceTree = "<group>"; };
@@ -268,7 +270,7 @@
 			children = (
 				81E9B1442405BEE400BBADB8 /* Main.storyboard */,
 				81E9B1492405BEE600BBADB8 /* LaunchScreen.storyboard */,
-				819970A425A0F958004D48C3 /* ModalView.swift */,
+				8164ED3825A70C2B00454D76 /* RoundedModalActionButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -304,6 +306,7 @@
 		81EE6750259A336C007B9D87 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				819970A425A0F958004D48C3 /* ModalView.swift */,
 				81EE67A6259B810F007B9D87 /* MTSlideToOpenView.swift */,
 				81EE6752259A33D5007B9D87 /* ShuffleView.swift */,
 			);
@@ -641,6 +644,7 @@
 				81AB5D6A2476F915009ADB97 /* HorizontalCollectionVC.swift in Sources */,
 				8170DD812468001C0060725D /* MinuteCell.swift in Sources */,
 				8188D5BB2408601800CCBA99 /* NewTaskViewController.swift in Sources */,
+				8164ED3925A70C2C00454D76 /* RoundedModalActionButton.swift in Sources */,
 				819970A525A0F958004D48C3 /* ModalView.swift in Sources */,
 				81DC259E246C752E00926034 /* DisplayTime.swift in Sources */,
 				81ED3A84244DEFD400C36DB8 /* TaskCell.swift in Sources */,
