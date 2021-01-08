@@ -40,6 +40,10 @@ class GapManager {
         completedGaps = populateGaps(state: .completed)
     }
     
+    func existPendingGaps() -> Bool {
+        return pendingGaps.count > 0
+    }
+    
     init() {
         fillGaps()
     }

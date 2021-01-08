@@ -13,12 +13,14 @@ class ShuffleResultsVC: ViewController {
     var shuffleVC: ShuffleVC? = ShuffleVC()
     lazy var cancelButton = modalView.cancelButton
     lazy var reshuffleButton = modalView.reshuffleButton
+    lazy var okButton = modalView.okButton
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view = modalView
         setupCancelButton()
         setupReshuffleButton()
+        setupOkButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -33,6 +35,10 @@ class ShuffleResultsVC: ViewController {
     
     private func setupReshuffleButton() {
         reshuffleButton.addTarget(self, action: #selector(reshuffleButtonAction), for: .touchUpInside)
+    }
+    
+    private func setupOkButton() {
+        okButton.addTarget(self, action: #selector(okButtonAction), for: .touchUpInside)
     }
     
     @objc private func cancelButtonAction() {
@@ -50,5 +56,10 @@ class ShuffleResultsVC: ViewController {
                 self.modalView.messageLabel.transform = .identity
             })
         }
+    }
+    
+    @objc private func okButtonAction() {
+        //TODO: Store assigned tasks
+        dismiss(animated: true, completion: nil)
     }
 }

@@ -54,7 +54,7 @@ class FillGapsController {
         
         var task = Task(id: "", name: "", duration: 0, priority: .low, state: .pending, gapid: "")
         
-        if existFreeGap(pendingGaps: pendingGaps) {
+        if  pendingGaps.count > 0{
             
             switch shuffleMode.when {
             
@@ -91,14 +91,6 @@ class FillGapsController {
         }else {
             return false
             
-        }
-    }
-    
-    private func existFreeGap(pendingGaps: [GapRealm]) -> Bool {
-        if pendingGaps.count > 0{
-            return true
-        } else {
-            return false
         }
     }
     

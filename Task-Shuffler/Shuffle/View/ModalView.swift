@@ -14,9 +14,7 @@ class ModalView: UIView {
     let cancelButton = UIButton()
     let cancelBackgroundView = UIView() //Crossmark icon. Dismiss the view controller.
     let buttonsContainerView = UIView()
-    let okButtonView = UIView()
     let okButton = RoundedModalActionButton()
-    let reshuffleButtonView = UIView()
     let reshuffleButton = RoundedModalActionButton()
     let bottomView = UIView()
     var messageLabel = UILabel()
@@ -34,14 +32,6 @@ class ModalView: UIView {
         setupReshuffleButton()
         setupBottomView()
         setupMessageLabel()
-    }
-    
-    //Necessary for updating rounded corners.
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        //Creates rounded corners
-        okButtonView.layer.cornerRadius = okButtonView.bounds.size.height / 2
-        reshuffleButtonView.layer.cornerRadius = reshuffleButtonView.bounds.size.height / 2
     }
     
     private func setupView() {
@@ -127,22 +117,6 @@ class ModalView: UIView {
         buttonsContainerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -30).isActive = true
         buttonsContainerView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -15).isActive = true
         buttonsContainerView.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.10).isActive = true
-    }
-    
-    private func setupOkButtonView() {
-        buttonsContainerView.addSubview(okButtonView)
-        okButtonView.backgroundColor = .powerGreen
-        okButtonView.layer.shadowColor = UIColor.mysticBlue.cgColor
-        okButtonView.layer.shadowOffset = .init(width: 0, height: 2)
-        okButtonView.layer.shadowRadius = 5
-        okButtonView.layer.shadowOpacity = 0.7
-        //CONSTRAINTS
-        okButtonView.translatesAutoresizingMaskIntoConstraints = false
-        okButtonView.leadingAnchor.constraint(equalTo: buttonsContainerView.centerXAnchor, constant: 15).isActive = true
-        okButtonView.topAnchor.constraint(equalTo: buttonsContainerView.topAnchor).isActive = true
-        okButtonView.trailingAnchor.constraint(equalTo: buttonsContainerView.trailingAnchor).isActive = true
-        okButtonView.bottomAnchor.constraint(equalTo: buttonsContainerView.bottomAnchor).isActive = true
-        
     }
     
     private func setupOkButton() {
