@@ -10,5 +10,5 @@ import Foundation
 
 class ShuffleModes {
     static let howModes = ["Smart", "Random", "Single"]
-    static let whenModes = ["All", "This", "Next"]
+    static let whenModes = ["All", "This", "Next", "Now"]
 }

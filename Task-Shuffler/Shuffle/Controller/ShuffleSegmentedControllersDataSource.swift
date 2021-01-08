@@ -29,31 +29,12 @@ class ShuffleSegmentedControllersDataSource: SJFluidSegmentedControlDataSource {
     func segmentedControl(_ segmentedControl: SJFluidSegmentedControl, titleForSegmentAtIndex index: Int) -> String? {
         switch segmentedControl {
         case shuffleView.howSegmentedControl:
-            switch index {
-            case 0:
                 return ShuffleModes.howModes[index]
-            case 1:
-                return ShuffleModes.howModes[index]
-            case 2:
-                return ShuffleModes.howModes[index]
-            default:
-                return "How to shuffle"
-            }
         case shuffleView.whenSegmentedControl:
-            switch index {
-            case 0:
                 return ShuffleModes.whenModes[index]
-            case 1:
-                return ShuffleModes.whenModes[index]
-            case 2:
-                return ShuffleModes.whenModes[index]
-            default:
-                return "How to shuffle"
-            }
         default:
             return "How to shuffle"
         }
-        
     }
     
     func segmentedControl(_ segmentedControl: SJFluidSegmentedControl, gradientColorsForSelectedSegmentAtIndex index: Int) -> [UIColor] {
@@ -64,6 +45,8 @@ class ShuffleSegmentedControllersDataSource: SJFluidSegmentedControlDataSource {
             return [UIColor.mysticBlue]
         case 2:
             return [UIColor.forestGreen]
+        case 3:
+            return [UIColor.darkOrange]
         default:
             return [UIColor.fireOrange]
         }

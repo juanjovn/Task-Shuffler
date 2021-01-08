@@ -74,6 +74,8 @@ class FillGapsController {
                 return task
             case .Next:
                 return task
+            case .Now:
+                return task
             }
         } else {
             if let sVC = shuffleVC {

@@ -24,4 +24,5 @@ enum WhenMode {
     case All
     case This
     case Next
+    case Now
 }
