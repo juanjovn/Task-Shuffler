@@ -59,6 +59,7 @@ class ShuffleSegmentedControllersDelegate: SJFluidSegmentedControlDelegate {
                 shuffleVC.shuffleView.disableHowView.isUserInteractionEnabled = true
                 UIView.animate(withDuration: 0.2) {
                     shuffleVC.shuffleView.disableHowView.backgroundColor = UIColor.darkGray.withAlphaComponent(0.8)
+                    self.shuffleView.detailLabel.text = "You will get an instant task to do"
                 }
             default:
                 shuffleVC.shuffleConfiguration.when = .All
