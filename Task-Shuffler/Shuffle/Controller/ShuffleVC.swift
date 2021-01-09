@@ -67,8 +67,8 @@ class ShuffleVC: AMTabsViewController {
         shuffleSlider.delegate = self
         shuffleSlider.thumbnailViewStartingDistance = 15
         shuffleSlider.labelText = "Slide to shuffle"
-        shuffleSlider.thumbnailImageView.image = UIImage(named: "shuffle_icon")?.tinted(color: .pearlWhite)?.withAlignmentRectInsets(UIEdgeInsets(top: -15, left: -15, bottom: -15, right: -15))
-        shuffleSlider.thumbnailImageView.contentMode = .scaleAspectFit
+//        shuffleSlider.thumbnailImageView.image = UIImage(named: "shuffle_icon")?.tinted(color: .pearlWhite)?.withAlignmentRectInsets(UIEdgeInsets(top: -15, left: -15, bottom: -15, right: -15))
+//        shuffleSlider.thumbnailImageView.contentMode = .scaleAspectFit
         shuffleSlider.sliderBackgroundColor = UIColor.mysticBlue.withAlphaComponent(0.3)
         shuffleSlider.textColor = .pearlWhite
         
@@ -128,7 +128,7 @@ extension ShuffleVC: MTSlideToOpenDelegate {
         sender.resetStateWithAnimation(true)
         
         let fillGapsController = FillGapsController(shuffleMode: shuffleConfiguration, shuffleVC: self)
-        
+        //var resultVC = obtainTypeOfResulVC(configuration: shuffleConfiguration)
         switch shuffleConfiguration.when {
         case .All:
             //TODO: All mode
@@ -149,7 +149,35 @@ extension ShuffleVC: MTSlideToOpenDelegate {
             }
         }
         
+        switch shuffleConfiguration.how {
+        case .Smart:
+            break
+        case .Random:
+            break
+        case .Single:
+            let singleVC = SingleResultsVC()
+            singleVC.shuffleVC = self
+            let shuffledTask = fillGapsController.shuffleTask()
+            singleVC.task = shuffledTask
+            present(singleVC, animated: true, completion: nil)
+        }
+        
     }
+    
+//    private func obtainTypeOfResulVC (configuration: ShuffleConfiguration) -> ViewController {
+//        switch configuration.how {
+//        case .Smart:
+//        //TODO: When results view controller with collection view is created
+//        break
+//        case .Random:
+//        //TODO: When results view controller with collection view is created
+//        break
+//        case .Single:
+//            return SingleResultsVC()
+//        }
+//
+//        return SingleResultsVC()
+//    }
     
     func mtSlideToOpenDelegateDidIncrease(_ sender: MTSlideToOpenView, _ translatedPoint: Int ) {
         //print("ROTATION APPLIED to the RIGHT >>>>>>> \(translatedPoint)")

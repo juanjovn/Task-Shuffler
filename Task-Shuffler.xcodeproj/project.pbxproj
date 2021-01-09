@@ -50,6 +50,10 @@
 		81DC259E246C752E00926034 /* DisplayTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81DC259D246C752E00926034 /* DisplayTime.swift */; };
 		81DECAB6243BA410009051A2 /* CustomColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81DECAB5243BA410009051A2 /* CustomColors.swift */; };
 		81DECAB8243BAE24009051A2 /* CustomFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81DECAB7243BAE24009051A2 /* CustomFonts.swift */; };
+		81E306AD25AA22BA0069809E /* SingleCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E306AC25AA22BA0069809E /* SingleCardView.swift */; };
+		81E306B025AA27150069809E /* SingleResultsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E306AF25AA27150069809E /* SingleResultsVC.swift */; };
+		81E306B325AA276A0069809E /* SingleResultModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E306B225AA276A0069809E /* SingleResultModalView.swift */; };
+		81E306B725AA2AB50069809E /* ShuffleResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E306B625AA2AB50069809E /* ShuffleResult.swift */; };
 		81E9B13F2405BEE400BBADB8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E9B13E2405BEE400BBADB8 /* AppDelegate.swift */; };
 		81E9B1432405BEE400BBADB8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E9B1422405BEE400BBADB8 /* ViewController.swift */; };
 		81E9B1462405BEE400BBADB8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81E9B1442405BEE400BBADB8 /* Main.storyboard */; };
@@ -112,6 +116,10 @@
 		81DC259D246C752E00926034 /* DisplayTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayTime.swift; sourceTree = "<group>"; };
 		81DECAB5243BA410009051A2 /* CustomColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColors.swift; sourceTree = "<group>"; };
 		81DECAB7243BAE24009051A2 /* CustomFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFonts.swift; sourceTree = "<group>"; };
+		81E306AC25AA22BA0069809E /* SingleCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleCardView.swift; sourceTree = "<group>"; };
+		81E306AF25AA27150069809E /* SingleResultsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SingleResultsVC.swift; path = "Task-Shuffler/Shuffle/View/SingleResultsVC.swift"; sourceTree = SOURCE_ROOT; };
+		81E306B225AA276A0069809E /* SingleResultModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleResultModalView.swift; sourceTree = "<group>"; };
+		81E306B625AA2AB50069809E /* ShuffleResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShuffleResult.swift; sourceTree = "<group>"; };
 		81E9B13B2405BEE400BBADB8 /* Task Shuffler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Task Shuffler.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81E9B13E2405BEE400BBADB8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		81E9B1422405BEE400BBADB8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -222,6 +230,14 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		81E306B525AA2A990069809E /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				81E306B625AA2AB50069809E /* ShuffleResult.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		81E9B1322405BEE400BBADB8 = {
 			isa = PBXGroup;
 			children = (
@@ -291,6 +307,7 @@
 		81EE674E259A3346007B9D87 /* Shuffle */ = {
 			isa = PBXGroup;
 			children = (
+				81E306B525AA2A990069809E /* Protocols */,
 				81EE674F259A3361007B9D87 /* Model */,
 				81EE6750259A336C007B9D87 /* View */,
 				81EE6751259A3376007B9D87 /* Controller */,
@@ -314,7 +331,9 @@
 				81EE67A6259B810F007B9D87 /* MTSlideToOpenView.swift */,
 				81EE6752259A33D5007B9D87 /* ShuffleView.swift */,
 				816271E325A8CFB000BC7A46 /* NowCardView.swift */,
+				81E306AC25AA22BA0069809E /* SingleCardView.swift */,
 				816271E625A8D41500BC7A46 /* NowResultModalView.swift */,
+				81E306B225AA276A0069809E /* SingleResultModalView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -322,6 +341,7 @@
 		81EE6751259A3376007B9D87 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				81E306AF25AA27150069809E /* SingleResultsVC.swift */,
 				81EE6755259A35D9007B9D87 /* ShuffleVC.swift */,
 				819970A125A09BCF004D48C3 /* ShuffleSegmentedControllersDataSource.swift */,
 				819970A725A0FEDA004D48C3 /* NowShuffleResultsVC.swift */,
@@ -654,7 +674,9 @@
 				8164ED3925A70C2C00454D76 /* RoundedModalActionButton.swift in Sources */,
 				819970A525A0F958004D48C3 /* ModalView.swift in Sources */,
 				81DC259E246C752E00926034 /* DisplayTime.swift in Sources */,
+				81E306B725AA2AB50069809E /* ShuffleResult.swift in Sources */,
 				81ED3A84244DEFD400C36DB8 /* TaskCell.swift in Sources */,
+				81E306B325AA276A0069809E /* SingleResultModalView.swift in Sources */,
 				816271E425A8CFB000BC7A46 /* NowCardView.swift in Sources */,
 				81705A83240B1D890053A571 /* ScheduleViewController.swift in Sources */,
 				81C2A17D25A38B1D00F9A53F /* ShuffleConfiguration.swift in Sources */,
@@ -664,12 +686,14 @@
 				81EE6756259A35D9007B9D87 /* ShuffleVC.swift in Sources */,
 				81C90B5324614F8B001C06B4 /* GapManager.swift in Sources */,
 				8198F26324763D5F00F547BC /* CalendarVC.swift in Sources */,
+				81E306B025AA27150069809E /* SingleResultsVC.swift in Sources */,
 				81C2A19E25A3A3E200F9A53F /* FillGapsController.swift in Sources */,
 				81EE67A7259B810F007B9D87 /* MTSlideToOpenView.swift in Sources */,
 				81DECAB6243BA410009051A2 /* CustomColors.swift in Sources */,
 				81C90B5B2463DDBA001C06B4 /* Utils.swift in Sources */,
 				8179FDDB24581E9F009A6D4B /* DummyModel.swift in Sources */,
 				81C451C824818E350086B806 /* EventType.swift in Sources */,
+				81E306AD25AA22BA0069809E /* SingleCardView.swift in Sources */,
 				8197F5C2245ACF700052FCC7 /* TaskManager.swift in Sources */,
 				81AB5D6C24770D01009ADB97 /* CollectionViewCell.swift in Sources */,
 				81EE67AA259E5093007B9D87 /* ShuffleModes.swift in Sources */,
