@@ -119,6 +119,7 @@ class ModalView: UIView {
         buttonsContainerView.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.10).isActive = true
     }
     
+    
     private func setupOkButton() {
         buttonsContainerView.addSubview(okButton)
         okButton.backgroundColor = .powerGreen
@@ -153,9 +154,9 @@ class ModalView: UIView {
         contentView.addSubview(bottomView)
         //CONSTRAINTS
         bottomView.translatesAutoresizingMaskIntoConstraints = false
-        bottomView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 15).isActive = true
+        bottomView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20).isActive = true
         bottomView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15).isActive = true
-        bottomView.bottomAnchor.constraint(equalTo: buttonsContainerView.topAnchor, constant: -15).isActive = true
+        bottomView.bottomAnchor.constraint(equalTo: buttonsContainerView.topAnchor, constant: -20).isActive = true
         bottomView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15).isActive = true
     }
     

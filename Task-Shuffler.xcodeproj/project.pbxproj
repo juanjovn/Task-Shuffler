@@ -11,6 +11,8 @@
 		8146988B25865C3E00D7BCE1 /* Pods_Task_Shuffler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C313B2D615F94E260304E37 /* Pods_Task_Shuffler.framework */; };
 		815204EF245E9A1E0004510B /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815204EE245E9A1E0004510B /* Alert.swift */; };
 		815204F1245F46C20004510B /* GapRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815204F0245F46C20004510B /* GapRealm.swift */; };
+		816271E425A8CFB000BC7A46 /* NowCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816271E325A8CFB000BC7A46 /* NowCardView.swift */; };
+		816271E725A8D41500BC7A46 /* NowResultModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816271E625A8D41500BC7A46 /* NowResultModalView.swift */; };
 		8164ED3925A70C2C00454D76 /* RoundedModalActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8164ED3825A70C2B00454D76 /* RoundedModalActionButton.swift */; };
 		816709CE245C9F7D00D94E65 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816709CC245C9F7D00D94E65 /* SettingsVC.swift */; };
 		816709CF245C9F7D00D94E65 /* SettingsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 816709CD245C9F7D00D94E65 /* SettingsVC.xib */; };
@@ -71,6 +73,8 @@
 		811880A5243515BC00E5FEE1 /* DeviceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceModel.swift; sourceTree = "<group>"; };
 		815204EE245E9A1E0004510B /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		815204F0245F46C20004510B /* GapRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GapRealm.swift; sourceTree = "<group>"; };
+		816271E325A8CFB000BC7A46 /* NowCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowCardView.swift; sourceTree = "<group>"; };
+		816271E625A8D41500BC7A46 /* NowResultModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowResultModalView.swift; sourceTree = "<group>"; };
 		8164ED3825A70C2B00454D76 /* RoundedModalActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedModalActionButton.swift; sourceTree = "<group>"; };
 		816709CC245C9F7D00D94E65 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		816709CD245C9F7D00D94E65 /* SettingsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsVC.xib; sourceTree = "<group>"; };
@@ -309,6 +313,8 @@
 				819970A425A0F958004D48C3 /* ModalView.swift */,
 				81EE67A6259B810F007B9D87 /* MTSlideToOpenView.swift */,
 				81EE6752259A33D5007B9D87 /* ShuffleView.swift */,
+				816271E325A8CFB000BC7A46 /* NowCardView.swift */,
+				816271E625A8D41500BC7A46 /* NowResultModalView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -626,6 +632,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				816271E725A8D41500BC7A46 /* NowResultModalView.swift in Sources */,
 				816709D1245CCC5000D94E65 /* SettingsValues.swift in Sources */,
 				81C90B61246530DC001C06B4 /* DatePickerVC.swift in Sources */,
 				816709CE245C9F7D00D94E65 /* SettingsVC.swift in Sources */,
@@ -648,6 +655,7 @@
 				819970A525A0F958004D48C3 /* ModalView.swift in Sources */,
 				81DC259E246C752E00926034 /* DisplayTime.swift in Sources */,
 				81ED3A84244DEFD400C36DB8 /* TaskCell.swift in Sources */,
+				816271E425A8CFB000BC7A46 /* NowCardView.swift in Sources */,
 				81705A83240B1D890053A571 /* ScheduleViewController.swift in Sources */,
 				81C2A17D25A38B1D00F9A53F /* ShuffleConfiguration.swift in Sources */,
 				811880A6243515BC00E5FEE1 /* DeviceModel.swift in Sources */,

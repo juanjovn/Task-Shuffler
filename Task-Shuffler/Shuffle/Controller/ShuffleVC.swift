@@ -131,7 +131,7 @@ extension ShuffleVC: MTSlideToOpenDelegate {
         if task.id != "" { //If this is empty means there were a problem during the task shuffler and returned an empty task. Prevents errors in console due to have an alert presented and intend to present another view controller (the results modal in this case)
             let shuffleResultsVC = ShuffleResultsVC()
             shuffleResultsVC.shuffleVC = self
-            shuffleResultsVC.modalView.messageLabel.text = "\(task.name) in gap id: \(task.gapid)"
+            shuffleResultsVC.nowResultModalView.nowCardView.nameLabel.text = "\(task.name)"
             present(shuffleResultsVC, animated: true, completion: nil)
         }
         

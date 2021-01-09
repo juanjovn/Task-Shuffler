@@ -9,15 +9,15 @@
 import UIKit
 
 class ShuffleResultsVC: ViewController {
-    let modalView = ModalView()
+    let nowResultModalView = NowResultModalView()
     var shuffleVC: ShuffleVC? = ShuffleVC()
-    lazy var cancelButton = modalView.cancelButton
-    lazy var reshuffleButton = modalView.reshuffleButton
-    lazy var okButton = modalView.okButton
+    lazy var cancelButton = nowResultModalView.cancelButton
+    lazy var reshuffleButton = nowResultModalView.reshuffleButton
+    lazy var okButton = nowResultModalView.okButton
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view = modalView
+        view = nowResultModalView
         setupCancelButton()
         setupReshuffleButton()
         setupOkButton()
@@ -26,7 +26,7 @@ class ShuffleResultsVC: ViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //Update rounded corners
-        modalView.buttonsContainerView.layoutIfNeeded()
+        nowResultModalView.buttonsContainerView.layoutIfNeeded()
     }
     
     private func setupCancelButton() {
@@ -49,11 +49,12 @@ class ShuffleResultsVC: ViewController {
         if let shuffleVC = shuffleVC {
             let fillGapsController = FillGapsController(shuffleMode: shuffleVC.shuffleConfiguration, shuffleVC: shuffleVC)
             let task = fillGapsController.shuffleTask()
+            
             UIView.animate(withDuration: 0.2, delay: 0, animations: { () -> Void in
-                self.modalView.messageLabel.transform = .init(scaleX: 0.75, y: 0.75)
+                self.nowResultModalView.nowCardView.nameLabel.transform = .init(scaleX: 0.75, y: 0.75)
             }, completion: { (finished: Bool) -> Void in
-                self.modalView.messageLabel.text = "\(task.name) in gap id: \(task.gapid)"
-                self.modalView.messageLabel.transform = .identity
+                self.nowResultModalView.nowCardView.nameLabel.text = "\(task.name)"
+                self.nowResultModalView.nowCardView.nameLabel.transform = .identity
             })
         }
     }
