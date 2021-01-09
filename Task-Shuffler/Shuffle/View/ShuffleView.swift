@@ -33,7 +33,7 @@ class ShuffleView: UIView {
         super.init(frame: frame)
         backgroundColor = .paleSilver
         setupFillView()
-        setupShuffleButton()
+        //setupShuffleButton()
         setupHowLabel()
         setupHowSegmentedControl()
         setupWhenLabel()

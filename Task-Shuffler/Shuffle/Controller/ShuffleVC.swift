@@ -22,7 +22,7 @@ class ShuffleVC: AMTabsViewController {
         setupShuffleView()
         setupNavigationBar()
         setupShuffleSlider()
-        setupShuffleButton()
+        //setupShuffleButton()
         shuffleView.howSegmentedControl.dataSource = shuffleSegmentedControllersDataSource
         shuffleView.whenSegmentedControl.dataSource = shuffleSegmentedControllersDataSource
         shuffleView.howSegmentedControl.delegate = shuffleSegmentedControllersDelegate
@@ -35,7 +35,7 @@ class ShuffleVC: AMTabsViewController {
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        shuffleView.shuffleButton.fitLayers()
+        //shuffleView.shuffleButton.fitLayers()
     }
     
     private func setupShuffleView() {
@@ -92,7 +92,7 @@ class ShuffleVC: AMTabsViewController {
     
     private func setupViewsCornerRadius() {
         shuffleSlider.sliderCornerRadius = shuffleSlider.bounds.size.height / 2
-        shuffleView.shuffleButton.layer.cornerRadius =  shuffleView.shuffleButton.bounds.size.width / 2
+        //shuffleView.shuffleButton.layer.cornerRadius =  shuffleView.shuffleButton.bounds.size.width / 2
         shuffleView.howSegmentedControl.cornerRadius = shuffleView.howSegmentedControl.bounds.size.height / 2
         shuffleView.whenSegmentedControl.cornerRadius = shuffleView.whenSegmentedControl.bounds.size.height / 2
     }
@@ -121,10 +121,10 @@ extension ShuffleVC: MTSlideToOpenDelegate {
             generator.impactOccurred()
         }
         
-        shuffleView.shuffleButton.setClicked(true)
-        _ = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) {_ in
-            self.shuffleView.shuffleButton.setClicked(false)
-        }
+//        shuffleView.shuffleButton.setClicked(true)
+//        _ = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) {_ in
+//            self.shuffleView.shuffleButton.setClicked(false)
+//        }
         sender.resetStateWithAnimation(true)
         
         let fillGapsController = FillGapsController(shuffleMode: shuffleConfiguration, shuffleVC: self)
