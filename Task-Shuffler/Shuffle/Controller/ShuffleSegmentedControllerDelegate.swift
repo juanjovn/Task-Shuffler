@@ -26,6 +26,13 @@ class ShuffleSegmentedControllersDelegate: SJFluidSegmentedControlDelegate {
             return
         }
         
+        if fromIndex == 3 && segmentedControl == shuffleView.whenSegmentedControl {
+            shuffleVC.shuffleView.disableHowView.isUserInteractionEnabled = false
+            UIView.animate(withDuration: 0.2) {
+                shuffleVC.shuffleView.disableHowView.backgroundColor = .clear
+            }
+        }
+        
         switch segmentedControl {
         case shuffleView.howSegmentedControl:
             switch toIndex {
@@ -46,6 +53,13 @@ class ShuffleSegmentedControllersDelegate: SJFluidSegmentedControlDelegate {
                 shuffleVC.shuffleConfiguration.when = .This
             case 2:
                 shuffleVC.shuffleConfiguration.when = .Next
+            case 3:
+                shuffleVC.shuffleConfiguration.when = .Now
+                shuffleVC.shuffleView.howSegmentedControl.setCurrentSegmentIndex(1, animated: true)
+                shuffleVC.shuffleView.disableHowView.isUserInteractionEnabled = true
+                UIView.animate(withDuration: 0.2) {
+                    shuffleVC.shuffleView.disableHowView.backgroundColor = UIColor.darkGray.withAlphaComponent(0.8)
+                }
             default:
                 shuffleVC.shuffleConfiguration.when = .All
             }

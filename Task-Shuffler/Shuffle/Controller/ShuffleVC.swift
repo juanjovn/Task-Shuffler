@@ -67,7 +67,8 @@ class ShuffleVC: AMTabsViewController {
         shuffleSlider.delegate = self
         shuffleSlider.thumbnailViewStartingDistance = 15
         shuffleSlider.labelText = "Slide to shuffle"
-        shuffleSlider.thumbnailImageView.image = UIImage(systemName: "shuffle")?.tinted(color: .pearlWhite)
+        shuffleSlider.thumbnailImageView.image = UIImage(named: "shuffle_icon")?.tinted(color: .pearlWhite)?.withAlignmentRectInsets(UIEdgeInsets(top: -15, left: -15, bottom: -15, right: -15))
+        shuffleSlider.thumbnailImageView.contentMode = .scaleAspectFit
         shuffleSlider.sliderBackgroundColor = UIColor.mysticBlue.withAlphaComponent(0.3)
         shuffleSlider.textColor = .pearlWhite
         
@@ -127,12 +128,25 @@ extension ShuffleVC: MTSlideToOpenDelegate {
         sender.resetStateWithAnimation(true)
         
         let fillGapsController = FillGapsController(shuffleMode: shuffleConfiguration, shuffleVC: self)
-        let task = fillGapsController.shuffleTask()
-        if task.id != "" { //If this is empty means there were a problem during the task shuffler and returned an empty task. Prevents errors in console due to have an alert presented and intend to present another view controller (the results modal in this case)
-            let shuffleResultsVC = ShuffleResultsVC()
-            shuffleResultsVC.shuffleVC = self
-            shuffleResultsVC.nowResultModalView.nowCardView.nameLabel.text = "\(task.name)"
-            present(shuffleResultsVC, animated: true, completion: nil)
+        
+        switch shuffleConfiguration.when {
+        case .All:
+            //TODO: All mode
+            break
+        case .This:
+            //TODO: This mode
+            break
+        case .Next:
+            //TODO: Next mode
+            break
+        case .Now:
+            let task = fillGapsController.shuffleTask()
+            if task.id != "" { //If this is empty means there were a problem during the task shuffler and returned an empty task. Prevents errors in console due to have an alert presented and intend to present another view controller (the results modal in this case)
+                let nowShuffleResultsVC = NowShuffleResultsVC()
+                nowShuffleResultsVC.shuffleVC = self
+                nowShuffleResultsVC.nowTask = task
+                present(nowShuffleResultsVC, animated: true, completion: nil)
+            }
         }
         
     }

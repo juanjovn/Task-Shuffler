@@ -25,6 +25,7 @@ class ShuffleView: UIView {
     var shuffleBackImage = UIImage(named: "shuffle.circle")
     let detailLabel = UILabel()
     let backgroundImageContainerView = UIView()
+    let disableHowView = UIView()
     
     //MARK: Variables
     
@@ -40,6 +41,7 @@ class ShuffleView: UIView {
         setupBackgroundImageContainerView()
         setupShuffleBackImageView()
         setupDetailLabel()
+        setupDisableHowView()
     }
     
     private func setupFillView() {
@@ -161,6 +163,21 @@ class ShuffleView: UIView {
         
         detailLabel.centerXAnchor.constraint(equalTo: shuffleBackImageView.centerXAnchor).isActive = true
         detailLabel.centerYAnchor.constraint(equalTo: shuffleBackImageView.centerYAnchor).isActive = true
+    }
+    
+    private func setupDisableHowView() {
+        howSegmentedControl.addSubview(disableHowView)
+        disableHowView.isUserInteractionEnabled = false
+        disableHowView.backgroundColor = .clear
+        self.bringSubviewToFront(disableHowView)
+        //CONSTRAINTS
+        disableHowView.translatesAutoresizingMaskIntoConstraints = false
+        disableHowView.leadingAnchor.constraint(equalTo: howSegmentedControl.leadingAnchor).isActive = true
+        disableHowView.trailingAnchor.constraint(equalTo: howSegmentedControl.trailingAnchor).isActive = true
+        disableHowView.topAnchor.constraint(equalTo: howSegmentedControl.topAnchor).isActive = true
+        disableHowView.bottomAnchor.constraint(equalTo: howSegmentedControl.bottomAnchor).isActive = true
+        
+        
     }
     
     required init?(coder: NSCoder) {

@@ -59,7 +59,12 @@ class FillGapsController {
             switch shuffleMode.when {
             
             case .All:
-               
+               break
+            case .This:
+                return task
+            case .Next:
+                return task
+            case .Now:
                 let shuffledGaps = pendingGaps.shuffled()
                 for t in tasks {
                     for g in shuffledGaps {
@@ -70,12 +75,6 @@ class FillGapsController {
                         }
                     }
                 }
-            case .This:
-                return task
-            case .Next:
-                return task
-            case .Now:
-                return task
             }
         } else {
             if let sVC = shuffleVC {

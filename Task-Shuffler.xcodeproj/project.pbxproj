@@ -32,7 +32,7 @@
 		8198F26324763D5F00F547BC /* CalendarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8198F26224763D5F00F547BC /* CalendarVC.swift */; };
 		819970A225A09BCF004D48C3 /* ShuffleSegmentedControllersDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819970A125A09BCF004D48C3 /* ShuffleSegmentedControllersDataSource.swift */; };
 		819970A525A0F958004D48C3 /* ModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819970A425A0F958004D48C3 /* ModalView.swift */; };
-		819970A825A0FEDA004D48C3 /* ShuffleResultsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819970A725A0FEDA004D48C3 /* ShuffleResultsVC.swift */; };
+		819970A825A0FEDA004D48C3 /* NowShuffleResultsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819970A725A0FEDA004D48C3 /* NowShuffleResultsVC.swift */; };
 		81AB5D6A2476F915009ADB97 /* HorizontalCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB5D692476F915009ADB97 /* HorizontalCollectionVC.swift */; };
 		81AB5D6C24770D01009ADB97 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB5D6B24770D01009ADB97 /* CollectionViewCell.swift */; };
 		81C2A17D25A38B1D00F9A53F /* ShuffleConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C2A17C25A38B1D00F9A53F /* ShuffleConfiguration.swift */; };
@@ -94,7 +94,7 @@
 		8198F26224763D5F00F547BC /* CalendarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarVC.swift; sourceTree = "<group>"; };
 		819970A125A09BCF004D48C3 /* ShuffleSegmentedControllersDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShuffleSegmentedControllersDataSource.swift; sourceTree = "<group>"; };
 		819970A425A0F958004D48C3 /* ModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalView.swift; sourceTree = "<group>"; };
-		819970A725A0FEDA004D48C3 /* ShuffleResultsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShuffleResultsVC.swift; sourceTree = "<group>"; };
+		819970A725A0FEDA004D48C3 /* NowShuffleResultsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowShuffleResultsVC.swift; sourceTree = "<group>"; };
 		81AB5D692476F915009ADB97 /* HorizontalCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCollectionVC.swift; sourceTree = "<group>"; };
 		81AB5D6B24770D01009ADB97 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		81C2A17C25A38B1D00F9A53F /* ShuffleConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShuffleConfiguration.swift; sourceTree = "<group>"; };
@@ -324,7 +324,7 @@
 			children = (
 				81EE6755259A35D9007B9D87 /* ShuffleVC.swift */,
 				819970A125A09BCF004D48C3 /* ShuffleSegmentedControllersDataSource.swift */,
-				819970A725A0FEDA004D48C3 /* ShuffleResultsVC.swift */,
+				819970A725A0FEDA004D48C3 /* NowShuffleResultsVC.swift */,
 				81C2A17F25A38FE300F9A53F /* ShuffleSegmentedControllerDelegate.swift */,
 				81C2A19D25A3A3E200F9A53F /* FillGapsController.swift */,
 			);
@@ -659,7 +659,7 @@
 				81705A83240B1D890053A571 /* ScheduleViewController.swift in Sources */,
 				81C2A17D25A38B1D00F9A53F /* ShuffleConfiguration.swift in Sources */,
 				811880A6243515BC00E5FEE1 /* DeviceModel.swift in Sources */,
-				819970A825A0FEDA004D48C3 /* ShuffleResultsVC.swift in Sources */,
+				819970A825A0FEDA004D48C3 /* NowShuffleResultsVC.swift in Sources */,
 				81C2A18025A38FE300F9A53F /* ShuffleSegmentedControllerDelegate.swift in Sources */,
 				81EE6756259A35D9007B9D87 /* ShuffleVC.swift in Sources */,
 				81C90B5324614F8B001C06B4 /* GapManager.swift in Sources */,

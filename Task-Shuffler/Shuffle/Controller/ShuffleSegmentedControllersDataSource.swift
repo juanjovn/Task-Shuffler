@@ -52,6 +52,28 @@ class ShuffleSegmentedControllersDataSource: SJFluidSegmentedControlDataSource {
         }
     }
     
+//    func segmentedControl(_ segmentedControl: SJFluidSegmentedControl, viewForSegmentAtIndex index: Int) -> UIView {
+//        switch segmentedControl {
+//        case shuffleView.whenSegmentedControl:
+//            if index == 3 {
+//                let image = UIImageView(image: UIImage(named: "clock")?.tinted(color: .pearlWhite))
+//                image.contentMode = .scaleAspectFit
+//                image.bounds.size.width = 15
+//                image.bounds.size.height = 15
+//                return image
+//            }
+//            
+//            if index == 2 {
+//                let label = UILabel()
+//                label.text = "hola"
+//                return label
+//            }
+//        default:
+//            break
+//        }
+//        return UIView()
+//    }
+    
     func segmentedControl(_ segmentedControl: SJFluidSegmentedControl,
                           gradientColorsForBounce bounce: SJFluidSegmentedControlBounce) -> [UIColor] {
         switch bounce {
