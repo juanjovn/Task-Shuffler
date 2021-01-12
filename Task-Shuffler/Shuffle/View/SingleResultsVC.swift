@@ -46,7 +46,7 @@ class SingleResultsVC: ViewController, ShuffleResult {
     }
     
     private func setupNameLabel() {
-        singleResultModalView.singleCard.nameLabel.text = task.name
+        singleResultModalView.singleCard.nameLabel.text = "Tarea de prueba placeholder"
     }
     
     private func updatePriorityColor() {

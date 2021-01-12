@@ -54,18 +54,18 @@ class SingleCardView: UIView {
     
     private func setupName() {
         addSubview(nameLabel)
-        addSubview(priorityIcon) //Necessary add this subview here to the hierarchy for setup the bottom constraint to its top anchor
-        nameLabel.text = "New Task"
         nameLabel.font = .avenirDemiBold(ofSize: UIFont.scaleFont(45))
         nameLabel.textColor = .mysticBlue
-        nameLabel.textAlignment = .center
+        nameLabel.textAlignment = .left
         nameLabel.adjustsFontSizeToFitWidth = true
         nameLabel.numberOfLines = 3
         //CONSTRAINTS
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         nameLabel.leadingAnchor.constraint(equalTo: nameIcon.trailingAnchor, constant: 7).isActive = true
-        nameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 30).isActive = true
+        nameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
         nameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20).isActive = true
+        nameLabel.bottomAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        nameLabel.backgroundColor = .red
     }
 
     private func setupPriorityIcon() {
