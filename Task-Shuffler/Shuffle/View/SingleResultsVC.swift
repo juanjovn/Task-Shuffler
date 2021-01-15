@@ -24,6 +24,7 @@ class SingleResultsVC: ViewController, ShuffleResult {
         setupReshuffleButton()
         setupOkButton()
         setupNameLabel()
+        setupDateLabel()
         updatePriorityColor()
     }
     
@@ -46,7 +47,11 @@ class SingleResultsVC: ViewController, ShuffleResult {
     }
     
     private func setupNameLabel() {
-        singleResultModalView.singleCard.nameLabel.text = "Tarea de prueba placeholder"
+        singleResultModalView.singleCard.nameLabel.text = "Limpiar el baño"
+    }
+    
+    private func setupDateLabel() {
+        singleResultModalView.singleCard.dateLabel.text = "Wednesday 30th"
     }
     
     private func updatePriorityColor() {

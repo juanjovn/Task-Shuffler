@@ -67,8 +67,11 @@ class ShuffleVC: AMTabsViewController {
         shuffleSlider.delegate = self
         shuffleSlider.thumbnailViewStartingDistance = 15
         shuffleSlider.labelText = "Slide to shuffle"
-//        shuffleSlider.thumbnailImageView.image = UIImage(named: "shuffle_icon")?.tinted(color: .pearlWhite)?.withAlignmentRectInsets(UIEdgeInsets(top: -15, left: -15, bottom: -15, right: -15))
-//        shuffleSlider.thumbnailImageView.contentMode = .scaleAspectFit
+        let thumbnailImage = UIImage(systemName: "shuffle")
+        shuffleSlider.thumbnailImageView.image = thumbnailImage
+        //shuffleSlider.thumbnailImageView.contentMode = .scaleAspectFit
+        shuffleSlider.thumbnailImageView.tintColor = .pearlWhite
+        
         shuffleSlider.sliderBackgroundColor = UIColor.mysticBlue.withAlphaComponent(0.3)
         shuffleSlider.textColor = .pearlWhite
         
