@@ -14,6 +14,10 @@
 		816271E425A8CFB000BC7A46 /* NowCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816271E325A8CFB000BC7A46 /* NowCardView.swift */; };
 		816271E725A8D41500BC7A46 /* NowResultModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816271E625A8D41500BC7A46 /* NowResultModalView.swift */; };
 		816271FB25B1BAA600BC7A46 /* RoundedTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816271FA25B1BAA600BC7A46 /* RoundedTimeView.swift */; };
+		8162720325B30DFA00BC7A46 /* ResultsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8162720225B30DFA00BC7A46 /* ResultsCollectionViewCell.swift */; };
+		8162720625B5A4A300BC7A46 /* MultipleResultModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8162720525B5A4A300BC7A46 /* MultipleResultModalView.swift */; };
+		8162720925B5A60700BC7A46 /* MultipleResultsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8162720825B5A60700BC7A46 /* MultipleResultsVC.swift */; };
+		8162720C25B5B11C00BC7A46 /* ResultsCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8162720B25B5B11C00BC7A46 /* ResultsCollectionVC.swift */; };
 		8164ED3925A70C2C00454D76 /* RoundedModalActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8164ED3825A70C2B00454D76 /* RoundedModalActionButton.swift */; };
 		816709CE245C9F7D00D94E65 /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816709CC245C9F7D00D94E65 /* SettingsVC.swift */; };
 		816709CF245C9F7D00D94E65 /* SettingsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 816709CD245C9F7D00D94E65 /* SettingsVC.xib */; };
@@ -81,6 +85,10 @@
 		816271E325A8CFB000BC7A46 /* NowCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowCardView.swift; sourceTree = "<group>"; };
 		816271E625A8D41500BC7A46 /* NowResultModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowResultModalView.swift; sourceTree = "<group>"; };
 		816271FA25B1BAA600BC7A46 /* RoundedTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTimeView.swift; sourceTree = "<group>"; };
+		8162720225B30DFA00BC7A46 /* ResultsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsCollectionViewCell.swift; sourceTree = "<group>"; };
+		8162720525B5A4A300BC7A46 /* MultipleResultModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleResultModalView.swift; sourceTree = "<group>"; };
+		8162720825B5A60700BC7A46 /* MultipleResultsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleResultsVC.swift; sourceTree = "<group>"; };
+		8162720B25B5B11C00BC7A46 /* ResultsCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsCollectionVC.swift; sourceTree = "<group>"; };
 		8164ED3825A70C2B00454D76 /* RoundedModalActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedModalActionButton.swift; sourceTree = "<group>"; };
 		816709CC245C9F7D00D94E65 /* SettingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
 		816709CD245C9F7D00D94E65 /* SettingsVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsVC.xib; sourceTree = "<group>"; };
@@ -337,6 +345,8 @@
 				816271E625A8D41500BC7A46 /* NowResultModalView.swift */,
 				81E306B225AA276A0069809E /* SingleResultModalView.swift */,
 				816271FA25B1BAA600BC7A46 /* RoundedTimeView.swift */,
+				8162720225B30DFA00BC7A46 /* ResultsCollectionViewCell.swift */,
+				8162720525B5A4A300BC7A46 /* MultipleResultModalView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -350,6 +360,8 @@
 				819970A725A0FEDA004D48C3 /* NowShuffleResultsVC.swift */,
 				81C2A17F25A38FE300F9A53F /* ShuffleSegmentedControllerDelegate.swift */,
 				81C2A19D25A3A3E200F9A53F /* FillGapsController.swift */,
+				8162720825B5A60700BC7A46 /* MultipleResultsVC.swift */,
+				8162720B25B5B11C00BC7A46 /* ResultsCollectionVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -667,6 +679,7 @@
 				81C90B572461D0B2001C06B4 /* GapCell.swift in Sources */,
 				815204F1245F46C20004510B /* GapRealm.swift in Sources */,
 				81EE677B259A428E007B9D87 /* NextToDoView.swift in Sources */,
+				8162720925B5A60700BC7A46 /* MultipleResultsVC.swift in Sources */,
 				8179FDD924580807009A6D4B /* DatabaseManager.swift in Sources */,
 				815204EF245E9A1E0004510B /* Alert.swift in Sources */,
 				8170DD792467FEE80060725D /* TimePickerVC.swift in Sources */,
@@ -674,6 +687,7 @@
 				81AB5D6A2476F915009ADB97 /* HorizontalCollectionVC.swift in Sources */,
 				8170DD812468001C0060725D /* MinuteCell.swift in Sources */,
 				8188D5BB2408601800CCBA99 /* NewTaskViewController.swift in Sources */,
+				8162720625B5A4A300BC7A46 /* MultipleResultModalView.swift in Sources */,
 				8164ED3925A70C2C00454D76 /* RoundedModalActionButton.swift in Sources */,
 				819970A525A0F958004D48C3 /* ModalView.swift in Sources */,
 				81DC259E246C752E00926034 /* DisplayTime.swift in Sources */,
@@ -694,6 +708,7 @@
 				81EE67A7259B810F007B9D87 /* MTSlideToOpenView.swift in Sources */,
 				81DECAB6243BA410009051A2 /* CustomColors.swift in Sources */,
 				81C90B5B2463DDBA001C06B4 /* Utils.swift in Sources */,
+				8162720C25B5B11C00BC7A46 /* ResultsCollectionVC.swift in Sources */,
 				8179FDDB24581E9F009A6D4B /* DummyModel.swift in Sources */,
 				81C451C824818E350086B806 /* EventType.swift in Sources */,
 				81E306AD25AA22BA0069809E /* SingleCardView.swift in Sources */,
@@ -708,6 +723,7 @@
 				81E9B13F2405BEE400BBADB8 /* AppDelegate.swift in Sources */,
 				81705A81240B1D4E0053A571 /* GapsViewController.swift in Sources */,
 				817E76F6245A084C00305111 /* TaskRealm.swift in Sources */,
+				8162720325B30DFA00BC7A46 /* ResultsCollectionViewCell.swift in Sources */,
 				816271FB25B1BAA600BC7A46 /* RoundedTimeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

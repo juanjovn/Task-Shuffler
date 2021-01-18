@@ -154,9 +154,13 @@ extension ShuffleVC: MTSlideToOpenDelegate {
         
         switch shuffleConfiguration.how {
         case .Smart:
-            break
+            let multipleVC = MultipleResultsVC()
+            multipleVC.shuffleVC = self
+            present(multipleVC, animated: true, completion: nil)
         case .Random:
-            break
+            let multipleVC = MultipleResultsVC()
+            multipleVC.shuffleVC = self
+            present(multipleVC, animated: true, completion: nil)
         case .Single:
             let singleVC = SingleResultsVC()
             singleVC.shuffleVC = self
