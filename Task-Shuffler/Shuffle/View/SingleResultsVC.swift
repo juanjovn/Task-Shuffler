@@ -16,6 +16,7 @@ class SingleResultsVC: ViewController, ShuffleResult {
     lazy var reshuffleButton = singleResultModalView.reshuffleButton
     lazy var okButton = singleResultModalView.okButton
     var task = Task(id: "", name: "", duration: 0, priority: .low, state: .pending, gapid: "")
+    let gapManager = GapManager.instance
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +27,7 @@ class SingleResultsVC: ViewController, ShuffleResult {
         setupNameLabel()
         setupDateLabel()
         updatePriorityColor()
+        setupTimeLabels()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,11 +49,27 @@ class SingleResultsVC: ViewController, ShuffleResult {
     }
     
     private func setupNameLabel() {
-        singleResultModalView.singleCard.nameLabel.text = "Limpiar el baño"
+        singleResultModalView.singleCard.nameLabel.text = task.name
     }
     
     private func setupDateLabel() {
-        singleResultModalView.singleCard.dateLabel.text = "Wednesday 30th"
+        if let gap = gapManager.getGapById(id: task.gapid) {
+            singleResultModalView.singleCard.dateLabel.text = Utils.formatDate(datePattern: "EEEE ", date: gap.startDate)
+            let ordinalDate = Utils.formatDayNumberToOrdinal(date: gap.startDate)!
+            singleResultModalView.singleCard.dateLabel.text! += ordinalDate
+        } else {
+            singleResultModalView.singleCard.dateLabel.text = "Date"
+        }
+        
+    }
+    
+    private func setupTimeLabels() {
+        if let gap = gapManager.getGapById(id: task.gapid) {
+            singleResultModalView.singleCard.startTime.timeLabel.text = Utils.formatDate(datePattern: "HH:mm", date: gap.startDate)
+            singleResultModalView.singleCard.endTime.timeLabel.text = Utils.formatDate(datePattern: "HH:mm", date: gap.endDate)
+        } else {
+            return
+        }
     }
     
     private func updatePriorityColor() {

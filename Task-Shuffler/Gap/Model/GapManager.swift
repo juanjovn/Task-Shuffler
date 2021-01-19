@@ -44,6 +44,17 @@ class GapManager {
         return pendingGaps.count > 0
     }
     
+    func getGapById(id:String) -> GapRealm? {
+        let db = DatabaseManager()
+        let predicate = "id = '\(id)'"
+        if let queryResults = db.getData(objectClass: GapRealm.self).filter(predicate).first as? GapRealm {
+            return queryResults
+        } else {
+            print("Failed to obtain a query result")
+            return nil
+        }
+    }
+    
     init() {
         fillGaps()
     }

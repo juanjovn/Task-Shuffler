@@ -20,6 +20,15 @@ class Utils {
         return dateFormatter.string(from: date)
     }
     
+    static func formatDayNumberToOrdinal(date: Date) -> String? {
+        let calendar = Calendar.current
+        let dateComponents = calendar.component(.day, from: date)
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .ordinal
+        let day = numberFormatter.string(from: dateComponents as NSNumber)
+        return day
+    }
+    
     static func printLocale() {
         let formatter = DateFormatter()
         print(formatter.locale!)

@@ -38,7 +38,7 @@ class FillGapsController {
             case .Random:
                 randomizedCandidateTasks = getRandomizedCandidateTasks(tasks: pendingTasks)
             case .Single:
-                break
+                randomizedCandidateTasks = getRandomizedCandidateTasks(tasks: pendingTasks)
             }
         } else {
             if let sVC = shuffleVC {
@@ -59,7 +59,16 @@ class FillGapsController {
             switch shuffleMode.when {
             
             case .All:
-               break
+                let shuffledGaps = pendingGaps.shuffled()
+                for t in tasks {
+                    for g in shuffledGaps {
+                        if t.duration <= g.duration {
+                            task = t
+                            task.gapid = g.id
+                            return task
+                        }
+                    }
+                }
             case .This:
                 return task
             case .Next:
