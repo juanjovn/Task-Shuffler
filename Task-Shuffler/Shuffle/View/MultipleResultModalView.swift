@@ -10,7 +10,7 @@ import UIKit
 
 class MultipleResultModalView: ModalView {
 
-    var collectionView = UICollectionView(frame:CGRect.zero , collectionViewLayout: UICollectionViewLayout.init())
+    var collectionViewContainer = UIView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -22,13 +22,13 @@ class MultipleResultModalView: ModalView {
     }
     
     private func setupCollectionViewPlaceHolder() {
-        contentView.addSubview(collectionView)
+        contentView.addSubview(collectionViewContainer)
         //CONSTRAINTS
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20).isActive = true
-        collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -25).isActive = true
-        collectionView.bottomAnchor.constraint(equalTo: buttonsContainerView.topAnchor, constant: -30).isActive = true
-        collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 25).isActive = true
+        collectionViewContainer.translatesAutoresizingMaskIntoConstraints = false
+        collectionViewContainer.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20).isActive = true
+        collectionViewContainer.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -25).isActive = true
+        collectionViewContainer.bottomAnchor.constraint(equalTo: buttonsContainerView.topAnchor, constant: -30).isActive = true
+        collectionViewContainer.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 25).isActive = true
         
     }
     

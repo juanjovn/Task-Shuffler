@@ -50,15 +50,13 @@ class MultipleResultsVC: ViewController {
         layout.scrollDirection = .horizontal
         let resultsCollectionVC = ResultsCollectionVC(collectionViewLayout: layout)
         addChild(resultsCollectionVC)
-        multipleResultModalView.collectionView = resultsCollectionVC.collectionView
-//        multipleResultModalView.collectionView.translatesAutoresizingMaskIntoConstraints = false
-//        multipleResultModalView.collectionView.topAnchor.constraint(equalTo: multipleResultModalView.titleLabel.bottomAnchor, constant: 20).isActive = true
-//        multipleResultModalView.collectionView.trailingAnchor.constraint(equalTo: multipleResultModalView.contentView.trailingAnchor, constant: -25).isActive = true
-//        multipleResultModalView.collectionView.bottomAnchor.constraint(equalTo: multipleResultModalView.buttonsContainerView.topAnchor, constant: -30).isActive = true
-//        multipleResultModalView.collectionView.leadingAnchor.constraint(equalTo: multipleResultModalView.contentView.leadingAnchor, constant: 25).isActive = true
-        
-        //view.addSubview(resultsCollectionVC.collectionView)
+        multipleResultModalView.collectionViewContainer.addSubview(resultsCollectionVC.view)
         resultsCollectionVC.didMove(toParent: self)
+        resultsCollectionVC.view.translatesAutoresizingMaskIntoConstraints = false
+        resultsCollectionVC.view.topAnchor.constraint(equalTo: multipleResultModalView.collectionViewContainer.topAnchor).isActive = true
+        resultsCollectionVC.view.leadingAnchor.constraint(equalTo: multipleResultModalView.collectionViewContainer.leadingAnchor).isActive = true
+        resultsCollectionVC.view.trailingAnchor.constraint(equalTo: multipleResultModalView.collectionViewContainer.trailingAnchor).isActive = true
+        resultsCollectionVC.view.bottomAnchor.constraint(equalTo: multipleResultModalView.collectionViewContainer.bottomAnchor).isActive = true
     }
     
 //    private func updatePriorityColor() {
