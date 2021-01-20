@@ -88,18 +88,26 @@ class SingleResultsVC: ViewController, ShuffleResult {
     }
     
     @objc private func reshuffleButtonAction() {
-//        if let shuffleVC = shuffleVC {
-//            let fillGapsController = FillGapsController(shuffleMode: shuffleVC.shuffleConfiguration, shuffleVC: shuffleVC)
-//            nowTask = fillGapsController.shuffleTask()
-//
-//            UIView.animate(withDuration: 0.2, delay: 0, animations: { () -> Void in
-//                self.nowResultModalView.nowCardView.nameLabel.transform = .init(scaleX: 0.75, y: 0.75)
-//                self.updatePriorityColor()
-//            }, completion: { (finished: Bool) -> Void in
-//                self.nowResultModalView.nowCardView.nameLabel.text = "\(self.nowTask.name)"
-//                self.nowResultModalView.nowCardView.nameLabel.transform = .identity
-//            })
-//        }
+        if let shuffleVC = shuffleVC {
+            let fillGapsController = FillGapsController(shuffleMode: shuffleVC.shuffleConfiguration, shuffleVC: shuffleVC)
+            task = fillGapsController.shuffleTask()
+
+            UIView.animate(withDuration: 0.15, delay: 0, animations: { () -> Void in
+                self.singleResultModalView.singleCard.nameLabel.transform = .init(scaleX: 0.75, y: 0.75)
+                self.singleResultModalView.singleCard.dateLabel.transform = .init(scaleX: 0.75, y: 0.75)
+                self.singleResultModalView.singleCard.startTime.transform = .init(scaleX: 0.75, y: 0.75)
+                self.singleResultModalView.singleCard.endTime.transform = .init(scaleX: 0.75, y: 0.75)
+                self.updatePriorityColor()
+            }, completion: { (finished: Bool) -> Void in
+                self.setupNameLabel()
+                self.setupDateLabel()
+                self.setupTimeLabels()
+                self.singleResultModalView.singleCard.nameLabel.transform = .identity
+                self.singleResultModalView.singleCard.dateLabel.transform = .identity
+                self.singleResultModalView.singleCard.startTime.transform = .identity
+                self.singleResultModalView.singleCard.endTime.transform = .identity
+            })
+        }
     }
     
     @objc private func okButtonAction() {

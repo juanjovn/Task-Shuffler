@@ -52,7 +52,7 @@ class FillGapsController {
     
     private func getAssignedTask(tasks: [Task]) -> Task {
         
-        var task = Task(id: "", name: "", duration: 0, priority: .low, state: .pending, gapid: "")
+        let task = Task(id: "", name: "", duration: 0, priority: .low, state: .pending, gapid: "")
         
         if  pendingGaps.count > 0{
             
@@ -60,30 +60,36 @@ class FillGapsController {
             
             case .All:
                 let shuffledGaps = pendingGaps.shuffled()
-                for t in tasks {
-                    for g in shuffledGaps {
-                        if t.duration <= g.duration {
-                            task = t
-                            task.gapid = g.id
-                            return task
-                        }
-                    }
-                }
+                return assignGapToTask(shuffledGaps: shuffledGaps, candidateTasks: tasks)
             case .This:
-                return task
+                let currentWeekNumber = Calendar.current.component(.weekOfYear, from: Date())
+                var thisGaps = [GapRealm]()
+                for gap in pendingGaps {
+                    let gapWeekNumber = Calendar.current.component(.weekOfYear, from: gap.startDate)
+                    if currentWeekNumber == gapWeekNumber {
+                        thisGaps.append(gap)
+                    }
+                    
+                }
+                
+                let shuffledGaps = thisGaps.shuffled()
+                return assignGapToTask(shuffledGaps: shuffledGaps, candidateTasks: tasks)
             case .Next:
-                return task
+                let currentWeekNumber = Calendar.current.component(.weekOfYear, from: Date())
+                var thisGaps = [GapRealm]()
+                for gap in pendingGaps {
+                    let gapWeekNumber = Calendar.current.component(.weekOfYear, from: gap.startDate)
+                    if currentWeekNumber != gapWeekNumber {
+                        thisGaps.append(gap)
+                    }
+                    
+                }
+                
+                let shuffledGaps = thisGaps.shuffled()
+                return assignGapToTask(shuffledGaps: shuffledGaps, candidateTasks: tasks)
             case .Now:
                 let shuffledGaps = pendingGaps.shuffled()
-                for t in tasks {
-                    for g in shuffledGaps {
-                        if t.duration <= g.duration {
-                            task = t
-                            task.gapid = g.id
-                            return task
-                        }
-                    }
-                }
+                return assignGapToTask(shuffledGaps: shuffledGaps, candidateTasks: tasks)
             }
         } else {
             if let sVC = shuffleVC {
@@ -126,6 +132,22 @@ class FillGapsController {
             }
         }
         return candidateTasks.shuffled()
+    }
+    
+    private func assignGapToTask (shuffledGaps: [GapRealm], candidateTasks: [Task]) -> Task {
+        var task = Task(id: "", name: "", duration: 0, priority: .low, state: .pending, gapid: "")
+        
+        for t in candidateTasks {
+            for g in shuffledGaps {
+                if t.duration <= g.duration {
+                    task = t
+                    task.gapid = g.id
+                    return task
+                }
+            }
+        }
+        
+        return task
     }
     
 }
