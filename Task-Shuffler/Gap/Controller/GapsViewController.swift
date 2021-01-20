@@ -341,6 +341,7 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func deleteGap (_ indexPath: IndexPath){
         var gap = GapRealm()
+        var assignedTasks = db.getData(objectClass: TaskRealm.self)
         switch indexPath.section {
         case 0:
             if segmentedControl.currentSegment == 0 {
@@ -353,7 +354,36 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
             }
         case 1:
             gap = gapManager.assignedGaps[indexPath.row]
+            assignedTasks = assignedTasks.filter("gapid = '\(gap.id)'")
+            for taskRealm in assignedTasks {
+                let task = taskRealm as! TaskRealm
+                do {
+                    try db.realm.write{
+                        task.gapid = ""
+                        task.state = State.pending.rawValue
+                        print("Updated object: \(task.description)")
+                    }
+                } catch {
+                    print("Error writing update to database")
+                }
+            }
             gapManager.assignedGaps.remove(at: indexPath.row)
+        case 2:
+            gap = gapManager.filledGaps[indexPath.row]
+            assignedTasks = assignedTasks.filter("gapid = '\(gap.id)'")
+            for taskRealm in assignedTasks {
+                let task = taskRealm as! TaskRealm
+                do {
+                    try db.realm.write{
+                        task.gapid = ""
+                        task.state = State.pending.rawValue
+                        print("Updated object: \(task.description)")
+                    }
+                } catch {
+                    print("Error writing update to database")
+                }
+            }
+            gapManager.filledGaps.remove(at: indexPath.row)
         default:
             break
         }
