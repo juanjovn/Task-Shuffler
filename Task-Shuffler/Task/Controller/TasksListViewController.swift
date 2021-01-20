@@ -65,6 +65,11 @@ class TasksListViewController: AMTabsViewController {
         setupSegmentedControl()
     }
     
+    //MARK: viewWillAppear
+    override func viewWillAppear(_ animated: Bool) {
+        fillTasks()
+    }
+    
     // MARK: viewDidAppear
     
     override func viewDidAppear(_ animated: Bool) {

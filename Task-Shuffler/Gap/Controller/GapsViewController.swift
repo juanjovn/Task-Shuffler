@@ -448,8 +448,10 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return segmentedControl.currentSegment == 0 ? gapManager.pendingGaps.count : gapManager.completedGaps.count
-        } else {
+        } else if section == 1 {
             return segmentedControl.currentSegment == 0 ? gapManager.assignedGaps.count : 0
+        } else {
+            return segmentedControl.currentSegment == 0 ? gapManager.filledGaps.count : 0
         }
     }
     
@@ -467,6 +469,8 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
                 
             case 1:
                 gap = gapManager.assignedGaps[indexPath.row]
+            case 2:
+                gap = gapManager.filledGaps[indexPath.row]
             
             default:
                 break
@@ -486,18 +490,25 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        2
+        3
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let firstSectionTitle: String = segmentedControl.currentSegment == 0 ? "Free" : "Completed"
         let secondSectionTitle: String = segmentedControl.currentSegment == 0 ? "Assigned" : ""
+        let thirdSectionTitle: String = segmentedControl.currentSegment == 0 ? "Filled" : ""
         switch section {
         case 0:
             return firstSectionTitle
         case 1:
             if existGaps(gaps: gapManager.assignedGaps){
                 return secondSectionTitle
+            } else{
+                return nil
+            }
+        case 2:
+            if existGaps(gaps: gapManager.filledGaps){
+                return thirdSectionTitle
             } else{
                 return nil
             }

@@ -14,6 +14,7 @@ class GapManager {
     
     var pendingGaps = [GapRealm]()
     var assignedGaps = [GapRealm]()
+    var filledGaps = [GapRealm]()
     var completedGaps = [GapRealm]()
     
     func populateGaps(state: State) -> [GapRealm]{
@@ -37,6 +38,7 @@ class GapManager {
     func fillGaps () {
         pendingGaps = populateGaps(state: .pending)
         assignedGaps = populateGaps(state: .assigned)
+        filledGaps = populateGaps(state: .filled)
         completedGaps = populateGaps(state: .completed)
     }
     

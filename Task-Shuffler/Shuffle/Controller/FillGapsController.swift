@@ -10,7 +10,7 @@ import Foundation
 
 class FillGapsController {
     var pendingTasks = TaskManager.populateTasks(state: .pending)
-    var pendingGaps = GapManager.instance.pendingGaps
+    lazy var candidateGaps = GapManager.instance.pendingGaps + GapManager.instance.assignedGaps
     var shuffleMode = ShuffleConfiguration.init(how: .Smart, when: .All)
     var shuffleVC: ShuffleVC?
     var randomizedCandidateTasks = [Task]()
@@ -36,9 +36,17 @@ class FillGapsController {
             case .Smart:
                 break
             case .Random:
+                if shuffleMode.when == .Now {
                 randomizedCandidateTasks = getRandomizedCandidateTasks(tasks: pendingTasks)
+                }
             case .Single:
                 randomizedCandidateTasks = getRandomizedCandidateTasks(tasks: pendingTasks)
+                if randomizedCandidateTasks.count == 0 {
+                    if let sVC = shuffleVC {
+                        Alert.errorInformation(title: "Ooops!", message: "There are no task suitable for any gap. Try creating longer gaps or shorter tasks.", vc: sVC, handler: nil)
+                        
+                    }
+                }
             }
         } else {
             if let sVC = shuffleVC {
@@ -54,17 +62,17 @@ class FillGapsController {
         
         let task = Task(id: "", name: "", duration: 0, priority: .low, state: .pending, gapid: "")
         
-        if  pendingGaps.count > 0{
+        if  candidateGaps.count > 0 {
             
             switch shuffleMode.when {
             
             case .All:
-                let shuffledGaps = pendingGaps.shuffled()
+                let shuffledGaps = candidateGaps.shuffled()
                 return assignGapToTask(shuffledGaps: shuffledGaps, candidateTasks: tasks)
             case .This:
                 let currentWeekNumber = Calendar.current.component(.weekOfYear, from: Date())
                 var thisGaps = [GapRealm]()
-                for gap in pendingGaps {
+                for gap in candidateGaps {
                     let gapWeekNumber = Calendar.current.component(.weekOfYear, from: gap.startDate)
                     if currentWeekNumber == gapWeekNumber {
                         thisGaps.append(gap)
@@ -77,7 +85,7 @@ class FillGapsController {
             case .Next:
                 let currentWeekNumber = Calendar.current.component(.weekOfYear, from: Date())
                 var thisGaps = [GapRealm]()
-                for gap in pendingGaps {
+                for gap in candidateGaps {
                     let gapWeekNumber = Calendar.current.component(.weekOfYear, from: gap.startDate)
                     if currentWeekNumber != gapWeekNumber {
                         thisGaps.append(gap)
@@ -88,7 +96,7 @@ class FillGapsController {
                 let shuffledGaps = thisGaps.shuffled()
                 return assignGapToTask(shuffledGaps: shuffledGaps, candidateTasks: tasks)
             case .Now:
-                let shuffledGaps = pendingGaps.shuffled()
+                let shuffledGaps = candidateGaps.shuffled()
                 return assignGapToTask(shuffledGaps: shuffledGaps, candidateTasks: tasks)
             }
         } else {
@@ -112,7 +120,7 @@ class FillGapsController {
     
     private func existSuitableGap() -> Bool {
         for t in pendingTasks {
-            for g in pendingGaps {
+            for g in candidateGaps {
                 if t.duration <= g.duration {
                     return true
                 }
@@ -124,7 +132,7 @@ class FillGapsController {
     private func getRandomizedCandidateTasks(tasks: [Task]) -> [Task] {
         var candidateTasks = [Task]()
         for task in tasks {
-            for gap in pendingGaps {
+            for gap in candidateGaps {
                 if task.duration <= gap.duration {
                     candidateTasks.append(task)
                     break

@@ -76,4 +76,40 @@ class DatabaseManager{
             print("Error writing to database")
         }
     }
+    
+    func resetAllAssignments() {
+        let tasksResults = getData(objectClass: TaskRealm.self)
+        for taskRealm in tasksResults {
+            let task = taskRealm as! TaskRealm
+            if task.gapid.count != 0 {
+                do {
+                    try realm.write{
+                        task.gapid = ""
+                        task.state = State.pending.rawValue
+                        realm.add(task, update: .modified)
+                        print("Updated object: \(task.description)")
+                    }
+                } catch {
+                    print("Error writing to database")
+                }
+            }
+        }
+        
+        let gapResults = getData(objectClass: GapRealm.self)
+        for gapRealm in gapResults {
+            let gap = gapRealm as! GapRealm
+            if gap.state == State.assigned.rawValue || gap.state == State.filled.rawValue {
+                do {
+                    try realm.write{
+                        gap.state = State.pending.rawValue
+                        gap.duration = gap.intervalDateToMinutes(startDate: gap.startDate, endDate: gap.endDate)
+                        realm.add(gap, update: .modified)
+                        print("Updated object: \(gap.description)")
+                    }
+                } catch {
+                    print("Error writing to database")
+                }
+            }
+        }
+    }
 }

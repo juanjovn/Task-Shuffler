@@ -22,11 +22,18 @@ class ViewController: AMTabsViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
+        //DEBUG/////////////////
+        //debugActions()
+        //DEBUG/////////////////
+        
         setTabsControllers()
         selectedTabIndex = 2
     }
     
-    
+    private func debugActions() {
+        let db = DatabaseManager()
+        db.resetAllAssignments()
+    }
     
     private func setTabsControllers() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)

@@ -43,6 +43,7 @@ class TaskManager {
                 taskObj.duration = task.duration
                 taskObj.priority = task.priority.rawValue
                 taskObj.state = task.state.rawValue
+                taskObj.gapid = task.gapid
                 print("Updated object: \(taskObj.description)")
             }
         } catch {
