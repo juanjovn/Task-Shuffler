@@ -477,7 +477,7 @@ extension TasksListViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         var swipeAction = UIContextualAction()
         if segmentedControl.currentSegment == 0 {
-            swipeAction = UIContextualAction(style: .normal, title: "✓", handler: {
+            swipeAction = UIContextualAction(style: .normal, title: "", handler: {
                 (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
                 self.markCompleted(indexPath: indexPath)
                 print("✅ Marcado completado")
@@ -488,7 +488,7 @@ extension TasksListViewController: UITableViewDelegate{
             }
             swipeAction.backgroundColor = .powerGreen
         } else {
-            swipeAction = UIContextualAction(style: .normal, title: "⎌", handler: {
+            swipeAction = UIContextualAction(style: .normal, title: "", handler: {
                 (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
                 self.restoreTask(indexPath: indexPath)
                 print("⎌ Marcado restaurar")
@@ -521,6 +521,24 @@ extension TasksListViewController: UITableViewDelegate{
         } else {
             task = assignedTasks[indexPath.row]
             assignedTasks.remove(at: indexPath.row)
+            
+            let gapid = task.gapid
+            if let gap = GapManager.instance.getGapById(id: gapid) {
+                do {
+                    try db.realm.write{
+                        gap.duration += task.duration
+                        let defaultDuration = gap.intervalDateToMinutes(startDate: gap.startDate, endDate: gap.endDate)
+                        if gap.duration == defaultDuration {
+                            if gap.state == State.assigned.rawValue || gap.state == State.filled.rawValue {
+                                gap.state = State.pending.rawValue
+                            }
+                        }
+                    }
+                } catch {
+                    print("Error writing update to database")
+                }
+                GapManager.instance.fillGaps()
+            }
         }
         task.state = .completed
         completedTasks.insert(task, at: 0)
@@ -540,6 +558,7 @@ extension TasksListViewController: UITableViewDelegate{
         task = completedTasks[indexPath.row]
         completedTasks.remove(at: indexPath.row)
         task.state = .pending
+        task.gapid = ""
         pendingTasks.append(task)
         TaskManager.updateTask(task: task)
         tableView.deleteRows(at: [indexPath], with: .fade)

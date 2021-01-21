@@ -463,10 +463,17 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.section == 0 {
             gap = gapManager.pendingGaps[indexPath.row]
             gapManager.pendingGaps.remove(at: indexPath.row)
-        } else {
+        } else if indexPath.section == 1 {
             gap = gapManager.assignedGaps[indexPath.row]
             gapManager.assignedGaps.remove(at: indexPath.row)
+            markTaskCompleted(gapid: gap.id)
+        } else if indexPath.section == 2 {
+            gap = gapManager.filledGaps[indexPath.row]
+            gapManager.filledGaps.remove(at: indexPath.row)
+            markTaskCompleted(gapid: gap.id)
         }
+        
+        
         
         updatedGap.id = gap.id
         updatedGap.duration = gap.duration
@@ -477,6 +484,18 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.deleteRows(at: [indexPath], with: .fade)
         db.updateData(object: updatedGap)
         hideAssignedIfEmpty()
+    }
+    
+    private func markTaskCompleted (gapid: String) {
+        let assignedTasks = TaskManager.populateTasks(state: .assigned)
+        var newTask = Task(id: "", name: "", duration: 0, priority: .high, state: .pending, gapid: "")
+        for task in assignedTasks {
+            if task.gapid == gapid {
+                newTask = task
+                newTask.state = .completed
+                TaskManager.updateTask(task: newTask)
+            }
+        }
     }
     
     
