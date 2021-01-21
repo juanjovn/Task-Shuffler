@@ -444,10 +444,16 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
         switch segmentedControl.currentSegment {
         case 1:
             newGapVC.editedGap = gapManager.completedGaps[indexPath.row]
+        case 0:
+            if indexPath.section == 0 {
+                newGapVC.editedGap = gapManager.pendingGaps[indexPath.row]
+            }
         default:
-            newGapVC.editedGap = gapManager.pendingGaps[indexPath.row]
+            break
         }
-        present(newGapVC, animated: true, completion: nil)
+        if indexPath.section == 0 {
+            present(newGapVC, animated: true, completion: nil)
+        }
     }
     
     private func markCompleted(indexPath: IndexPath) {
