@@ -448,6 +448,21 @@ extension TasksListViewController: UITableViewDelegate{
             }
         case 1:
             task = assignedTasks[indexPath.row]
+            let gapid = task.gapid
+            if let gap = GapManager.instance.getGapById(id: gapid) {
+                do {
+                    try db.realm.write{
+                        gap.duration += task.duration
+                        let defaultDuration = gap.intervalDateToMinutes(startDate: gap.startDate, endDate: gap.endDate)
+                        if gap.duration == defaultDuration {
+                            gap.state = State.pending.rawValue
+                        }
+                    }
+                } catch {
+                    print("Error writing update to database")
+                }
+                GapManager.instance.fillGaps()
+            }
             assignedTasks.remove(at: indexPath.row)
         default:
             break
