@@ -218,6 +218,45 @@ class GapsViewController: AMTabsViewController {
             }
         }
         
+        var gaps = [GapRealm]()
+        let usedGaps = gapManager.assignedGaps + gapManager.filledGaps
+        if usedGaps.count > 0 {
+            for gap in usedGaps {
+                if checkOutdated(currentGap: gap) {
+                    isChanged = true
+                    gaps.append(gap)
+                    do {
+                        try db.realm.write{
+                            if SettingsValues.taskSettings[0] {
+                                gap.state = State.completed.rawValue
+                            } else {
+                                gap.state = State.outdated.rawValue
+                            }
+                        }
+                    } catch {
+                        print("Error updating to database")
+                    }
+                }
+            }
+            
+            for gap in gaps {
+                var assignedTasks = db.getData(objectClass: TaskRealm.self)
+                assignedTasks = assignedTasks.filter("gapid = '\(gap.id)'")
+                for taskRealm in assignedTasks {
+                    let task = taskRealm as! TaskRealm
+                    do {
+                        try db.realm.write{
+                            if SettingsValues.taskSettings[0] {
+                                task.state = State.completed.rawValue
+                            }
+                        }
+                    } catch {
+                        print("Error writing update to database")
+                    }
+                }
+            }
+        }
+        
         if isChanged {
             gapManager.fillGaps()
         }
