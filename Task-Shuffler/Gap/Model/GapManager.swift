@@ -26,6 +26,13 @@ class GapManager {
         return self.populateArray(results: gapResults)
     }
     
+    func populateCurrentGaps() -> [GapRealm] {
+        let db = DatabaseManager()
+        let startOfWeekDate = Date().startOfWeek()
+        let gapResults = db.getData(objectClass: GapRealm.self).filter("startDate >= %@", startOfWeekDate)
+        return self.populateArray(results: gapResults)
+    }
+    
     func populateArray (results: Results<Object>) -> ([GapRealm]) {
         var gaps = [GapRealm]()
         for g in results{

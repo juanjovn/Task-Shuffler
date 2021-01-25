@@ -24,7 +24,7 @@ class CalendarVC: UIViewController {
         
         setupFakeEvent()
         setupTimetable()
-        insertDummyTask()
+        //insertDummyTask()
         
 //        let minute:TimeInterval = 60.0
 //        let hour:TimeInterval = 60.0 * minute

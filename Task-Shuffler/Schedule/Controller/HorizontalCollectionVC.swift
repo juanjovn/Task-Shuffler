@@ -54,8 +54,9 @@ class HorizontalCollectionVC: UICollectionViewController {
             cell.nextButton.isHidden = false
             cell.backView.isHidden = true
             cell.nextView.isHidden = false
-
-            for gap in gapManager.pendingGaps{
+            
+            let gapsToDraw = gapManager.populateCurrentGaps()
+            for gap in gapsToDraw {
                 let gapWeekNumber = Calendar.current.component(.weekOfYear, from: gap.startDate)
                 if currentWeekNumber == gapWeekNumber {
                     cell.calendarVC.insertEvent(eventName: "", startDate: gap.startDate, endDate: gap.endDate, type: EventType.Gap)
@@ -63,7 +64,21 @@ class HorizontalCollectionVC: UICollectionViewController {
 
             }
             
-            cell.calendarVC.insertDummyTask()
+            let assignedTask = TaskManager.populateTasks(state: .assigned)
+            for task in assignedTask {
+                let assignedGap = gapManager.getGapById(id: task.gapid)!
+                let numberOfAssignedGaps = TaskManager.getTasksByGapId(gapid: task.gapid).count
+                let gapWeekNumber = Calendar.current.component(.weekOfYear, from: assignedGap.startDate)
+                if currentWeekNumber == gapWeekNumber {
+                    if numberOfAssignedGaps == 1 {
+                    cell.calendarVC.insertEvent(eventName: task.name, startDate: assignedGap.startDate, endDate: assignedGap.endDate, type: EventType.Task)
+                    } else {
+                        //TODO: Draw equally the tasks assigned to this gap.
+                    }
+                }
+            }
+            
+            //cell.calendarVC.insertDummyTask()
             return cell
         case 1:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: weekCellReuseIdentifier, for: indexPath) as! CollectionViewCell
@@ -74,10 +89,21 @@ class HorizontalCollectionVC: UICollectionViewController {
             cell.backView.isHidden = false
             cell.nextView.isHidden = true
 
-            for gap in gapManager.pendingGaps{
+            let gapsToDraw = gapManager.populateCurrentGaps()
+            for gap in gapsToDraw {
                 let gapWeekNumber = Calendar.current.component(.weekOfYear, from: gap.startDate)
                 if currentWeekNumber != gapWeekNumber {
-                    cell.calendarVC.insertEvent(eventName: "gap", startDate: gap.startDate, endDate: gap.endDate, type: EventType.Gap)
+                    cell.calendarVC.insertEvent(eventName: "", startDate: gap.startDate, endDate: gap.endDate, type: EventType.Gap)
+                }
+
+            }
+            
+            let assignedTask = TaskManager.populateTasks(state: .assigned)
+            for task in assignedTask {
+                let assignedGap = gapManager.getGapById(id: task.gapid)!
+                let gapWeekNumber = Calendar.current.component(.weekOfYear, from: assignedGap.startDate)
+                if currentWeekNumber != gapWeekNumber {
+                    cell.calendarVC.insertEvent(eventName: task.name, startDate: assignedGap.startDate, endDate: assignedGap.endDate, type: EventType.Task)
                 }
             }
             

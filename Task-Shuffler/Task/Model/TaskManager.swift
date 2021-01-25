@@ -51,4 +51,12 @@ class TaskManager {
         }
         
     }
+    
+    static func getTasksByGapId (gapid: String) -> [Task] {
+        let db = DatabaseManager()
+        let predicate = "gapid = '\(gapid)'"
+        let tasksResults = db.getData(objectClass: TaskRealm.self).filter(predicate)
+        
+        return realmToStruct(tasksResults: tasksResults)
+    }
 }
