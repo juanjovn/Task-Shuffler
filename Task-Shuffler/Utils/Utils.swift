@@ -37,7 +37,15 @@ class Utils {
 }
 
 extension Calendar {
+    var currentDate: Date { return Date() }
     static let gregorian = Calendar(identifier: .gregorian)
+    
+    func isDateInNextWeek(_ date: Date) -> Bool {
+        guard let nextWeek = self.date(byAdding: DateComponents(weekOfYear: 1), to: currentDate) else {
+          return false
+        }
+        return isDate(date, equalTo: nextWeek, toGranularity: .weekOfYear)
+      }
 }
 
 extension Date {

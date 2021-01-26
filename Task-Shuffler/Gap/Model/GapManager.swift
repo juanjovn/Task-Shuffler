@@ -16,6 +16,7 @@ class GapManager {
     var assignedGaps = [GapRealm]()
     var filledGaps = [GapRealm]()
     var completedGaps = [GapRealm]()
+    var outdatedGaps = [GapRealm]()
     
     func populateGaps(state: State) -> [GapRealm]{
         let db = DatabaseManager()
@@ -47,6 +48,7 @@ class GapManager {
         assignedGaps = populateGaps(state: .assigned)
         filledGaps = populateGaps(state: .filled)
         completedGaps = populateGaps(state: .completed)
+        outdatedGaps = populateGaps(state: .outdated)
     }
     
     func existPendingGaps() -> Bool {

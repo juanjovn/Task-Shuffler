@@ -392,21 +392,32 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
                 gapManager.completedGaps.remove(at: indexPath.row)
             }
         case 1:
-            gap = gapManager.assignedGaps[indexPath.row]
+            if segmentedControl.currentSegment == 0 {
+                gap = gapManager.assignedGaps[indexPath.row]
+            } else {
+                gap = gapManager.outdatedGaps[indexPath.row]
+            }
             assignedTasks = assignedTasks.filter("gapid = '\(gap.id)'")
             for taskRealm in assignedTasks {
                 let task = taskRealm as! TaskRealm
                 do {
                     try db.realm.write{
                         task.gapid = ""
-                        task.state = State.pending.rawValue
+                        if segmentedControl.currentSegment == 0 {
+                            task.state = State.pending.rawValue
+                        }
                         print("Updated object: \(task.description)")
                     }
                 } catch {
                     print("Error writing update to database")
                 }
             }
-            gapManager.assignedGaps.remove(at: indexPath.row)
+            if segmentedControl.currentSegment == 0 {
+                gapManager.assignedGaps.remove(at: indexPath.row)
+            } else {
+                gapManager.outdatedGaps.remove(at: indexPath.row)
+            }
+            
         case 2:
             gap = gapManager.filledGaps[indexPath.row]
             assignedTasks = assignedTasks.filter("gapid = '\(gap.id)'")
@@ -543,7 +554,7 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
         if section == 0 {
             return segmentedControl.currentSegment == 0 ? gapManager.pendingGaps.count : gapManager.completedGaps.count
         } else if section == 1 {
-            return segmentedControl.currentSegment == 0 ? gapManager.assignedGaps.count : 0
+            return segmentedControl.currentSegment == 0 ? gapManager.assignedGaps.count : gapManager.outdatedGaps.count
         } else {
             return segmentedControl.currentSegment == 0 ? gapManager.filledGaps.count : 0
         }
@@ -562,7 +573,11 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
                 }
                 
             case 1:
-                gap = gapManager.assignedGaps[indexPath.row]
+                if segmentedControl.currentSegment == 0{
+                    gap = gapManager.assignedGaps[indexPath.row]
+                } else {
+                    gap = gapManager.outdatedGaps[indexPath.row]
+                }
             case 2:
                 gap = gapManager.filledGaps[indexPath.row]
             
@@ -589,15 +604,17 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let firstSectionTitle: String = segmentedControl.currentSegment == 0 ? "Free" : "Completed"
-        let secondSectionTitle: String = segmentedControl.currentSegment == 0 ? "Assigned" : ""
+        let secondSectionTitle: String = segmentedControl.currentSegment == 0 ? "Assigned" : "Outdated"
         let thirdSectionTitle: String = segmentedControl.currentSegment == 0 ? "Filled" : ""
         switch section {
         case 0:
             return firstSectionTitle
         case 1:
-            if existGaps(gaps: gapManager.assignedGaps){
+            if existGaps(gaps: gapManager.assignedGaps) && segmentedControl.currentSegment == 0 {
                 return secondSectionTitle
-            } else{
+            } else if existGaps(gaps: gapManager.outdatedGaps) && segmentedControl.currentSegment == 1 {
+                return secondSectionTitle
+            } else {
                 return nil
             }
         case 2:

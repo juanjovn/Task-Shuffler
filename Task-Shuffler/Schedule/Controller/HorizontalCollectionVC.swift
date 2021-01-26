@@ -91,8 +91,8 @@ class HorizontalCollectionVC: UICollectionViewController {
 
             let gapsToDraw = gapManager.populateCurrentGaps()
             for gap in gapsToDraw {
-                let gapWeekNumber = Calendar.current.component(.weekOfYear, from: gap.startDate)
-                if currentWeekNumber != gapWeekNumber {
+                
+                if Calendar.current.isDateInNextWeek(gap.startDate) {
                     cell.calendarVC.insertEvent(eventName: "", startDate: gap.startDate, endDate: gap.endDate, type: EventType.Gap)
                 }
 
@@ -101,8 +101,8 @@ class HorizontalCollectionVC: UICollectionViewController {
             let assignedTask = TaskManager.populateTasks(state: .assigned)
             for task in assignedTask {
                 let assignedGap = gapManager.getGapById(id: task.gapid)!
-                let gapWeekNumber = Calendar.current.component(.weekOfYear, from: assignedGap.startDate)
-                if currentWeekNumber != gapWeekNumber {
+                
+                if Calendar.current.isDateInNextWeek(assignedGap.startDate) {
                     cell.calendarVC.insertEvent(eventName: task.name, startDate: assignedGap.startDate, endDate: assignedGap.endDate, type: EventType.Task)
                 }
             }
