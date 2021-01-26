@@ -14,7 +14,7 @@ class SettingsVC: UIViewController {
     
     //Constants
     let taskSection =   [ "Mark completed when time ends",
-                          "Delete confirmation"]
+                          "Delete confirmation", "One task per gap"]
     let notificationsSection =  [ "Notify task starts",
                                   "Notify task ends"]
     let othersSection = ["Haptic feedback"]
