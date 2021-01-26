@@ -55,28 +55,7 @@ class HorizontalCollectionVC: UICollectionViewController {
             cell.backView.isHidden = true
             cell.nextView.isHidden = false
             
-            let gapsToDraw = gapManager.populateCurrentGaps()
-            for gap in gapsToDraw {
-                let gapWeekNumber = Calendar.current.component(.weekOfYear, from: gap.startDate)
-                if currentWeekNumber == gapWeekNumber {
-                    cell.calendarVC.insertEvent(eventName: "", startDate: gap.startDate, endDate: gap.endDate, type: EventType.Gap)
-                }
-
-            }
-            
-            let assignedTask = TaskManager.populateTasks(state: .assigned)
-            for task in assignedTask {
-                let assignedGap = gapManager.getGapById(id: task.gapid)!
-                let numberOfAssignedGaps = TaskManager.getTasksByGapId(gapid: task.gapid).count
-                let gapWeekNumber = Calendar.current.component(.weekOfYear, from: assignedGap.startDate)
-                if currentWeekNumber == gapWeekNumber {
-                    if numberOfAssignedGaps == 1 {
-                    cell.calendarVC.insertEvent(eventName: task.name, startDate: assignedGap.startDate, endDate: assignedGap.endDate, type: EventType.Task)
-                    } else {
-                        //TODO: Draw equally the tasks assigned to this gap.
-                    }
-                }
-            }
+            drawScheduleCells(cell: cell, row: indexPath.row)
             
             //cell.calendarVC.insertDummyTask()
             return cell
@@ -89,23 +68,7 @@ class HorizontalCollectionVC: UICollectionViewController {
             cell.backView.isHidden = false
             cell.nextView.isHidden = true
 
-            let gapsToDraw = gapManager.populateCurrentGaps()
-            for gap in gapsToDraw {
-                
-                if Calendar.current.isDateInNextWeek(gap.startDate) {
-                    cell.calendarVC.insertEvent(eventName: "", startDate: gap.startDate, endDate: gap.endDate, type: EventType.Gap)
-                }
-
-            }
-            
-            let assignedTask = TaskManager.populateTasks(state: .assigned)
-            for task in assignedTask {
-                let assignedGap = gapManager.getGapById(id: task.gapid)!
-                
-                if Calendar.current.isDateInNextWeek(assignedGap.startDate) {
-                    cell.calendarVC.insertEvent(eventName: task.name, startDate: assignedGap.startDate, endDate: assignedGap.endDate, type: EventType.Task)
-                }
-            }
+            drawScheduleCells(cell: cell, row: indexPath.row)
             
             return cell
         default:
@@ -121,12 +84,61 @@ class HorizontalCollectionVC: UICollectionViewController {
         }
     }
     
-//    private func isDateInNextWeek(_ date: Date) -> Bool {
-//        guard let nextWeek = Calendar.current.date(byAdding: DateComponents(weekOfYear: 1), to: Date()) else {
-//          return false
-//        }
-//        return Calendar.current.isDate(date, equalTo: nextWeek, toGranularity: .weekOfYear)
-//    }
+    private func drawScheduleCells (cell: CollectionViewCell, row: Int) {
+        var durationsDictionary = [String: Int]()
+        let gapsToDraw = gapManager.populateCurrentGaps()
+        for gap in gapsToDraw {
+            durationsDictionary.updateValue(gap.intervalDateToMinutes(startDate: gap.startDate, endDate: gap.endDate), forKey: gap.id)
+            let gapWeekNumber = Calendar.current.component(.weekOfYear, from: gap.startDate)
+            if row == 0 { //This week
+                if currentWeekNumber == gapWeekNumber {
+                    cell.calendarVC.insertEvent(eventName: "", startDate: gap.startDate, endDate: gap.endDate, type: EventType.Gap)
+                }
+            } else { //Next week
+                if Calendar.current.isDateInNextWeek(gap.startDate) {
+                    cell.calendarVC.insertEvent(eventName: "", startDate: gap.startDate, endDate: gap.endDate, type: EventType.Gap)
+                }
+            }
+
+        }
+        let assignedTask = TaskManager.populateTasks(state: .assigned)
+        for task in assignedTask {
+            let assignedGap = gapManager.getGapById(id: task.gapid)!
+            var assignedTasksInGap = TaskManager.getTasksByGapId(gapid: task.gapid)
+            assignedTasksInGap = assignedTasksInGap.filter({$0.state == State.assigned})
+            let numberOfAssignedTasksInGap = assignedTasksInGap.count
+            let gapWeekNumber = Calendar.current.component(.weekOfYear, from: assignedGap.startDate)
+            if row == 0 { //This week
+                if currentWeekNumber == gapWeekNumber {
+                    if numberOfAssignedTasksInGap == 1 {
+                    cell.calendarVC.insertEvent(eventName: task.name, startDate: assignedGap.startDate, endDate: assignedGap.endDate, type: EventType.Task)
+                    } else {
+                        //TODO: Draw equally the tasks assigned to this gap.
+                        guard let availableDuration = durationsDictionary[task.gapid] else { return}
+                        let startTime = Date(timeInterval: Double(availableDuration) * -60, since: assignedGap.endDate)
+                        let endTime = Date(timeInterval: Double(availableDuration * -60 + task.duration * 60), since: assignedGap.endDate)
+                        cell.calendarVC.insertEvent(eventName: task.name, startDate: startTime, endDate: endTime, type: EventType.Task)
+                        durationsDictionary.updateValue(availableDuration - task.duration, forKey: assignedGap.id)
+                    }
+                }
+            } else { //Next week
+                if Calendar.current.isDateInNextWeek(assignedGap.startDate) {
+                    if numberOfAssignedTasksInGap == 1 {
+                    cell.calendarVC.insertEvent(eventName: task.name, startDate: assignedGap.startDate, endDate: assignedGap.endDate, type: EventType.Task)
+                    } else {
+                        //TODO: Draw equally the tasks assigned to this gap.
+                        guard let availableDuration = durationsDictionary[task.gapid] else { return}
+                        let startTime = Date(timeInterval: Double(availableDuration) * -60, since: assignedGap.endDate)
+                        let endTime = Date(timeInterval: Double(availableDuration * -60 + task.duration * 60), since: assignedGap.endDate)
+                        cell.calendarVC.insertEvent(eventName: task.name, startDate: startTime, endDate: endTime, type: EventType.Task)
+                        durationsDictionary.updateValue(availableDuration - task.duration, forKey: assignedGap.id)
+                    }
+                }
+            }
+            
+        }
+    }
+    
     
     private func calculateSectionInset() -> CGFloat { // should be overridden
         return 0

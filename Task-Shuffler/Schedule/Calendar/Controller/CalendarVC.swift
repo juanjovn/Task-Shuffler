@@ -68,7 +68,7 @@ class CalendarVC: UIViewController {
             
             courseList.append(event)
         case .Task:
-            let event = ElliottEvent(courseId: "2", courseName: eventName, roomName: "", professor: "", courseDay: ElliotDay(rawValue: day)!, startTime: startTime, endTime: endTime, backgroundColor: UIColor.fireOrange)
+            let event = ElliottEvent(courseId: "2", courseName: eventName, roomName: "", professor: "", courseDay: ElliotDay(rawValue: day)!, startTime: startTime, endTime: endTime, backgroundColor: UIColor.fireOrange.withAlphaComponent(0.7))
             courseList.append(event)
         case .Fake:
             let event = ElliottEvent(courseId: "-1", courseName: eventName, roomName: "", professor: "", courseDay: ElliotDay(rawValue: day)!, startTime: "00:00", endTime: "23:59", backgroundColor: UIColor.fireOrange.withAlphaComponent(0.05))
@@ -120,7 +120,7 @@ class CalendarVC: UIViewController {
         timeTable.heightOfDaySection = 30
         timeTable.courseItemHeight = UIScreen.main.bounds.size.height / 15
         timeTable.textEdgeInsets = UIEdgeInsets(top: 5, left: 3, bottom: 5, right: 3)
-        timeTable.borderCornerRadius = 10
+        timeTable.borderCornerRadius = 5
         timeTable.courseTextAlignment = .center
         timeTable.borderWidth = 1
         timeTable.borderColor = UIColor.pearlWhite.withAlphaComponent(0.40)
