@@ -59,6 +59,10 @@ class FillGapsController {
     }
     
     private func getAssignedTask(tasks: [Task]) -> Task {
+        //If one task per gap option is enabled only take into account pending gaps
+        if SettingsValues.taskSettings[2] {
+            candidateGaps = GapManager.instance.pendingGaps
+        }
         
         let task = Task(id: "", name: "", duration: 0, priority: .low, state: .pending, gapid: "")
         
