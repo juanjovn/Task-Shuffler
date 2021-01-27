@@ -84,6 +84,14 @@ class FillGapsController {
                     
                 }
                 
+                
+                if let sVC = shuffleVC {
+                    if thisGaps.count == 0 {
+                        Alert.errorInformation(title: "Ooops!", message: "There are no gaps created in this week!", vc: sVC, handler: nil)
+                    }
+                    
+                }
+                
                 let shuffledGaps = thisGaps.shuffled()
                 return assignGapToTask(shuffledGaps: shuffledGaps, candidateTasks: tasks)
             case .Next:
@@ -93,6 +101,13 @@ class FillGapsController {
                     let gapWeekNumber = Calendar.current.component(.weekOfYear, from: gap.startDate)
                     if currentWeekNumber != gapWeekNumber {
                         thisGaps.append(gap)
+                    }
+                    
+                }
+                
+                if let sVC = shuffleVC {
+                    if thisGaps.count == 0{
+                        Alert.errorInformation(title: "Ooops!", message: "There are no gaps created in next week!", vc: sVC, handler: nil)
                     }
                     
                 }
