@@ -299,7 +299,7 @@ extension GapsViewController: SJFluidSegmentedControlDataSource, SJFluidSegmente
     func segmentedControl(_ segmentedControl: SJFluidSegmentedControl, didChangeFromSegmentAtIndex fromIndex: Int, toSegmentAtIndex toIndex: Int) {
         
         refreshOutdated()
-        tableView.reloadSections(IndexSet(integersIn: 0...1), with: .fade)
+        tableView.reloadSections(IndexSet(integersIn: 0...2), with: .fade)
         if tableView.numberOfRows(inSection: 0) > 0{
             let topIndex = IndexPath(row: 0, section: 0)
             tableView.scrollToRow(at: topIndex, at: .top, animated: true)
