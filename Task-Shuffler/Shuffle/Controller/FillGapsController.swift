@@ -66,7 +66,7 @@ class FillGapsController {
         
         let task = Task(id: "", name: "", duration: 0, priority: .low, state: .pending, gapid: "")
         
-        if  candidateGaps.count > 0 {
+        if  candidateGaps.count > 0 || shuffleMode.when == .Now{
             
             switch shuffleMode.when {
             
@@ -115,8 +115,8 @@ class FillGapsController {
                 let shuffledGaps = thisGaps.shuffled()
                 return assignGapToTask(shuffledGaps: shuffledGaps, candidateTasks: tasks)
             case .Now:
-                let shuffledGaps = candidateGaps.shuffled()
-                return assignGapToTask(shuffledGaps: shuffledGaps, candidateTasks: tasks)
+                guard let randomTask = pendingTasks.shuffled().first else { return task }
+                return randomTask
             }
         } else {
             if let sVC = shuffleVC {
