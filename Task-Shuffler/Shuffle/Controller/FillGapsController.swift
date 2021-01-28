@@ -43,7 +43,14 @@ class FillGapsController {
                 randomizedCandidateTasks = getRandomizedCandidateTasks(tasks: pendingTasks)
                 if randomizedCandidateTasks.count == 0 {
                     if let sVC = shuffleVC {
-                        Alert.errorInformation(title: "Ooops!", message: "There are no task suitable for any gap. Try creating longer gaps or shorter tasks.", vc: sVC, handler: nil)
+                        if SettingsValues.taskSettings[2] {
+                            candidateGaps = GapManager.instance.pendingGaps
+                        }
+                        if candidateGaps.count > 0 {
+                            Alert.errorInformation(title: "Ooops!", message: "There are no task suitable for any gap. Try creating longer gaps or shorter tasks.", vc: sVC, handler: nil)
+                        } else if !SettingsValues.taskSettings[2]{
+                            Alert.errorInformation(title: "Ooops!", message: "There are no gaps to shuffle!", vc: sVC, handler: nil)
+                        }
                         
                     }
                 }
@@ -120,7 +127,7 @@ class FillGapsController {
             }
         } else {
             if let sVC = shuffleVC {
-                Alert.errorInformation(title: "Ooops!", message: "There are no gaps to shuffle", vc: sVC, handler: nil)
+                Alert.errorInformation(title: "Ooops!", message: "There are no gaps to shuffle!", vc: sVC, handler: nil)
                 
             }
         }
