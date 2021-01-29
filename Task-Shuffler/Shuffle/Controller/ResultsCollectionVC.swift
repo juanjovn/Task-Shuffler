@@ -13,6 +13,7 @@ private let reuseIdentifier = "Cell"
 class ResultsCollectionVC: UICollectionViewController {
 
     let dummyNames = ["Juanjo", "Lucia", "Marcos", "Andy"]
+    var tasks = [Task]()
     override func viewDidLoad() {
         super.viewDidLoad()
     
@@ -33,12 +34,38 @@ class ResultsCollectionVC: UICollectionViewController {
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return TaskManager.populateTasks(state: .pending).count
+        return tasks.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-    
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! ResultsCollectionViewCell
+        let task = tasks[indexPath.row]
+        cell.nameLabel.text = task.name
+        
+        if let gap = GapManager.instance.getGapById(id: task.gapid) {
+            cell.dateLabel.text = Utils.formatDate(datePattern: "EEEE ", date: gap.startDate)
+            let ordinalDate = Utils.formatDayNumberToOrdinal(date: gap.startDate)!
+            cell.dateLabel.text! += ordinalDate
+        } else {
+            cell.dateLabel.text = "Date"
+        }
+        
+        if let gap = GapManager.instance.getGapById(id: task.gapid) {
+            cell.startTime.timeLabel.text = Utils.formatDate(datePattern: "HH:mm", date: gap.startDate)
+            cell.endTime.timeLabel.text = Utils.formatDate(datePattern: "HH:mm", date: gap.endDate)
+        } else {
+            return cell
+        }
+        
+        switch task.priority {
+        case .low:
+            cell.priorityIcon.tintColor = .powerGreen
+        case .medium:
+            cell.priorityIcon.tintColor = .darkOrange
+        case .high:
+            cell.priorityIcon.tintColor = .fireOrange
+        }
+        
         return cell
     }
 

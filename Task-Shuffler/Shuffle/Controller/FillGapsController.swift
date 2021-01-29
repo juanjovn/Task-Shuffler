@@ -10,7 +10,7 @@ import Foundation
 
 class FillGapsController {
     var pendingTasks = TaskManager.populateTasks(state: .pending)
-    lazy var candidateGaps = GapManager.instance.pendingGaps + GapManager.instance.assignedGaps
+    var candidateGaps = [GapRealm]()
     var shuffleMode = ShuffleConfiguration.init(how: .Smart, when: .All)
     var shuffleVC: ShuffleVC?
     var randomizedCandidateTasks = [Task]()
@@ -18,6 +18,38 @@ class FillGapsController {
     init(shuffleMode: ShuffleConfiguration, shuffleVC: ShuffleVC?) {
         self.shuffleMode = shuffleMode
         self.shuffleVC = shuffleVC
+        //If one task per gap option is enabled only take into account pending gaps
+        if SettingsValues.taskSettings[2] {
+            candidateGaps = GapManager.instance.pendingGaps
+        } else {
+            candidateGaps = GapManager.instance.pendingGaps + GapManager.instance.assignedGaps
+        }
+        
+        if shuffleMode.when == .This {
+            let currentWeekNumber = Calendar.current.component(.weekOfYear, from: Date())
+            var thisGaps = [GapRealm]()
+            for gap in candidateGaps {
+                let gapWeekNumber = Calendar.current.component(.weekOfYear, from: gap.startDate)
+                if currentWeekNumber == gapWeekNumber {
+                    thisGaps.append(gap)
+                }
+                
+            }
+            
+            candidateGaps = thisGaps
+        } else if shuffleMode.when == .Next {
+            let currentWeekNumber = Calendar.current.component(.weekOfYear, from: Date())
+            var nextGaps = [GapRealm]()
+            for gap in candidateGaps {
+                let gapWeekNumber = Calendar.current.component(.weekOfYear, from: gap.startDate)
+                if currentWeekNumber != gapWeekNumber {
+                    nextGaps.append(gap)
+                }
+                
+            }
+            
+            candidateGaps = nextGaps
+        }
     }
     
     
@@ -28,6 +60,49 @@ class FillGapsController {
         return task
     }
     
+    public func shuffleTasks() -> [Task] {
+        var tasks = [Task]()
+        var numberOfSuitableGaps = candidateGaps.count
+        
+        if SettingsValues.taskSettings[2] {
+            while numberOfSuitableGaps > 0 {
+                let task = getAssignedTask(tasks: getCandidateTasks())
+                if task.name != "" {
+                    for i in 0..<pendingTasks.count {
+                        if pendingTasks[i].id == task.id {
+                            pendingTasks.remove(at: i)
+                            break
+                        }
+                    }
+                    tasks.append(task)
+                    for i in 0..<candidateGaps.count {
+                        if candidateGaps[i].id == task.gapid {
+                            candidateGaps.remove(at: i)
+                            break
+                        }
+                    }
+                }
+                
+                numberOfSuitableGaps -= 1
+                if pendingTasks.count == 0 {
+                    break
+                }
+            }
+        }
+        
+        if tasks.count == 0 {
+            if let sVC = shuffleVC {
+                if candidateGaps.count == 0 {
+                    Alert.errorInformation(title: "Ooops!", message: "There are no gaps to shuffle!", vc: sVC, handler: nil)
+                } else {
+                    Alert.errorInformation(title: "Ooops!", message: "There are no suitable tasks!", vc: sVC, handler: nil)
+                }
+            }
+        }
+        
+        return tasks
+    }
+    
     
     private func getCandidateTasks() -> [Task] {
         if existFreeTask(pendingTasks: pendingTasks) {
@@ -36,9 +111,7 @@ class FillGapsController {
             case .Smart:
                 break
             case .Random:
-                if shuffleMode.when == .Now {
                 randomizedCandidateTasks = getRandomizedCandidateTasks(tasks: pendingTasks)
-                }
             case .Single:
                 randomizedCandidateTasks = getRandomizedCandidateTasks(tasks: pendingTasks)
                 if randomizedCandidateTasks.count == 0 {
@@ -66,10 +139,6 @@ class FillGapsController {
     }
     
     private func getAssignedTask(tasks: [Task]) -> Task {
-        //If one task per gap option is enabled only take into account pending gaps
-        if SettingsValues.taskSettings[2] {
-            candidateGaps = GapManager.instance.pendingGaps
-        }
         
         let task = Task(id: "", name: "", duration: 0, priority: .low, state: .pending, gapid: "")
         
@@ -79,7 +148,14 @@ class FillGapsController {
             
             case .All:
                 let shuffledGaps = candidateGaps.shuffled()
-                return assignGapToTask(shuffledGaps: shuffledGaps, candidateTasks: tasks)
+                let assignedTask = assignGapToTask(shuffledGaps: shuffledGaps, candidateTasks: tasks)
+                if assignedTask.name == "" {
+//                    if let sVC = shuffleVC {
+//                            Alert.errorInformation(title: "Ooops!", message: "There are no suitable gaps!", vc: sVC, handler: nil)
+//
+//                    }
+                }
+                return assignedTask
             case .This:
                 let currentWeekNumber = Calendar.current.component(.weekOfYear, from: Date())
                 var thisGaps = [GapRealm]()
@@ -100,7 +176,14 @@ class FillGapsController {
                 }
                 
                 let shuffledGaps = thisGaps.shuffled()
-                return assignGapToTask(shuffledGaps: shuffledGaps, candidateTasks: tasks)
+                let assignedTask = assignGapToTask(shuffledGaps: shuffledGaps, candidateTasks: tasks)
+//                if assignedTask.name == "" {
+//                    if let sVC = shuffleVC {
+//                            Alert.errorInformation(title: "Ooops!", message: "There are no suitable gaps in this week!", vc: sVC, handler: nil)
+//
+//                    }
+//                }
+                return assignedTask
             case .Next:
                 let currentWeekNumber = Calendar.current.component(.weekOfYear, from: Date())
                 var thisGaps = [GapRealm]()
@@ -120,7 +203,14 @@ class FillGapsController {
                 }
                 
                 let shuffledGaps = thisGaps.shuffled()
-                return assignGapToTask(shuffledGaps: shuffledGaps, candidateTasks: tasks)
+                let assignedTask = assignGapToTask(shuffledGaps: shuffledGaps, candidateTasks: tasks)
+//                if assignedTask.name == "" {
+//                    if let sVC = shuffleVC {
+//                            Alert.errorInformation(title: "Ooops!", message: "There are no suitable gaps in next week!", vc: sVC, handler: nil)
+//                        
+//                    }
+//                }
+                return assignedTask
             case .Now:
                 guard let randomTask = pendingTasks.shuffled().first else { return task }
                 return randomTask

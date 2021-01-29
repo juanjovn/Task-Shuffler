@@ -16,6 +16,13 @@ class MultipleResultsVC: ViewController {
     lazy var reshuffleButton = multipleResultModalView.reshuffleButton
     lazy var okButton = multipleResultModalView.okButton
     var task = Task(id: "", name: "", duration: 0, priority: .low, state: .pending, gapid: "")
+    var tasks = [Task]()
+    lazy var layout: UICollectionViewFlowLayout = {
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.scrollDirection = .horizontal
+        return flowLayout
+    }()
+    lazy var resultsCollectionVC = ResultsCollectionVC(collectionViewLayout: layout)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,11 +53,9 @@ class MultipleResultsVC: ViewController {
     }
     
     private func setupCollectionView() {
-        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        let resultsCollectionVC = ResultsCollectionVC(collectionViewLayout: layout)
         addChild(resultsCollectionVC)
         multipleResultModalView.collectionViewContainer.addSubview(resultsCollectionVC.view)
+        resultsCollectionVC.tasks = self.tasks
         resultsCollectionVC.didMove(toParent: self)
         resultsCollectionVC.view.translatesAutoresizingMaskIntoConstraints = false
         resultsCollectionVC.view.topAnchor.constraint(equalTo: multipleResultModalView.collectionViewContainer.topAnchor).isActive = true
@@ -75,18 +80,18 @@ class MultipleResultsVC: ViewController {
     }
     
     @objc private func reshuffleButtonAction() {
-//        if let shuffleVC = shuffleVC {
-//            let fillGapsController = FillGapsController(shuffleMode: shuffleVC.shuffleConfiguration, shuffleVC: shuffleVC)
-//            nowTask = fillGapsController.shuffleTask()
-//
-//            UIView.animate(withDuration: 0.2, delay: 0, animations: { () -> Void in
-//                self.nowResultModalView.nowCardView.nameLabel.transform = .init(scaleX: 0.75, y: 0.75)
-//                self.updatePriorityColor()
-//            }, completion: { (finished: Bool) -> Void in
-//                self.nowResultModalView.nowCardView.nameLabel.text = "\(self.nowTask.name)"
-//                self.nowResultModalView.nowCardView.nameLabel.transform = .identity
-//            })
-//        }
+        if let shuffleVC = shuffleVC {
+            let fillGapsController = FillGapsController(shuffleMode: shuffleVC.shuffleConfiguration, shuffleVC: shuffleVC)
+            tasks = fillGapsController.shuffleTasks()
+            resultsCollectionVC.tasks = tasks
+
+            UIView.animate(withDuration: 0.15, delay: 0, animations: { () -> Void in
+                self.resultsCollectionVC.collectionView.transform = .init(scaleX: 0.75, y: 0.75)
+                self.resultsCollectionVC.collectionView.reloadData()
+            }, completion: { (finished: Bool) -> Void in
+                self.resultsCollectionVC.collectionView.transform = .identity
+            })
+        }
     }
     
     @objc private func okButtonAction() {
