@@ -113,24 +113,7 @@ class SingleResultsVC: ViewController, ShuffleResult {
     @objc private func okButtonAction() {
         //TODO: Store assigned tasks
         task.state = .assigned
-        TaskManager.updateTask(task: task)
-        if let gap = gapManager.getGapById(id: task.gapid) {
-            let db = DatabaseManager()
-            do {
-                try db.realm.write{
-                    gap.duration = gap.duration - task.duration
-                    if gap.duration < 10 {
-                        gap.state = "Filled"
-                    } else {
-                        gap.state = "Assigned"
-                    }
-                    
-                }
-            } catch {
-                print("Error updating to database")
-            }
-            gapManager.fillGaps()
-        }
+        TaskManager.persistAssignments(task: task)
         dismiss(animated: true, completion: nil)
     }
 

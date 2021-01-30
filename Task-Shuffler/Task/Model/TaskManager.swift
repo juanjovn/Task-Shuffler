@@ -59,4 +59,26 @@ class TaskManager {
         
         return realmToStruct(tasksResults: tasksResults)
     }
+    
+    static func persistAssignments(task: Task) {
+        updateTask(task: task)
+        if let gap = GapManager.instance.getGapById(id: task.gapid) {
+            let db = DatabaseManager()
+            do {
+                try db.realm.write{
+                    gap.duration = gap.duration - task.duration
+                    if gap.duration < 10 {
+                        gap.state = "Filled"
+                    } else {
+                        gap.state = "Assigned"
+                    }
+                    
+                }
+            } catch {
+                print("Error updating to database")
+            }
+            GapManager.instance.fillGaps()
+        }
+    }
+    
 }

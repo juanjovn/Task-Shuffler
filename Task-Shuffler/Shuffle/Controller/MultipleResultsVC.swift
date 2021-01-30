@@ -96,6 +96,10 @@ class MultipleResultsVC: ViewController {
     
     @objc private func okButtonAction() {
         //TODO: Store assigned tasks
+        for i in 0..<tasks.count {
+            tasks[i].state = .assigned
+            TaskManager.persistAssignments(task: tasks[i])
+        }
         dismiss(animated: true, completion: nil)
     }
 
