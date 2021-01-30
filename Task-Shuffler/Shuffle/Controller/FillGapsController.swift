@@ -14,6 +14,7 @@ class FillGapsController {
     var shuffleMode = ShuffleConfiguration.init(how: .Smart, when: .All)
     var shuffleVC: ShuffleVC?
     var randomizedCandidateTasks = [Task]()
+    var availableDurations = [String:Int]()
     
     init(shuffleMode: ShuffleConfiguration, shuffleVC: ShuffleVC?) {
         self.shuffleMode = shuffleMode
@@ -64,29 +65,57 @@ class FillGapsController {
         var tasks = [Task]()
         var numberOfSuitableGaps = candidateGaps.count
         
-        if SettingsValues.taskSettings[2] {
-            while numberOfSuitableGaps > 0 {
-                let task = getAssignedTask(tasks: getCandidateTasks())
-                if task.name != "" {
-                    for i in 0..<pendingTasks.count {
-                        if pendingTasks[i].id == task.id {
-                            pendingTasks.remove(at: i)
-                            break
-                        }
+        while numberOfSuitableGaps > 0 && pendingTasks.count > 0{
+            let task = getAssignedTask(tasks: getCandidateTasks())
+            if task.name != "" {
+                for i in 0..<pendingTasks.count {
+                    if pendingTasks[i].id == task.id {
+                        pendingTasks.remove(at: i)
+                        break
                     }
-                    tasks.append(task)
+                }
+                
+                tasks.append(task)
+                
+                var isGapFilled = false
+                let currentGapDuration = availableDurations[task.gapid] ?? 99
+                isGapFilled = currentGapDuration < 10
+                
+                if SettingsValues.taskSettings[2] || isGapFilled {
                     for i in 0..<candidateGaps.count {
                         if candidateGaps[i].id == task.gapid {
                             candidateGaps.remove(at: i)
                             break
                         }
                     }
+                    
+                    numberOfSuitableGaps -= 1
                 }
-                
-                numberOfSuitableGaps -= 1
-                if pendingTasks.count == 0 {
-                    break
+            }
+            
+            if pendingTasks.count == 0 {
+                break
+            }
+            
+            var finishLoop = true
+            for t in pendingTasks {
+                for g in candidateGaps {
+                    if t.duration <= g.duration {
+                        if availableDurations.keys.contains(g.id) {
+                            if t.duration <= availableDurations[g.id]! {
+                                finishLoop = false
+                                break
+                            }
+                        } else {
+                            finishLoop = false
+                            break
+                        }
+                    }
                 }
+            }
+            
+            if finishLoop {
+                break
             }
         }
         
@@ -263,10 +292,29 @@ class FillGapsController {
         
         for t in candidateTasks {
             for g in shuffledGaps {
-                if t.duration <= g.duration {
-                    task = t
-                    task.gapid = g.id
-                    return task
+                if SettingsValues.taskSettings[2] {
+                    if t.duration <= g.duration {
+                        task = t
+                        task.gapid = g.id
+                        return task
+                    }
+                } else {
+                    if availableDurations.keys.contains(g.id){
+                        let gapDuration = availableDurations[g.id]!
+                        if t.duration <= gapDuration {
+                            task = t
+                            task.gapid = g.id
+                            availableDurations[g.id] = gapDuration - t.duration
+                            return task
+                        }
+                    } else {
+                        if t.duration <= g.duration {
+                            task = t
+                            task.gapid = g.id
+                            availableDurations[g.id] = g.duration - task.duration
+                            return task
+                        }
+                    }
                 }
             }
         }
