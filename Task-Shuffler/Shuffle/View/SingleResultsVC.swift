@@ -92,6 +92,12 @@ class SingleResultsVC: ViewController, ShuffleResult {
             let fillGapsController = FillGapsController(shuffleMode: shuffleVC.shuffleConfiguration, shuffleVC: shuffleVC)
             task = fillGapsController.shuffleTask()
 
+            //Haptic
+            let generator = UIImpactFeedbackGenerator(style: .light)
+            if SettingsValues.otherSettings[0] {
+                generator.impactOccurred()
+            }
+            
             UIView.animate(withDuration: 0.15, delay: 0, animations: { () -> Void in
                 self.singleResultModalView.singleCard.nameLabel.transform = .init(scaleX: 0.75, y: 0.75)
                 self.singleResultModalView.singleCard.dateLabel.transform = .init(scaleX: 0.75, y: 0.75)

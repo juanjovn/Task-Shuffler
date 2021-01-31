@@ -85,6 +85,12 @@ class MultipleResultsVC: ViewController {
             tasks = fillGapsController.shuffleTasks()
             resultsCollectionVC.tasks = tasks
 
+            //Haptic
+            let generator = UIImpactFeedbackGenerator(style: .light)
+            if SettingsValues.otherSettings[0] {
+                generator.impactOccurred()
+            }
+            
             UIView.animate(withDuration: 0.15, delay: 0, animations: { () -> Void in
                 self.resultsCollectionVC.collectionView.transform = .init(scaleX: 0.75, y: 0.75)
                 self.resultsCollectionVC.collectionView.reloadData()
