@@ -23,7 +23,7 @@ class ShuffleView: UIView {
     let whenSegmentedControl = SJFluidSegmentedControl()
     let shuffleBackImageView = UIImageView()
     var shuffleBackImage = UIImage(named: "shuffle.circle")
-    let detailLabel = UILabel()
+    let shuffleMessageLabel = UILabel()
     let backgroundImageContainerView = UIView()
     let disableHowView = UIView()
     
@@ -153,16 +153,16 @@ class ShuffleView: UIView {
     }
     
     private func setupDetailLabel() {
-        detailLabel.text = "12 tasks will be shuffled in 15 gaps"
-        detailLabel.font = .avenirDemiBold(ofSize: UIFont.scaleFont(20))
-        detailLabel.textColor = .mysticBlue
-        detailLabel.shadowOffset = CGSize(width: 0, height: 1)
-        detailLabel.shadowColor = UIColor.darkGray.withAlphaComponent(0.2)
-        backgroundImageContainerView.addSubview(detailLabel)
-        detailLabel.translatesAutoresizingMaskIntoConstraints = false
+        shuffleMessageLabel.text = "12 tasks will be shuffled in 15 gaps"
+        shuffleMessageLabel.font = .avenirDemiBold(ofSize: UIFont.scaleFont(20))
+        shuffleMessageLabel.textColor = .mysticBlue
+        shuffleMessageLabel.shadowOffset = CGSize(width: 0, height: 1)
+        shuffleMessageLabel.shadowColor = UIColor.darkGray.withAlphaComponent(0.2)
+        backgroundImageContainerView.addSubview(shuffleMessageLabel)
+        shuffleMessageLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        detailLabel.centerXAnchor.constraint(equalTo: shuffleBackImageView.centerXAnchor).isActive = true
-        detailLabel.centerYAnchor.constraint(equalTo: shuffleBackImageView.centerYAnchor).isActive = true
+        shuffleMessageLabel.centerXAnchor.constraint(equalTo: shuffleBackImageView.centerXAnchor).isActive = true
+        shuffleMessageLabel.centerYAnchor.constraint(equalTo: shuffleBackImageView.centerYAnchor).isActive = true
     }
     
     private func setupDisableHowView() {

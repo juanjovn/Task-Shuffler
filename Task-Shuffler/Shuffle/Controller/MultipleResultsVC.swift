@@ -106,6 +106,11 @@ class MultipleResultsVC: ViewController {
             tasks[i].state = .assigned
             TaskManager.persistAssignments(task: tasks[i])
         }
+        
+        if let shuffleVC = shuffleVC {
+            shuffleVC.shuffleSegmentedControllersDelegate.updateShuffleMessageLabel(shuffleConf: shuffleVC.shuffleConfiguration)
+        }
+        
         dismiss(animated: true, completion: nil)
     }
 

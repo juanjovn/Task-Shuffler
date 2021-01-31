@@ -120,6 +120,11 @@ class SingleResultsVC: ViewController, ShuffleResult {
         //TODO: Store assigned tasks
         task.state = .assigned
         TaskManager.persistAssignments(task: task)
+        
+        if let shuffleVC = shuffleVC {
+            shuffleVC.shuffleSegmentedControllersDelegate.updateShuffleMessageLabel(shuffleConf: shuffleVC.shuffleConfiguration)
+        }
+        
         dismiss(animated: true, completion: nil)
     }
 

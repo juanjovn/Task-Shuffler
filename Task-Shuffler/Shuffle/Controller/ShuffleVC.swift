@@ -27,6 +27,11 @@ class ShuffleVC: AMTabsViewController {
         shuffleView.whenSegmentedControl.dataSource = shuffleSegmentedControllersDataSource
         shuffleView.howSegmentedControl.delegate = shuffleSegmentedControllersDelegate
         shuffleView.whenSegmentedControl.delegate = shuffleSegmentedControllersDelegate
+        shuffleSegmentedControllersDelegate.shuffleConf = shuffleConfiguration
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        shuffleSegmentedControllersDelegate.updateShuffleMessageLabel(shuffleConf: shuffleConfiguration)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -213,6 +218,5 @@ extension ShuffleVC: MTSlideToOpenDelegate {
     }
     
 }
-
 
 
