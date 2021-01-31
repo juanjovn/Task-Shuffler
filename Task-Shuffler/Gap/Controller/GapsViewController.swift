@@ -196,7 +196,7 @@ class GapsViewController: AMTabsViewController {
     
     @objc private func pullRefreshControl() {
         refreshOutdated()
-        tableView.reloadSections(IndexSet(integersIn: 0...0), with: .fade)
+        tableView.reloadSections(IndexSet(integersIn: 0...2), with: .fade)
         self.pullcontrol.endRefreshing()
 //        if checkOutdated(currentGap: gap) {
 //            zelda.dateLabel.text = "OUTDATED"
