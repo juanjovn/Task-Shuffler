@@ -72,7 +72,13 @@ class ShuffleSegmentedControllersDelegate: SJFluidSegmentedControlDelegate {
             shuffleView.disableHowView.isUserInteractionEnabled = true
             UIView.animate(withDuration: 0.2) {
                 self.shuffleView.disableHowView.backgroundColor = UIColor.darkGray.withAlphaComponent(0.8)
-                self.shuffleMessageLabel.text = "You will get an instant task to do"
+                let pendingTaks = TaskManager.populateTasks(state: .pending)
+                let existPendingTasks = pendingTaks.count > 0
+                if existPendingTasks {
+                    self.shuffleMessageLabel.text = "You will get an instant task to do"
+                } else {
+                    self.updateShuffleMessageLabel(shuffleConf: self.shuffleConf)
+                }
             }
         } else {
             updateShuffleMessageLabel(shuffleConf: shuffleConf)
