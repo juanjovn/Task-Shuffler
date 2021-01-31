@@ -71,7 +71,7 @@ class CalendarVC: UIViewController {
             let event = ElliottEvent(courseId: "2", courseName: eventName, roomName: "", professor: "", courseDay: ElliotDay(rawValue: day)!, startTime: startTime, endTime: endTime, backgroundColor: UIColor.fireOrange.withAlphaComponent(0.7))
             courseList.append(event)
         case .Fake:
-            let event = ElliottEvent(courseId: "-1", courseName: eventName, roomName: "", professor: "", courseDay: ElliotDay(rawValue: day)!, startTime: "00:00", endTime: "23:59", backgroundColor: UIColor.fireOrange.withAlphaComponent(0.05))
+            let event = ElliottEvent(courseId: "-1", courseName: eventName, roomName: "", professor: "", courseDay: ElliotDay(rawValue: day)!, startTime: "00:00", endTime: "23:59", backgroundColor: .clear)
             courseList.append(event)
         }
         
@@ -142,7 +142,7 @@ class CalendarVC: UIViewController {
     
     // Create a event that fills the whole day to cheat ElliotTable and show all day hours in the schedule
     private func setupFakeEvent() {
-        insertEvent(eventName: "FAKE", startDate: Date() , endDate: Date(), type: .Fake)
+        insertEvent(eventName: "", startDate: Date() , endDate: Date(), type: .Fake)
     }
     
     private func deleteFakeEvent() {
