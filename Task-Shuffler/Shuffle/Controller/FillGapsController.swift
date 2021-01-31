@@ -138,7 +138,9 @@ class FillGapsController {
             
             switch shuffleMode.how {
             case .Smart:
-                break
+                //Sort pending tasks by priority from high to low and duration
+                let sortedTasks = pendingTasks.sorted(by: {($0.priority.rawValue, $0.duration) > ($1.priority.rawValue, $1.duration)})
+                randomizedCandidateTasks = sortedTasks
             case .Random:
                 randomizedCandidateTasks = getRandomizedCandidateTasks(tasks: pendingTasks)
             case .Single:
