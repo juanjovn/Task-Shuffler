@@ -18,6 +18,7 @@ class ModalView: UIView {
     let reshuffleButton = RoundedModalActionButton()
     let bottomView = UIView()
     var messageLabel = UILabel()
+    var contentViewTopConstraint = NSLayoutConstraint()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -45,7 +46,8 @@ class ModalView: UIView {
         //CONSTRAINTS
         contentView.translatesAutoresizingMaskIntoConstraints = false
         contentView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor).isActive = true
-        contentView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: Utils.screenHeight / 3).isActive = true
+        contentViewTopConstraint = contentView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: Utils.screenHeight / 3)
+        contentViewTopConstraint.isActive = true
         contentView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor).isActive = true
         contentView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: 50).isActive = true
     }

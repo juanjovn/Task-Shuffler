@@ -18,6 +18,7 @@ class SettingsVC: UIViewController {
     let notificationsSection =  [ "Notify task starts",
                                   "Notify task ends"]
     let othersSection = ["Haptic feedback"]
+    let resetSection = ["Factory reset"]
     let creditsSection = ["Credits"]
     
     
@@ -102,6 +103,8 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource{
         case 2:
             return othersSection.count
         case 3:
+            return resetSection.count
+        case 4:
             return creditsSection.count
         default:
             return 0
@@ -128,6 +131,9 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource{
             mySwitch.setOn(SettingsValues.otherSettings[indexPath.row], animated: false)
             cell.textLabel?.text = othersSection[indexPath.row]
         case 3:
+            cell.textLabel?.text = resetSection[indexPath.row]
+            cell.accessoryView = nil
+        case 4:
             cell.accessoryView = nil
             cell.textLabel?.text = creditsSection[indexPath.row]
         default:
@@ -140,11 +146,11 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource{
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        4
+        5
     }
     
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        if indexPath.section == 3{
+        if indexPath.section == 3 || indexPath.section == 4 {
             return true
         } else {
             return false
@@ -153,6 +159,13 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        switch indexPath.section {
+        case 3: //Factory reset
+            let modalVC = FactoryResetVC()
+            present(modalVC, animated: true, completion: nil)
+        default:
+            break
+        }
     }
 }
 

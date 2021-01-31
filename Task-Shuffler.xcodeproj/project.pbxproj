@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		811601A625C6E5CF00E47525 /* FactoryResetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811601A525C6E5CF00E47525 /* FactoryResetVC.swift */; };
+		811601A925C6EA1200E47525 /* FactoryResetModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811601A825C6EA1200E47525 /* FactoryResetModalView.swift */; };
 		811880A6243515BC00E5FEE1 /* DeviceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811880A5243515BC00E5FEE1 /* DeviceModel.swift */; };
 		8146988B25865C3E00D7BCE1 /* Pods_Task_Shuffler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C313B2D615F94E260304E37 /* Pods_Task_Shuffler.framework */; };
 		815204EF245E9A1E0004510B /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815204EE245E9A1E0004510B /* Alert.swift */; };
@@ -79,6 +81,8 @@
 		3E182028DE0B379EB966E722 /* Pods-Task-Shuffler.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Task-Shuffler.debug.xcconfig"; path = "Target Support Files/Pods-Task-Shuffler/Pods-Task-Shuffler.debug.xcconfig"; sourceTree = "<group>"; };
 		5B051BEDE7302552ECBD0BD9 /* Pods-Task-Shuffler.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Task-Shuffler.release.xcconfig"; path = "Target Support Files/Pods-Task-Shuffler/Pods-Task-Shuffler.release.xcconfig"; sourceTree = "<group>"; };
 		5C313B2D615F94E260304E37 /* Pods_Task_Shuffler.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Task_Shuffler.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		811601A525C6E5CF00E47525 /* FactoryResetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryResetVC.swift; sourceTree = "<group>"; };
+		811601A825C6EA1200E47525 /* FactoryResetModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryResetModalView.swift; sourceTree = "<group>"; };
 		811880A5243515BC00E5FEE1 /* DeviceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceModel.swift; sourceTree = "<group>"; };
 		815204EE245E9A1E0004510B /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		815204F0245F46C20004510B /* GapRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GapRealm.swift; sourceTree = "<group>"; };
@@ -528,6 +532,7 @@
 			isa = PBXGroup;
 			children = (
 				816709CC245C9F7D00D94E65 /* SettingsVC.swift */,
+				811601A525C6E5CF00E47525 /* FactoryResetVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -536,6 +541,7 @@
 			isa = PBXGroup;
 			children = (
 				816709CD245C9F7D00D94E65 /* SettingsVC.xib */,
+				811601A825C6EA1200E47525 /* FactoryResetModalView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -700,6 +706,7 @@
 				811880A6243515BC00E5FEE1 /* DeviceModel.swift in Sources */,
 				819970A825A0FEDA004D48C3 /* NowShuffleResultsVC.swift in Sources */,
 				81C2A18025A38FE300F9A53F /* ShuffleSegmentedControllerDelegate.swift in Sources */,
+				811601A925C6EA1200E47525 /* FactoryResetModalView.swift in Sources */,
 				81EE6756259A35D9007B9D87 /* ShuffleVC.swift in Sources */,
 				81C90B5324614F8B001C06B4 /* GapManager.swift in Sources */,
 				8198F26324763D5F00F547BC /* CalendarVC.swift in Sources */,
@@ -715,6 +722,7 @@
 				8197F5C2245ACF700052FCC7 /* TaskManager.swift in Sources */,
 				81AB5D6C24770D01009ADB97 /* CollectionViewCell.swift in Sources */,
 				81EE67AA259E5093007B9D87 /* ShuffleModes.swift in Sources */,
+				811601A625C6E5CF00E47525 /* FactoryResetVC.swift in Sources */,
 				81E9B1432405BEE400BBADB8 /* ViewController.swift in Sources */,
 				81EE6753259A33D5007B9D87 /* ShuffleView.swift in Sources */,
 				81EE6778259A4254007B9D87 /* NextToDoVC.swift in Sources */,
