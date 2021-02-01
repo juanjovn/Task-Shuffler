@@ -140,7 +140,7 @@ class FillGapsController {
             case .Smart:
                 //Sort pending tasks by priority from high to low and duration
                 let sortedTasks = pendingTasks.sorted(by: {($0.priority.rawValue, $0.duration) > ($1.priority.rawValue, $1.duration)})
-                randomizedCandidateTasks = sortedTasks
+                randomizedCandidateTasks = shuffleSortedTask(sortedTasks: sortedTasks)
             case .Random:
                 randomizedCandidateTasks = getRandomizedCandidateTasks(tasks: pendingTasks)
             case .Single:
@@ -178,7 +178,12 @@ class FillGapsController {
             switch shuffleMode.when {
             
             case .All:
-                let shuffledGaps = candidateGaps.shuffled()
+                var shuffledGaps = [GapRealm]()
+                if shuffleMode.how == .Smart {
+                    shuffledGaps = candidateGaps.sorted(by: {($0.startDate) < ($1.startDate)})
+                } else {
+                    shuffledGaps = candidateGaps.shuffled()
+                }
                 let assignedTask = assignGapToTask(shuffledGaps: shuffledGaps, candidateTasks: tasks)
                 if assignedTask.name == "" {
 //                    if let sVC = shuffleVC {
@@ -322,6 +327,22 @@ class FillGapsController {
         }
         
         return task
+    }
+    
+    //In a sorted array by priority and duration, shuffle positions of equal tasks
+    private func shuffleSortedTask(sortedTasks: [Task]) -> [Task] {
+        var shuffledTasks = sortedTasks
+        
+        for i in 0..<sortedTasks.count - 1 {
+            if sortedTasks[i].priority == sortedTasks[i+1].priority && sortedTasks[i].duration == sortedTasks[i+1].duration{
+                let randomInt = Int.random(in: 1...100)
+                if randomInt % 2 == 0 {
+                    shuffledTasks.swapAt(i, i+1)
+                }
+            }
+        }
+        
+        return shuffledTasks
     }
     
 }
