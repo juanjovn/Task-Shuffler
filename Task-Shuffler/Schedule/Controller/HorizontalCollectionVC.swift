@@ -221,8 +221,14 @@ class HorizontalCollectionVC: UICollectionViewController {
     }
     
     @objc func onDataModified () {
+        for cell in self.collectionView.visibleCells {
+            if let cell = cell as? CollectionViewCell {
+                cell.calendarVC.deleteAllEvents()
+                cell.calendarVC.setupFakeEvent()
+            }
+             }
         self.collectionView.reloadData()
-        //print("Collection's view data reloaded from notification ❗️")
+        print("Collection's view data reloaded from notification ❗️")
     }
 
 }

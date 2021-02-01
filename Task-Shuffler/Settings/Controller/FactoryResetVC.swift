@@ -48,7 +48,17 @@ class FactoryResetVC: UIViewController {
     }
     
     @objc private func reshuffleButtonAction() {
-        
+        let db = DatabaseManager()
+        Alert.confirmation(title: "Clear all data", message: "All tasks and gaps will be erased, are you sure?", vc: self) {_ in
+            let queue = DispatchQueue.global()
+            queue.sync {
+                db.eraseAll()
+            }
+            
+            queue.sync {
+                NotificationCenter.default.post(name: .didModifiedData, object: nil)
+            }
+        }
     }
     
     @objc private func okButtonAction() {

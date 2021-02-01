@@ -58,6 +58,7 @@ class TasksListViewController: AMTabsViewController {
         //***** Testing code *****
         //createTestTasks()
         //***** Testing code *****
+        setupNotificationCenter()
         setupNewTaskButton()
         fillTasks()
         setupTableView()
@@ -78,6 +79,16 @@ class TasksListViewController: AMTabsViewController {
     }
     
     // MARK: Functions
+    
+    private func setupNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(onDataModified), name: .didModifiedData, object: nil)
+    }
+    
+    @objc func onDataModified () {
+        fillTasks()
+        self.tableView.reloadData()
+        //print("❗️NOTIFIED!!! ")
+    }
     
     private func setupNewTaskButton() {
         newTaskButton.layer.cornerRadius = newTaskButton.bounds.size.width/2

@@ -85,6 +85,17 @@ class CalendarVC: UIViewController {
         //print("All events deleted 🗑")
     }
     
+    // Create a event that fills the whole day to cheat ElliotTable and show all day hours in the schedule
+    public func setupFakeEvent() {
+        insertEvent(eventName: "", startDate: Date() , endDate: Date(), type: .Fake)
+    }
+    
+    public func insertDummyTask() {
+        let minute:TimeInterval = 60.0
+        let hour:TimeInterval = 60.0 * minute
+        insertEvent(eventName: "Dummy Task for testing purposes", startDate: Date(), endDate: Date(timeInterval: hour * 2, since: Date()), type: .Task)
+    }
+    
     //MARK: Private
     private func setupElliottEvents() {
 //        let course_1 = ElliottEvent(courseId: "1", courseName: "", roomName: "", professor: "", courseDay: .tuesday, startTime: "10:00", endTime: "13:00", backgroundColor: UIColor.pearlWhite.withAlphaComponent(0.40))
@@ -104,13 +115,6 @@ class CalendarVC: UIViewController {
         
         
     }
-    
-    public func insertDummyTask() {
-        let minute:TimeInterval = 60.0
-        let hour:TimeInterval = 60.0 * minute
-        insertEvent(eventName: "Dummy Task for testing purposes", startDate: Date(), endDate: Date(timeInterval: hour * 2, since: Date()), type: .Task)
-    }
-    
     
     private func setupTimetable() {
         if Calendar.current.firstWeekday == 1 {timeTable.startDay = .sunday}
@@ -138,11 +142,6 @@ class CalendarVC: UIViewController {
         timeTable.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         timeTable.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         timeTable.reloadData()
-    }
-    
-    // Create a event that fills the whole day to cheat ElliotTable and show all day hours in the schedule
-    private func setupFakeEvent() {
-        insertEvent(eventName: "", startDate: Date() , endDate: Date(), type: .Fake)
     }
     
     private func deleteFakeEvent() {

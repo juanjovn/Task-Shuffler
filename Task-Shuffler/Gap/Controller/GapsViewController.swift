@@ -37,6 +37,7 @@ class GapsViewController: AMTabsViewController {
         super.viewDidLoad()
         
         //test()
+        setupNotificationCenter()
         setupNewGapButton()
         gapManager.fillGaps()
         setupView()
@@ -87,6 +88,17 @@ class GapsViewController: AMTabsViewController {
     }
     
     //MARK: PRIVATE
+    
+    private func setupNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(onDataModified), name: .didModifiedData, object: nil)
+    }
+    
+    @objc func onDataModified () {
+        gapManager.fillGaps()
+        tableView.reloadData()
+        //tableView.reloadSections(IndexSet(integersIn: 0...tableView.numberOfSections - 1), with: .fade)
+        //print("❗️NOTIFIED!!! ")
+    }
     
     private func test(){
         //db.eraseAll()
