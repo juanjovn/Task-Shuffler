@@ -52,6 +52,16 @@ class TaskManager {
         
     }
     
+    static func resetTaskAssignments() {
+        let tasks = populateTasks(state: .assigned)
+        for task in tasks {
+            var updatedTask = task
+            updatedTask.state = .pending
+            updatedTask.gapid = ""
+            updateTask(task: updatedTask)
+        }
+    }
+    
     static func getTasksByGapId (gapid: String) -> [Task] {
         let db = DatabaseManager()
         let predicate = "gapid = '\(gapid)'"

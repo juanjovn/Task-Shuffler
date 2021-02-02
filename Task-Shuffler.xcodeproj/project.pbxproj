@@ -10,6 +10,7 @@
 		811601A625C6E5CF00E47525 /* FactoryResetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811601A525C6E5CF00E47525 /* FactoryResetVC.swift */; };
 		811601A925C6EA1200E47525 /* FactoryResetModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811601A825C6EA1200E47525 /* FactoryResetModalView.swift */; };
 		811880A6243515BC00E5FEE1 /* DeviceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811880A5243515BC00E5FEE1 /* DeviceModel.swift */; };
+		813490BF25C89583004DF3D7 /* TrashIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813490BE25C89583004DF3D7 /* TrashIconView.swift */; };
 		8146988B25865C3E00D7BCE1 /* Pods_Task_Shuffler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C313B2D615F94E260304E37 /* Pods_Task_Shuffler.framework */; };
 		815204EF245E9A1E0004510B /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815204EE245E9A1E0004510B /* Alert.swift */; };
 		815204F1245F46C20004510B /* GapRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815204F0245F46C20004510B /* GapRealm.swift */; };
@@ -35,11 +36,13 @@
 		8188D5B9240701AF00CCBA99 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8188D5B8240701AF00CCBA99 /* Task.swift */; };
 		8188D5BB2408601800CCBA99 /* NewTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8188D5BA2408601800CCBA99 /* NewTaskViewController.swift */; };
 		818DFEE12422B90D007F6682 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818DFEE02422B90D007F6682 /* TestViewController.swift */; };
+		8192149A25C9B7590030BB2E /* TimeSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8192149925C9B7590030BB2E /* TimeSwiftUIView.swift */; };
 		8197F5C2245ACF700052FCC7 /* TaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8197F5C1245ACF700052FCC7 /* TaskManager.swift */; };
 		8198F26324763D5F00F547BC /* CalendarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8198F26224763D5F00F547BC /* CalendarVC.swift */; };
 		819970A225A09BCF004D48C3 /* ShuffleSegmentedControllersDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819970A125A09BCF004D48C3 /* ShuffleSegmentedControllersDataSource.swift */; };
 		819970A525A0F958004D48C3 /* ModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819970A425A0F958004D48C3 /* ModalView.swift */; };
 		819970A825A0FEDA004D48C3 /* NowShuffleResultsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819970A725A0FEDA004D48C3 /* NowShuffleResultsVC.swift */; };
+		819ABED325C9815D0062AF87 /* NextToDoSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819ABED225C9815D0062AF87 /* NextToDoSwiftUIView.swift */; };
 		81AB5D6A2476F915009ADB97 /* HorizontalCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB5D692476F915009ADB97 /* HorizontalCollectionVC.swift */; };
 		81AB5D6C24770D01009ADB97 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB5D6B24770D01009ADB97 /* CollectionViewCell.swift */; };
 		81C2A17D25A38B1D00F9A53F /* ShuffleConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C2A17C25A38B1D00F9A53F /* ShuffleConfiguration.swift */; };
@@ -84,6 +87,7 @@
 		811601A525C6E5CF00E47525 /* FactoryResetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryResetVC.swift; sourceTree = "<group>"; };
 		811601A825C6EA1200E47525 /* FactoryResetModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryResetModalView.swift; sourceTree = "<group>"; };
 		811880A5243515BC00E5FEE1 /* DeviceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceModel.swift; sourceTree = "<group>"; };
+		813490BE25C89583004DF3D7 /* TrashIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashIconView.swift; sourceTree = "<group>"; };
 		815204EE245E9A1E0004510B /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		815204F0245F46C20004510B /* GapRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GapRealm.swift; sourceTree = "<group>"; };
 		816271E325A8CFB000BC7A46 /* NowCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowCardView.swift; sourceTree = "<group>"; };
@@ -108,11 +112,13 @@
 		8188D5B8240701AF00CCBA99 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		8188D5BA2408601800CCBA99 /* NewTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskViewController.swift; sourceTree = "<group>"; };
 		818DFEE02422B90D007F6682 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
+		8192149925C9B7590030BB2E /* TimeSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSwiftUIView.swift; sourceTree = "<group>"; };
 		8197F5C1245ACF700052FCC7 /* TaskManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskManager.swift; sourceTree = "<group>"; };
 		8198F26224763D5F00F547BC /* CalendarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarVC.swift; sourceTree = "<group>"; };
 		819970A125A09BCF004D48C3 /* ShuffleSegmentedControllersDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShuffleSegmentedControllersDataSource.swift; sourceTree = "<group>"; };
 		819970A425A0F958004D48C3 /* ModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalView.swift; sourceTree = "<group>"; };
 		819970A725A0FEDA004D48C3 /* NowShuffleResultsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowShuffleResultsVC.swift; sourceTree = "<group>"; };
+		819ABED225C9815D0062AF87 /* NextToDoSwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextToDoSwiftUIView.swift; sourceTree = "<group>"; };
 		81AB5D692476F915009ADB97 /* HorizontalCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalCollectionVC.swift; sourceTree = "<group>"; };
 		81AB5D6B24770D01009ADB97 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		81C2A17C25A38B1D00F9A53F /* ShuffleConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShuffleConfiguration.swift; sourceTree = "<group>"; };
@@ -391,6 +397,8 @@
 			isa = PBXGroup;
 			children = (
 				81EE677A259A428E007B9D87 /* NextToDoView.swift */,
+				819ABED225C9815D0062AF87 /* NextToDoSwiftUIView.swift */,
+				8192149925C9B7590030BB2E /* TimeSwiftUIView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -542,6 +550,7 @@
 			children = (
 				816709CD245C9F7D00D94E65 /* SettingsVC.xib */,
 				811601A825C6EA1200E47525 /* FactoryResetModalView.swift */,
+				813490BE25C89583004DF3D7 /* TrashIconView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -677,12 +686,14 @@
 				816709D1245CCC5000D94E65 /* SettingsValues.swift in Sources */,
 				81C90B61246530DC001C06B4 /* DatePickerVC.swift in Sources */,
 				816709CE245C9F7D00D94E65 /* SettingsVC.swift in Sources */,
+				813490BF25C89583004DF3D7 /* TrashIconView.swift in Sources */,
 				8170DD7F2467FF6B0060725D /* HourCell.swift in Sources */,
 				819970A225A09BCF004D48C3 /* ShuffleSegmentedControllersDataSource.swift in Sources */,
 				8188D5B9240701AF00CCBA99 /* Task.swift in Sources */,
 				81D0E450240AE7C800B2E5D8 /* TasksListViewController.swift in Sources */,
 				81C90B5E246492BC001C06B4 /* NewGapVC.swift in Sources */,
 				81C90B572461D0B2001C06B4 /* GapCell.swift in Sources */,
+				819ABED325C9815D0062AF87 /* NextToDoSwiftUIView.swift in Sources */,
 				815204F1245F46C20004510B /* GapRealm.swift in Sources */,
 				81EE677B259A428E007B9D87 /* NextToDoView.swift in Sources */,
 				8162720925B5A60700BC7A46 /* MultipleResultsVC.swift in Sources */,
@@ -723,6 +734,7 @@
 				81AB5D6C24770D01009ADB97 /* CollectionViewCell.swift in Sources */,
 				81EE67AA259E5093007B9D87 /* ShuffleModes.swift in Sources */,
 				811601A625C6E5CF00E47525 /* FactoryResetVC.swift in Sources */,
+				8192149A25C9B7590030BB2E /* TimeSwiftUIView.swift in Sources */,
 				81E9B1432405BEE400BBADB8 /* ViewController.swift in Sources */,
 				81EE6753259A33D5007B9D87 /* ShuffleView.swift in Sources */,
 				81EE6778259A4254007B9D87 /* NextToDoVC.swift in Sources */,

@@ -66,6 +66,27 @@ class GapManager {
         }
     }
     
+    func resetGapAssignments() {
+        let db = DatabaseManager()
+        let gapResults = db.getData(objectClass: GapRealm.self)
+        
+        for gap in gapResults {
+            if let gap = gap as? GapRealm {
+                if gap.state == State.assigned.rawValue || gap.state == State.filled.rawValue {
+                    
+                    let updatedGap = GapRealm()
+                    updatedGap.id = gap.id
+                    updatedGap.startDate = gap.startDate
+                    updatedGap.endDate = gap.endDate
+                    updatedGap.duration = gap.intervalDateToMinutes(startDate: gap.startDate, endDate: gap.endDate)
+                    updatedGap.state = State.pending.rawValue
+                    
+                    db.updateData(object: updatedGap)
+                }
+            }
+        }
+    }
+    
     init() {
         fillGaps()
     }

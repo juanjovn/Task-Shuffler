@@ -54,6 +54,17 @@ class DatabaseManager{
         }
     }
     
+    func deleteAllByType (object: AnyClass) {
+        do {
+            let objects = getData(objectClass: object.self)
+            try realm.write{
+                realm.delete(objects)
+            }
+        } catch {
+            print("Error writing to database")
+        }
+    }
+    
     func deleteByPK (primaryKey: String, objectClass: AnyClass){
         do {
             try realm.write{

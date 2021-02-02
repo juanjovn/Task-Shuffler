@@ -14,6 +14,7 @@ class FactoryResetVC: UIViewController {
     lazy var cancelButton = modalView.cancelButton
     lazy var reshuffleButton = modalView.reshuffleButton
     lazy var okButton = modalView.okButton
+    private var clear: clearMode = .none
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +24,16 @@ class FactoryResetVC: UIViewController {
         setupOkButton()
         setupReshuffleButton()
         setupTitleLabel()
+        setupGestures()
+    }
+    
+    // Gestures recognizers
+    private func setupGestures() {
+        let tapGestureTasks = UITapGestureRecognizer(target: self, action: #selector(clearTasksViewAction))
+        modalView.clearTasksView.addGestureRecognizer(tapGestureTasks)
+        
+        let tapGestureGaps = UITapGestureRecognizer(target: self, action: #selector(clearGapsViewAction))
+        modalView.clearGapsView.addGestureRecognizer(tapGestureGaps)
     }
     
     private func setupCancelButton() {
@@ -58,12 +69,95 @@ class FactoryResetVC: UIViewController {
             queue.sync {
                 NotificationCenter.default.post(name: .didModifiedData, object: nil)
             }
+            self.dismiss(animated: true, completion: nil)
         }
     }
     
     @objc private func okButtonAction() {
-        //TODO: Store assigned tasks
-        dismiss(animated: true, completion: nil)
+        let db = DatabaseManager()
+        switch clear {
+        case .tasks:
+            Alert.confirmation(title: "Clear tasks data", message: "All tasks will be erased, are you sure?", vc: self) {_ in
+                let queue = DispatchQueue.global()
+                queue.sync {
+                    db.deleteAllByType(object: TaskRealm.self)
+                    GapManager.instance.resetGapAssignments()
+                }
+                
+                queue.sync {
+                    NotificationCenter.default.post(name: .didModifiedData, object: nil)
+                }
+                self.dismiss(animated: true, completion: nil)
+            }
+        case .gaps:
+            Alert.confirmation(title: "Clear gaps data", message: "All gaps will be erased, are you sure?", vc: self) {_ in
+                let queue = DispatchQueue.global()
+                queue.sync {
+                    db.deleteAllByType(object: GapRealm.self)
+                    TaskManager.resetTaskAssignments()
+                }
+                
+                queue.sync {
+                    NotificationCenter.default.post(name: .didModifiedData, object: nil)
+                }
+                self.dismiss(animated: true, completion: nil)
+            }
+        case .none:
+            dismiss(animated: true, completion: nil)
+        }
+    }
+    
+    @objc private func clearTasksViewAction() {
+        let generator = UIImpactFeedbackGenerator(style: .light)
+        if SettingsValues.otherSettings[0] {
+                generator.impactOccurred()
+        }
+        UIView.animate(withDuration: 0.1, animations: {
+            self.modalView.clearTasksView.backgroundColor = .fireOrange
+            self.modalView.tasksTrashIcon.tintColor = .pearlWhite
+            self.modalView.clearGapsView.backgroundColor = UIColor.mysticBlue.withAlphaComponent(0.15)
+            self.modalView.gapsTrashIcon.tintColor = UIColor.pearlWhite.withAlphaComponent(0.6)
+            self.modalView.tasksTrashIcon.transform = .init(scaleX: 1.10, y: 1.10)
+            self.modalView.clearTasksView.layer.shadowOpacity = 0.7
+            self.modalView.clearGapsView.layer.shadowOpacity = 0
+        }, completion: {_ in
+            UIView.animate(withDuration: 0.05){
+                self.modalView.tasksTrashIcon.transform = .identity
+            }
+        })
+        
+        
+        clear = .tasks
+    }
+    
+    @objc private func clearGapsViewAction() {
+        let generator = UIImpactFeedbackGenerator(style: .light)
+        if SettingsValues.otherSettings[0] {
+                generator.impactOccurred()
+        }
+        UIView.animate(withDuration: 0.1, animations: {
+            self.modalView.clearGapsView.backgroundColor = .fireOrange
+            self.modalView.gapsTrashIcon.tintColor = .pearlWhite
+            self.modalView.clearTasksView.backgroundColor = UIColor.mysticBlue.withAlphaComponent(0.15)
+            self.modalView.tasksTrashIcon.tintColor = UIColor.pearlWhite.withAlphaComponent(0.6)
+            self.modalView.gapsTrashIcon.transform = .init(scaleX: 1.10, y: 1.10)
+            self.modalView.clearTasksView.layer.shadowOpacity = 0
+            self.modalView.clearGapsView.layer.shadowOpacity = 0.7
+        }, completion: {_ in
+            UIView.animate(withDuration: 0.05){
+                self.modalView.gapsTrashIcon.transform = .identity
+            }
+        })
+        
+        clear = .gaps
     }
 
+}
+
+extension FactoryResetVC {
+    private enum clearMode {
+        case tasks
+        case gaps
+        case none
+    }
 }
