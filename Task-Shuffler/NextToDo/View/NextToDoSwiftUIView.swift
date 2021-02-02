@@ -9,39 +9,54 @@
 import SwiftUI
 
 struct NextToDoSwiftUIView: View {
+    
+    init() {
+        if #available(iOS 14.0, *) {
+            // iOS 14 doesn't have extra separators below the list by default.
+        } else {
+            // To remove only extra separators below the list:
+            UITableView.appearance().tableFooterView = UIView()
+        }
+        
+        // To remove all separators including the actual ones:
+        UITableView.appearance().separatorStyle = .none
+        UITableView.appearance().separatorColor = .clear
+        
+        UITableView.appearance().backgroundColor = .clear
+        UITableViewCell.appearance().backgroundColor = .clear
+    }
+    
     var body: some View {
         List(){
             ZStack(alignment: .topLeading){
-                HStack{
-                    Spacer()
-                    RoundedRectangle(cornerRadius: 20).foregroundColor(Color(UIColor.darkOrange.withAlphaComponent(0.5))).shadow(color: Color(UIColor.mysticBlue.withAlphaComponent(0.5)), radius:5, x: 0, y: 2)
-                    Spacer()
-                }
+                
+                RoundedRectangle(cornerRadius: 20).foregroundColor(Color.white).padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10)).shadow(color: Color(UIColor.mysticBlue.withAlphaComponent(0.5)), radius:5, x: 0, y: 2)
+                RoundedRectangle(cornerRadius: 20).foregroundColor(Color(UIColor.fireOrange.withAlphaComponent(0.7))).padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
                 
                 VStack (alignment: .leading, spacing: 0){
                     
                     HStack (alignment: .top) {
-                        Image(systemName: "largecircle.fill.circle").resizable().scaledToFit().frame(width: 25, height: 25, alignment: .topLeading).foregroundColor(Color(.mysticBlue)).padding(EdgeInsets(top: 5, leading: 0, bottom: 0, trailing: 0))
-                        Text("Nombre de tarea muy largo ocupando todo").font(.custom("AvenirNext-Medium", size: 25)).foregroundColor(Color(UIColor.mysticBlue)).lineLimit(nil).background(Color.clear)
-                    }.background(Color.pink)
+                        Image(systemName: "largecircle.fill.circle").resizable().frame(width: 25, height: 25, alignment: .topLeading).foregroundColor(Color(.mysticBlue)).padding(EdgeInsets(top: 5, leading: 0, bottom: 0, trailing: 0))
+                        Text("Tarea con un titulo considerablemente largo").font(.custom("AvenirNext-Medium", size: 25)).foregroundColor(Color(UIColor.mysticBlue)).lineLimit(3).background(Color.clear).minimumScaleFactor(0.5)
+                    }.background(Color.clear)
                     Spacer()
                     HStack (alignment: .center){
-                        Image(systemName: "calendar.badge.clock").resizable().scaledToFit().frame(width: 25, height: 25, alignment: .topLeading).foregroundColor(Color(.mysticBlue)).padding(EdgeInsets(top: 5, leading: 0, bottom: 0, trailing: 0))
+                        Image(systemName: "calendar").resizable().frame(width: 25, height: 25, alignment: .topLeading).foregroundColor(Color(.mysticBlue)).padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                         Text("November 30th").font(.init(UIFont.avenirRegular(ofSize: 20))).foregroundColor(Color(UIColor.mysticBlue))
-                    }.background(Color.yellow)
+                    }.background(Color.clear)
                     Spacer()
                     HStack(alignment: .center){
-                        TimeSwiftUIView(color: .opalRed).padding(EdgeInsets(top: 0, leading: 35, bottom: 0, trailing: 20))
+                        TimeSwiftUIView(color: .opalRed).padding(EdgeInsets(top: 0, leading: 35, bottom: 0, trailing: 15))
                         TimeSwiftUIView(color: .turquesa)
                         Spacer()
                         //Image(systemName: "exclamationmark.circle").resizable().scaledToFit().foregroundColor(Color(.fireOrange)).shadow(color: Color(UIColor.mysticBlue.withAlphaComponent(0.6)), radius:3, x: 0, y:0)
-                        Text("180'").font(.custom("AvenirNext-Medium", size: 25)).foregroundColor(Color(UIColor.mysticBlue)).background(Color.clear).shadow(color: Color(UIColor.mysticBlue.withAlphaComponent(0.4)), radius:2, x: 0, y: 2)
+                        Text("180'").font(.custom("AvenirNext-Medium", size: 30)).foregroundColor(Color(UIColor.mysticBlue)).background(Color.clear).shadow(color: Color(UIColor.mysticBlue.withAlphaComponent(0.4)), radius:2, x: 0, y: 2)
                         Spacer()
                     }.background(Color.clear).frame(minWidth: 0, maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, minHeight: 20, maxHeight: 40, alignment: .leading)
-                }.background(Color.clear).padding(EdgeInsets(top: 15, leading: 25, bottom: 15, trailing: 25))
+                }.background(Color.clear).padding(EdgeInsets(top: 15, leading: 30, bottom: 15, trailing: 30))
                 
-            }.listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)).frame(height: 200)
-        }
+            }.listRowInsets(EdgeInsets(top: 10, leading: 0, bottom: 0, trailing: 0)).frame(height: 200).listRowBackground(Color.clear)
+        }.background(Color.clear)
     }
 }
 

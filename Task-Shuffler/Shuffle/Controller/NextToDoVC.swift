@@ -8,13 +8,16 @@
 
 import UIKit
 import AMTabView
+import SwiftUI
 
 class NextToDoVC: AMTabsViewController {
     let nextToDoView = NextToDoView()
+    let contentView = UIHostingController(rootView: NextToDoSwiftUIView())
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNextToDoView()
+        setupHostingViewController()
         setupNavigationBar()
     }
     
@@ -22,10 +25,27 @@ class NextToDoVC: AMTabsViewController {
         view.addSubview(nextToDoView)
         
         nextToDoView.translatesAutoresizingMaskIntoConstraints = false
-        nextToDoView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        nextToDoView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         nextToDoView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         nextToDoView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        nextToDoView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        nextToDoView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50).isActive = true
+    }
+    
+    private func setupHostingViewController() {
+        addChild(contentView)
+        nextToDoView.addSubview(contentView.view)
+        contentView.didMove(toParent: self)
+        
+        contentView.view.backgroundColor = .clear
+        contentView.view.layer.cornerRadius = 20
+        contentView.view.layer.masksToBounds = true
+        
+        contentView.view.translatesAutoresizingMaskIntoConstraints = false
+        contentView.view.leadingAnchor.constraint(equalTo: nextToDoView.leadingAnchor, constant: 10).isActive = true
+        contentView.view.trailingAnchor.constraint(equalTo: nextToDoView.trailingAnchor, constant: -10).isActive = true
+        contentView.view.topAnchor.constraint(equalTo: nextToDoView.topAnchor, constant: 10).isActive = true
+        contentView.view.bottomAnchor.constraint(equalTo: nextToDoView.bottomAnchor, constant: -10).isActive = true
+        
     }
     
     private func setupNavigationBar() {
