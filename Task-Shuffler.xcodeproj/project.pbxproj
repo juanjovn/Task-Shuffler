@@ -33,6 +33,7 @@
 		8179FDD924580807009A6D4B /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179FDD824580807009A6D4B /* DatabaseManager.swift */; };
 		8179FDDB24581E9F009A6D4B /* DummyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8179FDDA24581E9F009A6D4B /* DummyModel.swift */; };
 		817E76F6245A084C00305111 /* TaskRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817E76F5245A084C00305111 /* TaskRealm.swift */; };
+		81864B0125C9E40900CE27D2 /* NextToDoTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81864B0025C9E40900CE27D2 /* NextToDoTask.swift */; };
 		8188D5B9240701AF00CCBA99 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8188D5B8240701AF00CCBA99 /* Task.swift */; };
 		8188D5BB2408601800CCBA99 /* NewTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8188D5BA2408601800CCBA99 /* NewTaskViewController.swift */; };
 		818DFEE12422B90D007F6682 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818DFEE02422B90D007F6682 /* TestViewController.swift */; };
@@ -109,6 +110,7 @@
 		8179FDD824580807009A6D4B /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		8179FDDA24581E9F009A6D4B /* DummyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyModel.swift; sourceTree = "<group>"; };
 		817E76F5245A084C00305111 /* TaskRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRealm.swift; sourceTree = "<group>"; };
+		81864B0025C9E40900CE27D2 /* NextToDoTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextToDoTask.swift; sourceTree = "<group>"; };
 		8188D5B8240701AF00CCBA99 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		8188D5BA2408601800CCBA99 /* NewTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTaskViewController.swift; sourceTree = "<group>"; };
 		818DFEE02422B90D007F6682 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
@@ -389,6 +391,7 @@
 		81EE6773259A4149007B9D87 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				81864B0025C9E40900CE27D2 /* NextToDoTask.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -719,6 +722,7 @@
 				81C2A18025A38FE300F9A53F /* ShuffleSegmentedControllerDelegate.swift in Sources */,
 				811601A925C6EA1200E47525 /* FactoryResetModalView.swift in Sources */,
 				81EE6756259A35D9007B9D87 /* ShuffleVC.swift in Sources */,
+				81864B0125C9E40900CE27D2 /* NextToDoTask.swift in Sources */,
 				81C90B5324614F8B001C06B4 /* GapManager.swift in Sources */,
 				8198F26324763D5F00F547BC /* CalendarVC.swift in Sources */,
 				81E306B025AA27150069809E /* SingleResultsVC.swift in Sources */,
