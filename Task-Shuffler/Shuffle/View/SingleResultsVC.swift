@@ -124,7 +124,7 @@ class SingleResultsVC: ViewController, ShuffleResult {
         if let shuffleVC = shuffleVC {
             shuffleVC.shuffleSegmentedControllersDelegate.updateShuffleMessageLabel(shuffleConf: shuffleVC.shuffleConfiguration)
         }
-        
+        NotificationCenter.default.post(name: .didModifiedData, object: nil)
         dismiss(animated: true, completion: nil)
     }
 

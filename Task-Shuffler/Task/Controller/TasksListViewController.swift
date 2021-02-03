@@ -68,7 +68,7 @@ class TasksListViewController: AMTabsViewController {
     
     //MARK: viewWillAppear
     override func viewWillAppear(_ animated: Bool) {
-        fillTasks()
+        //fillTasks()
     }
     
     // MARK: viewDidAppear
