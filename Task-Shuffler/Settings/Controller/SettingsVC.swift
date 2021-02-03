@@ -60,7 +60,7 @@ class SettingsVC: UIViewController {
         tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: UIScreen.main.bounds.width/2).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
     
         
     }
@@ -106,6 +106,8 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource{
             return resetSection.count
         case 4:
             return creditsSection.count
+        case 5:
+            return 1
         default:
             return 0
         }
@@ -136,6 +138,20 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource{
         case 4:
             cell.accessoryView = nil
             cell.textLabel?.text = creditsSection[indexPath.row]
+        case 5:
+            cell.accessoryView = nil
+            cell.backgroundColor = .clear
+            let imageView = UIImageView(image: UIImage(named: "easter")?.withTintColor(UIColor.pearlWhite.withAlphaComponent(0.2)))
+            imageView.contentMode = .scaleAspectFit
+            
+            cell.addSubview(imageView)
+            imageView.translatesAutoresizingMaskIntoConstraints = false
+            
+            imageView.centerXAnchor.constraint(equalTo: cell.centerXAnchor).isActive = true
+            imageView.centerYAnchor.constraint(equalTo: cell.centerYAnchor).isActive = true
+            imageView.heightAnchor.constraint(equalToConstant: Utils.screenHeight / 12).isActive = true
+            //imageView.centerXAnchor.constraint(equalTo: cell.centerXAnchor).isActive = true
+            
         default:
             return cell
         }
@@ -146,7 +162,7 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource{
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        5
+        6
     }
     
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
