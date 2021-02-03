@@ -21,6 +21,11 @@ class SettingsVC: UIViewController {
     let resetSection = ["Factory reset"]
     let creditsSection = ["Credits"]
     
+    //Variables
+    var isEasterOpen = false
+    var easterCount = 3
+    var easterIndex = IndexPath()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +33,14 @@ class SettingsVC: UIViewController {
         setupView()
         setupNavigationBar()
         setupTableView()
+    }
+    
+    
+    @objc private func easterAction() {
+        let easterCell = tableView.cellForRow(at: easterIndex) as! EasterCell
+        
+        easterCell.easterImageView.tintColor = .systemPink
+        print("tocado")
     }
     
     private func setupView(){
@@ -115,6 +128,7 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
+        let easterCell = EasterCell()
         let mySwitch = MySettingsSwitch()
         mySwitch.indexPath = indexPath
         mySwitch.addTarget(self, action: #selector(switchAction(sender:)), for: .touchUpInside)
@@ -139,18 +153,12 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource{
             cell.accessoryView = nil
             cell.textLabel?.text = creditsSection[indexPath.row]
         case 5:
-            cell.accessoryView = nil
-            cell.backgroundColor = .clear
-            let imageView = UIImageView(image: UIImage(named: "easter")?.withTintColor(UIColor.pearlWhite.withAlphaComponent(0.2)))
-            imageView.contentMode = .scaleAspectFit
+            easterIndex = indexPath
+            //Gesture recognizer
+            let tapGestureEaster = UITapGestureRecognizer(target: self, action: #selector(easterAction))
+            easterCell.easterImageView.addGestureRecognizer(tapGestureEaster)
             
-            cell.addSubview(imageView)
-            imageView.translatesAutoresizingMaskIntoConstraints = false
-            
-            imageView.centerXAnchor.constraint(equalTo: cell.centerXAnchor).isActive = true
-            imageView.centerYAnchor.constraint(equalTo: cell.centerYAnchor).isActive = true
-            imageView.heightAnchor.constraint(equalToConstant: Utils.screenHeight / 12).isActive = true
-            //imageView.centerXAnchor.constraint(equalTo: cell.centerXAnchor).isActive = true
+            return easterCell
             
         default:
             return cell

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8107629F25CB397B00F1758B /* EasterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8107629E25CB397B00F1758B /* EasterCell.swift */; };
 		811601A625C6E5CF00E47525 /* FactoryResetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811601A525C6E5CF00E47525 /* FactoryResetVC.swift */; };
 		811601A925C6EA1200E47525 /* FactoryResetModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811601A825C6EA1200E47525 /* FactoryResetModalView.swift */; };
 		811880A6243515BC00E5FEE1 /* DeviceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811880A5243515BC00E5FEE1 /* DeviceModel.swift */; };
@@ -85,6 +86,7 @@
 		3E182028DE0B379EB966E722 /* Pods-Task-Shuffler.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Task-Shuffler.debug.xcconfig"; path = "Target Support Files/Pods-Task-Shuffler/Pods-Task-Shuffler.debug.xcconfig"; sourceTree = "<group>"; };
 		5B051BEDE7302552ECBD0BD9 /* Pods-Task-Shuffler.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Task-Shuffler.release.xcconfig"; path = "Target Support Files/Pods-Task-Shuffler/Pods-Task-Shuffler.release.xcconfig"; sourceTree = "<group>"; };
 		5C313B2D615F94E260304E37 /* Pods_Task_Shuffler.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Task_Shuffler.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8107629E25CB397B00F1758B /* EasterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasterCell.swift; sourceTree = "<group>"; };
 		811601A525C6E5CF00E47525 /* FactoryResetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryResetVC.swift; sourceTree = "<group>"; };
 		811601A825C6EA1200E47525 /* FactoryResetModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryResetModalView.swift; sourceTree = "<group>"; };
 		811880A5243515BC00E5FEE1 /* DeviceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceModel.swift; sourceTree = "<group>"; };
@@ -554,6 +556,7 @@
 				816709CD245C9F7D00D94E65 /* SettingsVC.xib */,
 				811601A825C6EA1200E47525 /* FactoryResetModalView.swift */,
 				813490BE25C89583004DF3D7 /* TrashIconView.swift */,
+				8107629E25CB397B00F1758B /* EasterCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -730,6 +733,7 @@
 				81EE67A7259B810F007B9D87 /* MTSlideToOpenView.swift in Sources */,
 				81DECAB6243BA410009051A2 /* CustomColors.swift in Sources */,
 				81C90B5B2463DDBA001C06B4 /* Utils.swift in Sources */,
+				8107629F25CB397B00F1758B /* EasterCell.swift in Sources */,
 				8162720C25B5B11C00BC7A46 /* ResultsCollectionVC.swift in Sources */,
 				8179FDDB24581E9F009A6D4B /* DummyModel.swift in Sources */,
 				81C451C824818E350086B806 /* EventType.swift in Sources */,
