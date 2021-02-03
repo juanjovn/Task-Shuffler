@@ -31,6 +31,6 @@ struct NextToDoTask: Identifiable {
         }
         
         
-        return nextToDoTasks.sorted(by: {($0.startTime,  $0.priority.rawValue) < ($1.startTime, $1.priority.rawValue)})
+        return nextToDoTasks.sorted(by: {($0.startTime,  $1.priority.rawValue) < ($1.startTime, $0.priority.rawValue)})
     }
 }
