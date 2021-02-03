@@ -28,7 +28,7 @@ class NextToDoVC: AMTabsViewController {
         nextToDoView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         nextToDoView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         nextToDoView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        nextToDoView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50).isActive = true
+        nextToDoView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
     }
     
     private func setupHostingViewController() {
@@ -37,8 +37,8 @@ class NextToDoVC: AMTabsViewController {
         contentView.didMove(toParent: self)
         
         contentView.view.backgroundColor = .clear
-        contentView.view.layer.cornerRadius = 20
-        contentView.view.layer.masksToBounds = true
+//        contentView.view.layer.cornerRadius = 20
+//        contentView.view.layer.masksToBounds = true
         
         contentView.view.translatesAutoresizingMaskIntoConstraints = false
         contentView.view.leadingAnchor.constraint(equalTo: nextToDoView.leadingAnchor, constant: 10).isActive = true

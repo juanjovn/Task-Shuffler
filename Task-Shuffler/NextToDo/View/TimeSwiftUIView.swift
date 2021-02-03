@@ -12,9 +12,11 @@ struct TimeSwiftUIView: View {
     var color: UIColor
     var time: String
     var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 30).foregroundColor(Color(color)).frame(width:80, height: 30).shadow(color: Color(UIColor.mysticBlue.withAlphaComponent(0.7)), radius:2, x: 0, y: 2)
-            Text(time).foregroundColor(Color(.pearlWhite))
+        GeometryReader { metrics in
+            ZStack {
+                RoundedRectangle(cornerRadius: metrics.size.height).foregroundColor(Color(color)).shadow(color: Color(UIColor.mysticBlue.withAlphaComponent(0.7)), radius:2, x: 0, y: 2)
+                Text(time).foregroundColor(Color(.pearlWhite))
+            }
         }
     }
 }
