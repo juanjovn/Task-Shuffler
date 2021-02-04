@@ -3,11 +3,17 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		8107629F25CB397B00F1758B /* EasterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8107629E25CB397B00F1758B /* EasterCell.swift */; };
+		810762A225CC462100F1758B /* EasterEggModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810762A125CC462100F1758B /* EasterEggModalView.swift */; };
+		810762A525CC464700F1758B /* EasterEggVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810762A425CC464700F1758B /* EasterEggVC.swift */; };
+		810762B525CC50F500F1758B /* cat_loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = 810762B425CC50F500F1758B /* cat_loading.gif */; };
+		810762B825CC55B600F1758B /* cat.gif in Resources */ = {isa = PBXBuildFile; fileRef = 810762B725CC55B600F1758B /* cat.gif */; };
+		810762C825CC6B4600F1758B /* GifFileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810762C725CC6B4600F1758B /* GifFileProvider.swift */; };
+		810762CC25CC771200F1758B /* SwiftyGif in Frameworks */ = {isa = PBXBuildFile; productRef = 810762CB25CC771200F1758B /* SwiftyGif */; };
 		811601A625C6E5CF00E47525 /* FactoryResetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811601A525C6E5CF00E47525 /* FactoryResetVC.swift */; };
 		811601A925C6EA1200E47525 /* FactoryResetModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811601A825C6EA1200E47525 /* FactoryResetModalView.swift */; };
 		811880A6243515BC00E5FEE1 /* DeviceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811880A5243515BC00E5FEE1 /* DeviceModel.swift */; };
@@ -87,6 +93,11 @@
 		5B051BEDE7302552ECBD0BD9 /* Pods-Task-Shuffler.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Task-Shuffler.release.xcconfig"; path = "Target Support Files/Pods-Task-Shuffler/Pods-Task-Shuffler.release.xcconfig"; sourceTree = "<group>"; };
 		5C313B2D615F94E260304E37 /* Pods_Task_Shuffler.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Task_Shuffler.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8107629E25CB397B00F1758B /* EasterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasterCell.swift; sourceTree = "<group>"; };
+		810762A125CC462100F1758B /* EasterEggModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasterEggModalView.swift; sourceTree = "<group>"; };
+		810762A425CC464700F1758B /* EasterEggVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasterEggVC.swift; sourceTree = "<group>"; };
+		810762B425CC50F500F1758B /* cat_loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = cat_loading.gif; sourceTree = "<group>"; };
+		810762B725CC55B600F1758B /* cat.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = cat.gif; sourceTree = "<group>"; };
+		810762C725CC6B4600F1758B /* GifFileProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifFileProvider.swift; sourceTree = "<group>"; };
 		811601A525C6E5CF00E47525 /* FactoryResetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryResetVC.swift; sourceTree = "<group>"; };
 		811601A825C6EA1200E47525 /* FactoryResetModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryResetModalView.swift; sourceTree = "<group>"; };
 		811880A5243515BC00E5FEE1 /* DeviceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceModel.swift; sourceTree = "<group>"; };
@@ -168,6 +179,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8146988B25865C3E00D7BCE1 /* Pods_Task_Shuffler.framework in Frameworks */,
+				810762CC25CC771200F1758B /* SwiftyGif in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,6 +277,8 @@
 		81E9B1322405BEE400BBADB8 = {
 			isa = PBXGroup;
 			children = (
+				810762B725CC55B600F1758B /* cat.gif */,
+				810762B425CC50F500F1758B /* cat_loading.gif */,
 				81E9B13D2405BEE400BBADB8 /* Task-Shuffler */,
 				81E9B13C2405BEE400BBADB8 /* Products */,
 				21B5D8D428181BD625FB5FB7 /* Pods */,
@@ -546,6 +560,8 @@
 			children = (
 				816709CC245C9F7D00D94E65 /* SettingsVC.swift */,
 				811601A525C6E5CF00E47525 /* FactoryResetVC.swift */,
+				810762A425CC464700F1758B /* EasterEggVC.swift */,
+				810762C725CC6B4600F1758B /* GifFileProvider.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -557,6 +573,7 @@
 				811601A825C6EA1200E47525 /* FactoryResetModalView.swift */,
 				813490BE25C89583004DF3D7 /* TrashIconView.swift */,
 				8107629E25CB397B00F1758B /* EasterCell.swift */,
+				810762A125CC462100F1758B /* EasterEggModalView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -587,6 +604,9 @@
 			dependencies = (
 			);
 			name = "Task-Shuffler";
+			packageProductDependencies = (
+				810762CB25CC771200F1758B /* SwiftyGif */,
+			);
 			productName = "Task-Shuffler";
 			productReference = 81E9B13B2405BEE400BBADB8 /* Task Shuffler.app */;
 			productType = "com.apple.product-type.application";
@@ -615,6 +635,9 @@
 				Base,
 			);
 			mainGroup = 81E9B1322405BEE400BBADB8;
+			packageReferences = (
+				810762CA25CC771200F1758B /* XCRemoteSwiftPackageReference "SwiftyGif" */,
+			);
 			productRefGroup = 81E9B13C2405BEE400BBADB8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -629,8 +652,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				810762B525CC50F500F1758B /* cat_loading.gif in Resources */,
 				81C90B5F246492BC001C06B4 /* NewGapVC.xib in Resources */,
 				81C90B552461D080001C06B4 /* GapCell.xib in Resources */,
+				810762B825CC55B600F1758B /* cat.gif in Resources */,
 				81ED3A85244DEFD400C36DB8 /* TaskCell.xib in Resources */,
 				81E9B14B2405BEE600BBADB8 /* LaunchScreen.storyboard in Resources */,
 				81E9B1482405BEE600BBADB8 /* Assets.xcassets in Resources */,
@@ -693,6 +718,7 @@
 				81C90B61246530DC001C06B4 /* DatePickerVC.swift in Sources */,
 				816709CE245C9F7D00D94E65 /* SettingsVC.swift in Sources */,
 				813490BF25C89583004DF3D7 /* TrashIconView.swift in Sources */,
+				810762C825CC6B4600F1758B /* GifFileProvider.swift in Sources */,
 				8170DD7F2467FF6B0060725D /* HourCell.swift in Sources */,
 				819970A225A09BCF004D48C3 /* ShuffleSegmentedControllersDataSource.swift in Sources */,
 				8188D5B9240701AF00CCBA99 /* Task.swift in Sources */,
@@ -722,12 +748,14 @@
 				81C2A17D25A38B1D00F9A53F /* ShuffleConfiguration.swift in Sources */,
 				811880A6243515BC00E5FEE1 /* DeviceModel.swift in Sources */,
 				819970A825A0FEDA004D48C3 /* NowShuffleResultsVC.swift in Sources */,
+				810762A525CC464700F1758B /* EasterEggVC.swift in Sources */,
 				81C2A18025A38FE300F9A53F /* ShuffleSegmentedControllerDelegate.swift in Sources */,
 				811601A925C6EA1200E47525 /* FactoryResetModalView.swift in Sources */,
 				81EE6756259A35D9007B9D87 /* ShuffleVC.swift in Sources */,
 				81864B0125C9E40900CE27D2 /* NextToDoTask.swift in Sources */,
 				81C90B5324614F8B001C06B4 /* GapManager.swift in Sources */,
 				8198F26324763D5F00F547BC /* CalendarVC.swift in Sources */,
+				810762A225CC462100F1758B /* EasterEggModalView.swift in Sources */,
 				81E306B025AA27150069809E /* SingleResultsVC.swift in Sources */,
 				81C2A19E25A3A3E200F9A53F /* FillGapsController.swift in Sources */,
 				81EE67A7259B810F007B9D87 /* MTSlideToOpenView.swift in Sources */,
@@ -956,6 +984,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		810762CA25CC771200F1758B /* XCRemoteSwiftPackageReference "SwiftyGif" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kirualex/SwiftyGif.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.4.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		810762CB25CC771200F1758B /* SwiftyGif */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 810762CA25CC771200F1758B /* XCRemoteSwiftPackageReference "SwiftyGif" */;
+			productName = SwiftyGif;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 81E9B1332405BEE400BBADB8 /* Project object */;
 }
