@@ -12,7 +12,7 @@ class SettingsValues {
     static var taskSettings = [true, true, true] //[markCompletedWhenTimeEnds, confirmDelete, oneTaskPerGap]
     static var notificationsSettings = [true, true] //[notifyTaskStarts, notifyTaskEnds]
     static var otherSettings = [true] //[hapticFeedback]
-    static var easterEgg = true
+    static var easterEgg = false
     
     static func storeSettings(){
         let userDefault = UserDefaults.standard
@@ -30,6 +30,12 @@ class SettingsValues {
         otherSettings = userDefault.array(forKey: "otherSettings") as! [Bool]
         easterEgg = userDefault.bool(forKey: "easterEgg")
     }
+    
+    static func resetEasterEgg() {
+        let userDefault = UserDefaults.standard
+        userDefault.set(false, forKey: "easterEgg")
+    }
+    
     
     static func isKeyPresentInUserDefaults(key: String) -> Bool {
         return UserDefaults.standard.object(forKey: key) != nil

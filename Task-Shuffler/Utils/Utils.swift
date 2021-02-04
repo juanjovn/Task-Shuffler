@@ -53,3 +53,37 @@ extension Date {
         calendar.dateComponents([.calendar, .yearForWeekOfYear, .weekOfYear], from: self).date!
     }
 }
+
+extension UIColor {
+    var rgba: (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {
+        var red: CGFloat = 0
+        var green: CGFloat = 0
+        var blue: CGFloat = 0
+        var alpha: CGFloat = 0
+        getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+
+        return (red, green, blue, alpha)
+    }
+}
+
+extension UIImageView {
+    static func fromGif(frame: CGRect, resourceName: String) -> UIImageView? {
+        guard let path = Bundle.main.path(forResource: resourceName, ofType: "gif") else {
+            print("Gif does not exist at that path")
+            return nil
+        }
+        let url = URL(fileURLWithPath: path)
+        guard let gifData = try? Data(contentsOf: url),
+            let source =  CGImageSourceCreateWithData(gifData as CFData, nil) else { return nil }
+        var images = [UIImage]()
+        let imageCount = CGImageSourceGetCount(source)
+        for i in 0 ..< imageCount {
+            if let image = CGImageSourceCreateImageAtIndex(source, i, nil) {
+                images.append(UIImage(cgImage: image))
+            }
+        }
+        let gifImageView = UIImageView(frame: frame)
+        gifImageView.animationImages = images
+        return gifImageView
+    }
+}

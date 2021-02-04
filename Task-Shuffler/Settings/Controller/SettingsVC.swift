@@ -37,10 +37,81 @@ class SettingsVC: UIViewController {
     
     
     @objc private func easterAction() {
-        let easterCell = tableView.cellForRow(at: easterIndex) as! EasterCell
         
-        easterCell.easterImageView.tintColor = .systemPink
-        print("tocado")
+        //Easter egg is not discovered yet
+        if !SettingsValues.easterEgg {
+            
+            //Haptic handling
+            if SettingsValues.otherSettings[0] {
+                var generator = UIImpactFeedbackGenerator(style: .light)
+                switch easterCount {
+                case 3:
+                    generator = UIImpactFeedbackGenerator(style: .light)
+                case 2:
+                    generator = UIImpactFeedbackGenerator(style: .medium)
+                case 1:
+                    generator = UIImpactFeedbackGenerator(style: .rigid)
+                default:
+                    generator = UIImpactFeedbackGenerator(style: .light)
+                }
+                    generator.impactOccurred()
+            }
+            
+            let easterCell = tableView.cellForRow(at: easterIndex) as! EasterCell
+            let eggColorRGBA = easterCell.easterImageView.tintColor.rgba
+            let eggAlpha = eggColorRGBA.3
+            
+    //        if easterCount > 0 {
+    //            UIView.animate(withDuration: 0.05, animations: {
+    //                easterCell.easterImageView.transform = CGAffineTransform(rotationAngle: 0.261799)
+    //            }, completion: {_ in
+    //                UIView.animate(withDuration: 0.05){
+    //                    easterCell.easterImageView.transform = .identity
+    //                }
+    //            })
+    //
+    //            easterCell.easterImageView.tintColor = UIColor.pearlWhite.withAlphaComponent(eggAlpha + 0.26)
+    //        }
+            
+            if easterCount > 0 {
+                UIView.animate(withDuration: 0.07, animations: {
+                    easterCell.easterImageView.tintColor = UIColor.pearlWhite.withAlphaComponent(eggAlpha + 0.26)
+                    //left or right inclination
+                    if self.easterCount % 2 == 0 {
+                        easterCell.easterImageView.transform = CGAffineTransform(rotationAngle: -0.261799)
+                    } else {
+                        easterCell.easterImageView.transform = CGAffineTransform(rotationAngle: 0.261799)
+                    }
+                }, completion: {_ in
+                    UIView.animate(withDuration: 0.1, animations: {
+                        easterCell.easterImageView.transform = .identity
+                    })
+                })
+                
+            }
+            easterCount -= 1
+            if easterCount == 0 {
+                easterCell.easterImageView.tintColor = UIColor.pearlWhite.withAlphaComponent(1)
+                //easterCell.eggContainerView.isUserInteractionEnabled = false
+                
+                isEasterOpen = true
+                SettingsValues.easterEgg = isEasterOpen
+                SettingsValues.storeSettings()
+                print("LANZAR PANTALLA")
+                present(EasterEggVC(), animated: true, completion: nil)
+            }
+            
+            print("tocado, contador = \(easterCount)")
+        } else {
+            if SettingsValues.otherSettings[0] {
+                let generator = UIImpactFeedbackGenerator(style: .heavy)
+                    generator.impactOccurred()
+            }
+            print("Easter egg esta descubierto. Abrir pantalla directamente.")
+            present(EasterEggVC(), animated: true, completion: nil)
+        }
+        
+        
     }
     
     private func setupView(){
@@ -156,7 +227,12 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource{
             easterIndex = indexPath
             //Gesture recognizer
             let tapGestureEaster = UITapGestureRecognizer(target: self, action: #selector(easterAction))
-            easterCell.easterImageView.addGestureRecognizer(tapGestureEaster)
+            easterCell.eggContainerView.addGestureRecognizer(tapGestureEaster)
+            if SettingsValues.easterEgg {
+                easterCell.easterImageView.tintColor = UIColor.pearlWhite
+            } else {
+                easterCell.easterImageView.tintColor = UIColor.pearlWhite.withAlphaComponent(0.2)
+            }
             
             return easterCell
             
