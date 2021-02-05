@@ -162,6 +162,15 @@ class SettingsVC: UIViewController {
             print(SettingsValues.taskSettings[row])
         case 1:
             SettingsValues.notificationsSettings[row] = !SettingsValues.notificationsSettings[row]
+            if row == 0 {
+                if SettingsValues.notificationsSettings[row] {
+                    NotificationManager.instance.removeNotifications(of: .start)
+                }
+            } else if row == 1 {
+                if SettingsValues.notificationsSettings[row] {
+                    NotificationManager.instance.removeNotifications(of: .end)
+                }
+            }
             print(SettingsValues.notificationsSettings[row])
         case 2:
             SettingsValues.otherSettings[row] = !SettingsValues.otherSettings[row]

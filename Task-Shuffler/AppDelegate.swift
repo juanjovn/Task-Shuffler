@@ -61,12 +61,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UINavigationBar.appearance().barTintColor = .mysticBlue
             
         }
-        //UINavigationBar.appearance().isTranslucent = true
+        
+        //MARK: Notification permission request
+        NotificationManager.instance.notificationPermissionRequest()
         
     
         self.window!.rootViewController = vc
         window?.makeKeyAndVisible()
         return true
+    }
+    
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        //Remove notification badge
+        UIApplication.shared.applicationIconBadgeNumber = 0
     }
 
 }

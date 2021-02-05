@@ -15,6 +15,7 @@
 		810762C825CC6B4600F1758B /* GifFileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810762C725CC6B4600F1758B /* GifFileProvider.swift */; };
 		810762CC25CC771200F1758B /* SwiftyGif in Frameworks */ = {isa = PBXBuildFile; productRef = 810762CB25CC771200F1758B /* SwiftyGif */; };
 		8107630125CDA63B00F1758B /* ReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8107630025CDA63B00F1758B /* ReviewManager.swift */; };
+		8107631325CDC6FC00F1758B /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8107631225CDC6FC00F1758B /* NotificationManager.swift */; };
 		811601A625C6E5CF00E47525 /* FactoryResetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811601A525C6E5CF00E47525 /* FactoryResetVC.swift */; };
 		811601A925C6EA1200E47525 /* FactoryResetModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811601A825C6EA1200E47525 /* FactoryResetModalView.swift */; };
 		811880A6243515BC00E5FEE1 /* DeviceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811880A5243515BC00E5FEE1 /* DeviceModel.swift */; };
@@ -100,6 +101,7 @@
 		810762B725CC55B600F1758B /* cat.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = cat.gif; sourceTree = "<group>"; };
 		810762C725CC6B4600F1758B /* GifFileProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifFileProvider.swift; sourceTree = "<group>"; };
 		8107630025CDA63B00F1758B /* ReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewManager.swift; sourceTree = SOURCE_ROOT; };
+		8107631225CDC6FC00F1758B /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		811601A525C6E5CF00E47525 /* FactoryResetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryResetVC.swift; sourceTree = "<group>"; };
 		811601A825C6EA1200E47525 /* FactoryResetModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryResetModalView.swift; sourceTree = "<group>"; };
 		811880A5243515BC00E5FEE1 /* DeviceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceModel.swift; sourceTree = "<group>"; };
@@ -214,6 +216,7 @@
 				815204EE245E9A1E0004510B /* Alert.swift */,
 				81C90B5A2463DDBA001C06B4 /* Utils.swift */,
 				81EE66E325990926007B9D87 /* Notifications.swift */,
+				8107631225CDC6FC00F1758B /* NotificationManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -748,6 +751,7 @@
 				81ED3A84244DEFD400C36DB8 /* TaskCell.swift in Sources */,
 				81E306B325AA276A0069809E /* SingleResultModalView.swift in Sources */,
 				816271E425A8CFB000BC7A46 /* NowCardView.swift in Sources */,
+				8107631325CDC6FC00F1758B /* NotificationManager.swift in Sources */,
 				81705A83240B1D890053A571 /* ScheduleViewController.swift in Sources */,
 				81C2A17D25A38B1D00F9A53F /* ShuffleConfiguration.swift in Sources */,
 				811880A6243515BC00E5FEE1 /* DeviceModel.swift in Sources */,
