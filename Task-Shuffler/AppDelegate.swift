@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //DEBUG/////////////////
         //createTestTasks()
         //factoryResetWithTestTasks()
-        SettingsValues.resetEasterEgg()
+        //SettingsValues.resetEasterEgg()
         Utils.printLocale()
         //DEBUG/////////////////
         
