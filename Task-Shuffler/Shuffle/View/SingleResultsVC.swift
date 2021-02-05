@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import StoreKit
 
 class SingleResultsVC: ViewController, ShuffleResult {
 
@@ -17,6 +18,7 @@ class SingleResultsVC: ViewController, ShuffleResult {
     lazy var okButton = singleResultModalView.okButton
     var task = Task(id: "", name: "", duration: 0, priority: .low, state: .pending, gapid: "")
     let gapManager = GapManager.instance
+    let reviewManager = ReviewManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -125,7 +127,17 @@ class SingleResultsVC: ViewController, ShuffleResult {
             shuffleVC.shuffleSegmentedControllersDelegate.updateShuffleMessageLabel(shuffleConf: shuffleVC.shuffleConfiguration)
         }
         NotificationCenter.default.post(name: .didModifiedData, object: nil)
+        reviewManager.log(.shuffle)
+        checkLaunchReviewRequest()
         dismiss(animated: true, completion: nil)
+    }
+    
+    private func checkLaunchReviewRequest() {
+        if reviewManager.count(of: .shuffle) > 50 || reviewManager.count(of: .launchApp) > 200 {
+            SKStoreReviewController.requestReview()
+            reviewManager.reset(.shuffle)
+            reviewManager.reset(.launchApp)
+        }
     }
 
 }

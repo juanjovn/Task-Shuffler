@@ -20,6 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //createTestTasks()
         //factoryResetWithTestTasks()
         //SettingsValues.resetEasterEgg()
+<<<<<<< HEAD
+=======
+        //resetReviewRequestCounter()
+>>>>>>> develop
         Utils.printLocale()
         //DEBUG/////////////////
         
@@ -81,6 +85,13 @@ extension AppDelegate {
         let db = DatabaseManager()
         db.eraseAll()
         createTestTasks()
+    }
+    
+    private func resetReviewRequestCounter() {
+        let reviewManager = ReviewManager()
+        reviewManager.reset(.easter)
+        reviewManager.reset(.launchApp)
+        reviewManager.reset(.shuffle)
     }
     
     private func createTestTasks() {

@@ -9,6 +9,7 @@
 import UIKit
 import SwiftyGif
 import Network
+import StoreKit
 
 class EasterEggVC: UIViewController {
     
@@ -18,6 +19,7 @@ class EasterEggVC: UIViewController {
     var existsInternet = false
     let gifUrl = "https://cataas.com/cat/gif" //Random cat gif
     lazy var message = UILabel()
+    private let reviewManager = ReviewManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,6 +91,9 @@ class EasterEggVC: UIViewController {
         
         if existsInternet {
             gifImageView.setGifFromURL(url, manager: manager, loopCount: -1, levelOfIntegrity: .default, session: .init(configuration: configuration), showLoader: true, customLoader: loader)
+            //Count easter egg opened successfully for review request purposes
+            reviewManager.log(.easter)
+            
             
         } else {
             //Show the gif file from the bundle
@@ -116,6 +121,17 @@ class EasterEggVC: UIViewController {
         message.trailingAnchor.constraint(equalTo: modalView.bottomView.trailingAnchor, constant: -10).isActive = true
         message.centerXAnchor.constraint(equalTo: modalView.bottomView.centerXAnchor).isActive = true
         
+    }
+    
+    private func checkLaunchReviewRequest() {
+        print("CURRENT EASTER COUNT: \(reviewManager.count(of: .easter))")
+        if reviewManager.count(of: .easter) == 10 {
+            SKStoreReviewController.requestReview()
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        checkLaunchReviewRequest()
     }
     
     
