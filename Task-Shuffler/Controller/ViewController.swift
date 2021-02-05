@@ -15,6 +15,9 @@ class ViewController: AMTabsViewController {
     
     var myTask :Task?
     
+    //ReviewManager
+    private let reviewManager = ReviewManager()
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
       return .lightContent
     }
@@ -22,6 +25,8 @@ class ViewController: AMTabsViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Count the app was launched for review request purposes
+        reviewManager.log(.launchApp)
         setTabsControllers()
         selectedTabIndex = 2
     }

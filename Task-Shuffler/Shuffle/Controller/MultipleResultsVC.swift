@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import StoreKit
 
 class MultipleResultsVC: ViewController {
 
@@ -23,6 +24,7 @@ class MultipleResultsVC: ViewController {
         return flowLayout
     }()
     lazy var resultsCollectionVC = ResultsCollectionVC(collectionViewLayout: layout)
+    let reviewManager = ReviewManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -111,7 +113,17 @@ class MultipleResultsVC: ViewController {
             shuffleVC.shuffleSegmentedControllersDelegate.updateShuffleMessageLabel(shuffleConf: shuffleVC.shuffleConfiguration)
         }
         NotificationCenter.default.post(name: .didModifiedData, object: nil)
+        reviewManager.log(.shuffle)
+        checkLaunchReviewRequest()
         dismiss(animated: true, completion: nil)
+    }
+    
+    private func checkLaunchReviewRequest() {
+        if reviewManager.count(of: .shuffle) > 50 || reviewManager.count(of: .launchApp) > 200 {
+            SKStoreReviewController.requestReview()
+            reviewManager.reset(.shuffle)
+            reviewManager.reset(.launchApp)
+        }
     }
 
 }
