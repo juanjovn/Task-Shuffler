@@ -10,18 +10,13 @@ import UIKit
 
 class EasterEggModalView: ModalView {
     
-    var gifImageView = UIImageView()
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         setupTitle()
-        
         buttonsContainerView.removeFromSuperview()
         messageLabel.removeFromSuperview()
-        
         setupBottomView()
-        //setupGifImageView()
     }
     
     
@@ -42,18 +37,7 @@ class EasterEggModalView: ModalView {
         bottomView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
         bottomView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15).isActive = true
     }
-    
-    private func setupGifImageView() {
-        bottomView.addSubview(gifImageView)
-        gifImageView.translatesAutoresizingMaskIntoConstraints = false
-        gifImageView.centerYAnchor.constraint(equalTo: bottomView.centerYAnchor).isActive = true
-        gifImageView.centerXAnchor.constraint(equalTo: bottomView.centerXAnchor).isActive = true
-        gifImageView.heightAnchor.constraint(lessThanOrEqualTo: bottomView.heightAnchor, multiplier: 0.8).isActive = true
-        gifImageView.widthAnchor.constraint(lessThanOrEqualTo: bottomView.widthAnchor, multiplier: 0.8).isActive = true
-        gifImageView.contentMode = .scaleAspectFit
-    }
-    
-    
+      
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
