@@ -163,11 +163,11 @@ class SettingsVC: UIViewController {
         case 1:
             SettingsValues.notificationsSettings[row] = !SettingsValues.notificationsSettings[row]
             if row == 0 {
-                if SettingsValues.notificationsSettings[row] {
+                if !SettingsValues.notificationsSettings[row] {
                     NotificationManager.instance.removeNotifications(of: .start)
                 }
             } else if row == 1 {
-                if SettingsValues.notificationsSettings[row] {
+                if !SettingsValues.notificationsSettings[row] {
                     NotificationManager.instance.removeNotifications(of: .end)
                 }
             }
