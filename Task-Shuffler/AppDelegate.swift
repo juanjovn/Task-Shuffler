@@ -20,10 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //createTestTasks()
         //factoryResetWithTestTasks()
         //SettingsValues.resetEasterEgg()
-<<<<<<< HEAD
-=======
         //resetReviewRequestCounter()
->>>>>>> develop
         Utils.printLocale()
         //DEBUG/////////////////
         
