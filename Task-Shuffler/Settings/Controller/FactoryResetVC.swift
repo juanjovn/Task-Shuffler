@@ -64,6 +64,7 @@ class FactoryResetVC: UIViewController {
             let queue = DispatchQueue.global()
             queue.sync {
                 db.eraseAll()
+                GapManager.instance.fillGaps()
             }
             
             queue.sync {
@@ -81,6 +82,7 @@ class FactoryResetVC: UIViewController {
                 let queue = DispatchQueue.global()
                 queue.sync {
                     db.deleteAllByType(object: TaskRealm.self)
+                    GapManager.instance.fillGaps()
                     GapManager.instance.resetGapAssignments()
                 }
                 
@@ -94,6 +96,7 @@ class FactoryResetVC: UIViewController {
                 let queue = DispatchQueue.global()
                 queue.sync {
                     db.deleteAllByType(object: GapRealm.self)
+                    GapManager.instance.fillGaps()
                     TaskManager.resetTaskAssignments()
                 }
                 

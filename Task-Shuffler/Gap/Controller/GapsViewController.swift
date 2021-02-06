@@ -94,7 +94,7 @@ class GapsViewController: AMTabsViewController {
     }
     
     @objc func onDataModified () {
-        //gapManager.fillGaps()
+        gapManager.fillGaps()
         refreshOutdated()
         tableView.reloadData()
         //tableView.reloadSections(IndexSet(integersIn: 0...tableView.numberOfSections - 1), with: .fade)
@@ -217,16 +217,20 @@ class GapsViewController: AMTabsViewController {
     }
     
     private func refreshOutdated() {
+        
         var isChanged = false
-        for gap in gapManager.pendingGaps {
-            if checkOutdated(currentGap: gap) {
-                isChanged = true
-                do {
-                    try db.realm.write{
-                        gap.state = State.outdated.rawValue
+        
+        if gapManager.pendingGaps.count > 0 {
+            for gap in gapManager.pendingGaps {
+                if checkOutdated(currentGap: gap) {
+                    isChanged = true
+                    do {
+                        try db.realm.write{
+                            gap.state = State.outdated.rawValue
+                        }
+                    } catch {
+                        print("Error updating to database")
                     }
-                } catch {
-                    print("Error updating to database")
                 }
             }
         }
@@ -312,7 +316,8 @@ extension GapsViewController: SJFluidSegmentedControlDataSource, SJFluidSegmente
     func segmentedControl(_ segmentedControl: SJFluidSegmentedControl, didChangeFromSegmentAtIndex fromIndex: Int, toSegmentAtIndex toIndex: Int) {
         
         refreshOutdated()
-        tableView.reloadSections(IndexSet(integersIn: 0...2), with: .fade)
+        tableView.reloadSections(IndexSet(integersIn: 0...tableView.numberOfSections - 1), with: .fade)
+        
         if tableView.numberOfRows(inSection: 0) > 0{
             let topIndex = IndexPath(row: 0, section: 0)
             tableView.scrollToRow(at: topIndex, at: .top, animated: true)
