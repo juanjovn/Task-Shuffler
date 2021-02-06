@@ -426,6 +426,10 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
             }
             if segmentedControl.currentSegment == 0 {
                 gapManager.assignedGaps.remove(at: indexPath.row)
+                
+                //Update notifications
+                NotificationManager.instance.removeAllTypeNotifications()
+                NotificationManager.instance.scheduleMultipleTasksNotifications(for: TaskManager.populateTasks(state: .assigned))
             } else {
                 gapManager.outdatedGaps.remove(at: indexPath.row)
             }
@@ -446,6 +450,11 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
                 }
             }
             gapManager.filledGaps.remove(at: indexPath.row)
+            
+            //Update notifications
+            NotificationManager.instance.removeAllTypeNotifications()
+            NotificationManager.instance.scheduleMultipleTasksNotifications(for: TaskManager.populateTasks(state: .assigned))
+            
         default:
             break
         }
@@ -558,6 +567,10 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
                 TaskManager.updateTask(task: newTask)
             }
         }
+        
+        //Update notifications
+        NotificationManager.instance.removeAllTypeNotifications()
+        NotificationManager.instance.scheduleMultipleTasksNotifications(for: TaskManager.populateTasks(state: .assigned))
     }
     
     

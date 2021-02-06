@@ -54,24 +54,24 @@ class SettingsVC: UIViewController {
                 default:
                     generator = UIImpactFeedbackGenerator(style: .light)
                 }
-                    generator.impactOccurred()
+                generator.impactOccurred()
             }
             
             let easterCell = tableView.cellForRow(at: easterIndex) as! EasterCell
             let eggColorRGBA = easterCell.easterImageView.tintColor.rgba
             let eggAlpha = eggColorRGBA.3
             
-    //        if easterCount > 0 {
-    //            UIView.animate(withDuration: 0.05, animations: {
-    //                easterCell.easterImageView.transform = CGAffineTransform(rotationAngle: 0.261799)
-    //            }, completion: {_ in
-    //                UIView.animate(withDuration: 0.05){
-    //                    easterCell.easterImageView.transform = .identity
-    //                }
-    //            })
-    //
-    //            easterCell.easterImageView.tintColor = UIColor.pearlWhite.withAlphaComponent(eggAlpha + 0.26)
-    //        }
+            //        if easterCount > 0 {
+            //            UIView.animate(withDuration: 0.05, animations: {
+            //                easterCell.easterImageView.transform = CGAffineTransform(rotationAngle: 0.261799)
+            //            }, completion: {_ in
+            //                UIView.animate(withDuration: 0.05){
+            //                    easterCell.easterImageView.transform = .identity
+            //                }
+            //            })
+            //
+            //            easterCell.easterImageView.tintColor = UIColor.pearlWhite.withAlphaComponent(eggAlpha + 0.26)
+            //        }
             
             if easterCount > 0 {
                 UIView.animate(withDuration: 0.07, animations: {
@@ -105,7 +105,7 @@ class SettingsVC: UIViewController {
         } else {
             if SettingsValues.otherSettings[0] {
                 let generator = UIImpactFeedbackGenerator(style: .heavy)
-                    generator.impactOccurred()
+                generator.impactOccurred()
             }
             print("Easter egg esta descubierto. Abrir pantalla directamente.")
             present(EasterEggVC(), animated: true, completion: nil)
@@ -117,12 +117,12 @@ class SettingsVC: UIViewController {
     private func setupView(){
         title = "Settings"
         view.backgroundColor = #colorLiteral(red: 0.7764705882, green: 0.7725490196, blue: 0.7254901961, alpha: 0.85)
-
+        
         let blurEffect = UIBlurEffect(style: .light)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         view.addSubview(blurEffectView)
         view.sendSubviewToBack(blurEffectView)
-
+        
         blurEffectView.translatesAutoresizingMaskIntoConstraints = false
         blurEffectView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         blurEffectView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
@@ -132,7 +132,7 @@ class SettingsVC: UIViewController {
     
     private func setupNavigationBar(){
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(closeModalView))
-
+        
     }
     
     private func setupTableView(){
@@ -145,7 +145,7 @@ class SettingsVC: UIViewController {
         tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-    
+        
         
     }
     
@@ -159,31 +159,27 @@ class SettingsVC: UIViewController {
         switch indexPath?.section{
         case 0:
             SettingsValues.taskSettings[row] = !SettingsValues.taskSettings[row]
-            print(SettingsValues.taskSettings[row])
+        //print(SettingsValues.taskSettings[row])
         case 1:
             SettingsValues.notificationsSettings[row] = !SettingsValues.notificationsSettings[row]
-            if row == 0 {
-                if !SettingsValues.notificationsSettings[row] {
-                    NotificationManager.instance.removeNotifications(of: .start)
-                }
-            } else if row == 1 {
-                if !SettingsValues.notificationsSettings[row] {
-                    NotificationManager.instance.removeNotifications(of: .end)
-                }
+            if !SettingsValues.notificationsSettings[row] {
+                NotificationManager.instance.removeAllTypeNotifications()
             }
-            print(SettingsValues.notificationsSettings[row])
+            NotificationManager.instance.scheduleMultipleTasksNotifications(for: TaskManager.populateTasks(state: .assigned))
+            
+        //print(SettingsValues.notificationsSettings[row])
         case 2:
             SettingsValues.otherSettings[row] = !SettingsValues.otherSettings[row]
-            print(SettingsValues.otherSettings[row])
-            
+        //print(SettingsValues.otherSettings[row])
+        
         default:
             break
         }
         
         SettingsValues.storeSettings()
     }
-
-
+    
+    
 }
 
 extension SettingsVC: UITableViewDelegate, UITableViewDataSource{
@@ -274,6 +270,17 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource{
             present(modalVC, animated: true, completion: nil)
         default:
             break
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == tableView.numberOfSections - 1 {
+            return 1
+        } else if section == 0{
+            //return UITableView.automaticDimension
+            return 15
+        } else {
+            return 1
         }
     }
 }

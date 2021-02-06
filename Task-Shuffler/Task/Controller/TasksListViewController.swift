@@ -475,6 +475,9 @@ extension TasksListViewController: UITableViewDelegate{
                 GapManager.instance.fillGaps()
             }
             assignedTasks.remove(at: indexPath.row)
+            //Update notifications
+            NotificationManager.instance.removeAllTypeNotifications()
+            NotificationManager.instance.scheduleMultipleTasksNotifications(for: assignedTasks)
         default:
             break
         }
@@ -532,6 +535,10 @@ extension TasksListViewController: UITableViewDelegate{
         } else {
             task = assignedTasks[indexPath.row]
             assignedTasks.remove(at: indexPath.row)
+            
+            //Update notifications
+            NotificationManager.instance.removeAllTypeNotifications()
+            NotificationManager.instance.scheduleMultipleTasksNotifications(for: assignedTasks)
             
             let gapid = task.gapid
             if let gap = GapManager.instance.getGapById(id: gapid) {
