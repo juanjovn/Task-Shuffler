@@ -51,13 +51,13 @@ class GapsViewController: AMTabsViewController {
     //MARK: viewWillAppear
     override func viewWillAppear(_ animated: Bool) {
         refreshOutdated()
+        tableView.reloadData()
     }
     
     // MARK: viewDidAppear
     
     override func viewDidAppear(_ animated: Bool) {
         segmentedControl.cornerRadius = segmentedControl.bounds.height / 2
-        tableView.reloadData()
     }
     
     //MARK: PUBLIC
@@ -94,7 +94,8 @@ class GapsViewController: AMTabsViewController {
     }
     
     @objc func onDataModified () {
-        gapManager.fillGaps()
+        //gapManager.fillGaps()
+        refreshOutdated()
         tableView.reloadData()
         //tableView.reloadSections(IndexSet(integersIn: 0...tableView.numberOfSections - 1), with: .fade)
         //print("❗️NOTIFIED!!! ")

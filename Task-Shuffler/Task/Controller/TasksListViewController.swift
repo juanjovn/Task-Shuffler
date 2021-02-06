@@ -68,14 +68,14 @@ class TasksListViewController: AMTabsViewController {
     
     //MARK: viewWillAppear
     override func viewWillAppear(_ animated: Bool) {
-        //fillTasks()
+        fillTasks()
+        tableView.reloadData()
     }
     
     // MARK: viewDidAppear
     
     override func viewDidAppear(_ animated: Bool) {
         segmentedControl.cornerRadius = segmentedControl.bounds.height / 2
-        tableView.reloadData()
     }
     
     // MARK: Functions

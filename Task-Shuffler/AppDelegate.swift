@@ -74,6 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(_ application: UIApplication) {
         //Remove notification badge
         UIApplication.shared.applicationIconBadgeNumber = 0
+        NotificationCenter.default.post(name: .didModifiedData, object: nil)
     }
 
 }
