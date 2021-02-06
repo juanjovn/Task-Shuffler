@@ -126,7 +126,7 @@ class SingleResultsVC: ViewController, ShuffleResult {
         //Set notifications
         if let gap = gapManager.getGapById(id: task.gapid) {
             if SettingsValues.notificationsSettings[0] {
-                NotificationManager.instance.scheduleTaskNotification(at: gap.startDate, with: "Start to do the task! 💪", message: task.name, type: .start)
+                NotificationManager.instance.scheduleTaskNotification(at: gap.startDate, with: "Start the task! 💪", message: task.name, type: .start)
             }
             
             if SettingsValues.notificationsSettings[1] {

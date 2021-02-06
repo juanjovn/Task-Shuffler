@@ -58,7 +58,7 @@ class FactoryResetVC: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    @objc private func reshuffleButtonAction() {
+    @objc private func reshuffleButtonAction() {//Clear All button in this case. Reshuffle is in parent class.
         let db = DatabaseManager()
         Alert.confirmation(title: "Clear all data", message: "All tasks and gaps will be erased, are you sure?", vc: self) {_ in
             let queue = DispatchQueue.global()

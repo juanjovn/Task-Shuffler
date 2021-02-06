@@ -88,7 +88,7 @@ class NotificationManager {
                         return }
                     
                     if SettingsValues.notificationsSettings[0] {
-                        scheduleTaskNotification(at: gap.startDate, with: "Start to do the task! 💪", message: task.name, type: .start)
+                        scheduleTaskNotification(at: gap.startDate, with: "Start the task! 💪", message: task.name, type: .start)
                     }
                     if SettingsValues.notificationsSettings[1] {
                         scheduleTaskNotification(at: gap.endDate, with: "Task ended! 🏁", message: "Have you completed \(task.name)?", type: .end)
