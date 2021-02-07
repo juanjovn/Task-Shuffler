@@ -2,6 +2,7 @@ ${PODS_ROOT}/Target Support Files/Pods-Task-Shuffler/Pods-Task-Shuffler-framewor
 ${BUILT_PRODUCTS_DIR}/AMTabView/AMTabView.framework
 ${BUILT_PRODUCTS_DIR}/BubbleTransition/BubbleTransition.framework
 ${BUILT_PRODUCTS_DIR}/DateScrollPicker/DateScrollPicker.framework
+${BUILT_PRODUCTS_DIR}/EasyTipView/EasyTipView.framework
 ${BUILT_PRODUCTS_DIR}/Elliotable/Elliotable.framework
 ${BUILT_PRODUCTS_DIR}/Realm/Realm.framework
 ${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework
