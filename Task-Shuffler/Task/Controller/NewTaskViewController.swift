@@ -124,6 +124,7 @@ class NewTaskViewController: UIViewController {
         priorityButtonBackgroundView.alpha = 0
         
         // Text Field
+        newTaskTextName.autocapitalizationType = .sentences
         if !taskListVC!.isTaskEditing {
             newTaskTextName.becomeFirstResponder()
         }
