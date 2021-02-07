@@ -72,7 +72,10 @@ struct NextToDoSwiftUIView: View {
             }.listStyle(SidebarListStyle()).onAppear(perform: updateData)
             .onReceive(pub) { (output) in
                 self.updateData()
-            } //IOS 14
+            }.onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
+                self.updateData()
+                //print("Enter foreground triggered! ❗️")
+            }//IOS 14
         } else {
             List(){
                 ForEach(taskList) { taskItem in
@@ -115,6 +118,9 @@ struct NextToDoSwiftUIView: View {
             }.onAppear(perform: updateData)
             .onReceive(pub) { (output) in
                 self.updateData()
+        }.onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
+                self.updateData()
+                print("Enter foreground triggered! ❗️")
             }
         }
     }
