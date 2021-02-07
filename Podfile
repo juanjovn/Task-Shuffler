@@ -15,5 +15,6 @@ target 'Task-Shuffler' do
   pod 'RealmSwift', '>=4.4.1'
   pod 'DateScrollPicker', '1.1.0'
   pod 'Elliotable', '1.2.5'
+  pod 'EasyTipView', '2.1'
 
 end
