@@ -74,6 +74,8 @@
 		81E306B025AA27150069809E /* SingleResultsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E306AF25AA27150069809E /* SingleResultsVC.swift */; };
 		81E306B325AA276A0069809E /* SingleResultModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E306B225AA276A0069809E /* SingleResultModalView.swift */; };
 		81E306B725AA2AB50069809E /* ShuffleResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E306B625AA2AB50069809E /* ShuffleResult.swift */; };
+		81E3F53525CF285700398F4E /* CreditsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E3F53425CF285700398F4E /* CreditsCell.swift */; };
+		81E3F53825CF5D9C00398F4E /* MailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E3F53725CF5D9C00398F4E /* MailController.swift */; };
 		81E9B13F2405BEE400BBADB8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E9B13E2405BEE400BBADB8 /* AppDelegate.swift */; };
 		81E9B1432405BEE400BBADB8 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E9B1422405BEE400BBADB8 /* ViewController.swift */; };
 		81E9B1462405BEE400BBADB8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81E9B1442405BEE400BBADB8 /* Main.storyboard */; };
@@ -159,6 +161,8 @@
 		81E306AF25AA27150069809E /* SingleResultsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SingleResultsVC.swift; path = "Task-Shuffler/Shuffle/View/SingleResultsVC.swift"; sourceTree = SOURCE_ROOT; };
 		81E306B225AA276A0069809E /* SingleResultModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleResultModalView.swift; sourceTree = "<group>"; };
 		81E306B625AA2AB50069809E /* ShuffleResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShuffleResult.swift; sourceTree = "<group>"; };
+		81E3F53425CF285700398F4E /* CreditsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditsCell.swift; sourceTree = "<group>"; };
+		81E3F53725CF5D9C00398F4E /* MailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailController.swift; sourceTree = "<group>"; };
 		81E9B13B2405BEE400BBADB8 /* Task Shuffler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Task Shuffler.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81E9B13E2405BEE400BBADB8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		81E9B1422405BEE400BBADB8 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -568,6 +572,7 @@
 				811601A525C6E5CF00E47525 /* FactoryResetVC.swift */,
 				810762A425CC464700F1758B /* EasterEggVC.swift */,
 				810762C725CC6B4600F1758B /* GifFileProvider.swift */,
+				81E3F53725CF5D9C00398F4E /* MailController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -580,6 +585,7 @@
 				813490BE25C89583004DF3D7 /* TrashIconView.swift */,
 				8107629E25CB397B00F1758B /* EasterCell.swift */,
 				810762A125CC462100F1758B /* EasterEggModalView.swift */,
+				81E3F53425CF285700398F4E /* CreditsCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -728,6 +734,7 @@
 				8170DD7F2467FF6B0060725D /* HourCell.swift in Sources */,
 				819970A225A09BCF004D48C3 /* ShuffleSegmentedControllersDataSource.swift in Sources */,
 				8188D5B9240701AF00CCBA99 /* Task.swift in Sources */,
+				81E3F53525CF285700398F4E /* CreditsCell.swift in Sources */,
 				81D0E450240AE7C800B2E5D8 /* TasksListViewController.swift in Sources */,
 				81C90B5E246492BC001C06B4 /* NewGapVC.swift in Sources */,
 				81C90B572461D0B2001C06B4 /* GapCell.swift in Sources */,
@@ -745,6 +752,7 @@
 				8188D5BB2408601800CCBA99 /* NewTaskViewController.swift in Sources */,
 				8162720625B5A4A300BC7A46 /* MultipleResultModalView.swift in Sources */,
 				8164ED3925A70C2C00454D76 /* RoundedModalActionButton.swift in Sources */,
+				81E3F53825CF5D9C00398F4E /* MailController.swift in Sources */,
 				819970A525A0F958004D48C3 /* ModalView.swift in Sources */,
 				81DC259E246C752E00926034 /* DisplayTime.swift in Sources */,
 				81E306B725AA2AB50069809E /* ShuffleResult.swift in Sources */,

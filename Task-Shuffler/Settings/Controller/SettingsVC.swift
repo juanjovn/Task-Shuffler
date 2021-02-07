@@ -179,6 +179,27 @@ class SettingsVC: UIViewController {
         SettingsValues.storeSettings()
     }
     
+    @objc func twitterAction() {
+        if let url = URL(string: "https://twitter.com/juanjovn") {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    }
+    
+    @objc func instagramAction() {
+        if let url = URL(string: "https://www.instagram.com/juanjovn/") {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    }
+    
+    @objc func mailAction() {
+        let mailVC = MailController()
+        
+        addChild(mailVC)
+        mailVC.didMove(toParent: self)
+        mailVC.sendEmail()
+
+    }
+    
     
 }
 
@@ -226,8 +247,15 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource{
             cell.textLabel?.text = resetSection[indexPath.row]
             cell.accessoryView = nil
         case 4:
-            cell.accessoryView = nil
-            cell.textLabel?.text = creditsSection[indexPath.row]
+            let creditsCell = CreditsCell()
+            creditsCell.twitterButton.setImage(UIImage(named: "twitter_icon"), for: .normal)
+            creditsCell.twitterButton.addTarget(self, action: #selector(twitterAction), for: .touchUpInside)
+            creditsCell.instagramButton.setImage(UIImage(named: "instagram_icon"), for: .normal)
+            creditsCell.instagramButton.addTarget(self, action: #selector(instagramAction), for: .touchUpInside)
+            creditsCell.mailButton.setImage(UIImage(named: "mail_icon"), for: .normal)
+            creditsCell.mailButton.addTarget(self, action: #selector(mailAction), for: .touchUpInside)
+            
+            return creditsCell
         case 5:
             easterIndex = indexPath
             //Gesture recognizer
@@ -276,12 +304,35 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == tableView.numberOfSections - 1 {
             return 1
+        } else if section == tableView.numberOfSections - 2 {
+            return 20
         } else if section == 0{
             //return UITableView.automaticDimension
             return 15
         } else {
             return 1
         }
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == tableView.numberOfSections - 2 {
+            return "Developed by Juanjo Valiño"
+        } else {
+            return nil
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        let header: UITableViewHeaderFooterView = view as! UITableViewHeaderFooterView
+        
+        let title = "Developed by Juanjo Valiño"
+        header.textLabel?.font = .avenirRegular(ofSize: UIFont.scaleFont(13))
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = NSTextAlignment.center
+        let text = title.withBoldText(text: "Juanjo Valiño")
+        text.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: title.count))
+        
+        header.textLabel?.attributedText = text
     }
 }
 
