@@ -111,7 +111,8 @@ class MultipleResultsVC: ViewController {
         
         //Set notifications
         if SettingsValues.notificationsSettings[0] || SettingsValues.notificationsSettings[1] {
-            NotificationManager.instance.scheduleMultipleTasksNotifications(for: tasks)
+            NotificationManager.instance.removeAllTypeNotifications()
+            NotificationManager.instance.scheduleMultipleTasksNotifications(for: TaskManager.populateTasks(state: .assigned))
         }
         
         if let shuffleVC = shuffleVC {

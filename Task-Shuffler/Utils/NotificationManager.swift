@@ -56,8 +56,8 @@ class NotificationManager {
         }
     }
     
-    func removeNotifications(of type: NotificationType) {
-        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [type.rawValue])
+    func removeNotifications(id: String) {
+        UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [id])
     }
     
     func removeAllTypeNotifications() {
@@ -91,7 +91,7 @@ class NotificationManager {
                         scheduleTaskNotification(at: gap.startDate, with: "Start the task! 💪", message: task.name, type: .start)
                     }
                     if SettingsValues.notificationsSettings[1] {
-                        scheduleTaskNotification(at: gap.endDate, with: "Task ended! 🏁", message: "Have you completed \(task.name)?", type: .end)
+                        scheduleTaskNotification(at: gap.endDate, with: "Tasks ended! 🏁", message: "Have you completed \(task.name)?", type: .end)
                     }
                     
                 } else {
@@ -110,7 +110,7 @@ class NotificationManager {
                         scheduleTaskNotification(at: gap.startDate, with: "Start to do the tasks! 💪", message: taskNamesSentence, type: .start)
                     }
                     if SettingsValues.notificationsSettings[1] {
-                        scheduleTaskNotification(at: gap.endDate, with: "Task ended! 🏁", message: "Have you completed \(taskNamesSentence)?", type: .end)
+                        scheduleTaskNotification(at: gap.endDate, with: "Tasks ended! 🏁", message: "Have you completed \(taskNamesSentence)?", type: .end)
                     }
                 }
             }

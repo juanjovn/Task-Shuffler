@@ -69,6 +69,8 @@ class FactoryResetVC: UIViewController {
             
             queue.sync {
                 NotificationCenter.default.post(name: .didModifiedData, object: nil)
+                let notificationManager = NotificationManager()
+                notificationManager.removeAllTypeNotifications()
             }
             self.dismiss(animated: true, completion: nil)
         }
@@ -88,6 +90,8 @@ class FactoryResetVC: UIViewController {
                 
                 queue.sync {
                     NotificationCenter.default.post(name: .didModifiedData, object: nil)
+                    let notificationManager = NotificationManager()
+                    notificationManager.removeAllTypeNotifications()
                 }
                 self.dismiss(animated: true, completion: nil)
             }
@@ -102,6 +106,8 @@ class FactoryResetVC: UIViewController {
                 
                 queue.sync {
                     NotificationCenter.default.post(name: .didModifiedData, object: nil)
+                    let notificationManager = NotificationManager()
+                    notificationManager.removeAllTypeNotifications()
                 }
                 self.dismiss(animated: true, completion: nil)
             }
