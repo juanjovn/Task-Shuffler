@@ -493,16 +493,17 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
             }
             swipeAction.backgroundColor = .powerGreen
         } else {
-            swipeAction = UIContextualAction(style: .normal, title: "⎌", handler: {
-                (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
-                //self.restoreTask(indexPath: indexPath)
-                print("⎌ Marcado restaurar")
-                success(true)
-            })
-            swipeAction.image = UIGraphicsImageRenderer(size: CGSize(width: 26, height: 26)).image { _ in
-                UIImage(named: "restore")?.draw(in: CGRect(x: 0, y: 0, width: 26, height: 26))
-            }
-            swipeAction.backgroundColor = .systemOrange
+            //            swipeAction = UIContextualAction(style: .normal, title: "⎌", handler: {
+            //                (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
+            //                //self.restoreTask(indexPath: indexPath)
+            //                print("⎌ Marcado restaurar")
+            //                success(true)
+            //            })
+            //            swipeAction.image = UIGraphicsImageRenderer(size: CGSize(width: 26, height: 26)).image { _ in
+            //                UIImage(named: "restore")?.draw(in: CGRect(x: 0, y: 0, width: 26, height: 26))
+            //            }
+            //            swipeAction.backgroundColor = .systemOrange
+            return nil
         }
         
         return UISwipeActionsConfiguration(actions: [swipeAction])
