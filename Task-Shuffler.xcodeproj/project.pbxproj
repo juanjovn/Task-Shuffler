@@ -23,6 +23,7 @@
 		8146988B25865C3E00D7BCE1 /* Pods_Task_Shuffler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C313B2D615F94E260304E37 /* Pods_Task_Shuffler.framework */; };
 		815204EF245E9A1E0004510B /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815204EE245E9A1E0004510B /* Alert.swift */; };
 		815204F1245F46C20004510B /* GapRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815204F0245F46C20004510B /* GapRealm.swift */; };
+		815FB74A25D0A29700592AAF /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815FB74925D0A29700592AAF /* Extensions.swift */; };
 		816271E425A8CFB000BC7A46 /* NowCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816271E325A8CFB000BC7A46 /* NowCardView.swift */; };
 		816271E725A8D41500BC7A46 /* NowResultModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816271E625A8D41500BC7A46 /* NowResultModalView.swift */; };
 		816271FB25B1BAA600BC7A46 /* RoundedTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816271FA25B1BAA600BC7A46 /* RoundedTimeView.swift */; };
@@ -110,6 +111,7 @@
 		813490BE25C89583004DF3D7 /* TrashIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashIconView.swift; sourceTree = "<group>"; };
 		815204EE245E9A1E0004510B /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		815204F0245F46C20004510B /* GapRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GapRealm.swift; sourceTree = "<group>"; };
+		815FB74925D0A29700592AAF /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		816271E325A8CFB000BC7A46 /* NowCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowCardView.swift; sourceTree = "<group>"; };
 		816271E625A8D41500BC7A46 /* NowResultModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NowResultModalView.swift; sourceTree = "<group>"; };
 		816271FA25B1BAA600BC7A46 /* RoundedTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTimeView.swift; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 				81C90B5A2463DDBA001C06B4 /* Utils.swift */,
 				81EE66E325990926007B9D87 /* Notifications.swift */,
 				8107631225CDC6FC00F1758B /* NotificationManager.swift */,
+				815FB74925D0A29700592AAF /* Extensions.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -736,6 +739,7 @@
 				8188D5B9240701AF00CCBA99 /* Task.swift in Sources */,
 				81E3F53525CF285700398F4E /* CreditsCell.swift in Sources */,
 				81D0E450240AE7C800B2E5D8 /* TasksListViewController.swift in Sources */,
+				815FB74A25D0A29700592AAF /* Extensions.swift in Sources */,
 				81C90B5E246492BC001C06B4 /* NewGapVC.swift in Sources */,
 				81C90B572461D0B2001C06B4 /* GapCell.swift in Sources */,
 				819ABED325C9815D0062AF87 /* NextToDoSwiftUIView.swift in Sources */,
