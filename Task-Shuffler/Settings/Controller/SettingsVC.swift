@@ -133,6 +133,8 @@ class SettingsVC: UIViewController {
     private func setupNavigationBar(){
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(closeModalView))
         
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareAction))
+        
     }
     
     private func setupTableView(){
@@ -151,6 +153,14 @@ class SettingsVC: UIViewController {
     
     @objc func closeModalView(){
         dismiss(animated: true)
+    }
+    
+    @objc func shareAction() {
+        if let appUrl = URL(string: "https://itunes.apple.com/us/app/tallycounter/id1507818665") {
+            let items:[Any] = [appUrl]
+            let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
+            present(ac, animated: true)
+        }
     }
     
     @objc func switchAction (sender: MySettingsSwitch){
@@ -197,7 +207,7 @@ class SettingsVC: UIViewController {
         addChild(mailVC)
         mailVC.didMove(toParent: self)
         mailVC.sendEmail()
-
+        
     }
     
     
