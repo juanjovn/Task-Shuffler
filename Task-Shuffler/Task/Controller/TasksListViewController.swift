@@ -712,13 +712,6 @@ extension TasksListViewController: SJFluidSegmentedControlDelegate {
     }
 }
 
-//Just for mute a autolayout warning by a bug of iOS: https://stackoverflow.com/questions/55653187/swift-default-alertviewcontroller-breaking-constraints
-extension UIAlertController {
-    func pruneNegativeWidthConstraints() {
-        for subView in self.view.subviews {
-            for constraint in subView.constraints where constraint.debugDescription.contains("width == - 16") {
-                subView.removeConstraint(constraint)
-            }
-        }
-    }
-}
+
+
+
