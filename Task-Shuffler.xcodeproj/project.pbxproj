@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8106758825D0B52C0004779D /* OnboardManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8106758725D0B52C0004779D /* OnboardManager.swift */; };
 		8107629F25CB397B00F1758B /* EasterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8107629E25CB397B00F1758B /* EasterCell.swift */; };
 		810762A225CC462100F1758B /* EasterEggModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810762A125CC462100F1758B /* EasterEggModalView.swift */; };
 		810762A525CC464700F1758B /* EasterEggVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810762A425CC464700F1758B /* EasterEggVC.swift */; };
@@ -97,6 +98,7 @@
 		3E182028DE0B379EB966E722 /* Pods-Task-Shuffler.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Task-Shuffler.debug.xcconfig"; path = "Target Support Files/Pods-Task-Shuffler/Pods-Task-Shuffler.debug.xcconfig"; sourceTree = "<group>"; };
 		5B051BEDE7302552ECBD0BD9 /* Pods-Task-Shuffler.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Task-Shuffler.release.xcconfig"; path = "Target Support Files/Pods-Task-Shuffler/Pods-Task-Shuffler.release.xcconfig"; sourceTree = "<group>"; };
 		5C313B2D615F94E260304E37 /* Pods_Task_Shuffler.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Task_Shuffler.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8106758725D0B52C0004779D /* OnboardManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardManager.swift; sourceTree = "<group>"; };
 		8107629E25CB397B00F1758B /* EasterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasterCell.swift; sourceTree = "<group>"; };
 		810762A125CC462100F1758B /* EasterEggModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasterEggModalView.swift; sourceTree = "<group>"; };
 		810762A425CC464700F1758B /* EasterEggVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasterEggVC.swift; sourceTree = "<group>"; };
@@ -213,6 +215,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		8106758625D0B4D40004779D /* Onboard */ = {
+			isa = PBXGroup;
+			children = (
+				8106758725D0B52C0004779D /* OnboardManager.swift */,
+			);
+			path = Onboard;
+			sourceTree = "<group>";
+		};
 		811880A42435157E00E5FEE1 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -318,6 +328,7 @@
 				81EE6772259A4124007B9D87 /* NextToDo */,
 				81FFF0C62467F80E0086500A /* Schedule */,
 				81FFF0CA2467F8650086500A /* Settings */,
+				8106758625D0B4D40004779D /* Onboard */,
 				811880A42435157E00E5FEE1 /* Utils */,
 				81E9B13E2405BEE400BBADB8 /* AppDelegate.swift */,
 				81E9B1472405BEE600BBADB8 /* Assets.xcassets */,
@@ -801,6 +812,7 @@
 				817E76F6245A084C00305111 /* TaskRealm.swift in Sources */,
 				8162720325B30DFA00BC7A46 /* ResultsCollectionViewCell.swift in Sources */,
 				816271FB25B1BAA600BC7A46 /* RoundedTimeView.swift in Sources */,
+				8106758825D0B52C0004779D /* OnboardManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

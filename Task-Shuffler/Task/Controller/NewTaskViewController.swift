@@ -290,9 +290,11 @@ class NewTaskViewController: UIViewController {
         UIView.animate(withDuration: 0.7) {self.slider.alpha = 1}
         _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) {_ in
             UIView.animate(withDuration: 0.7) {self.priorityLabel.alpha = 1}
-            UIView.animate(withDuration: 0.7) { self.priorityButton.alpha = 1
+            UIView.animate(withDuration: 0.7, animations:  { self.priorityButton.alpha = 1
                 self.priorityButtonBackgroundView.alpha = 1
-            }
+            }, completion: {_ in
+                Onboard.instance.presentNewTaskTips(on: self)
+            })
         }
     }
     

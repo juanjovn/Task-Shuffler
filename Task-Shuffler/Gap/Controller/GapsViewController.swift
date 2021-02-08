@@ -58,6 +58,7 @@ class GapsViewController: AMTabsViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         segmentedControl.cornerRadius = segmentedControl.bounds.height / 2
+        Onboard.instance.presentGapTips(on: self)
     }
     
     //MARK: PUBLIC

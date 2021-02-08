@@ -52,6 +52,7 @@ class TimePickerVC: UIViewController {
         hourView.layer.cornerRadius = hourView.layer.bounds.height / 2
         minuteView.layer.cornerRadius = minuteView.layer.bounds.height / 2
         amPmButtonCotainerView.layer.cornerRadius = amPmButtonCotainerView.bounds.size.height / 2
+        Onboard.instance.presentTimePickerTips(on: self)
     }
     
     private func setupHourContainerView() {
