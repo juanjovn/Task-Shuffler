@@ -241,6 +241,7 @@ class NewGapVC: UIViewController {
             })
             
         case 2:
+            Onboard.instance.presentTimePickerEndingTime(on: self)
             let hour = Int(fromDisplayTimeView.fromHourLabel.text!)!
             let minute = Int(fromDisplayTimeView.fromMinuteLabel.text!)!
             

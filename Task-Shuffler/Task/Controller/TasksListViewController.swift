@@ -64,6 +64,7 @@ class TasksListViewController: AMTabsViewController {
         setupTableView()
         setupNavigationBar()
         setupSegmentedControl()
+        //setupTips()
     }
     
     //MARK: viewWillAppear
@@ -76,9 +77,43 @@ class TasksListViewController: AMTabsViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         segmentedControl.cornerRadius = segmentedControl.bounds.height / 2
+        Onboard.instance.presentTaskListTips(on: self)
     }
     
     // MARK: Functions
+    
+    //Onboard tips views
+//    private func setupTips() {
+//
+//    }
+    
+    private func showTips() {
+//        var preferences = EasyTipView.Preferences()
+//        preferences.drawing.font = .avenirMedium(ofSize: UIFont.scaleFont(17))
+//        preferences.drawing.foregroundColor = UIColor.pearlWhite
+//        preferences.drawing.backgroundColor = .turquesa
+//        preferences.drawing.arrowPosition = .bottom
+//        preferences.drawing.cornerRadius = 15
+//        preferences.drawing.arrowHeight = 8
+//        preferences.positioning.contentInsets = UIEdgeInsets(top: 8, left: 13, bottom: 8, right: 13)
+//        preferences.positioning.bubbleInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+//
+//        /*
+//         * Optionally you can make these preferences global for all future EasyTipViews
+//         */
+//        EasyTipView.globalPreferences = preferences
+//
+//        let newTaskTip = EasyTipView(text: "First create a task")
+//        newTaskTip.show(animated: true, forView: newTaskButton, withinSuperview: view)
+//
+//        preferences.drawing.arrowPosition = .top
+//        preferences.positioning.bubbleInsets = UIEdgeInsets(top: 10, left: 110, bottom: 5, right: 5)
+//        preferences.drawing.arrowHeight = 25
+//        EasyTipView.globalPreferences = preferences
+//        let segmentedTip = EasyTipView(text: "Switch between pending and completed tasks")
+//        segmentedTip.show(animated: true, forView: segmentedControl, withinSuperview: view)
+        
+    }
     
     private func setupNotificationCenter() {
         NotificationCenter.default.addObserver(self, selector: #selector(onDataModified), name: .didModifiedData, object: nil)
