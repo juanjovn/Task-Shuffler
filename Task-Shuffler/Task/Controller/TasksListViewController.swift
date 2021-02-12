@@ -77,7 +77,13 @@ class TasksListViewController: AMTabsViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         segmentedControl.cornerRadius = segmentedControl.bounds.height / 2
-        Onboard.instance.presentTaskListTips(on: self)
+        if let firstTimeHere = SettingsValues.firstTime["newTaksList"] {
+            if firstTimeHere {
+                Onboard.instance.presentTaskListTips(on: self)
+                SettingsValues.firstTime["newTaskList"] = false
+                SettingsValues.storeSettings()
+            }
+        }
     }
     
     // MARK: Functions
