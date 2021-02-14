@@ -8,6 +8,7 @@
 
 import UIKit
 import AMTabView
+import EasyTipView
 
 class ShuffleVC: AMTabsViewController {
     let shuffleView = ShuffleView()
@@ -16,6 +17,7 @@ class ShuffleVC: AMTabsViewController {
     var shuffleSlider = MTSlideToOpenView(frame: CGRect(x: 26, y: 200, width: 317, height: 56))
     var shuffleImageRotation = CGFloat()
     var shuffleConfiguration = ShuffleConfiguration(how: .Smart, when: .All)
+    var tips = [EasyTipView?]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +38,13 @@ class ShuffleVC: AMTabsViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         setupViewsCornerRadius()
+        if let firstTimeHere = SettingsValues.firstTime["shuffleHow"] {
+            if firstTimeHere {
+                tips = Onboard.instance.presentShuffleTips(on: self)
+                SettingsValues.firstTime["shuffleHow"] = false
+                SettingsValues.storeSettings()
+            }
+        }
     }
     
     override func viewWillLayoutSubviews() {

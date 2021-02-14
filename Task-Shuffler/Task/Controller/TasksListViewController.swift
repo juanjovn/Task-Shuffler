@@ -77,10 +77,10 @@ class TasksListViewController: AMTabsViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         segmentedControl.cornerRadius = segmentedControl.bounds.height / 2
-        if let firstTimeHere = SettingsValues.firstTime["newTaksList"] {
+        if let firstTimeHere = SettingsValues.firstTime["taskList"] {
             if firstTimeHere {
                 Onboard.instance.presentTaskListTips(on: self)
-                SettingsValues.firstTime["newTaskList"] = false
+                SettingsValues.firstTime["taskList"] = false
                 SettingsValues.storeSettings()
             }
         }

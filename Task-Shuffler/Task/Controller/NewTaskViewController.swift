@@ -11,6 +11,7 @@ import AMTabView
 import SkyFloatingLabelTextField
 import fluid_slider
 import WCLShineButton
+import EasyTipView
 
 class NewTaskViewController: UIViewController {
     
@@ -62,6 +63,7 @@ class NewTaskViewController: UIViewController {
         UIImage(named: "exc_mark_med"),
         UIImage(named: "exc_mark_high")
     ]
+    var tipView = EasyTipView?(nilLiteral: ())
     
     // MARK: Variables
     
@@ -141,17 +143,20 @@ class NewTaskViewController: UIViewController {
         priorityButton.fitLayers()
     }
     
-    // MARK: viewDidAppear
-    
-    override func viewDidAppear(_ animated: Bool) {
-        // Priority button
-        priorityButtonBackgroundView.layer.cornerRadius = priorityButtonBackgroundView.bounds.size.width/2
-        
+    // MARK: viewWillAppear
+    override func viewWillAppear(_ animated: Bool) {
         if let taskEditing = taskListVC?.isTaskEditing {
             if taskEditing{
                  configureEditingForm()
             }
         }
+    }
+    
+    // MARK: viewDidAppear
+    
+    override func viewDidAppear(_ animated: Bool) {
+        // Priority button
+        priorityButtonBackgroundView.layer.cornerRadius = priorityButtonBackgroundView.bounds.size.width/2
     }
     
     // MARK: Actions
@@ -185,6 +190,11 @@ class NewTaskViewController: UIViewController {
     }
     
     @objc func sliderValueChanged(_ sender: UIControl){
+        
+        if let tipView = tipView {
+            tipView.dismiss()
+        }
+        
         let fractionValue = slider.fraction
         let value: Float = Float(fractionValue * (180 - 10))
         let resultValue: Int = 10 + roundTo(n: value, mult: 5)
@@ -293,7 +303,13 @@ class NewTaskViewController: UIViewController {
             UIView.animate(withDuration: 0.7, animations:  { self.priorityButton.alpha = 1
                 self.priorityButtonBackgroundView.alpha = 1
             }, completion: {_ in
-                Onboard.instance.presentNewTaskTips(on: self)
+                if let firstTimeHere = SettingsValues.firstTime["newTask"] {
+                    if firstTimeHere {
+                        self.tipView = Onboard.instance.presentNewTaskTips(on: self)
+                        SettingsValues.firstTime["newTask"] = false
+                        SettingsValues.storeSettings()
+                    }
+                }
             })
         }
     }
