@@ -54,24 +54,24 @@ class SettingsVC: UIViewController {
                 default:
                     generator = UIImpactFeedbackGenerator(style: .light)
                 }
-                    generator.impactOccurred()
+                generator.impactOccurred()
             }
             
             let easterCell = tableView.cellForRow(at: easterIndex) as! EasterCell
             let eggColorRGBA = easterCell.easterImageView.tintColor.rgba
             let eggAlpha = eggColorRGBA.3
             
-    //        if easterCount > 0 {
-    //            UIView.animate(withDuration: 0.05, animations: {
-    //                easterCell.easterImageView.transform = CGAffineTransform(rotationAngle: 0.261799)
-    //            }, completion: {_ in
-    //                UIView.animate(withDuration: 0.05){
-    //                    easterCell.easterImageView.transform = .identity
-    //                }
-    //            })
-    //
-    //            easterCell.easterImageView.tintColor = UIColor.pearlWhite.withAlphaComponent(eggAlpha + 0.26)
-    //        }
+            //        if easterCount > 0 {
+            //            UIView.animate(withDuration: 0.05, animations: {
+            //                easterCell.easterImageView.transform = CGAffineTransform(rotationAngle: 0.261799)
+            //            }, completion: {_ in
+            //                UIView.animate(withDuration: 0.05){
+            //                    easterCell.easterImageView.transform = .identity
+            //                }
+            //            })
+            //
+            //            easterCell.easterImageView.tintColor = UIColor.pearlWhite.withAlphaComponent(eggAlpha + 0.26)
+            //        }
             
             if easterCount > 0 {
                 UIView.animate(withDuration: 0.07, animations: {
@@ -105,7 +105,7 @@ class SettingsVC: UIViewController {
         } else {
             if SettingsValues.otherSettings[0] {
                 let generator = UIImpactFeedbackGenerator(style: .heavy)
-                    generator.impactOccurred()
+                generator.impactOccurred()
             }
             print("Easter egg esta descubierto. Abrir pantalla directamente.")
             present(EasterEggVC(), animated: true, completion: nil)
@@ -117,12 +117,12 @@ class SettingsVC: UIViewController {
     private func setupView(){
         title = "Settings"
         view.backgroundColor = #colorLiteral(red: 0.7764705882, green: 0.7725490196, blue: 0.7254901961, alpha: 0.85)
-
+        
         let blurEffect = UIBlurEffect(style: .light)
         let blurEffectView = UIVisualEffectView(effect: blurEffect)
         view.addSubview(blurEffectView)
         view.sendSubviewToBack(blurEffectView)
-
+        
         blurEffectView.translatesAutoresizingMaskIntoConstraints = false
         blurEffectView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         blurEffectView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
@@ -132,7 +132,9 @@ class SettingsVC: UIViewController {
     
     private func setupNavigationBar(){
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(closeModalView))
-
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareAction))
+        
     }
     
     private func setupTableView(){
@@ -145,12 +147,20 @@ class SettingsVC: UIViewController {
         tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-    
+        
         
     }
     
     @objc func closeModalView(){
         dismiss(animated: true)
+    }
+    
+    @objc func shareAction() {
+        if let appUrl = URL(string: "https://itunes.apple.com/us/app/tallycounter/id1507818665") {
+            let items:[Any] = [appUrl]
+            let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
+            present(ac, animated: true)
+        }
     }
     
     @objc func switchAction (sender: MySettingsSwitch){
@@ -159,22 +169,48 @@ class SettingsVC: UIViewController {
         switch indexPath?.section{
         case 0:
             SettingsValues.taskSettings[row] = !SettingsValues.taskSettings[row]
-            print(SettingsValues.taskSettings[row])
+        //print(SettingsValues.taskSettings[row])
         case 1:
             SettingsValues.notificationsSettings[row] = !SettingsValues.notificationsSettings[row]
-            print(SettingsValues.notificationsSettings[row])
+            if !SettingsValues.notificationsSettings[row] {
+                NotificationManager.instance.removeAllTypeNotifications()
+            }
+            NotificationManager.instance.scheduleMultipleTasksNotifications(for: TaskManager.populateTasks(state: .assigned))
+            
+        //print(SettingsValues.notificationsSettings[row])
         case 2:
             SettingsValues.otherSettings[row] = !SettingsValues.otherSettings[row]
-            print(SettingsValues.otherSettings[row])
-            
+        //print(SettingsValues.otherSettings[row])
+        
         default:
             break
         }
         
         SettingsValues.storeSettings()
     }
-
-
+    
+    @objc func twitterAction() {
+        if let url = URL(string: "https://twitter.com/juanjovn") {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    }
+    
+    @objc func instagramAction() {
+        if let url = URL(string: "https://www.instagram.com/juanjovn/") {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    }
+    
+    @objc func mailAction() {
+        let mailVC = MailController()
+        
+        addChild(mailVC)
+        mailVC.didMove(toParent: self)
+        mailVC.sendEmail()
+        
+    }
+    
+    
 }
 
 extension SettingsVC: UITableViewDelegate, UITableViewDataSource{
@@ -221,8 +257,15 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource{
             cell.textLabel?.text = resetSection[indexPath.row]
             cell.accessoryView = nil
         case 4:
-            cell.accessoryView = nil
-            cell.textLabel?.text = creditsSection[indexPath.row]
+            let creditsCell = CreditsCell()
+            creditsCell.twitterButton.setImage(UIImage(named: "twitter_icon"), for: .normal)
+            creditsCell.twitterButton.addTarget(self, action: #selector(twitterAction), for: .touchUpInside)
+            creditsCell.instagramButton.setImage(UIImage(named: "instagram_icon"), for: .normal)
+            creditsCell.instagramButton.addTarget(self, action: #selector(instagramAction), for: .touchUpInside)
+            creditsCell.mailButton.setImage(UIImage(named: "mail_icon"), for: .normal)
+            creditsCell.mailButton.addTarget(self, action: #selector(mailAction), for: .touchUpInside)
+            
+            return creditsCell
         case 5:
             easterIndex = indexPath
             //Gesture recognizer
@@ -266,6 +309,40 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource{
         default:
             break
         }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == tableView.numberOfSections - 1 {
+            return 1
+        } else if section == tableView.numberOfSections - 2 {
+            return 20
+        } else if section == 0{
+            //return UITableView.automaticDimension
+            return 15
+        } else {
+            return 1
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == tableView.numberOfSections - 2 {
+            return "Developed by Juanjo Valiño"
+        } else {
+            return nil
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        let header: UITableViewHeaderFooterView = view as! UITableViewHeaderFooterView
+        
+        let title = "Developed by Juanjo Valiño"
+        header.textLabel?.font = .avenirRegular(ofSize: UIFont.scaleFont(13))
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = NSTextAlignment.center
+        let text = title.withBoldText(text: "Juanjo Valiño")
+        text.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: title.count))
+        
+        header.textLabel?.attributedText = text
     }
 }
 

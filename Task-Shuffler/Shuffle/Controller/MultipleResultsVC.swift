@@ -109,6 +109,12 @@ class MultipleResultsVC: ViewController {
             TaskManager.persistAssignments(task: tasks[i])
         }
         
+        //Set notifications
+        if SettingsValues.notificationsSettings[0] || SettingsValues.notificationsSettings[1] {
+            NotificationManager.instance.removeAllTypeNotifications()
+            NotificationManager.instance.scheduleMultipleTasksNotifications(for: TaskManager.populateTasks(state: .assigned))
+        }
+        
         if let shuffleVC = shuffleVC {
             shuffleVC.shuffleSegmentedControllersDelegate.updateShuffleMessageLabel(shuffleConf: shuffleVC.shuffleConfiguration)
         }

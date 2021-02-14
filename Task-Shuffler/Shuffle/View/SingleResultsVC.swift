@@ -123,6 +123,27 @@ class SingleResultsVC: ViewController, ShuffleResult {
         task.state = .assigned
         TaskManager.persistAssignments(task: task)
         
+        //Set notifications
+        if let gap = gapManager.getGapById(id: task.gapid) {
+            
+            if TaskManager.getTasksByGapId(gapid: gap.id).count == 1 {
+                
+                if SettingsValues.notificationsSettings[0] {
+                    NotificationManager.instance.scheduleTaskNotification(at: gap.startDate, with: "Start the task! 💪", message: task.name, type: .start)
+                }
+                
+                if SettingsValues.notificationsSettings[1] {
+                    NotificationManager.instance.scheduleTaskNotification(at: gap.endDate, with: "Task ended! 🏁", message: "Have you completed \(task.name)?", type: .end)
+                }
+            } else {
+                if SettingsValues.notificationsSettings[0] || SettingsValues.notificationsSettings[1] {
+                    NotificationManager.instance.removeAllTypeNotifications()
+                    NotificationManager.instance.scheduleMultipleTasksNotifications(for: TaskManager.populateTasks(state: .assigned))
+                }
+                
+            }
+        }
+        
         if let shuffleVC = shuffleVC {
             shuffleVC.shuffleSegmentedControllersDelegate.updateShuffleMessageLabel(shuffleConf: shuffleVC.shuffleConfiguration)
         }

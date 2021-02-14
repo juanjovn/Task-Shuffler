@@ -58,16 +58,19 @@ class FactoryResetVC: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    @objc private func reshuffleButtonAction() {
+    @objc private func reshuffleButtonAction() {//Clear All button in this case. Reshuffle is in parent class.
         let db = DatabaseManager()
         Alert.confirmation(title: "Clear all data", message: "All tasks and gaps will be erased, are you sure?", vc: self) {_ in
             let queue = DispatchQueue.global()
             queue.sync {
                 db.eraseAll()
+                GapManager.instance.fillGaps()
             }
             
             queue.sync {
                 NotificationCenter.default.post(name: .didModifiedData, object: nil)
+                let notificationManager = NotificationManager()
+                notificationManager.removeAllTypeNotifications()
             }
             self.dismiss(animated: true, completion: nil)
         }
@@ -81,11 +84,14 @@ class FactoryResetVC: UIViewController {
                 let queue = DispatchQueue.global()
                 queue.sync {
                     db.deleteAllByType(object: TaskRealm.self)
+                    GapManager.instance.fillGaps()
                     GapManager.instance.resetGapAssignments()
                 }
                 
                 queue.sync {
                     NotificationCenter.default.post(name: .didModifiedData, object: nil)
+                    let notificationManager = NotificationManager()
+                    notificationManager.removeAllTypeNotifications()
                 }
                 self.dismiss(animated: true, completion: nil)
             }
@@ -94,11 +100,14 @@ class FactoryResetVC: UIViewController {
                 let queue = DispatchQueue.global()
                 queue.sync {
                     db.deleteAllByType(object: GapRealm.self)
+                    GapManager.instance.fillGaps()
                     TaskManager.resetTaskAssignments()
                 }
                 
                 queue.sync {
                     NotificationCenter.default.post(name: .didModifiedData, object: nil)
+                    let notificationManager = NotificationManager()
+                    notificationManager.removeAllTypeNotifications()
                 }
                 self.dismiss(animated: true, completion: nil)
             }

@@ -11,6 +11,7 @@ import AMTabView
 import SkyFloatingLabelTextField
 import fluid_slider
 import WCLShineButton
+import EasyTipView
 
 class NewTaskViewController: UIViewController {
     
@@ -62,6 +63,7 @@ class NewTaskViewController: UIViewController {
         UIImage(named: "exc_mark_med"),
         UIImage(named: "exc_mark_high")
     ]
+    var tipView = EasyTipView?(nilLiteral: ())
     
     // MARK: Variables
     
@@ -124,6 +126,7 @@ class NewTaskViewController: UIViewController {
         priorityButtonBackgroundView.alpha = 0
         
         // Text Field
+        newTaskTextName.autocapitalizationType = .sentences
         if !taskListVC!.isTaskEditing {
             newTaskTextName.becomeFirstResponder()
         }
@@ -140,17 +143,20 @@ class NewTaskViewController: UIViewController {
         priorityButton.fitLayers()
     }
     
-    // MARK: viewDidAppear
-    
-    override func viewDidAppear(_ animated: Bool) {
-        // Priority button
-        priorityButtonBackgroundView.layer.cornerRadius = priorityButtonBackgroundView.bounds.size.width/2
-        
+    // MARK: viewWillAppear
+    override func viewWillAppear(_ animated: Bool) {
         if let taskEditing = taskListVC?.isTaskEditing {
             if taskEditing{
                  configureEditingForm()
             }
         }
+    }
+    
+    // MARK: viewDidAppear
+    
+    override func viewDidAppear(_ animated: Bool) {
+        // Priority button
+        priorityButtonBackgroundView.layer.cornerRadius = priorityButtonBackgroundView.bounds.size.width/2
     }
     
     // MARK: Actions
@@ -184,6 +190,11 @@ class NewTaskViewController: UIViewController {
     }
     
     @objc func sliderValueChanged(_ sender: UIControl){
+        
+        if let tipView = tipView {
+            tipView.dismiss()
+        }
+        
         let fractionValue = slider.fraction
         let value: Float = Float(fractionValue * (180 - 10))
         let resultValue: Int = 10 + roundTo(n: value, mult: 5)
@@ -289,9 +300,17 @@ class NewTaskViewController: UIViewController {
         UIView.animate(withDuration: 0.7) {self.slider.alpha = 1}
         _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) {_ in
             UIView.animate(withDuration: 0.7) {self.priorityLabel.alpha = 1}
-            UIView.animate(withDuration: 0.7) { self.priorityButton.alpha = 1
+            UIView.animate(withDuration: 0.7, animations:  { self.priorityButton.alpha = 1
                 self.priorityButtonBackgroundView.alpha = 1
-            }
+            }, completion: {_ in
+                if let firstTimeHere = SettingsValues.firstTime["newTask"] {
+                    if firstTimeHere {
+                        self.tipView = Onboard.instance.presentNewTaskTips(on: self)
+                        SettingsValues.firstTime["newTask"] = false
+                        SettingsValues.storeSettings()
+                    }
+                }
+            })
         }
     }
     
@@ -556,51 +575,4 @@ extension NewTaskViewController: UITextFieldDelegate{
         self.dismissKeyboard(textField)
         return true
     }
-    
-}
-
-extension UIImage {
-  func tinted(color: UIColor) -> UIImage? {
-    let image = self.withRenderingMode(.alwaysTemplate)
-    let imageView = UIImageView(image: image)
-    imageView.tintColor = color
-
-    UIGraphicsBeginImageContext(image.size)
-    if let context = UIGraphicsGetCurrentContext() {
-      imageView.layer.render(in: context)
-      let tintedImage = UIGraphicsGetImageFromCurrentImageContext()
-      UIGraphicsEndImageContext()
-      return tintedImage
-    } else {
-      return self
-    }
-  }
-
-    func addingShadow(blur: CGFloat = 1, shadowColor: UIColor = UIColor(white: 0, alpha: 1), offset: CGSize = CGSize(width: 1, height: 1) ) -> UIImage {
-
-        UIGraphicsBeginImageContextWithOptions(CGSize(width: size.width + 2 * blur, height: size.height + 2 * blur), false, 0)
-        let context = UIGraphicsGetCurrentContext()!
-
-        context.setShadow(offset: offset, blur: blur, color: shadowColor.cgColor)
-        draw(in: CGRect(x: blur - offset.width / 2, y: blur - offset.height / 2, width: size.width, height: size.height))
-        let image = UIGraphicsGetImageFromCurrentImageContext()!
-
-        UIGraphicsEndImageContext()
-
-        return image
-    }
-}
-
-extension CALayer {
-    func fit(rect: CGRect) {
-      frame = rect
-
-      sublayers?.forEach { $0.fit(rect: rect) }
-    }
-}
-
-extension UIView {
-  func fitLayers() {
-    layer.fit(rect: bounds)
-  }
 }

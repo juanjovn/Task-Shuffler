@@ -51,13 +51,20 @@ class GapsViewController: AMTabsViewController {
     //MARK: viewWillAppear
     override func viewWillAppear(_ animated: Bool) {
         refreshOutdated()
+        tableView.reloadData()
     }
     
     // MARK: viewDidAppear
     
     override func viewDidAppear(_ animated: Bool) {
         segmentedControl.cornerRadius = segmentedControl.bounds.height / 2
-        tableView.reloadData()
+        if let firstTimeHere = SettingsValues.firstTime["gapsList"] {
+            if firstTimeHere {
+                Onboard.instance.presentGapTips(on: self)
+                SettingsValues.firstTime["gapsList"] = false
+                SettingsValues.storeSettings()
+            }
+        }
     }
     
     //MARK: PUBLIC
@@ -95,6 +102,7 @@ class GapsViewController: AMTabsViewController {
     
     @objc func onDataModified () {
         gapManager.fillGaps()
+        refreshOutdated()
         tableView.reloadData()
         //tableView.reloadSections(IndexSet(integersIn: 0...tableView.numberOfSections - 1), with: .fade)
         //print("❗️NOTIFIED!!! ")
@@ -216,16 +224,20 @@ class GapsViewController: AMTabsViewController {
     }
     
     private func refreshOutdated() {
+        
         var isChanged = false
-        for gap in gapManager.pendingGaps {
-            if checkOutdated(currentGap: gap) {
-                isChanged = true
-                do {
-                    try db.realm.write{
-                        gap.state = State.outdated.rawValue
+        
+        if gapManager.pendingGaps.count > 0 {
+            for gap in gapManager.pendingGaps {
+                if checkOutdated(currentGap: gap) {
+                    isChanged = true
+                    do {
+                        try db.realm.write{
+                            gap.state = State.outdated.rawValue
+                        }
+                    } catch {
+                        print("Error updating to database")
                     }
-                } catch {
-                    print("Error updating to database")
                 }
             }
         }
@@ -311,7 +323,8 @@ extension GapsViewController: SJFluidSegmentedControlDataSource, SJFluidSegmente
     func segmentedControl(_ segmentedControl: SJFluidSegmentedControl, didChangeFromSegmentAtIndex fromIndex: Int, toSegmentAtIndex toIndex: Int) {
         
         refreshOutdated()
-        tableView.reloadSections(IndexSet(integersIn: 0...2), with: .fade)
+        tableView.reloadSections(IndexSet(integersIn: 0...tableView.numberOfSections - 1), with: .fade)
+        
         if tableView.numberOfRows(inSection: 0) > 0{
             let topIndex = IndexPath(row: 0, section: 0)
             tableView.scrollToRow(at: topIndex, at: .top, animated: true)
@@ -426,6 +439,10 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
             }
             if segmentedControl.currentSegment == 0 {
                 gapManager.assignedGaps.remove(at: indexPath.row)
+                
+                //Update notifications
+                NotificationManager.instance.removeAllTypeNotifications()
+                NotificationManager.instance.scheduleMultipleTasksNotifications(for: TaskManager.populateTasks(state: .assigned))
             } else {
                 gapManager.outdatedGaps.remove(at: indexPath.row)
             }
@@ -446,6 +463,11 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
                 }
             }
             gapManager.filledGaps.remove(at: indexPath.row)
+            
+            //Update notifications
+            NotificationManager.instance.removeAllTypeNotifications()
+            NotificationManager.instance.scheduleMultipleTasksNotifications(for: TaskManager.populateTasks(state: .assigned))
+            
         default:
             break
         }
@@ -478,16 +500,17 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
             }
             swipeAction.backgroundColor = .powerGreen
         } else {
-            swipeAction = UIContextualAction(style: .normal, title: "⎌", handler: {
-                (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
-                //self.restoreTask(indexPath: indexPath)
-                print("⎌ Marcado restaurar")
-                success(true)
-            })
-            swipeAction.image = UIGraphicsImageRenderer(size: CGSize(width: 26, height: 26)).image { _ in
-                UIImage(named: "restore")?.draw(in: CGRect(x: 0, y: 0, width: 26, height: 26))
-            }
-            swipeAction.backgroundColor = .systemOrange
+            //            swipeAction = UIContextualAction(style: .normal, title: "⎌", handler: {
+            //                (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
+            //                //self.restoreTask(indexPath: indexPath)
+            //                print("⎌ Marcado restaurar")
+            //                success(true)
+            //            })
+            //            swipeAction.image = UIGraphicsImageRenderer(size: CGSize(width: 26, height: 26)).image { _ in
+            //                UIImage(named: "restore")?.draw(in: CGRect(x: 0, y: 0, width: 26, height: 26))
+            //            }
+            //            swipeAction.backgroundColor = .systemOrange
+            return nil
         }
         
         return UISwipeActionsConfiguration(actions: [swipeAction])
@@ -558,6 +581,10 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
                 TaskManager.updateTask(task: newTask)
             }
         }
+        
+        //Update notifications
+        NotificationManager.instance.removeAllTypeNotifications()
+        NotificationManager.instance.scheduleMultipleTasksNotifications(for: TaskManager.populateTasks(state: .assigned))
     }
     
     

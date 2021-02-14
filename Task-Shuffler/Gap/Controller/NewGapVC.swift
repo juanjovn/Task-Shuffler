@@ -235,12 +235,28 @@ class NewGapVC: UIViewController {
                 self.view.layoutIfNeeded()
                 self.timePicker.view.alpha = 1
                 self.fromDisplayTimeView.alpha = 1
+                self.fromDisplayTimeView.fromTimeContainerView.backgroundColor = UIColor.powerGreen.withAlphaComponent(1)
             },
             completion: { success in
                 self.nextButton.tag = 2
             })
             
         case 2:
+            
+            let generator = UIImpactFeedbackGenerator(style: .heavy)
+            if SettingsValues.otherSettings[0] {
+                    generator.impactOccurred()
+            }
+            
+            //Present tip
+            if let firstTimeHere = SettingsValues.firstTime["newGap"] {
+                if firstTimeHere {
+                    Onboard.instance.presentTimePickerEndingTime(on: self)
+                }
+                SettingsValues.firstTime["newGap"] = false
+                SettingsValues.storeSettings()
+            }
+            
             let hour = Int(fromDisplayTimeView.fromHourLabel.text!)!
             let minute = Int(fromDisplayTimeView.fromMinuteLabel.text!)!
             
@@ -253,9 +269,10 @@ class NewGapVC: UIViewController {
                 self.toDisplayTimeView.fromMinuteLabel.text = self.fromDisplayTimeView.fromMinuteLabel.text
                 UIView.animate(withDuration: 0.3,animations: {
                     self.toDisplayTimeView.alpha = 1
-                    self.fromDisplayTimeView.fromTimeContainerView.alpha = 0
+                    self.fromDisplayTimeView.fromTimeContainerView.alpha = 30
                     self.fromDisplayTimeView.alpha = 0.50
                     self.toDisplayTimeView.fromTimeContainerView.alpha = 0.8
+                    self.toDisplayTimeView.fromTimeContainerView.backgroundColor = UIColor.fireOrange.withAlphaComponent(1)
                 },
                 completion: { success in
                     self.nextButton.tag = 3

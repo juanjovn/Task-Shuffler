@@ -56,6 +56,7 @@ class DisplayTime: UIView {
     private func setupFromColonLabel() {
         fromColonLabel.text = ":"
         fromColonLabel.font = .avenirMedium(ofSize: UIFont.scaleFont(15))
+        fromColonLabel.textColor = .pearlWhite
         fromContainerView.addSubview(fromColonLabel)
         
         fromColonLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -80,7 +81,8 @@ class DisplayTime: UIView {
     
     private func setupFromHourLabel() {
         fromHourLabel.text = "01"
-        fromHourLabel.font = .avenirRegular(ofSize: UIFont.scaleFont(18))
+        fromHourLabel.font = .avenirDemiBold(ofSize: UIFont.scaleFont(18))
+        fromHourLabel.textColor = .pearlWhite
         fromContainerView.addSubview(fromHourLabel)
         
         fromHourLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -90,7 +92,8 @@ class DisplayTime: UIView {
     
     private func setupFromMinuteLabel() {
         fromMinuteLabel.text = "00"
-        fromMinuteLabel.font = .avenirRegular(ofSize: UIFont.scaleFont(18))
+        fromMinuteLabel.font = .avenirDemiBold(ofSize: UIFont.scaleFont(18))
+        fromMinuteLabel.textColor = .pearlWhite
         fromContainerView.addSubview(fromMinuteLabel)
         
         fromMinuteLabel.translatesAutoresizingMaskIntoConstraints = false
