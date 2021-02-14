@@ -151,7 +151,7 @@ class NewGapVC: UIViewController {
         nextButton.backgroundColor = .bone
         nextButton.setTitleColor(UIColor.mysticBlue.withAlphaComponent(0.2), for: .normal)
         nextButton.setTitleColor(UIColor.pearlWhite.withAlphaComponent(0.2), for: .highlighted)
-        nextButton.setTitle(">", for: .normal)
+        nextButton.setTitle("➜", for: .normal)
         nextButton.titleLabel?.font = .avenirDemiBold(ofSize: UIFont.scaleFont(25))
         
         view.addSubview(nextButton)
@@ -264,7 +264,7 @@ class NewGapVC: UIViewController {
             if startDate < Date() {
                 Alert.errorInformation(title: "Error", message: "The gap must start later than current time", vc: self, handler: nil)
             } else {
-                nextButton.setTitle(">", for: .normal)
+                nextButton.setTitle("➜", for: .normal)
                 self.toDisplayTimeView.fromHourLabel.text = self.fromDisplayTimeView.fromHourLabel.text
                 self.toDisplayTimeView.fromMinuteLabel.text = self.fromDisplayTimeView.fromMinuteLabel.text
                 UIView.animate(withDuration: 0.3,animations: {
@@ -288,7 +288,12 @@ class NewGapVC: UIViewController {
             minute = Int(toDisplayTimeView.fromMinuteLabel.text!)!
             newGap.endDate = Calendar.current.date(bySettingHour: hour, minute: minute, second: 0, of: newGap.endDate)!
             if newGap.duration < 10 {
-                Alert.errorInformation(title: "Error", message: "The gap must end later than start time", vc: self, handler: nil)
+                if newGap.duration < 0 {
+                    Alert.errorInformation(title: "Error", message: "The gap must end later than start time", vc: self, handler: nil)
+                } else {
+                    Alert.errorInformation(title: "Error", message: "The gap must have at least a duration of 10 minutes", vc: self, handler: nil)
+                }
+                
             } else {
                 let predicate = NSPredicate(format: "startDate < %@ AND %@ < endDate", newGap.endDate as CVarArg, newGap.startDate as CVarArg)
                 let results = gapsVC?.db.getData(objectClass: GapRealm.self).filter(predicate)
@@ -355,7 +360,7 @@ class NewGapVC: UIViewController {
                 self.toDisplayTimeView.alpha = 0
                 self.fromDisplayTimeView.fromTimeContainerView.alpha = 0.8
                 self.fromDisplayTimeView.alpha = 1
-                self.nextButton.setTitle(">", for: .normal)
+                self.nextButton.setTitle("➜", for: .normal)
             }
             let hour = Int(fromDisplayTimeView.fromHourLabel.text!)!
             let minute = Int(fromDisplayTimeView.fromMinuteLabel.text!)! / 5
