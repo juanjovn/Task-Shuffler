@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import EasyTipView
 
 protocol TimePickerVCDelegate {
     func timeDidSelect(hour: Int?, minute: Int?)
@@ -34,6 +35,8 @@ class TimePickerVC: UIViewController {
     var hour: Int = 0
     var minute: Int = 0
     
+    var tipsViews = [EasyTipView?]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -52,7 +55,11 @@ class TimePickerVC: UIViewController {
         hourView.layer.cornerRadius = hourView.layer.bounds.height / 2
         minuteView.layer.cornerRadius = minuteView.layer.bounds.height / 2
         amPmButtonCotainerView.layer.cornerRadius = amPmButtonCotainerView.bounds.size.height / 2
-        Onboard.instance.presentTimePickerTips(on: self)
+        if let firstTimeHere = SettingsValues.firstTime["newGap"] {
+            if firstTimeHere {
+                tipsViews = Onboard.instance.presentTimePickerTips(on: self)
+            }
+        }
     }
     
     private func setupHourContainerView() {
@@ -259,6 +266,12 @@ class TimePickerVC: UIViewController {
         let generator = UIImpactFeedbackGenerator(style: .medium)
         switch view {
         case hourContainerView:
+            
+            //Dismiss tip
+            if let tip = tipsViews.first {
+                tip?.dismiss()
+            }
+            
             let hourViewheight = hourView.frame.size.height
             var point = gesture.location(in: hourContainerView)
             point.x = hourView.center.x
@@ -281,6 +294,11 @@ class TimePickerVC: UIViewController {
                 self.hourView.center = point
             }
         case minuteContainerView:
+            //Dismiss tip
+            if let tip = tipsViews.last {
+                tip?.dismiss()
+            }
+            
             let minuteViewheight = minuteView.frame.size.height
             var point = gesture.location(in: minuteContainerView)
             point.x = minuteView.center.x

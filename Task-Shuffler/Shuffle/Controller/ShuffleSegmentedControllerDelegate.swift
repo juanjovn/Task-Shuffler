@@ -50,6 +50,21 @@ class ShuffleSegmentedControllersDelegate: SJFluidSegmentedControlDelegate {
             default:
                 shuffleConf.how = .Smart
             }
+            
+            //Hide how tip and show when tip
+            if let firstTimeHere = SettingsValues.firstTime["shuffleWhen"] {
+                if firstTimeHere {
+                    if let tip = shuffleVC?.tips.first {
+                        tip?.dismiss()
+                        if let whenTip = shuffleVC?.tips.last {
+                            whenTip?.show(animated: true, forView: shuffleView.whenSegmentedControl, withinSuperview: shuffleView)
+                            SettingsValues.firstTime["shuffleWhen"] = false
+                            SettingsValues.storeSettings()
+                        }
+                    }
+                }
+            }
+            
         case shuffleView.whenSegmentedControl:
             switch toIndex {
             case 0:

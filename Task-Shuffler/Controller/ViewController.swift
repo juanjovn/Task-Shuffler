@@ -28,7 +28,7 @@ class ViewController: AMTabsViewController {
         //Count the app was launched for review request purposes
         reviewManager.log(.launchApp)
         setTabsControllers()
-        selectedTabIndex = 2
+        selectedTabIndex = 0
     }
     
     

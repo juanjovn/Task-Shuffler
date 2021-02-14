@@ -45,13 +45,15 @@ class Onboard {
         segmentedTip.show(animated: true, forView: vc.segmentedControl, withinSuperview: vc.view)
     }
     
-    func presentNewTaskTips (on vc: NewTaskViewController) {
+    func presentNewTaskTips (on vc: NewTaskViewController) -> EasyTipView {
         preferences.drawing.arrowPosition = .bottom
         preferences.positioning.bubbleInsets = UIEdgeInsets(top: 10, left: 130, bottom: 5, right: 10)
         preferences.drawing.arrowHeight = 25
         EasyTipView.globalPreferences = preferences
         let newTaskTip = EasyTipView(text: "Estimate duration in minutes")
         newTaskTip.show(animated: true, forView: vc.slider, withinSuperview: vc.view)
+        
+        return newTaskTip
     }
     
     func presentGapTips (on vc: GapsViewController) {
@@ -71,7 +73,7 @@ class Onboard {
         segmentedTip.show(animated: true, forView: vc.segmentedControl, withinSuperview: vc.view)
     }
     
-    func presentTimePickerTips (on vc: TimePickerVC) {
+    func presentTimePickerTips (on vc: TimePickerVC) -> [EasyTipView]{
         preferences.drawing.arrowPosition = .top
         preferences.positioning.bubbleInsets = UIEdgeInsets(top: 10, left: 10, bottom: 5, right: 10)
         preferences.drawing.arrowHeight = 10
@@ -83,6 +85,8 @@ class Onboard {
         preferences.positioning.bubbleInsets = UIEdgeInsets(top: 10, left: 0, bottom: 5, right: 10)
         let minutesTip = EasyTipView(text: "Drag to select minutes")
         minutesTip.show(animated: true, forView: vc.dragLinesView, withinSuperview: vc.minuteContainerView)
+        
+        return [amPmTip, minutesTip]
     }
     
     func presentTimePickerEndingTime (on vc: NewGapVC) {
@@ -91,6 +95,38 @@ class Onboard {
         preferences.drawing.arrowPosition = .right
         EasyTipView.globalPreferences = preferences
         endTimeTip.show(animated: true, forView: vc.toDisplayTimeView.fromLabel, withinSuperview: vc.view)
+    }
+    
+    func presentShuffleTips (on vc: ShuffleVC) -> [EasyTipView?]{
+        let howTitle = "Choose if you wish to shuffle the tasks in a Smart way, Random or only shuffle a Single task"
+        let font = UIFont.avenirRegular(ofSize: UIFont.scaleFont(17))
+        let boldFont = UIFont.avenirDemiBold(ofSize: UIFont.scaleFont(17))
+        let howAttributes = [NSAttributedString.Key.font: font, .foregroundColor: UIColor.pearlWhite]
+        let howAttributedTitle = NSMutableAttributedString(string: howTitle, attributes: howAttributes)
+        howAttributedTitle.addAttribute(NSAttributedString.Key.font, value: boldFont, range: NSRange(location: 45, length: 5))
+        howAttributedTitle.addAttribute(NSAttributedString.Key.font, value: boldFont, range: NSRange(location: 56, length: 6))
+        howAttributedTitle.addAttribute(NSAttributedString.Key.font, value: boldFont, range: NSRange(location: 81, length: 6))
+        
+        preferences.positioning.maxWidth = vc.view.frame.size.width * 0.8
+        preferences.drawing.arrowPosition = .top
+        preferences.drawing.arrowHeight = 10
+        preferences.positioning.bubbleInsets = UIEdgeInsets(top: 13, left: 0, bottom: 0, right: 0)
+        preferences.positioning.contentInsets = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
+        EasyTipView.globalPreferences = preferences
+        let howTip = EasyTipView(text: howAttributedTitle)
+        howTip.show(animated: true, forView: vc.shuffleView.howSegmentedControl, withinSuperview: vc.view)
+        
+        let whenTitle = "Choose if you wish to shuffle in Both weeks, only in This or Next week or if you feel lucky and want to get an instant random task to do Now"
+        let whenAttributes = [NSAttributedString.Key.font: font, .foregroundColor: UIColor.pearlWhite]
+        let whenAttributedTitle = NSMutableAttributedString(string: whenTitle, attributes: whenAttributes)
+        whenAttributedTitle.addAttribute(NSAttributedString.Key.font, value: boldFont, range: NSRange(location: 33, length: 4))
+        whenAttributedTitle.addAttribute(NSAttributedString.Key.font, value: boldFont, range: NSRange(location: 53, length: 4))
+        whenAttributedTitle.addAttribute(NSAttributedString.Key.font, value: boldFont, range: NSRange(location: 61, length: 4))
+        whenAttributedTitle.addAttribute(NSAttributedString.Key.font, value: boldFont, range: NSRange(location: whenTitle.count - 3, length: 3))
+        EasyTipView.globalPreferences = preferences
+        let whenTip = EasyTipView(text: whenAttributedTitle)
+        
+        return [howTip, whenTip]
     }
     
 }

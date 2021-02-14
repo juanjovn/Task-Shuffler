@@ -13,7 +13,7 @@ class SettingsValues {
     static var notificationsSettings = [true, true] //[notifyTaskStarts, notifyTaskEnds]
     static var otherSettings = [true] //[hapticFeedback]
     static var easterEgg = false
-    static var firstTime: [String:Bool] = ["app":true, "taskList":true, "newTask":true, "gapsList":true, "newGap":true, "shuffle":true, "nextToDo":true, "schedule":true]
+    static var firstTime = ["app":true, "taskList":true, "newTask":true, "gapsList":true, "newGap":true, "shuffleHow":true, "shuffleWhen":true, "nextToDo":true, "schedule":true]
     
     static func storeSettings(){
         let userDefault = UserDefaults.standard
@@ -31,7 +31,7 @@ class SettingsValues {
         notificationsSettings = userDefault.array(forKey: "notificationsSettings") as! [Bool]
         otherSettings = userDefault.array(forKey: "otherSettings") as! [Bool]
         easterEgg = userDefault.bool(forKey: "easterEgg")
-        firstTime = userDefault.dictionary(forKey: "firstTime") as! [String:Bool]
+        firstTime = userDefault.dictionary(forKey: "firstTime") as? [String:Bool] ?? firstTime
     }
     
     static func resetEasterEgg() {

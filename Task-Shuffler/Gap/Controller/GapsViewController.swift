@@ -58,7 +58,13 @@ class GapsViewController: AMTabsViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         segmentedControl.cornerRadius = segmentedControl.bounds.height / 2
-        Onboard.instance.presentGapTips(on: self)
+        if let firstTimeHere = SettingsValues.firstTime["gapsList"] {
+            if firstTimeHere {
+                Onboard.instance.presentGapTips(on: self)
+                SettingsValues.firstTime["gapsList"] = false
+                SettingsValues.storeSettings()
+            }
+        }
     }
     
     //MARK: PUBLIC
