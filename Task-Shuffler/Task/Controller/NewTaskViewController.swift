@@ -216,6 +216,13 @@ class NewTaskViewController: UIViewController {
         
         sliderValue = resultValue
         
+        if cancelButton.isHidden == true {
+            if let taskListVC = taskListVC {
+                if taskListVC.isTaskEditing {
+                    cancelButton.isHidden = false
+                }
+            }
+        }
         
     }
     
@@ -268,6 +275,12 @@ class NewTaskViewController: UIViewController {
         let generator = UIImpactFeedbackGenerator(style: .medium)
         if SettingsValues.otherSettings[0] {
                 generator.impactOccurred()
+        }
+        
+        if let taskListVC = taskListVC {
+            if taskListVC.isTaskEditing {
+                cancelButton.isHidden = false
+            }
         }
     }
     
