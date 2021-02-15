@@ -309,11 +309,11 @@ class NewTaskViewController: UIViewController {
         self.priorityButton.isHidden = false
         self.priorityButtonBackgroundView.isHidden = false
         backButton.setTitle("OK", for: .normal)
-        UIView.animate(withDuration: 0.7) {self.durationLabel.alpha = 1}
-        UIView.animate(withDuration: 0.7) {self.slider.alpha = 1}
-        _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) {_ in
-            UIView.animate(withDuration: 0.7) {self.priorityLabel.alpha = 1}
-            UIView.animate(withDuration: 0.7, animations:  { self.priorityButton.alpha = 1
+        UIView.animate(withDuration: 0.3) {self.durationLabel.alpha = 1}
+        UIView.animate(withDuration: 0.3) {self.slider.alpha = 1}
+        _ = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) {_ in
+            UIView.animate(withDuration: 0.3) {self.priorityLabel.alpha = 1}
+            UIView.animate(withDuration: 0.3, animations:  { self.priorityButton.alpha = 1
                 self.priorityButtonBackgroundView.alpha = 1
             }, completion: {_ in
                 if let firstTimeHere = SettingsValues.firstTime["newTask"] {

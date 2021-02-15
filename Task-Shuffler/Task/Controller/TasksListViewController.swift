@@ -385,17 +385,19 @@ extension TasksListViewController: UIViewControllerTransitioningDelegate{
     // MARK: UIViewControllerTransitioningDelegate
 
     public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-      transition.transitionMode = .present
-      transition.startingPoint = newTaskButton.center
-      transition.bubbleColor = newTaskButton.backgroundColor ?? .black
-      return transition
+        transition.transitionMode = .present
+        transition.startingPoint = newTaskButton.center
+        transition.bubbleColor = newTaskButton.backgroundColor ?? .black
+        transition.duration = 0.3
+        return transition
     }
 
     public func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-      transition.transitionMode = .dismiss
-      transition.startingPoint = newTaskButton.center
-      transition.bubbleColor = newTaskButton.backgroundColor ?? .black
-      return transition
+        transition.transitionMode = .dismiss
+        transition.startingPoint = newTaskButton.center
+        transition.bubbleColor = newTaskButton.backgroundColor ?? .black
+        transition.duration = 0.2
+        return transition
     }
     
 }
@@ -432,7 +434,7 @@ extension TasksListViewController: UITableViewDelegate{
     
     func hideButton() {
         
-        UIView.animate(withDuration: 0.5) {
+        UIView.animate(withDuration: 0.3) {
             self.newTaskButton.alpha = 0
             self.newTaskButtonBottomConstraint.constant = 0
             self.segmentedControl.alpha = 0
@@ -450,7 +452,7 @@ extension TasksListViewController: UITableViewDelegate{
     
     func showButton() {
         
-        UIView.animate(withDuration: 0.3) {
+        UIView.animate(withDuration: 0.15) {
             self.newTaskButton.alpha = 1
             self.newTaskButtonBottomConstraint.constant = 80
             self.segmentedControl.alpha = 1

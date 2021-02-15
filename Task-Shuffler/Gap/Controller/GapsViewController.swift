@@ -354,7 +354,7 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func hideButton() {
-        UIView.animate(withDuration: 0.5) {
+        UIView.animate(withDuration: 0.3) {
             self.newGapButton.alpha = 0
             self.newGapButtonBottomConstraint.constant = 0
             self.segmentedControl.alpha = 0
@@ -369,7 +369,7 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func showButton() {
-        UIView.animate(withDuration: 0.3) {
+        UIView.animate(withDuration: 0.15) {
             self.newGapButton.alpha = 1
             self.newGapButtonBottomConstraint.constant = 80
             self.segmentedControl.alpha = 1
