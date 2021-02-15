@@ -88,7 +88,7 @@ extension DatePickerVC: DateScrollPickerDataSource {
     func dateScrollPicker(_ dateScrollPicker: DateScrollPicker, dotColorByDate date: Date) -> UIColor? {
         if Date.today() == date { return .powerGreen }
         let weekDay = Calendar.current.component(.weekday, from: date)
-        if weekDay == 2 {
+        if weekDay == Calendar.current.firstWeekday {
             return .yellow
         }
         return UIColor.clear
