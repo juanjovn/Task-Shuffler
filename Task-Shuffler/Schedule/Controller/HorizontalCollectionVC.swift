@@ -217,18 +217,29 @@ class HorizontalCollectionVC: UICollectionViewController {
     }
     
     private func setupNotificationCenter() {
-        NotificationCenter.default.addObserver(self, selector: #selector(onDataModified), name: .didModifiedData, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(onDataModified), name: .didModifiedData, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground),
+                                               name: UIApplication.willEnterForegroundNotification,
+                                                   object: nil)
     }
     
     @objc func onDataModified () {
-        for cell in self.collectionView.visibleCells {
-            if let cell = cell as? CollectionViewCell {
-                cell.calendarVC.deleteAllEvents()
-                cell.calendarVC.setupFakeEvent()
-            }
-             }
+//        for cell in self.collectionView.visibleCells {
+//            if let cell = cell as? CollectionViewCell {
+//                cell.calendarVC.deleteAllEvents()
+//                cell.calendarVC.setupFakeEvent()
+//                if cell.weekLabel.text == "Next Week" {
+//                    self.collectionView.reloadItems(at: [IndexPath(row: 1, section: 0)])
+//                } else {
+//                    self.collectionView.reloadItems(at: [IndexPath(row: 0, section: 0)])
+//                }
+//            }
+//             }
+//        print("Collection's view data reloaded from notification ❗️")
+    }
+    
+    @objc func willEnterForeground () {
         self.collectionView.reloadData()
-        print("Collection's view data reloaded from notification ❗️")
     }
 
 }
