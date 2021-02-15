@@ -517,27 +517,20 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        if indexPath.section == 0 && segmentedControl.currentSegment == 0{
-//            isTaskEditing = true
-//            performSegue(withIdentifier: "newTaskSegue", sender: tableView)
-//        }
-//
-        tableView.deselectRow(at: indexPath, animated: true)
-        let newGapVC = NewGapVC()
-        newGapVC.gapsVC = self
-        newGapVC.isEditing = true
-        switch segmentedControl.currentSegment {
-        case 1:
-            newGapVC.editedGap = gapManager.completedGaps[indexPath.row]
-        case 0:
+        
+        if segmentedControl.currentSegment == 0 {
             if indexPath.section == 0 {
+                tableView.deselectRow(at: indexPath, animated: true)
+                let newGapVC = NewGapVC()
+                newGapVC.gapsVC = self
+                newGapVC.isEditing = true
                 newGapVC.editedGap = gapManager.pendingGaps[indexPath.row]
+                present(newGapVC, animated: true, completion: nil)
+            } else {
+                tableView.cellForRow(at: indexPath)?.selectionStyle = .none
             }
-        default:
-            break
-        }
-        if indexPath.section == 0 {
-            present(newGapVC, animated: true, completion: nil)
+        } else {
+            tableView.cellForRow(at: indexPath)?.selectionStyle = .none
         }
     }
     
