@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //factoryResetWithTestTasks()
         //SettingsValues.resetEasterEgg()
         //resetReviewRequestCounter()
-        Utils.printLocale()
+        //Utils.printLocale()
         //DEBUG/////////////////
         
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)

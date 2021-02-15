@@ -128,7 +128,7 @@ struct NextToDoSwiftUIView: View {
                 self.updateData()
             }.onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
                 self.updateData()
-                print("Enter foreground triggered! ❗️")
+                //print("Enter foreground triggered! ❗️")
             }
         }
     }

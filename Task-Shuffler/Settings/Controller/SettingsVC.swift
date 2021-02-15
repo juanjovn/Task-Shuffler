@@ -97,17 +97,17 @@ class SettingsVC: UIViewController {
                 isEasterOpen = true
                 SettingsValues.easterEgg = isEasterOpen
                 SettingsValues.storeSettings()
-                print("LANZAR PANTALLA")
+                //print("LANZAR PANTALLA")
                 present(EasterEggVC(), animated: true, completion: nil)
             }
             
-            print("tocado, contador = \(easterCount)")
+            //print("tocado, contador = \(easterCount)")
         } else {
             if SettingsValues.otherSettings[0] {
                 let generator = UIImpactFeedbackGenerator(style: .heavy)
                 generator.impactOccurred()
             }
-            print("Easter egg esta descubierto. Abrir pantalla directamente.")
+            //print("Easter egg esta descubierto. Abrir pantalla directamente.")
             present(EasterEggVC(), animated: true, completion: nil)
         }
         

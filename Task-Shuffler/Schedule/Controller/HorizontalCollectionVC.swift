@@ -199,7 +199,7 @@ class HorizontalCollectionVC: UICollectionViewController {
     }
     
     @objc private func nextButtonAction () {
-        print ("Next Week touched!")
+        //print ("Next Week touched!")
         let generator = UIImpactFeedbackGenerator(style: .medium)
         if SettingsValues.otherSettings[0] {
             generator.impactOccurred()
@@ -208,7 +208,7 @@ class HorizontalCollectionVC: UICollectionViewController {
     }
     
     @objc private func backButtonAction () {
-        print ("Previous Week touched!")
+        //print ("Previous Week touched!")
         let generator = UIImpactFeedbackGenerator(style: .medium)
         if SettingsValues.otherSettings[0] {
             generator.impactOccurred()
@@ -250,6 +250,6 @@ extension HorizontalCollectionVC: UICollectionViewDelegateFlowLayout {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath)
+        //print(indexPath)
     }
 }

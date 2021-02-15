@@ -197,10 +197,10 @@ extension CalendarVC: ElliotableDelegate, ElliotableDataSource {
     }
     
     func elliotable(elliotable: Elliotable, didLongSelectCourse longSelectedCourse: ElliottEvent) {
-        if Int(longSelectedCourse.courseId) != -1 { //-1 is the id of Fake events
-            Alert.errorInformation(title: "Celda long touch", message: "\(longSelectedCourse.startTime) - \(longSelectedCourse.endTime)"
-                                   , vc: self, handler: nil)
-        }
+//        if Int(longSelectedCourse.courseId) != -1 { //-1 is the id of Fake events
+//            Alert.errorInformation(title: "Celda long touch", message: "\(longSelectedCourse.startTime) - \(longSelectedCourse.endTime)"
+//                                   , vc: self, handler: nil)
+//        }
     }
     
     func elliotable(elliotable: Elliotable, at dayPerIndex: Int) -> String {

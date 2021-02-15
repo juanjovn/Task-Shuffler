@@ -45,7 +45,7 @@ class GapsViewController: AMTabsViewController {
         setupSegmentedControl()
         setupTableView()
         
-        print("Number of pending gaps = \(gapManager.pendingGaps.count)")
+        //print("Number of pending gaps = \(gapManager.pendingGaps.count)")
     }
     
     //MARK: viewWillAppear
@@ -85,8 +85,8 @@ class GapsViewController: AMTabsViewController {
         }
         
         gapManager.fillGaps()
-        print("GapManager refilled ⬆️")
-        print("Number of pending gaps = \(gapManager.pendingGaps.count)")
+        //print("GapManager refilled ⬆️")
+        //print("Number of pending gaps = \(gapManager.pendingGaps.count)")
         NotificationCenter.default.post(name: .didModifiedData, object: nil)
     }
     
@@ -410,7 +410,7 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
         case 0:
             if segmentedControl.currentSegment == 0 {
                 gap = gapManager.pendingGaps[indexPath.row]
-                print(gap.description)
+                //print(gap.description)
                 gapManager.pendingGaps.remove(at: indexPath.row)
             } else {
                 gap = gapManager.completedGaps[indexPath.row]
@@ -431,7 +431,7 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
                         if segmentedControl.currentSegment == 0 {
                             task.state = State.pending.rawValue
                         }
-                        print("Updated object: \(task.description)")
+                        //print("Updated object: \(task.description)")
                     }
                 } catch {
                     print("Error writing update to database")
@@ -456,7 +456,7 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
                     try db.realm.write{
                         task.gapid = ""
                         task.state = State.pending.rawValue
-                        print("Updated object: \(task.description)")
+                        //print("Updated object: \(task.description)")
                     }
                 } catch {
                     print("Error writing update to database")
@@ -474,7 +474,7 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
 
         tableView.deleteRows(at: [indexPath], with: .fade)
         db.deleteData(object: gap)
-        print("Number of pending gaps = \(gapManager.pendingGaps.count)")
+        //print("Number of pending gaps = \(gapManager.pendingGaps.count)")
         NotificationCenter.default.post(name: .didModifiedData, object: nil)
 
         hideAssignedIfEmpty()
@@ -492,7 +492,7 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
             swipeAction = UIContextualAction(style: .normal, title: "✓", handler: {
                 (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
                 self.markCompleted(indexPath: indexPath)
-                print("✅ Marcado completado")
+                //print("✅ Marcado completado")
                 success(true)
             })
             swipeAction.image = UIGraphicsImageRenderer(size: CGSize(width: 26, height: 20)).image { _ in

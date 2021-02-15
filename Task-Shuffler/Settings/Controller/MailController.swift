@@ -32,6 +32,6 @@ class MailController: ViewController, MFMailComposeViewControllerDelegate {
     }
     
     deinit {
-        print("Deinit MailController ✉️")
+        //print("Deinit MailController ✉️")
     }
 }

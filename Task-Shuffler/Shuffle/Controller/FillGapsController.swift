@@ -57,7 +57,7 @@ class FillGapsController {
     
     public func shuffleTask() -> Task {
         let task = getAssignedTask(tasks: getCandidateTasks())
-        print("You have to do \(task.name) in gap \(task.gapid)")
+        //print("You have to do \(task.name) in gap \(task.gapid)")
         return task
     }
     

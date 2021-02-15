@@ -142,7 +142,7 @@ class TasksListViewController: AMTabsViewController {
     }
     
     private func fillTasks(){
-        print(try! Realm().configuration.fileURL!)
+        //print(try! Realm().configuration.fileURL!)
         pendingTasks = TaskManager.populateTasks(state: .pending)
         assignedTasks = TaskManager.populateTasks(state: .assigned)
         completedTasks = TaskManager.populateTasks(state: .completed)
@@ -537,7 +537,7 @@ extension TasksListViewController: UITableViewDelegate{
             swipeAction = UIContextualAction(style: .normal, title: "", handler: {
                 (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
                 self.markCompleted(indexPath: indexPath)
-                print("✅ Marcado completado")
+                //print("✅ Marcado completado")
                 success(true)
             })
             swipeAction.image = UIGraphicsImageRenderer(size: CGSize(width: 26, height: 20)).image { _ in
@@ -548,7 +548,7 @@ extension TasksListViewController: UITableViewDelegate{
             swipeAction = UIContextualAction(style: .normal, title: "", handler: {
                 (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
                 self.restoreTask(indexPath: indexPath)
-                print("⎌ Marcado restaurar")
+                //print("⎌ Marcado restaurar")
                 success(true)
             })
             swipeAction.image = UIGraphicsImageRenderer(size: CGSize(width: 26, height: 26)).image { _ in
