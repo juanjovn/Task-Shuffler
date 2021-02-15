@@ -124,8 +124,8 @@ class EasterEggVC: UIViewController {
     }
     
     private func checkLaunchReviewRequest() {
-        print("CURRENT EASTER COUNT: \(reviewManager.count(of: .easter))")
-        if reviewManager.count(of: .easter) == 10 {
+        //print("CURRENT EASTER COUNT: \(reviewManager.count(of: .easter))")
+        if reviewManager.count(of: .easter) == 5 {
             SKStoreReviewController.requestReview()
         }
     }
