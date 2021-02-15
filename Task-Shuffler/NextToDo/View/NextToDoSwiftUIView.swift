@@ -21,6 +21,8 @@ struct NextToDoSwiftUIView: View {
         // To remove all separators including the actual ones:
         UITableView.appearance().separatorStyle = .none
         UITableView.appearance().separatorColor = .clear
+        let insets = UIEdgeInsets(top: 10, left: 0, bottom: 120, right: 0)
+        UITableView.appearance().contentInset = insets
         
         UITableView.appearance().backgroundColor = .clear
         UITableViewCell.appearance().backgroundColor = .clear
@@ -120,7 +122,8 @@ struct NextToDoSwiftUIView: View {
                     }.listRowBackground(Color.clear)
                 }
                 
-            }.onAppear(perform: updateData)
+            }
+            .onAppear(perform: updateData)
             .onReceive(pub) { (output) in
                 self.updateData()
             }.onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in

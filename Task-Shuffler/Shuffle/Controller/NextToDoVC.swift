@@ -25,7 +25,7 @@ class NextToDoVC: AMTabsViewController {
         view.addSubview(nextToDoView)
         
         nextToDoView.translatesAutoresizingMaskIntoConstraints = false
-        nextToDoView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        nextToDoView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         nextToDoView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         nextToDoView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         nextToDoView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
