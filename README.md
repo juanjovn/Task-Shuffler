@@ -1,4 +1,7 @@
 # Task-Shuffler
+![GitHub repo size]
+![GitHub stars]
+![Twitter Follow](https://twitter.com/juanjovn)
 Task-Shuffler fills your spare time gaps with tasks defined by you.  
 The target is to __avoid the procrastination__ by choosing for you what you have to do rather than struggling with decisions that end in doing absolutely nothing.  
 It can be done random or choosing in a smart way.  
