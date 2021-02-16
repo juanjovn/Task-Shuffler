@@ -6,5 +6,5 @@ It can be done random or choosing in a smart way.
 2- Choose your free time gaps in the week.  
 3- Shuffle!  
 
-[![](covergithub.jpg)](https://apps.apple.com/us/app/task-shuffler/id1552752499)  
+[![](covergithub_radius.png)](https://apps.apple.com/us/app/task-shuffler/id1552752499)  
 [![](appstorelogo.png)](https://apps.apple.com/us/app/task-shuffler/id1552752499)
