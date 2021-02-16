@@ -152,10 +152,8 @@ class NewTaskViewController: UIViewController {
         }
     }
     
-    // MARK: viewDidAppear
-    
-    override func viewDidAppear(_ animated: Bool) {
-        // Priority button
+    // MARK: viewDidLayoutSubviews
+    override func viewDidLayoutSubviews() {
         priorityButtonBackgroundView.layer.cornerRadius = priorityButtonBackgroundView.bounds.size.width/2
     }
     
