@@ -1,5 +1,5 @@
 # Task-Shuffler
-[![CocoaPods](https://img.shields.io/cocoapods/p/EasyNotificationBadge.svg)] 
+![CocoaPods](https://img.shields.io/cocoapods/p/EasyNotificationBadge.svg) 
 ![GitHub stars](https://img.shields.io/github/stars/juanjovn/Task-Shuffler?style=social) 
 [![GitHub followers](https://img.shields.io/github/followers/juanjovn.svg?style=social&label=Follow&maxAge=2592000)](https://github.com/juanjovn?tab=followers) 
 ![Twitter Follow](https://img.shields.io/twitter/follow/juanjovn?style=social)  
