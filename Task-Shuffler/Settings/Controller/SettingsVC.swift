@@ -156,7 +156,7 @@ class SettingsVC: UIViewController {
     }
     
     @objc func shareAction() {
-        if let appUrl = URL(string: "https://itunes.apple.com/us/app/tallycounter/id1507818665") {
+        if let appUrl = URL(string: "https://apps.apple.com/us/app/task-shuffler/id1552752499") {
             let items:[Any] = [appUrl]
             let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
             present(ac, animated: true)
