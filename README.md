@@ -1,23 +1,10 @@
 # Task-Shuffler
-This is an iOS app that random fills the spare time gaps with tasks defined by users.  
+Task-Shuffler fills your spare time gaps with tasks defined by you.  
 The target is to __avoid the procrastination__ by choosing for you what you have to do rather than struggling with decisions that end in doing absolutely nothing.
+It can be done random or choosing in a smart way.
+1- Enter your tasks.
+2- Choose your free time gaps in the week.
+3- Shuffle!
 
-## App tour
-
-#### Get the full sample video
-https://bit.ly/38wwlYG
-
-#### Screenshots
-
-![](screenshot1.png)
-![](screenshot2.png)
-![](screenshot3.png)
-![](screenshot4.png)
-![](screenshot5.png)
-![](screenshot6.png)
-![](screenshot7.png)
-![](screenshot8.png)
-
-#### Gifs
-
-![](appSample1.gif) ![](appSample2.gif) ![](appSample3.gif) ![](appSample4.gif)
+![](covergithub.jpg)(https://apps.apple.com/us/app/task-shuffler/id1552752499)
+![](appstorelogo.jpg)(https://apps.apple.com/us/app/task-shuffler/id1552752499)
