@@ -1,6 +1,7 @@
 # Task-Shuffler
-![GitHub repo size](https://img.shields.io/github/repo-size/juanjovn/Task-Shuffler)
-![GitHub stars](https://img.shields.io/github/stars/juanjovn/Task-Shuffler?style=social)
+[![CocoaPods](https://img.shields.io/cocoapods/p/EasyNotificationBadge.svg)] 
+![GitHub stars](https://img.shields.io/github/stars/juanjovn/Task-Shuffler?style=social) 
+[![GitHub followers](https://img.shields.io/github/followers/juanjovn.svg?style=social&label=Follow&maxAge=2592000)](https://github.com/juanjovn?tab=followers) 
 ![Twitter Follow](https://img.shields.io/twitter/follow/juanjovn?style=social)  
 Task-Shuffler fills your spare time gaps with tasks defined by you.  
 The target is to __avoid the procrastination__ by choosing for you what you have to do rather than struggling with decisions that end in doing absolutely nothing.  
