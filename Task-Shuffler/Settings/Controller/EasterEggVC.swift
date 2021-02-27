@@ -107,7 +107,7 @@ class EasterEggVC: UIViewController {
     }
     
     private func setupErrorMessageLabel() {
-        message.text = "No internet. Get a connection to watch us!"
+        message.text = "No internet. Get a connection to watch us!".localized()
         message.font = .avenirDemiBold(ofSize: UIFont.scaleFont(20))
         message.textColor = .fireOrange
         message.numberOfLines = 0

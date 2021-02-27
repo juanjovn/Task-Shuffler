@@ -48,7 +48,7 @@ class HorizontalCollectionVC: UICollectionViewController {
         switch indexPath.row {
         case 0:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: weekCellReuseIdentifier, for: indexPath) as! CollectionViewCell
-            cell.labelText = "This Week"
+            cell.labelText = "This Week".localized()
             cell.nextButton.addTarget(self, action: #selector(nextButtonAction), for: .touchUpInside)
             cell.backButton.isHidden = true
             cell.nextButton.isHidden = false
@@ -61,7 +61,7 @@ class HorizontalCollectionVC: UICollectionViewController {
             return cell
         case 1:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: weekCellReuseIdentifier, for: indexPath) as! CollectionViewCell
-            cell.labelText = "Next Week"
+            cell.labelText = "Next Week".localized()
             cell.backButton.addTarget(self, action: #selector(backButtonAction), for: .touchUpInside)
             cell.backButton.isHidden = false
             cell.nextButton.isHidden = true

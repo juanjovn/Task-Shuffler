@@ -126,6 +126,8 @@ class NewTaskViewController: UIViewController {
         priorityButtonBackgroundView.alpha = 0
         
         // Text Field
+        newTaskTextName.placeholder = "New task name".localized()
+        newTaskTextName.selectedTitle = "Task name".localized()
         newTaskTextName.autocapitalizationType = .sentences
         if !taskListVC!.isTaskEditing {
             newTaskTextName.becomeFirstResponder()

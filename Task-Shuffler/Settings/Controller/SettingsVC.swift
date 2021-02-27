@@ -13,12 +13,12 @@ class SettingsVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     //Constants
-    let taskSection =   [ "Mark completed when time ends",
-                          "Delete confirmation", "One task per gap"]
-    let notificationsSection =  [ "Notify task starts",
-                                  "Notify task ends"]
-    let othersSection = ["Haptic feedback"]
-    let resetSection = ["Factory reset"]
+    let taskSection =   [ "Mark completed when time ends".localized(),
+                          "Delete confirmation".localized(), "One task per gap".localized()]
+    let notificationsSection =  [ "Notify task starts".localized(),
+                                  "Notify task ends".localized()]
+    let othersSection = ["Haptic feedback".localized()]
+    let resetSection = ["Factory reset".localized()]
     let creditsSection = ["Credits"]
     
     //Variables
@@ -115,7 +115,7 @@ class SettingsVC: UIViewController {
     }
     
     private func setupView(){
-        title = "Settings"
+        title = "Settings".localized()
         view.backgroundColor = #colorLiteral(red: 0.7764705882, green: 0.7725490196, blue: 0.7254901961, alpha: 0.85)
         
         let blurEffect = UIBlurEffect(style: .light)
@@ -326,7 +326,7 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == tableView.numberOfSections - 2 {
-            return "Developed by Juanjo Valiño"
+            return "Developed by Juanjo Valiño".localized()
         } else {
             return nil
         }
@@ -335,7 +335,7 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         let header: UITableViewHeaderFooterView = view as! UITableViewHeaderFooterView
         
-        let title = "Developed by Juanjo Valiño"
+        let title = "Developed by Juanjo Valiño".localized()
         header.textLabel?.font = .avenirRegular(ofSize: UIFont.scaleFont(13))
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = NSTextAlignment.center

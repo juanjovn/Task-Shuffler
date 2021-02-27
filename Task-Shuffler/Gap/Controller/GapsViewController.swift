@@ -145,16 +145,16 @@ class GapsViewController: AMTabsViewController {
     }
     
     @objc func sortButtonAction(){
-        let sortMenu = UIAlertController(title: "Sort by", message: nil, preferredStyle: .actionSheet)
-        let sortByDateAction = UIAlertAction(title: "Date", style: .default, handler: {
+        let sortMenu = UIAlertController(title: "Sort by".localized(), message: nil, preferredStyle: .actionSheet)
+        let sortByDateAction = UIAlertAction(title: "Date".localized(), style: .default, handler: {
             action in
             self.sortActions(sortType: .date)
         })
-        let sortByDurationAction = UIAlertAction(title: "Duration", style: .default, handler: {
+        let sortByDurationAction = UIAlertAction(title: "Duration".localized(), style: .default, handler: {
             action in
             self.sortActions(sortType: .duration)
         })
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        let cancelAction = UIAlertAction(title: "Cancel".localized(), style: .cancel)
         
         
         sortMenu.addAction(sortByDateAction)
@@ -394,7 +394,7 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             if (SettingsValues.taskSettings[1]){
-                Alert.confirmation(title: "Confirm delete?", message: nil, vc: self, handler: {_ in
+                Alert.confirmation(title: "Confirm delete?".localized(), message: nil, vc: self, handler: {_ in
                     self.deleteGap(indexPath)
                 })
             } else {
@@ -635,9 +635,9 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let firstSectionTitle: String = segmentedControl.currentSegment == 0 ? "Free" : "Completed"
-        let secondSectionTitle: String = segmentedControl.currentSegment == 0 ? "Assigned" : "Outdated"
-        let thirdSectionTitle: String = segmentedControl.currentSegment == 0 ? "Filled" : ""
+        let firstSectionTitle: String = segmentedControl.currentSegment == 0 ? "Free".localized() : "Completed".localized()
+        let secondSectionTitle: String = segmentedControl.currentSegment == 0 ? "Assigned".localized() : "Outdated".localized()
+        let thirdSectionTitle: String = segmentedControl.currentSegment == 0 ? "Filled".localized() : ""
         switch section {
         case 0:
             return firstSectionTitle

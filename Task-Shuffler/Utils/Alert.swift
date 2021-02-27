@@ -13,7 +13,7 @@ enum Alert {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
         let ok = UIAlertAction(title: "OK", style: .destructive, handler: handler)
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+        let cancel = UIAlertAction(title: "Cancel".localized(), style: .cancel)
         
         alert.addAction(cancel)
         alert.addAction(ok)

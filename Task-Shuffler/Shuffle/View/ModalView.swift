@@ -68,7 +68,7 @@ class ModalView: UIView {
     }
     
     private func setupTitleLabel() {
-        titleLabel.text = "Are you happy?"
+        titleLabel.text = "Are you happy?".localized()
         //print(self.editedGap.description)
         titleLabel.font = .avenirDemiBold(ofSize: UIFont.scaleFont(30))
         contentView.addSubview(titleLabel)
@@ -139,7 +139,7 @@ class ModalView: UIView {
     private func setupReshuffleButton() {
         buttonsContainerView.addSubview(reshuffleButton)
         reshuffleButton.backgroundColor = .opalRed
-        reshuffleButton.setTitle("RESHUFFLE", for: .normal)
+        reshuffleButton.setTitle("RESHUFFLE".localized(), for: .normal)
         reshuffleButton.setTitleColor(.pearlWhite, for: .normal)
         //CONSTRAINTS
         reshuffleButton.translatesAutoresizingMaskIntoConstraints = false

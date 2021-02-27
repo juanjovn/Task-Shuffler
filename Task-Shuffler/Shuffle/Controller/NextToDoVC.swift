@@ -49,7 +49,7 @@ class NextToDoVC: AMTabsViewController {
     }
     
     private func setupNavigationBar() {
-        navigationItem.title = "Next to do"
+        navigationItem.title = "Next to do".localized()
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "gear"), style: .plain, target: self, action: #selector(settingsButtonAction))
         navigationController?.navigationBar.prefersLargeTitles = true
     }

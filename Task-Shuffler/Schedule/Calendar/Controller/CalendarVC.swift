@@ -13,7 +13,7 @@ class CalendarVC: UIViewController {
     
     //Constants
     let timeTable = Elliotable()
-    private let daySymbol = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+    private let daySymbol = ["Sun".localized(), "Mon".localized(), "Tue".localized(), "Wed".localized(), "Thu".localized(), "Fri".localized(), "Sat".localized()]
     
     //Variables
     var courseList = [ElliottEvent]()
@@ -182,12 +182,12 @@ extension CalendarVC: ElliotableDelegate, ElliotableDataSource {
         //courseId == 1 for gap events. courseId == 2 for task events
         case 1:
             if Int(selectedCourse.courseId) != -1 { //-1 is the id of Fake events
-                Alert.errorInformation(title: "Gap of time", message: "\nStarting at: \(selectedCourse.startTime) \nFinishing at: \(selectedCourse.endTime)"
+                Alert.errorInformation(title: "Gap of time".localized(), message: "\n" + "Starting at:".localized() + " \(selectedCourse.startTime) " + "\n" + "Finishing at:".localized() + " \(selectedCourse.endTime)"
                                        , vc: self, handler: nil)
             }
         case 2:
             if Int(selectedCourse.courseId) != -1 { //-1 is the id of Fake events
-                Alert.errorInformation(title: selectedCourse.courseName, message: "\nStarting at: \(selectedCourse.startTime) \nFinishing at: \(selectedCourse.endTime)"
+                Alert.errorInformation(title: selectedCourse.courseName, message: "\n" + "Starting at:".localized() + " \(selectedCourse.startTime) " + "\n" + "Finishing at:".localized() + " \(selectedCourse.endTime)"
                                        , vc: self, handler: nil)
             }
         default:

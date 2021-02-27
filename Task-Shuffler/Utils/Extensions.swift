@@ -133,6 +133,10 @@ extension String {
         return fullString
     }
     
+    func localized(bundle: Bundle = .main, tableName: String = "Localizable") -> String {
+            return NSLocalizedString(self, tableName: tableName, value: self, comment: "")
+        }
+    
 }
 
 //Just for mute a autolayout warning by a bug of iOS: https://stackoverflow.com/questions/55653187/swift-default-alertviewcontroller-breaking-constraints

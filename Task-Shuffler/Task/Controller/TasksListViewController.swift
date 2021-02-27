@@ -157,20 +157,20 @@ class TasksListViewController: AMTabsViewController {
     }
     
     @objc private func sortButtonAction () {
-        let sortMenu = UIAlertController(title: "Sort by", message: nil, preferredStyle: .actionSheet)
-        let sortByPriorityAction = UIAlertAction(title: "Priority", style: .default, handler: {
+        let sortMenu = UIAlertController(title: "Sort by".localized(), message: nil, preferredStyle: .actionSheet)
+        let sortByPriorityAction = UIAlertAction(title: "Priority".localized(), style: .default, handler: {
             action in
             self.sortActions(sortType: .priority)
         })
-        let sortByDurationAction = UIAlertAction(title: "Duration", style: .default, handler: {
+        let sortByDurationAction = UIAlertAction(title: "Duration".localized(), style: .default, handler: {
             action in
             self.sortActions(sortType: .duration)
         })
-        let sortByNameAction = UIAlertAction(title: "Name", style: .default, handler: {
+        let sortByNameAction = UIAlertAction(title: "Name".localized(), style: .default, handler: {
             action in
             self.sortActions(sortType: .name)
         })
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        let cancelAction = UIAlertAction(title: "Cancel".localized(), style: .cancel)
         
         
         sortMenu.addAction(sortByNameAction)
@@ -481,7 +481,7 @@ extension TasksListViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             if (SettingsValues.taskSettings[1]){
-                Alert.confirmation(title: "Confirm delete?", message: nil, vc: self, handler: {_ in
+                Alert.confirmation(title: "Confirm delete?".localized(), message: nil, vc: self, handler: {_ in
                     self.deleteTask(indexPath)
                 })
             } else {
@@ -690,8 +690,8 @@ extension TasksListViewController : UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let firstSectionTitle: String = segmentedControl.currentSegment == 0 ? "Pending" : "Completed"
-        let secondSectionTitle: String = segmentedControl.currentSegment == 0 ? "Assigned" : ""
+        let firstSectionTitle: String = segmentedControl.currentSegment == 0 ? "Pending".localized() : "Completed".localized()
+        let secondSectionTitle: String = segmentedControl.currentSegment == 0 ? "Assigned".localized() : ""
         switch section {
         case 0:
             return firstSectionTitle

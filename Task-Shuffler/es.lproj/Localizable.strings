@@ -1,0 +1,135 @@
+/* 
+  Localizable.strings
+  Task-Shuffler
+
+  Created by Juanjo Valiño on 27/2/21.
+  Copyright © 2021 Juanjo Valiño. All rights reserved.
+*/
+
+
+//MARK: Task List
+"Sort by" = "Ordenar";
+"Priority" = "Prioridad";
+"Duration" = "Duración";
+"Name" = "Nombre";
+"Cancel" = "Cancelar";
+"Confirm delete?" = "¿Confirmar borrado?";
+"Name" = "Nombre";
+"Pending" = "Pendiente";
+"Completed" = "Completado";
+"Assigned" = "Asignado";
+
+//MARK: New Task
+"New task name" = "Nueva tarea";
+"Task name" = "Nombre de tarea";
+
+//MARK: Gap List
+"Date" = "Fecha";
+"Free" = "Libre";
+"Filled" = "Lleno";
+"Outdated" = "Caducado";
+
+//MARK: New Gap
+"From" = "Desde";
+"To" = "Hasta";
+"Edit gap:" = "Editar hueco:";
+"Select a day" = "Selecciona un día";
+"The gap must start later than current time" = "El hueco debe comenzar más tarde de la hora actual";
+"The gap must end later than start time" = "El hueco debe terminar más tarde que la hora actual";
+"The gap must have at least a duration of 10 minutes" = "El tiempo mínimo de un hueco es de 10 minutos";
+"The current gap overlaps with an existing gap at " = "Este hueco se superpone con uno que ya existea las: ";
+
+//MARK: Shuffle
+"Slide to shuffle" = "    Desliza para mezclar!";
+"Smart" = "Inteligente";
+"Random" = "Aleatorio";
+"Single" = "Individual";
+"All" = "Todo";
+"This" = "Ésta";
+"Next" = "Siguiente";
+"Now" = "Ahora";
+"Are you happy?" = "¿Estás contento?";
+"RESHUFFLE" = "REPETIR";
+"You will get an instant task to do" = "Obtendrás una tarea instantánea";
+"There are no tasks to shuffle" = "No existen tareas para mezclar";
+"There are no gaps to shuffle" = "No existen huecos para mezclar";
+"gaps" = "huecos";
+"One task will be shuffled in" = "Una tarea se mezclará entre";
+"tasks will be shuffled in" = "tareas se mezclarán entre";
+"task will be shuffled in" = "tarea se mezclará entre";
+"There are no suitable tasks" = "Las tareas pendientes no cogen en ningún hueco";
+"Ooops!" = "¡Ups!";
+"There are no task suitable for any gap. Try creating longer gaps or shorter tasks." = "Las tareas pendientes no cogen en ningún hueco. Prueba a crear tareas más cortas o huecos más largos";
+"There are no gaps created in this week!" = "No existen huecos en esta semana";
+"How" = "Cómo";
+"When" = "Cuándo";
+
+//MARK: Next to do
+"Next to do" = "Próximas tareas";
+
+//MARK: Schedule
+"This Week" = "Semana actual";
+"Next Week" = "Siguiente semana";
+"Sun" = "Dom";
+"Mon" = "Lun";
+"Tue" = "Mar";
+"Wed" = "Mié";
+"Thu" = "Jue";
+"Fri" = "Vie";
+"Sat" = "Sáb";
+"Gap of time" = "Hueco";
+"Starting at:" = "Empieza a las:";
+"Finishing at:" = "Acaba a las:";
+"" = "";
+"" = "";
+"" = "";
+"" = "";
+"" = "";
+"" = "";
+"" = "";
+
+
+//MARK: Notificaciones
+"Start the task! 💪" = "Comienza la tarea! 💪";
+"Task ended! 🏁" = "¡Tarea finalizada! 🏁";
+"Have you completed" = "¿Has completado";
+
+//MARK: Settings
+"Settings" = "Ajustes";
+"Developed by Juanjo Valiño" = "Desarrollado por Juanjo Valiño";
+"Mark completed when time ends" = "Autocompletar al finalizar la hora";
+"Delete confirmation" = "Confirmación de borrado";
+"One task per gap" = "Tarea única en cada hueco";
+"Notify task starts" = "Notificación empezar tarea";
+"Notify task ends" = "Notificación tarea terminada";
+"Haptic feedback" = "Vibración";
+"Factory reset" = "Borrado de datos";
+"Tasks" = "Tareas";
+"Gaps" = "Huecos";
+"Clear All" = "Borrar todo";
+"Clear all data" = "Borrar todos los datos";
+"All tasks and gaps will be erased, are you sure?" = "Se borrarán todas las tareas y huecos, ¿estás seguro?";
+"Clear tasks data" = "Borrar tareas";
+"All tasks will be erased, are you sure?" = "Se borrarán todas las tareas, ¿estás seguro?";
+"Clear gaps data" = "Borrar huecos";
+"All gaps will be erased, are you sure?" = "Se borrarán todos los huecos, ¿estás seguro?";
+"Suggestions about Task Shuffler" = "Sugerencias para mejorar Task-Shuffler";
+"No internet. Get a connection to watch us!" = "No hay internet, ¡busca una conexión para encontrarnos!";
+"Meooow! \nYou found me! 🙀" = "¡Miaaau! \n¡Me encontraste! 🙀";
+
+//MARK: Tips
+"First create a task" = "Comienza por crear una tarea";
+"Switch between pending and completed tasks" = "Cambia entre tareas pendientes o completadas";
+"Estimate duration in minutes" = "Estima cuánto te llevará en minutos";
+"Create a gap of spare time" = "Crea huecos en los que podrías hacer tareas";
+"Switch between free and completed gaps" = "Cambia entre huecos pendientes o completados";
+"Switch between AM or PM hours" = "Cambia entre AM o PM";
+"Drag to select minutes" = "Desliza para elegir minutos";
+"Ending time" = "Hora de finalización";
+"Choose if you wish to shuffle the tasks in a Smart way, Random or only shuffle a Single task" = "Elige si quieres mezclar las tareas de un modo Inteligente, Aleatorio o una única tarea";
+"Choose if you wish to shuffle in Both weeks, only in This or Next week or if you feel lucky and want to get an instant random task to do Now" = "Elige si quieres mezclar en todos los huecos, en los de esta semana, en la siguiente u obtener una tarea instantánea para hacer";
+"" = "";
+"" = "";
+"" = "";
+"" = "";
+"" = "";

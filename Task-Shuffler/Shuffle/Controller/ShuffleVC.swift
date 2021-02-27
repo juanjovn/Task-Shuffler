@@ -80,7 +80,7 @@ class ShuffleVC: AMTabsViewController {
         shuffleSlider.draggedView.backgroundColor = .fireOrange
         shuffleSlider.delegate = self
         shuffleSlider.thumbnailViewStartingDistance = 15
-        shuffleSlider.labelText = "Slide to shuffle"
+        shuffleSlider.labelText = "Slide to shuffle".localized()
         let thumbnailImage = UIImage(systemName: "shuffle")
         shuffleSlider.thumbnailImageView.image = thumbnailImage
         //shuffleSlider.thumbnailImageView.contentMode = .scaleAspectFit
