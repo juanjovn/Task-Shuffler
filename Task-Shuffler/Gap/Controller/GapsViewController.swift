@@ -105,7 +105,7 @@ class GapsViewController: AMTabsViewController {
         refreshOutdated()
         tableView.reloadData()
         //tableView.reloadSections(IndexSet(integersIn: 0...tableView.numberOfSections - 1), with: .fade)
-        //print("❗️NOTIFIED!!! ")
+        //print("❗️NOTIFIED in GAPS VIEW CONTROLLER!!! ")
     }
     
     private func test(){

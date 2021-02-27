@@ -74,7 +74,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(_ application: UIApplication) {
         //Remove notification badge
         UIApplication.shared.applicationIconBadgeNumber = 0
+        GapManager.instance.refreshOutdated()
         NotificationCenter.default.post(name: .didModifiedData, object: nil)
+        //print ("BECOMES ACTIVE TRIGGERED")
     }
 
 }
