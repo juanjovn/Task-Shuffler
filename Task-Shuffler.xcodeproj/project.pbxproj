@@ -55,6 +55,7 @@
 		819970A525A0F958004D48C3 /* ModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819970A425A0F958004D48C3 /* ModalView.swift */; };
 		819970A825A0FEDA004D48C3 /* NowShuffleResultsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819970A725A0FEDA004D48C3 /* NowShuffleResultsVC.swift */; };
 		819ABED325C9815D0062AF87 /* NextToDoSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819ABED225C9815D0062AF87 /* NextToDoSwiftUIView.swift */; };
+		81A7C65125EC07FA00AF5288 /* PaperOnboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 81A7C65025EC07FA00AF5288 /* PaperOnboarding */; };
 		81AB5D6A2476F915009ADB97 /* HorizontalCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB5D692476F915009ADB97 /* HorizontalCollectionVC.swift */; };
 		81AB5D6C24770D01009ADB97 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB5D6B24770D01009ADB97 /* CollectionViewCell.swift */; };
 		81C2A17D25A38B1D00F9A53F /* ShuffleConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C2A17C25A38B1D00F9A53F /* ShuffleConfiguration.swift */; };
@@ -198,6 +199,7 @@
 			files = (
 				8146988B25865C3E00D7BCE1 /* Pods_Task_Shuffler.framework in Frameworks */,
 				810762CC25CC771200F1758B /* SwiftyGif in Frameworks */,
+				81A7C65125EC07FA00AF5288 /* PaperOnboarding in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -630,6 +632,7 @@
 			name = "Task-Shuffler";
 			packageProductDependencies = (
 				810762CB25CC771200F1758B /* SwiftyGif */,
+				81A7C65025EC07FA00AF5288 /* PaperOnboarding */,
 			);
 			productName = "Task-Shuffler";
 			productReference = 81E9B13B2405BEE400BBADB8 /* Task Shuffler.app */;
@@ -663,6 +666,7 @@
 			mainGroup = 81E9B1322405BEE400BBADB8;
 			packageReferences = (
 				810762CA25CC771200F1758B /* XCRemoteSwiftPackageReference "SwiftyGif" */,
+				81A7C64F25EC07FA00AF5288 /* XCRemoteSwiftPackageReference "paper-onboarding" */,
 			);
 			productRefGroup = 81E9B13C2405BEE400BBADB8 /* Products */;
 			projectDirPath = "";
@@ -1046,6 +1050,14 @@
 				minimumVersion = 5.4.0;
 			};
 		};
+		81A7C64F25EC07FA00AF5288 /* XCRemoteSwiftPackageReference "paper-onboarding" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Ramotion/paper-onboarding.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.1.5;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1053,6 +1065,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 810762CA25CC771200F1758B /* XCRemoteSwiftPackageReference "SwiftyGif" */;
 			productName = SwiftyGif;
+		};
+		81A7C65025EC07FA00AF5288 /* PaperOnboarding */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 81A7C64F25EC07FA00AF5288 /* XCRemoteSwiftPackageReference "paper-onboarding" */;
+			productName = PaperOnboarding;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
