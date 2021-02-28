@@ -47,8 +47,8 @@ class Onboard {
     
     func presentNewTaskTips (on vc: NewTaskViewController) -> EasyTipView {
         preferences.drawing.arrowPosition = .bottom
-        preferences.positioning.bubbleInsets = UIEdgeInsets(top: 10, left: 130, bottom: 5, right: 10)
-        preferences.drawing.arrowHeight = 25
+        preferences.positioning.bubbleInsets = UIEdgeInsets(top: 5, left: 80, bottom: 5, right: 5)
+        preferences.drawing.arrowHeight = 40
         EasyTipView.globalPreferences = preferences
         let newTaskTip = EasyTipView(text: "Estimate duration in minutes".localized())
         newTaskTip.show(animated: true, forView: vc.slider, withinSuperview: vc.view)
@@ -66,8 +66,8 @@ class Onboard {
         let gapTip = EasyTipView(text: "Create a slot of spare time".localized())
         gapTip.show(animated: true, forView: vc.newGapButton, withinSuperview: vc.view)
         preferences.drawing.arrowPosition = .top
-        preferences.positioning.bubbleInsets = UIEdgeInsets(top: 5, left: 90, bottom: 5, right: 5)
-        preferences.drawing.arrowHeight = 15
+        preferences.positioning.bubbleInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        preferences.drawing.arrowHeight = 25
         EasyTipView.globalPreferences = preferences
         let segmentedTip = EasyTipView(text: "Switch between free and completed time slots".localized())
         segmentedTip.show(animated: true, forView: vc.segmentedControl, withinSuperview: vc.view)
