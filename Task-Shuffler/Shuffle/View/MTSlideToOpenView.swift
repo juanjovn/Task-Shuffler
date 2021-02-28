@@ -195,7 +195,7 @@ import UIKit
         textLabel.centerYAnchor.constraint(equalTo: sliderHolderView.centerYAnchor).isActive = true
         leadingTextLabelConstraint = textLabel.leadingAnchor.constraint(equalTo: sliderHolderView.leadingAnchor, constant: textLabelLeadingDistance)
         leadingTextLabelConstraint?.isActive = true
-        textLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8).isActive = true
+        textLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Utils.screenWidth / 15).isActive = true
         // Setup for sliderTextLabel
         sliderTextLabel.topAnchor.constraint(equalTo: textLabel.topAnchor).isActive = true
         sliderTextLabel.centerYAnchor.constraint(equalTo: textLabel.centerYAnchor).isActive = true
