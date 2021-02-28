@@ -19,6 +19,8 @@ class GapsViewController: AMTabsViewController {
     @IBOutlet weak var segmentedControlBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var newGapButton: UIButton!
     @IBOutlet weak var newGapButtonBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var placeholderImageView: UIImageView!
+    
     var pullcontrol = UIRefreshControl()
     
     //Constants
@@ -44,6 +46,7 @@ class GapsViewController: AMTabsViewController {
         setupNavigationItems()
         setupSegmentedControl()
         setupTableView()
+        showOrHidePlaceHolderBackground()
         
         //print("Number of pending gaps = \(gapManager.pendingGaps.count)")
     }
@@ -104,6 +107,7 @@ class GapsViewController: AMTabsViewController {
         gapManager.fillGaps()
         refreshOutdated()
         tableView.reloadData()
+        showOrHidePlaceHolderBackground()
         //tableView.reloadSections(IndexSet(integersIn: 0...tableView.numberOfSections - 1), with: .fade)
         //print("❗️NOTIFIED in GAPS VIEW CONTROLLER!!! ")
     }
@@ -287,6 +291,18 @@ class GapsViewController: AMTabsViewController {
         
     }
     
+    private func showOrHidePlaceHolderBackground() {
+        if gapManager.checkPlaceholderGaps() {
+            UIView.animate(withDuration: 0.5, animations: {
+                self.placeholderImageView.alpha = 0.1
+            })
+        } else {
+            UIView.animate(withDuration: 0.5, animations: {
+                self.placeholderImageView.alpha = 0
+            })
+        }
+    }
+    
     @IBAction func newGapAction(_ sender: Any) {
         let newGapVC = NewGapVC()
         newGapVC.gapsVC = self
@@ -329,6 +345,12 @@ extension GapsViewController: SJFluidSegmentedControlDataSource, SJFluidSegmente
             let topIndex = IndexPath(row: 0, section: 0)
             tableView.scrollToRow(at: topIndex, at: .top, animated: true)
             tableView.reloadData()
+        }
+        
+        if toIndex == 0 {
+            showOrHidePlaceHolderBackground()
+        } else if toIndex == 1 {
+            placeholderImageView.alpha = 0
         }
         
     }
@@ -562,6 +584,8 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.deleteRows(at: [indexPath], with: .fade)
         db.updateData(object: updatedGap)
         hideAssignedIfEmpty()
+        
+        NotificationCenter.default.post(name: .didModifiedData, object: nil)
     }
     
     private func markTaskCompleted (gapid: String) {

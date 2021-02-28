@@ -30,6 +30,7 @@ struct NextToDoSwiftUIView: View {
     
     @SwiftUI.State fileprivate var taskList = NextToDoTask.calculateNextToDoTask()
     let taskListTest = [NextToDoTask(id: "1", name: "Tarea de prueba con doble linea", startTime: Calendar.current.currentDate, endTime: Calendar.current.currentDate, duration: 180, priority: .high)]
+    @SwiftUI.State fileprivate var showPlaceholder = false
     
     var body: some View {
         if #available(iOS 14.0, *) { //Hardcode solution because .listStyle(SidebarListStyle()) is only available in iOS 14 for removing the separator bar.
@@ -77,7 +78,7 @@ struct NextToDoSwiftUIView: View {
             }.onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
                 self.updateData()
                 //print("Enter foreground triggered! ❗️")
-            }//IOS 14
+            }.overlay(Image(systemName: "line.horizontal.3.decrease").resizable().aspectRatio(contentMode: .fit).frame(width: 200, height: 200, alignment: .center).foregroundColor(Color(.mysticBlue).opacity(showPlaceholder ? 0.15 : 0)))//IOS 14
         } else {
             List(){
                 if taskList.isEmpty { //This is  needed only in iOS 13. It crashed in the onAppear when the list was empty the first time gaps was shuffled.
@@ -129,7 +130,7 @@ struct NextToDoSwiftUIView: View {
             }.onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
                 self.updateData()
                 //print("Enter foreground triggered! ❗️")
-            }
+            }.overlay(Image(systemName: "line.horizontal.3.decrease").resizable().aspectRatio(contentMode: .fit).frame(width: 200, height: 200, alignment: .center).foregroundColor(Color(.mysticBlue).opacity(showPlaceholder ? 0.15 : 0)))
         }
     }
     
@@ -138,6 +139,11 @@ struct NextToDoSwiftUIView: View {
     
     func updateData() {
         taskList = NextToDoTask.calculateNextToDoTask()
+        if taskList.count == 0 {
+            showPlaceholder = true
+        } else {
+            showPlaceholder = false
+        }
     }
     
 }

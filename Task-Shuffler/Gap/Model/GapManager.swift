@@ -156,6 +156,16 @@ class GapManager {
         return Date() > currentGap.endDate
     }
     
+    
+    //Check if the placeholder background image should be displayed when there are no gaps showing in current view.
+    func checkPlaceholderGaps() -> Bool {
+        if pendingGaps.count == 0 && assignedGaps.count == 0 && filledGaps.count == 0 {
+            return true
+        } else {
+            return false
+        }
+    }
+    
     init() {
         fillGaps()
     }

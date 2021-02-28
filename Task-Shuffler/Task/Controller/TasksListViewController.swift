@@ -21,6 +21,7 @@ class TasksListViewController: AMTabsViewController {
     @IBOutlet weak var newTaskButtonBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var segmentedControlBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var segmentedControl: SJFluidSegmentedControl!
+    @IBOutlet weak var placeholderImageView: UIImageView!
     
     
     
@@ -64,6 +65,7 @@ class TasksListViewController: AMTabsViewController {
         setupTableView()
         setupNavigationBar()
         setupSegmentedControl()
+        setupPlaceholderImageView()
         //setupTips()
     }
     
@@ -129,9 +131,23 @@ class TasksListViewController: AMTabsViewController {
         
         fillTasks()
         self.tableView.reloadData()
+        showOrHidePlaceHolderBackground()
+        
         
         
         //print("❗️NOTIFIED onDataModified in TaskListViewController!!! ")
+    }
+    
+    private func showOrHidePlaceHolderBackground() {
+        if pendingTasks.count == 0 && assignedTasks.count == 0 {
+            UIView.animate(withDuration: 0.5, animations: {
+                self.placeholderImageView.alpha = 0.1
+            })
+        } else {
+            UIView.animate(withDuration: 0.5, animations: {
+                self.placeholderImageView.alpha = 0
+            })
+        }
     }
     
     private func setupNewTaskButton() {
@@ -269,6 +285,10 @@ class TasksListViewController: AMTabsViewController {
         segmentedControl.cornerRadius = segmentedControl.bounds.height / 2
     }
     
+    private func setupPlaceholderImageView() {
+        showOrHidePlaceHolderBackground()
+    }
+    
     //    func createTestTasks() {
     //        pendingTasks = [
     //
@@ -332,6 +352,8 @@ class TasksListViewController: AMTabsViewController {
         if segmentedControl.currentSegment > 0 {
             segmentedControl.setCurrentSegmentIndex(0, animated: true)
         }
+        
+        showOrHidePlaceHolderBackground()
     }
     
     public func replaceTask (task: Task, position: Int) {
@@ -532,6 +554,7 @@ extension TasksListViewController: UITableViewDelegate{
         db.deleteByPK(primaryKey: task.id, objectClass: TaskRealm.self)
         
         hideAssignedIfEmpty()
+        showOrHidePlaceHolderBackground()
     }
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -541,6 +564,7 @@ extension TasksListViewController: UITableViewDelegate{
                 (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
                 self.markCompleted(indexPath: indexPath)
                 //print("✅ Marcado completado")
+                self.showOrHidePlaceHolderBackground()
                 success(true)
             })
             swipeAction.image = UIGraphicsImageRenderer(size: CGSize(width: 26, height: 20)).image { _ in
@@ -753,6 +777,12 @@ extension TasksListViewController: SJFluidSegmentedControlDelegate {
             let topIndex = IndexPath(row: 0, section: 0)
             tableView.scrollToRow(at: topIndex, at: .top, animated: true)
             tableView.reloadData()
+        }
+        
+        if toIndex == 0 {
+            showOrHidePlaceHolderBackground()
+        } else if toIndex == 1 {
+            placeholderImageView.alpha = 0
         }
         
     }

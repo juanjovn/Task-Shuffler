@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -21,6 +22,11 @@
                                 <rect key="frame" x="0.0" y="96" width="375" height="571"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.15000000596046448" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fEV-91-m3o">
+                                <rect key="frame" x="37.5" y="297.5" width="301.5" height="170"/>
+                                <color key="tintColor" red="0.1333333333" green="0.21960784310000001" blue="0.26274509800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <imageReference key="image" image="calendar.badge.clock" catalog="system" symbolScale="default"/>
+                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2zZ-UP-CUJ" userLabel="FillView">
                                 <rect key="frame" x="0.0" y="657" width="375" height="10"/>
                                 <color key="backgroundColor" red="0.1333333333" green="0.21960784310000001" blue="0.26274509800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -83,13 +89,17 @@
                             <constraint firstItem="FHw-r7-UvB" firstAttribute="centerX" secondItem="sOJ-LN-tvB" secondAttribute="centerX" id="Das-X4-hft"/>
                             <constraint firstItem="wiO-6O-f3V" firstAttribute="centerX" secondItem="TJ2-4J-f2Y" secondAttribute="centerX" id="EkR-Pg-vBa"/>
                             <constraint firstItem="TJ2-4J-f2Y" firstAttribute="trailing" secondItem="sOJ-LN-tvB" secondAttribute="trailing" id="JYV-K2-SGk"/>
+                            <constraint firstItem="fEV-91-m3o" firstAttribute="height" secondItem="TJ2-4J-f2Y" secondAttribute="height" multiplier="0.299475" id="Mj2-D3-jHG"/>
                             <constraint firstItem="FHw-r7-UvB" firstAttribute="top" secondItem="sOJ-LN-tvB" secondAttribute="top" id="ONB-Yc-Hpp"/>
                             <constraint firstItem="TJ2-4J-f2Y" firstAttribute="leading" secondItem="sOJ-LN-tvB" secondAttribute="leading" id="Osd-H2-nop"/>
                             <constraint firstItem="2zZ-UP-CUJ" firstAttribute="width" secondItem="sOJ-LN-tvB" secondAttribute="width" id="PAN-Nr-eXz"/>
                             <constraint firstAttribute="bottom" secondItem="TJ2-4J-f2Y" secondAttribute="bottom" id="TH9-Qg-NmH"/>
                             <constraint firstItem="sOJ-LN-tvB" firstAttribute="bottom" secondItem="wiO-6O-f3V" secondAttribute="bottom" constant="80" id="UC8-VG-zFu"/>
                             <constraint firstItem="2zZ-UP-CUJ" firstAttribute="centerX" secondItem="sOJ-LN-tvB" secondAttribute="centerX" id="XtX-SP-lR4"/>
+                            <constraint firstItem="fEV-91-m3o" firstAttribute="width" secondItem="TJ2-4J-f2Y" secondAttribute="width" multiplier="0.8" id="YKW-u1-Nmi"/>
                             <constraint firstItem="FHw-r7-UvB" firstAttribute="width" secondItem="sOJ-LN-tvB" secondAttribute="width" id="bad-w4-dlW"/>
+                            <constraint firstItem="fEV-91-m3o" firstAttribute="centerX" secondItem="TJ2-4J-f2Y" secondAttribute="centerX" id="jtP-aA-GiQ"/>
+                            <constraint firstItem="fEV-91-m3o" firstAttribute="centerY" secondItem="TJ2-4J-f2Y" secondAttribute="centerY" id="kaX-jd-ylF"/>
                             <constraint firstItem="FHw-r7-UvB" firstAttribute="height" secondItem="sOJ-LN-tvB" secondAttribute="width" multiplier="1:10" id="yla-Uc-Mie"/>
                         </constraints>
                     </view>
@@ -97,6 +107,7 @@
                     <connections>
                         <outlet property="newGapButton" destination="wiO-6O-f3V" id="K8C-AV-E6f"/>
                         <outlet property="newGapButtonBottomConstraint" destination="UC8-VG-zFu" id="qcZ-AB-UQZ"/>
+                        <outlet property="placeholderImageView" destination="fEV-91-m3o" id="6VF-Ki-5XJ"/>
                         <outlet property="segmentedControl" destination="NUl-ew-JHq" id="97N-5X-9Kp"/>
                         <outlet property="segmentedControlBottomConstraint" destination="pPK-jh-JIm" id="MrZ-YZ-f46"/>
                         <outlet property="tableView" destination="TJ2-4J-f2Y" id="ncU-zJ-i0f"/>
@@ -313,6 +324,10 @@
                                 <rect key="frame" x="0.0" y="96" width="375" height="571"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.14999999999999999" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="text.badge.plus" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Pl7-cN-kRS">
+                                <rect key="frame" x="37.5" y="296" width="300" height="169"/>
+                                <color key="tintColor" red="0.1333333333" green="0.21960784310000001" blue="0.26274509800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YHx-ZN-FgW" userLabel="FillView">
                                 <rect key="frame" x="0.0" y="657" width="375" height="10"/>
                                 <color key="backgroundColor" red="0.1333333333" green="0.21960784310000001" blue="0.26274509800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -370,7 +385,10 @@
                         <viewLayoutGuide key="safeArea" id="Oi9-0p-9MJ"/>
                         <color key="backgroundColor" red="0.1333333333" green="0.21960784310000001" blue="0.26274509800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="Pl7-cN-kRS" firstAttribute="centerX" secondItem="drR-vR-BFd" secondAttribute="centerX" id="1lC-v8-E11"/>
+                            <constraint firstItem="Pl7-cN-kRS" firstAttribute="centerY" secondItem="drR-vR-BFd" secondAttribute="centerY" id="48n-V5-4AZ"/>
                             <constraint firstItem="drR-vR-BFd" firstAttribute="top" secondItem="s5V-zp-QGi" secondAttribute="top" id="Eoa-SJ-NwL"/>
+                            <constraint firstItem="Pl7-cN-kRS" firstAttribute="width" secondItem="drR-vR-BFd" secondAttribute="width" multiplier="0.8" id="IP1-su-9Vp"/>
                             <constraint firstItem="drR-vR-BFd" firstAttribute="bottom" secondItem="YHx-ZN-FgW" secondAttribute="bottom" id="Ie5-qq-KFC"/>
                             <constraint firstItem="s5V-zp-QGi" firstAttribute="trailing" secondItem="drR-vR-BFd" secondAttribute="trailing" id="KLE-9j-eQc"/>
                             <constraint firstItem="YHx-ZN-FgW" firstAttribute="centerX" secondItem="drR-vR-BFd" secondAttribute="centerX" id="MXU-l3-Yke"/>
@@ -383,12 +401,14 @@
                             <constraint firstItem="drR-vR-BFd" firstAttribute="leading" secondItem="s5V-zp-QGi" secondAttribute="leading" id="lYN-eV-G8A"/>
                             <constraint firstItem="s5V-zp-QGi" firstAttribute="height" secondItem="s1Q-l0-V7B" secondAttribute="width" multiplier="1:10" id="rcV-Ww-6AD"/>
                             <constraint firstItem="hW7-Hr-s8P" firstAttribute="centerX" secondItem="s1Q-l0-V7B" secondAttribute="centerX" id="vcw-vY-q0L"/>
+                            <constraint firstItem="Pl7-cN-kRS" firstAttribute="height" secondItem="drR-vR-BFd" secondAttribute="height" multiplier="0.3" id="yao-Cc-rUq"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Tasks" id="RgV-61-hod"/>
                     <connections>
                         <outlet property="newTaskButton" destination="hW7-Hr-s8P" id="yro-Ui-VEo"/>
                         <outlet property="newTaskButtonBottomConstraint" destination="fdP-3U-jPn" id="zxU-1u-z0g"/>
+                        <outlet property="placeholderImageView" destination="Pl7-cN-kRS" id="lgV-7g-qo0"/>
                         <outlet property="segmentedControl" destination="vC2-CB-gc4" id="2Lr-9t-dzL"/>
                         <outlet property="segmentedControlBottomConstraint" destination="eF1-Pd-YhW" id="bQA-13-UWF"/>
                         <outlet property="tableView" destination="drR-vR-BFd" id="xRp-Tv-v1K"/>
@@ -467,6 +487,8 @@
         </designable>
     </designables>
     <resources>
+        <image name="calendar.badge.clock" catalog="system" width="128" height="108"/>
+        <image name="text.badge.plus" catalog="system" width="128" height="109"/>
         <systemColor name="scrollViewTexturedBackgroundColor">
             <color red="0.43529411764705878" green="0.44313725490196082" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
