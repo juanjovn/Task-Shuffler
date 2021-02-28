@@ -48,7 +48,7 @@ class HorizontalCollectionVC: UICollectionViewController {
         switch indexPath.row {
         case 0:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: weekCellReuseIdentifier, for: indexPath) as! CollectionViewCell
-            cell.labelText = "This Week"
+            cell.labelText = "This Week".localized()
             cell.nextButton.addTarget(self, action: #selector(nextButtonAction), for: .touchUpInside)
             cell.backButton.isHidden = true
             cell.nextButton.isHidden = false
@@ -61,7 +61,7 @@ class HorizontalCollectionVC: UICollectionViewController {
             return cell
         case 1:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: weekCellReuseIdentifier, for: indexPath) as! CollectionViewCell
-            cell.labelText = "Next Week"
+            cell.labelText = "Next Week".localized()
             cell.backButton.addTarget(self, action: #selector(backButtonAction), for: .touchUpInside)
             cell.backButton.isHidden = false
             cell.nextButton.isHidden = true
@@ -199,7 +199,7 @@ class HorizontalCollectionVC: UICollectionViewController {
     }
     
     @objc private func nextButtonAction () {
-        print ("Next Week touched!")
+        //print ("Next Week touched!")
         let generator = UIImpactFeedbackGenerator(style: .medium)
         if SettingsValues.otherSettings[0] {
             generator.impactOccurred()
@@ -208,7 +208,7 @@ class HorizontalCollectionVC: UICollectionViewController {
     }
     
     @objc private func backButtonAction () {
-        print ("Previous Week touched!")
+        //print ("Previous Week touched!")
         let generator = UIImpactFeedbackGenerator(style: .medium)
         if SettingsValues.otherSettings[0] {
             generator.impactOccurred()
@@ -217,18 +217,29 @@ class HorizontalCollectionVC: UICollectionViewController {
     }
     
     private func setupNotificationCenter() {
-        NotificationCenter.default.addObserver(self, selector: #selector(onDataModified), name: .didModifiedData, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(onDataModified), name: .didModifiedData, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(willEnterForeground),
+                                               name: UIApplication.willEnterForegroundNotification,
+                                                   object: nil)
     }
     
     @objc func onDataModified () {
-        for cell in self.collectionView.visibleCells {
-            if let cell = cell as? CollectionViewCell {
-                cell.calendarVC.deleteAllEvents()
-                cell.calendarVC.setupFakeEvent()
-            }
-             }
+//        for cell in self.collectionView.visibleCells {
+//            if let cell = cell as? CollectionViewCell {
+//                cell.calendarVC.deleteAllEvents()
+//                cell.calendarVC.setupFakeEvent()
+//                if cell.weekLabel.text == "Next Week" {
+//                    self.collectionView.reloadItems(at: [IndexPath(row: 1, section: 0)])
+//                } else {
+//                    self.collectionView.reloadItems(at: [IndexPath(row: 0, section: 0)])
+//                }
+//            }
+//             }
+//        print("Collection's view data reloaded from notification ❗️")
+    }
+    
+    @objc func willEnterForeground () {
         self.collectionView.reloadData()
-        print("Collection's view data reloaded from notification ❗️")
     }
 
 }
@@ -239,6 +250,6 @@ extension HorizontalCollectionVC: UICollectionViewDelegateFlowLayout {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath)
+        //print(indexPath)
     }
 }

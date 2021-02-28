@@ -16,8 +16,8 @@ class NewGapVC: UIViewController {
     let contentView = UIView()
     let datePicker = DatePickerVC()
     let timePicker = TimePickerVC()
-    let fromDisplayTimeView = DisplayTime(text: "From")!
-    let toDisplayTimeView = DisplayTime(text: "To")!
+    let fromDisplayTimeView = DisplayTime(text: "From".localized())!
+    let toDisplayTimeView = DisplayTime(text: "To".localized())!
     let dateLabel = UILabel()
     let dateEditLabel = UILabel()
     let strikeThroughLine = UIView()
@@ -91,7 +91,7 @@ class NewGapVC: UIViewController {
     }
     
     private func setupDateLabel() {
-        dateLabel.text = isEditing ? "Edit gap:" : "Select a day"
+        dateLabel.text = isEditing ? "Edit gap:".localized() : "Select a day".localized()
         //print(self.editedGap.description)
         dateLabel.font = .avenirDemiBold(ofSize: UIFont.scaleFont(30))
         view.addSubview(dateLabel)
@@ -129,7 +129,7 @@ class NewGapVC: UIViewController {
     }
     
     private func setupCloseButton() {
-        closeButton.setTitle("Cancel", for: .normal)
+        closeButton.setTitle("Cancel".localized(), for: .normal)
         closeButton.setTitleColor(UIColor.bone, for: .normal)
         closeButton.setTitleColor(UIColor.bone.withAlphaComponent(0.35), for: .highlighted)
         view.addSubview(closeButton)
@@ -151,7 +151,7 @@ class NewGapVC: UIViewController {
         nextButton.backgroundColor = .bone
         nextButton.setTitleColor(UIColor.mysticBlue.withAlphaComponent(0.2), for: .normal)
         nextButton.setTitleColor(UIColor.pearlWhite.withAlphaComponent(0.2), for: .highlighted)
-        nextButton.setTitle(">", for: .normal)
+        nextButton.setTitle("➜", for: .normal)
         nextButton.titleLabel?.font = .avenirDemiBold(ofSize: UIFont.scaleFont(25))
         
         view.addSubview(nextButton)
@@ -262,9 +262,9 @@ class NewGapVC: UIViewController {
             
             let startDate = Calendar.current.date(bySettingHour: hour, minute: minute, second: 0, of: newGap.startDate)!
             if startDate < Date() {
-                Alert.errorInformation(title: "Error", message: "The gap must start later than current time", vc: self, handler: nil)
+                Alert.errorInformation(title: "Error", message: "The gap must start later than current time".localized(), vc: self, handler: nil)
             } else {
-                nextButton.setTitle(">", for: .normal)
+                nextButton.setTitle("➜", for: .normal)
                 self.toDisplayTimeView.fromHourLabel.text = self.fromDisplayTimeView.fromHourLabel.text
                 self.toDisplayTimeView.fromMinuteLabel.text = self.fromDisplayTimeView.fromMinuteLabel.text
                 UIView.animate(withDuration: 0.3,animations: {
@@ -288,14 +288,19 @@ class NewGapVC: UIViewController {
             minute = Int(toDisplayTimeView.fromMinuteLabel.text!)!
             newGap.endDate = Calendar.current.date(bySettingHour: hour, minute: minute, second: 0, of: newGap.endDate)!
             if newGap.duration < 10 {
-                Alert.errorInformation(title: "Error", message: "The gap must end later than start time", vc: self, handler: nil)
+                if newGap.duration < 0 {
+                    Alert.errorInformation(title: "Error", message: "The gap must end later than start time".localized(), vc: self, handler: nil)
+                } else {
+                    Alert.errorInformation(title: "Error", message: "The gap must have at least a duration of 10 minutes".localized(), vc: self, handler: nil)
+                }
+                
             } else {
                 let predicate = NSPredicate(format: "startDate < %@ AND %@ < endDate", newGap.endDate as CVarArg, newGap.startDate as CVarArg)
                 let results = gapsVC?.db.getData(objectClass: GapRealm.self).filter(predicate)
                 if let overlapedGap = results?.first as? GapRealm {
                     if isEditing {
                         if overlapedGap.id != editedGap.id {
-                            Alert.errorInformation(title: "Error", message: "The current gap overlaps with an existing gap at \(Utils.formatDate(datePattern: "HH:mm", date: overlapedGap.startDate)) - \(Utils.formatDate(datePattern: "HH:mm", date: overlapedGap.endDate))", vc: self, handler: nil)
+                            Alert.errorInformation(title: "Error", message: "The current gap overlaps with an existing gap at ".localized() + "\(Utils.formatDate(datePattern: "HH:mm", date: overlapedGap.startDate)) - \(Utils.formatDate(datePattern: "HH:mm", date: overlapedGap.endDate))", vc: self, handler: nil)
                         } else {
                             do {
                                 try gapsVC?.db.realm.write{
@@ -314,7 +319,7 @@ class NewGapVC: UIViewController {
                         
                     } else {
                         
-                        Alert.errorInformation(title: "Error", message: "The current gap overlaps with an existing gap at \(Utils.formatDate(datePattern: "HH:mm", date: overlapedGap.startDate)) - \(Utils.formatDate(datePattern: "HH:mm", date: overlapedGap.endDate))", vc: self, handler: nil)
+                        Alert.errorInformation(title: "Error", message: "The current gap overlaps with an existing gap at ".localized() + "\(Utils.formatDate(datePattern: "HH:mm", date: overlapedGap.startDate)) - \(Utils.formatDate(datePattern: "HH:mm", date: overlapedGap.endDate))", vc: self, handler: nil)
                     }
                 } else {
                     if isEditing {
@@ -355,7 +360,7 @@ class NewGapVC: UIViewController {
                 self.toDisplayTimeView.alpha = 0
                 self.fromDisplayTimeView.fromTimeContainerView.alpha = 0.8
                 self.fromDisplayTimeView.alpha = 1
-                self.nextButton.setTitle(">", for: .normal)
+                self.nextButton.setTitle("➜", for: .normal)
             }
             let hour = Int(fromDisplayTimeView.fromHourLabel.text!)!
             let minute = Int(fromDisplayTimeView.fromMinuteLabel.text!)! / 5

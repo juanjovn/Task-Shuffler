@@ -12,13 +12,13 @@
 		810762A225CC462100F1758B /* EasterEggModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810762A125CC462100F1758B /* EasterEggModalView.swift */; };
 		810762A525CC464700F1758B /* EasterEggVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810762A425CC464700F1758B /* EasterEggVC.swift */; };
 		810762B525CC50F500F1758B /* cat_loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = 810762B425CC50F500F1758B /* cat_loading.gif */; };
-		810762B825CC55B600F1758B /* cat.gif in Resources */ = {isa = PBXBuildFile; fileRef = 810762B725CC55B600F1758B /* cat.gif */; };
 		810762C825CC6B4600F1758B /* GifFileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810762C725CC6B4600F1758B /* GifFileProvider.swift */; };
 		810762CC25CC771200F1758B /* SwiftyGif in Frameworks */ = {isa = PBXBuildFile; productRef = 810762CB25CC771200F1758B /* SwiftyGif */; };
 		8107630125CDA63B00F1758B /* ReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8107630025CDA63B00F1758B /* ReviewManager.swift */; };
 		8107631325CDC6FC00F1758B /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8107631225CDC6FC00F1758B /* NotificationManager.swift */; };
 		811601A625C6E5CF00E47525 /* FactoryResetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811601A525C6E5CF00E47525 /* FactoryResetVC.swift */; };
 		811601A925C6EA1200E47525 /* FactoryResetModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811601A825C6EA1200E47525 /* FactoryResetModalView.swift */; };
+		811720A625EACC81009AC681 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 811720A825EACC81009AC681 /* Localizable.strings */; };
 		811880A6243515BC00E5FEE1 /* DeviceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811880A5243515BC00E5FEE1 /* DeviceModel.swift */; };
 		813490BF25C89583004DF3D7 /* TrashIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813490BE25C89583004DF3D7 /* TrashIconView.swift */; };
 		8146988B25865C3E00D7BCE1 /* Pods_Task_Shuffler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C313B2D615F94E260304E37 /* Pods_Task_Shuffler.framework */; };
@@ -55,6 +55,7 @@
 		819970A525A0F958004D48C3 /* ModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819970A425A0F958004D48C3 /* ModalView.swift */; };
 		819970A825A0FEDA004D48C3 /* NowShuffleResultsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819970A725A0FEDA004D48C3 /* NowShuffleResultsVC.swift */; };
 		819ABED325C9815D0062AF87 /* NextToDoSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 819ABED225C9815D0062AF87 /* NextToDoSwiftUIView.swift */; };
+		81A7C65125EC07FA00AF5288 /* PaperOnboarding in Frameworks */ = {isa = PBXBuildFile; productRef = 81A7C65025EC07FA00AF5288 /* PaperOnboarding */; };
 		81AB5D6A2476F915009ADB97 /* HorizontalCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB5D692476F915009ADB97 /* HorizontalCollectionVC.swift */; };
 		81AB5D6C24770D01009ADB97 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB5D6B24770D01009ADB97 /* CollectionViewCell.swift */; };
 		81C2A17D25A38B1D00F9A53F /* ShuffleConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C2A17C25A38B1D00F9A53F /* ShuffleConfiguration.swift */; };
@@ -103,12 +104,18 @@
 		810762A125CC462100F1758B /* EasterEggModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasterEggModalView.swift; sourceTree = "<group>"; };
 		810762A425CC464700F1758B /* EasterEggVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasterEggVC.swift; sourceTree = "<group>"; };
 		810762B425CC50F500F1758B /* cat_loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = cat_loading.gif; sourceTree = "<group>"; };
-		810762B725CC55B600F1758B /* cat.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = cat.gif; sourceTree = "<group>"; };
 		810762C725CC6B4600F1758B /* GifFileProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifFileProvider.swift; sourceTree = "<group>"; };
-		8107630025CDA63B00F1758B /* ReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewManager.swift; sourceTree = SOURCE_ROOT; };
+		8107630025CDA63B00F1758B /* ReviewManager.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; path = ReviewManager.swift; sourceTree = "<group>"; };
 		8107631225CDC6FC00F1758B /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		811601A525C6E5CF00E47525 /* FactoryResetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryResetVC.swift; sourceTree = "<group>"; };
 		811601A825C6EA1200E47525 /* FactoryResetModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactoryResetModalView.swift; sourceTree = "<group>"; };
+		8117209D25EACB4F009AC681 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Main.strings; sourceTree = "<group>"; };
+		8117209E25EACB4F009AC681 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		811720A025EACB8A009AC681 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/Main.strings"; sourceTree = "<group>"; };
+		811720A125EACB8A009AC681 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		811720A725EACC81009AC681 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		811720AA25EACC92009AC681 /* es-419 */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-419"; path = "es-419.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		811720AC25EACCBA009AC681 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		811880A5243515BC00E5FEE1 /* DeviceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceModel.swift; sourceTree = "<group>"; };
 		813490BE25C89583004DF3D7 /* TrashIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashIconView.swift; sourceTree = "<group>"; };
 		815204EE245E9A1E0004510B /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
@@ -192,6 +199,7 @@
 			files = (
 				8146988B25865C3E00D7BCE1 /* Pods_Task_Shuffler.framework in Frameworks */,
 				810762CC25CC771200F1758B /* SwiftyGif in Frameworks */,
+				81A7C65125EC07FA00AF5288 /* PaperOnboarding in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,16 +251,8 @@
 			children = (
 				8170DD7D2467FF0F0060725D /* Controller */,
 				8170DD7C2467FF090060725D /* View */,
-				8170DD7B2467FF010060725D /* Model */,
 			);
 			path = TimePicker;
-			sourceTree = "<group>";
-		};
-		8170DD7B2467FF010060725D /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		8170DD7C2467FF090060725D /* View */ = {
@@ -299,7 +299,6 @@
 		81E9B1322405BEE400BBADB8 = {
 			isa = PBXGroup;
 			children = (
-				810762B725CC55B600F1758B /* cat.gif */,
 				810762B425CC50F500F1758B /* cat_loading.gif */,
 				81E9B13D2405BEE400BBADB8 /* Task-Shuffler */,
 				81E9B13C2405BEE400BBADB8 /* Products */,
@@ -332,6 +331,7 @@
 				811880A42435157E00E5FEE1 /* Utils */,
 				81E9B13E2405BEE400BBADB8 /* AppDelegate.swift */,
 				81E9B1472405BEE600BBADB8 /* Assets.xcassets */,
+				811720A825EACC81009AC681 /* Localizable.strings */,
 				81E9B14C2405BEE600BBADB8 /* Info.plist */,
 			);
 			path = "Task-Shuffler";
@@ -632,6 +632,7 @@
 			name = "Task-Shuffler";
 			packageProductDependencies = (
 				810762CB25CC771200F1758B /* SwiftyGif */,
+				81A7C65025EC07FA00AF5288 /* PaperOnboarding */,
 			);
 			productName = "Task-Shuffler";
 			productReference = 81E9B13B2405BEE400BBADB8 /* Task Shuffler.app */;
@@ -659,10 +660,13 @@
 			knownRegions = (
 				en,
 				Base,
+				es,
+				"es-419",
 			);
 			mainGroup = 81E9B1322405BEE400BBADB8;
 			packageReferences = (
 				810762CA25CC771200F1758B /* XCRemoteSwiftPackageReference "SwiftyGif" */,
+				81A7C64F25EC07FA00AF5288 /* XCRemoteSwiftPackageReference "paper-onboarding" */,
 			);
 			productRefGroup = 81E9B13C2405BEE400BBADB8 /* Products */;
 			projectDirPath = "";
@@ -681,8 +685,8 @@
 				810762B525CC50F500F1758B /* cat_loading.gif in Resources */,
 				81C90B5F246492BC001C06B4 /* NewGapVC.xib in Resources */,
 				81C90B552461D080001C06B4 /* GapCell.xib in Resources */,
-				810762B825CC55B600F1758B /* cat.gif in Resources */,
 				81ED3A85244DEFD400C36DB8 /* TaskCell.xib in Resources */,
+				811720A625EACC81009AC681 /* Localizable.strings in Resources */,
 				81E9B14B2405BEE600BBADB8 /* LaunchScreen.storyboard in Resources */,
 				81E9B1482405BEE600BBADB8 /* Assets.xcassets in Resources */,
 				81E9B1462405BEE400BBADB8 /* Main.storyboard in Resources */,
@@ -819,10 +823,22 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		811720A825EACC81009AC681 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				811720A725EACC81009AC681 /* es */,
+				811720AA25EACC92009AC681 /* es-419 */,
+				811720AC25EACCBA009AC681 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		81E9B1442405BEE400BBADB8 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				81E9B1452405BEE400BBADB8 /* Base */,
+				8117209D25EACB4F009AC681 /* es */,
+				811720A025EACB8A009AC681 /* es-419 */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -831,6 +847,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				81E9B14A2405BEE600BBADB8 /* Base */,
+				8117209E25EACB4F009AC681 /* es */,
+				811720A125EACB8A009AC681 /* es-419 */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -842,6 +860,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -903,6 +922,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -960,6 +980,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 52SFG8NL7R;
 				INFOPLIST_FILE = "Task-Shuffler/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -967,6 +988,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.juanjovn.Task-Shuffler";
 				PRODUCT_NAME = "Task Shuffler";
 				SWIFT_VERSION = 5.0;
@@ -980,6 +1002,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 52SFG8NL7R;
 				INFOPLIST_FILE = "Task-Shuffler/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -987,6 +1010,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.juanjovn.Task-Shuffler";
 				PRODUCT_NAME = "Task Shuffler";
 				SWIFT_VERSION = 5.0;
@@ -1026,6 +1050,14 @@
 				minimumVersion = 5.4.0;
 			};
 		};
+		81A7C64F25EC07FA00AF5288 /* XCRemoteSwiftPackageReference "paper-onboarding" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Ramotion/paper-onboarding.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.1.5;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1033,6 +1065,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 810762CA25CC771200F1758B /* XCRemoteSwiftPackageReference "SwiftyGif" */;
 			productName = SwiftyGif;
+		};
+		81A7C65025EC07FA00AF5288 /* PaperOnboarding */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 81A7C64F25EC07FA00AF5288 /* XCRemoteSwiftPackageReference "paper-onboarding" */;
+			productName = PaperOnboarding;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -72,7 +72,7 @@ class ShuffleView: UIView {
     }
     
     private func setupHowLabel() {
-        howLabel.text = "How"
+        howLabel.text = "How".localized()
         howLabel.font = .avenirDemiBold(ofSize: UIFont.scaleFont(35))
         self.addSubview(howLabel)
         
@@ -84,7 +84,7 @@ class ShuffleView: UIView {
     }
     
     private func setupWhenLabel() {
-        whenLabel.text = "When"
+        whenLabel.text = "When".localized()
         whenLabel.font = .avenirDemiBold(ofSize: UIFont.scaleFont(35))
         self.addSubview(whenLabel)
         

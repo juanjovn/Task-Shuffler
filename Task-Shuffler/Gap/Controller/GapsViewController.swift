@@ -19,6 +19,8 @@ class GapsViewController: AMTabsViewController {
     @IBOutlet weak var segmentedControlBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var newGapButton: UIButton!
     @IBOutlet weak var newGapButtonBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var placeholderImageView: UIImageView!
+    
     var pullcontrol = UIRefreshControl()
     
     //Constants
@@ -44,8 +46,9 @@ class GapsViewController: AMTabsViewController {
         setupNavigationItems()
         setupSegmentedControl()
         setupTableView()
+        showOrHidePlaceHolderBackground()
         
-        print("Number of pending gaps = \(gapManager.pendingGaps.count)")
+        //print("Number of pending gaps = \(gapManager.pendingGaps.count)")
     }
     
     //MARK: viewWillAppear
@@ -85,8 +88,8 @@ class GapsViewController: AMTabsViewController {
         }
         
         gapManager.fillGaps()
-        print("GapManager refilled ⬆️")
-        print("Number of pending gaps = \(gapManager.pendingGaps.count)")
+        //print("GapManager refilled ⬆️")
+        //print("Number of pending gaps = \(gapManager.pendingGaps.count)")
         NotificationCenter.default.post(name: .didModifiedData, object: nil)
     }
     
@@ -104,8 +107,9 @@ class GapsViewController: AMTabsViewController {
         gapManager.fillGaps()
         refreshOutdated()
         tableView.reloadData()
+        showOrHidePlaceHolderBackground()
         //tableView.reloadSections(IndexSet(integersIn: 0...tableView.numberOfSections - 1), with: .fade)
-        //print("❗️NOTIFIED!!! ")
+        //print("❗️NOTIFIED in GAPS VIEW CONTROLLER!!! ")
     }
     
     private func test(){
@@ -145,16 +149,16 @@ class GapsViewController: AMTabsViewController {
     }
     
     @objc func sortButtonAction(){
-        let sortMenu = UIAlertController(title: "Sort by", message: nil, preferredStyle: .actionSheet)
-        let sortByDateAction = UIAlertAction(title: "Date", style: .default, handler: {
+        let sortMenu = UIAlertController(title: "Sort by".localized(), message: nil, preferredStyle: .actionSheet)
+        let sortByDateAction = UIAlertAction(title: "Date".localized(), style: .default, handler: {
             action in
             self.sortActions(sortType: .date)
         })
-        let sortByDurationAction = UIAlertAction(title: "Duration", style: .default, handler: {
+        let sortByDurationAction = UIAlertAction(title: "Duration".localized(), style: .default, handler: {
             action in
             self.sortActions(sortType: .duration)
         })
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        let cancelAction = UIAlertAction(title: "Cancel".localized(), style: .cancel)
         
         
         sortMenu.addAction(sortByDateAction)
@@ -287,6 +291,18 @@ class GapsViewController: AMTabsViewController {
         
     }
     
+    private func showOrHidePlaceHolderBackground() {
+        if gapManager.checkPlaceholderGaps() {
+            UIView.animate(withDuration: 0.5, animations: {
+                self.placeholderImageView.alpha = 0.1
+            })
+        } else {
+            UIView.animate(withDuration: 0.5, animations: {
+                self.placeholderImageView.alpha = 0
+            })
+        }
+    }
+    
     @IBAction func newGapAction(_ sender: Any) {
         let newGapVC = NewGapVC()
         newGapVC.gapsVC = self
@@ -331,6 +347,12 @@ extension GapsViewController: SJFluidSegmentedControlDataSource, SJFluidSegmente
             tableView.reloadData()
         }
         
+        if toIndex == 0 {
+            showOrHidePlaceHolderBackground()
+        } else if toIndex == 1 {
+            placeholderImageView.alpha = 0
+        }
+        
     }
     
 }
@@ -354,7 +376,7 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func hideButton() {
-        UIView.animate(withDuration: 0.5) {
+        UIView.animate(withDuration: 0.3) {
             self.newGapButton.alpha = 0
             self.newGapButtonBottomConstraint.constant = 0
             self.segmentedControl.alpha = 0
@@ -369,7 +391,7 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func showButton() {
-        UIView.animate(withDuration: 0.3) {
+        UIView.animate(withDuration: 0.15) {
             self.newGapButton.alpha = 1
             self.newGapButtonBottomConstraint.constant = 80
             self.segmentedControl.alpha = 1
@@ -394,7 +416,7 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             if (SettingsValues.taskSettings[1]){
-                Alert.confirmation(title: "Confirm delete?", message: nil, vc: self, handler: {_ in
+                Alert.confirmation(title: "Confirm delete?".localized(), message: nil, vc: self, handler: {_ in
                     self.deleteGap(indexPath)
                 })
             } else {
@@ -410,7 +432,7 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
         case 0:
             if segmentedControl.currentSegment == 0 {
                 gap = gapManager.pendingGaps[indexPath.row]
-                print(gap.description)
+                //print(gap.description)
                 gapManager.pendingGaps.remove(at: indexPath.row)
             } else {
                 gap = gapManager.completedGaps[indexPath.row]
@@ -431,7 +453,7 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
                         if segmentedControl.currentSegment == 0 {
                             task.state = State.pending.rawValue
                         }
-                        print("Updated object: \(task.description)")
+                        //print("Updated object: \(task.description)")
                     }
                 } catch {
                     print("Error writing update to database")
@@ -456,7 +478,7 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
                     try db.realm.write{
                         task.gapid = ""
                         task.state = State.pending.rawValue
-                        print("Updated object: \(task.description)")
+                        //print("Updated object: \(task.description)")
                     }
                 } catch {
                     print("Error writing update to database")
@@ -474,7 +496,7 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
 
         tableView.deleteRows(at: [indexPath], with: .fade)
         db.deleteData(object: gap)
-        print("Number of pending gaps = \(gapManager.pendingGaps.count)")
+        //print("Number of pending gaps = \(gapManager.pendingGaps.count)")
         NotificationCenter.default.post(name: .didModifiedData, object: nil)
 
         hideAssignedIfEmpty()
@@ -492,7 +514,7 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
             swipeAction = UIContextualAction(style: .normal, title: "✓", handler: {
                 (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
                 self.markCompleted(indexPath: indexPath)
-                print("✅ Marcado completado")
+                //print("✅ Marcado completado")
                 success(true)
             })
             swipeAction.image = UIGraphicsImageRenderer(size: CGSize(width: 26, height: 20)).image { _ in
@@ -517,27 +539,20 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        if indexPath.section == 0 && segmentedControl.currentSegment == 0{
-//            isTaskEditing = true
-//            performSegue(withIdentifier: "newTaskSegue", sender: tableView)
-//        }
-//
-        tableView.deselectRow(at: indexPath, animated: true)
-        let newGapVC = NewGapVC()
-        newGapVC.gapsVC = self
-        newGapVC.isEditing = true
-        switch segmentedControl.currentSegment {
-        case 1:
-            newGapVC.editedGap = gapManager.completedGaps[indexPath.row]
-        case 0:
+        
+        if segmentedControl.currentSegment == 0 {
             if indexPath.section == 0 {
+                tableView.deselectRow(at: indexPath, animated: true)
+                let newGapVC = NewGapVC()
+                newGapVC.gapsVC = self
+                newGapVC.isEditing = true
                 newGapVC.editedGap = gapManager.pendingGaps[indexPath.row]
+                present(newGapVC, animated: true, completion: nil)
+            } else {
+                tableView.cellForRow(at: indexPath)?.selectionStyle = .none
             }
-        default:
-            break
-        }
-        if indexPath.section == 0 {
-            present(newGapVC, animated: true, completion: nil)
+        } else {
+            tableView.cellForRow(at: indexPath)?.selectionStyle = .none
         }
     }
     
@@ -569,6 +584,8 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.deleteRows(at: [indexPath], with: .fade)
         db.updateData(object: updatedGap)
         hideAssignedIfEmpty()
+        
+        NotificationCenter.default.post(name: .didModifiedData, object: nil)
     }
     
     private func markTaskCompleted (gapid: String) {
@@ -642,9 +659,9 @@ extension GapsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let firstSectionTitle: String = segmentedControl.currentSegment == 0 ? "Free" : "Completed"
-        let secondSectionTitle: String = segmentedControl.currentSegment == 0 ? "Assigned" : "Outdated"
-        let thirdSectionTitle: String = segmentedControl.currentSegment == 0 ? "Filled" : ""
+        let firstSectionTitle: String = segmentedControl.currentSegment == 0 ? "Free".localized() : "Completed".localized()
+        let secondSectionTitle: String = segmentedControl.currentSegment == 0 ? "Assigned".localized() : "Outdated".localized()
+        let thirdSectionTitle: String = segmentedControl.currentSegment == 0 ? "Filled".localized() : ""
         switch section {
         case 0:
             return firstSectionTitle

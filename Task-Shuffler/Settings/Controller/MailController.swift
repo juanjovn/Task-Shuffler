@@ -16,7 +16,7 @@ class MailController: ViewController, MFMailComposeViewControllerDelegate {
             let mail = MFMailComposeViewController()
             mail.mailComposeDelegate = self
             mail.setToRecipients(["juanjovn@gmail.com"])
-            mail.setSubject("Suggestions about Task Shuffler")
+            mail.setSubject("Suggestions about Task Shuffler".localized())
 
             present(mail, animated: true)
         } else {
@@ -32,6 +32,6 @@ class MailController: ViewController, MFMailComposeViewControllerDelegate {
     }
     
     deinit {
-        print("Deinit MailController ✉️")
+        //print("Deinit MailController ✉️")
     }
 }

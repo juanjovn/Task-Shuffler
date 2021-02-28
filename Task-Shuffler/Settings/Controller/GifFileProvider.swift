@@ -19,7 +19,7 @@ class GifFileProvider {
         let task = URLSession.shared.downloadTask(with: catsURL) { localURL, urlResponse, error in
             if let localURL = localURL {
                 if let string = try? String(contentsOf: localURL) {
-                    print(string)
+                    //print(string)
                 }
             }
         }

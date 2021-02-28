@@ -9,6 +9,6 @@
 import Foundation
 
 class ShuffleModes {
-    static let howModes = ["Smart", "Random", "Single"]
-    static let whenModes = ["All", "This", "Next", "Now"]
+    static let howModes = ["Smart".localized(), "Random".localized(), "Single".localized()]
+    static let whenModes = ["All".localized(), "This".localized(), "Next".localized(), "Now".localized()]
 }

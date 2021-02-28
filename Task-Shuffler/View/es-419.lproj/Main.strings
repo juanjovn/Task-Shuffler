@@ -1,0 +1,33 @@
+
+/* Class = "UILabel"; text = "Duration"; ObjectID = "6sJ-9S-Hn2"; */
+"6sJ-9S-Hn2.text" = "Duración";
+
+/* Class = "UIViewController"; title = "Tasks"; ObjectID = "E20-oo-eoh"; */
+"E20-oo-eoh.title" = "Tareas";
+
+/* Class = "UILabel"; text = "Priority"; ObjectID = "FFv-QV-uJS"; */
+"FFv-QV-uJS.text" = "Prioridad";
+
+/* Class = "UINavigationItem"; title = "Tasks"; ObjectID = "RgV-61-hod"; */
+"RgV-61-hod.title" = "Tareas";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "dU6-YS-Aub"; */
+"dU6-YS-Aub.normalTitle" = "Cancelar";
+
+/* Class = "UILabel"; text = "MAX LENGTH REACHED!"; ObjectID = "e9e-cH-PUs"; */
+"e9e-cH-PUs.text" = "LONGITUD MÁXIMA!";
+
+/* Class = "UIButton"; normalTitle = "+"; ObjectID = "hW7-Hr-s8P"; */
+"hW7-Hr-s8P.normalTitle" = "+";
+
+/* Class = "UINavigationItem"; title = "Gaps"; ObjectID = "oCX-y3-nCK"; */
+"oCX-y3-nCK.title" = "Huecos";
+
+/* Class = "UIButton"; normalTitle = "+"; ObjectID = "wiO-6O-f3V"; */
+"wiO-6O-f3V.normalTitle" = "+";
+
+/* Class = "UIButton"; normalTitle = "OK"; ObjectID = "xBG-74-0Nf"; */
+"xBG-74-0Nf.normalTitle" = "OK";
+
+/* Class = "UINavigationItem"; title = "Schedule"; ObjectID = "yf9-Qc-mKM"; */
+"yf9-Qc-mKM.title" = "Calendario";

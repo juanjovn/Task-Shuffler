@@ -87,6 +87,85 @@ class GapManager {
         }
     }
     
+    func refreshOutdated() {
+        let db = DatabaseManager()
+        
+        var isChanged = false
+        
+        if pendingGaps.count > 0 {
+            for gap in pendingGaps {
+                if checkOutdated(currentGap: gap) {
+                    isChanged = true
+                    do {
+                        try db.realm.write{
+                            gap.state = State.outdated.rawValue
+                        }
+                    } catch {
+                        print("Error updating to database")
+                    }
+                }
+            }
+        }
+        
+        var gaps = [GapRealm]()
+        let usedGaps = assignedGaps + filledGaps
+        if usedGaps.count > 0 {
+            for gap in usedGaps {
+                if checkOutdated(currentGap: gap) {
+                    isChanged = true
+                    gaps.append(gap)
+                    do {
+                        try db.realm.write{
+                            if SettingsValues.taskSettings[0] {
+                                gap.state = State.completed.rawValue
+                            } else {
+                                gap.state = State.outdated.rawValue
+                            }
+                        }
+                    } catch {
+                        print("Error updating to database")
+                    }
+                }
+            }
+            
+            for gap in gaps {
+                var assignedTasks = db.getData(objectClass: TaskRealm.self)
+                assignedTasks = assignedTasks.filter("gapid = '\(gap.id)'")
+                for taskRealm in assignedTasks {
+                    let task = taskRealm as! TaskRealm
+                    do {
+                        try db.realm.write{
+                            if SettingsValues.taskSettings[0] {
+                                task.state = State.completed.rawValue
+                            }
+                        }
+                    } catch {
+                        print("Error writing update to database")
+                    }
+                }
+            }
+        }
+        
+        if isChanged {
+            fillGaps()
+        }
+        
+    }
+    
+    private func checkOutdated(currentGap: GapRealm) -> Bool{
+        return Date() > currentGap.endDate
+    }
+    
+    
+    //Check if the placeholder background image should be displayed when there are no gaps showing in current view.
+    func checkPlaceholderGaps() -> Bool {
+        if pendingGaps.count == 0 && assignedGaps.count == 0 && filledGaps.count == 0 {
+            return true
+        } else {
+            return false
+        }
+    }
+    
     init() {
         fillGaps()
     }

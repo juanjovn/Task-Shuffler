@@ -21,7 +21,7 @@ class EasterEggModalView: ModalView {
     
     
     private func setupTitle() {
-        titleLabel.text = "Meooow! \nYou found me! 🙀"
+        titleLabel.text = "Meooow! \nYou found me! 🙀".localized()
         titleLabel.font = .avenirDemiBold(ofSize: UIFont.scaleFont(23))
         titleLabel.numberOfLines = 0
         titleLabel.textAlignment = .center

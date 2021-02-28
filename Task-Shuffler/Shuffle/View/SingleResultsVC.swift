@@ -57,8 +57,7 @@ class SingleResultsVC: ViewController, ShuffleResult {
     private func setupDateLabel() {
         if let gap = gapManager.getGapById(id: task.gapid) {
             singleResultModalView.singleCard.dateLabel.text = Utils.formatDate(datePattern: "EEEE ", date: gap.startDate)
-            let ordinalDate = Utils.formatDayNumberToOrdinal(date: gap.startDate)!
-            singleResultModalView.singleCard.dateLabel.text! += ordinalDate
+            singleResultModalView.singleCard.dateLabel.text? += Utils.parseDayNumberByLocation(date: gap.startDate)
         } else {
             singleResultModalView.singleCard.dateLabel.text = "Date"
         }
@@ -129,11 +128,11 @@ class SingleResultsVC: ViewController, ShuffleResult {
             if TaskManager.getTasksByGapId(gapid: gap.id).count == 1 {
                 
                 if SettingsValues.notificationsSettings[0] {
-                    NotificationManager.instance.scheduleTaskNotification(at: gap.startDate, with: "Start the task! 💪", message: task.name, type: .start)
+                    NotificationManager.instance.scheduleTaskNotification(at: gap.startDate, with: "Start the task! 💪".localized(), message: task.name, type: .start)
                 }
                 
                 if SettingsValues.notificationsSettings[1] {
-                    NotificationManager.instance.scheduleTaskNotification(at: gap.endDate, with: "Task ended! 🏁", message: "Have you completed \(task.name)?", type: .end)
+                    NotificationManager.instance.scheduleTaskNotification(at: gap.endDate, with: "Task ended! 🏁".localized(), message: "Have you completed".localized() + " \(task.name)?", type: .end)
                 }
             } else {
                 if SettingsValues.notificationsSettings[0] || SettingsValues.notificationsSettings[1] {

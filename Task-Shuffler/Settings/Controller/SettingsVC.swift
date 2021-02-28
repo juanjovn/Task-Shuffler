@@ -13,12 +13,12 @@ class SettingsVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     //Constants
-    let taskSection =   [ "Mark completed when time ends",
-                          "Delete confirmation", "One task per gap"]
-    let notificationsSection =  [ "Notify task starts",
-                                  "Notify task ends"]
-    let othersSection = ["Haptic feedback"]
-    let resetSection = ["Factory reset"]
+    let taskSection =   [ "Mark completed when time ends".localized(),
+                          "Delete confirmation".localized(), "One task per gap".localized()]
+    let notificationsSection =  [ "Notify task starts".localized(),
+                                  "Notify task ends".localized()]
+    let othersSection = ["Haptic feedback".localized()]
+    let resetSection = ["Factory reset".localized()]
     let creditsSection = ["Credits"]
     
     //Variables
@@ -56,22 +56,10 @@ class SettingsVC: UIViewController {
                 }
                 generator.impactOccurred()
             }
-            
+        
             let easterCell = tableView.cellForRow(at: easterIndex) as! EasterCell
             let eggColorRGBA = easterCell.easterImageView.tintColor.rgba
             let eggAlpha = eggColorRGBA.3
-            
-            //        if easterCount > 0 {
-            //            UIView.animate(withDuration: 0.05, animations: {
-            //                easterCell.easterImageView.transform = CGAffineTransform(rotationAngle: 0.261799)
-            //            }, completion: {_ in
-            //                UIView.animate(withDuration: 0.05){
-            //                    easterCell.easterImageView.transform = .identity
-            //                }
-            //            })
-            //
-            //            easterCell.easterImageView.tintColor = UIColor.pearlWhite.withAlphaComponent(eggAlpha + 0.26)
-            //        }
             
             if easterCount > 0 {
                 UIView.animate(withDuration: 0.07, animations: {
@@ -97,17 +85,17 @@ class SettingsVC: UIViewController {
                 isEasterOpen = true
                 SettingsValues.easterEgg = isEasterOpen
                 SettingsValues.storeSettings()
-                print("LANZAR PANTALLA")
+                //print("LANZAR PANTALLA")
                 present(EasterEggVC(), animated: true, completion: nil)
             }
             
-            print("tocado, contador = \(easterCount)")
+            //print("tocado, contador = \(easterCount)")
         } else {
             if SettingsValues.otherSettings[0] {
                 let generator = UIImpactFeedbackGenerator(style: .heavy)
                 generator.impactOccurred()
             }
-            print("Easter egg esta descubierto. Abrir pantalla directamente.")
+            //print("Easter egg esta descubierto. Abrir pantalla directamente.")
             present(EasterEggVC(), animated: true, completion: nil)
         }
         
@@ -115,7 +103,7 @@ class SettingsVC: UIViewController {
     }
     
     private func setupView(){
-        title = "Settings"
+        title = "Settings".localized()
         view.backgroundColor = #colorLiteral(red: 0.7764705882, green: 0.7725490196, blue: 0.7254901961, alpha: 0.85)
         
         let blurEffect = UIBlurEffect(style: .light)
@@ -156,7 +144,7 @@ class SettingsVC: UIViewController {
     }
     
     @objc func shareAction() {
-        if let appUrl = URL(string: "https://itunes.apple.com/us/app/tallycounter/id1507818665") {
+        if let appUrl = URL(string: "https://apps.apple.com/us/app/task-shuffler/id1552752499") {
             let items:[Any] = [appUrl]
             let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
             present(ac, animated: true)
@@ -274,7 +262,7 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource{
             if SettingsValues.easterEgg {
                 easterCell.easterImageView.tintColor = UIColor.pearlWhite
             } else {
-                easterCell.easterImageView.tintColor = UIColor.pearlWhite.withAlphaComponent(0.2)
+                easterCell.easterImageView.tintColor = UIColor.pearlWhite.withAlphaComponent(0.40)
             }
             
             return easterCell
@@ -326,7 +314,7 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == tableView.numberOfSections - 2 {
-            return "Developed by Juanjo Valiño"
+            return "Developed by Juanjo Valiño".localized()
         } else {
             return nil
         }
@@ -335,7 +323,7 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         let header: UITableViewHeaderFooterView = view as! UITableViewHeaderFooterView
         
-        let title = "Developed by Juanjo Valiño"
+        let title = "Developed by Juanjo Valiño".localized()
         header.textLabel?.font = .avenirRegular(ofSize: UIFont.scaleFont(13))
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.alignment = NSTextAlignment.center

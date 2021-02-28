@@ -21,6 +21,8 @@ struct NextToDoSwiftUIView: View {
         // To remove all separators including the actual ones:
         UITableView.appearance().separatorStyle = .none
         UITableView.appearance().separatorColor = .clear
+        let insets = UIEdgeInsets(top: 10, left: 0, bottom: 120, right: 0)
+        UITableView.appearance().contentInset = insets
         
         UITableView.appearance().backgroundColor = .clear
         UITableViewCell.appearance().backgroundColor = .clear
@@ -28,14 +30,15 @@ struct NextToDoSwiftUIView: View {
     
     @SwiftUI.State fileprivate var taskList = NextToDoTask.calculateNextToDoTask()
     let taskListTest = [NextToDoTask(id: "1", name: "Tarea de prueba con doble linea", startTime: Calendar.current.currentDate, endTime: Calendar.current.currentDate, duration: 180, priority: .high)]
+    @SwiftUI.State fileprivate var showPlaceholder = false
     
     var body: some View {
         if #available(iOS 14.0, *) { //Hardcode solution because .listStyle(SidebarListStyle()) is only available in iOS 14 for removing the separator bar.
             List(){
                 ForEach(taskList) { taskItem in
                     let dateText = Utils.formatDate(datePattern: "EEEE ", date: taskItem.startTime)
-                    let ordinalDate = Utils.formatDayNumberToOrdinal(date: taskItem.startTime)
-                    let printableDate = dateText + ordinalDate!
+                    let ordinalDate = Utils.parseDayNumberByLocation(date: taskItem.startTime)
+                    let printableDate = dateText + ordinalDate
                     
                     ZStack(alignment: .topLeading) {
                         
@@ -75,7 +78,7 @@ struct NextToDoSwiftUIView: View {
             }.onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
                 self.updateData()
                 //print("Enter foreground triggered! ❗️")
-            }//IOS 14
+            }.overlay(Image(systemName: "line.horizontal.3.decrease").resizable().aspectRatio(contentMode: .fit).frame(width: 200, height: 200, alignment: .center).foregroundColor(Color(.mysticBlue).opacity(showPlaceholder ? 0.15 : 0)))//IOS 14
         } else {
             List(){
                 if taskList.isEmpty { //This is  needed only in iOS 13. It crashed in the onAppear when the list was empty the first time gaps was shuffled.
@@ -83,8 +86,8 @@ struct NextToDoSwiftUIView: View {
                 } else {
                     ForEach(taskList) { taskItem in
                         let dateText = Utils.formatDate(datePattern: "EEEE ", date: taskItem.startTime)
-                        let ordinalDate = Utils.formatDayNumberToOrdinal(date: taskItem.startTime)
-                        let printableDate = dateText + ordinalDate!
+                        let ordinalDate = Utils.parseDayNumberByLocation(date: taskItem.startTime)
+                        let printableDate = dateText + ordinalDate
                         
                         ZStack(alignment: .topLeading) {
                             
@@ -120,13 +123,14 @@ struct NextToDoSwiftUIView: View {
                     }.listRowBackground(Color.clear)
                 }
                 
-            }.onAppear(perform: updateData)
+            }
+            .onAppear(perform: updateData)
             .onReceive(pub) { (output) in
                 self.updateData()
             }.onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
                 self.updateData()
-                print("Enter foreground triggered! ❗️")
-            }
+                //print("Enter foreground triggered! ❗️")
+            }.overlay(Image(systemName: "line.horizontal.3.decrease").resizable().aspectRatio(contentMode: .fit).frame(width: 200, height: 200, alignment: .center).foregroundColor(Color(.mysticBlue).opacity(showPlaceholder ? 0.15 : 0)))
         }
     }
     
@@ -135,6 +139,11 @@ struct NextToDoSwiftUIView: View {
     
     func updateData() {
         taskList = NextToDoTask.calculateNextToDoTask()
+        if taskList.count == 0 {
+            showPlaceholder = true
+        } else {
+            showPlaceholder = false
+        }
     }
     
 }

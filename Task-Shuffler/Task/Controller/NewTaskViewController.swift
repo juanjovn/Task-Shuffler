@@ -126,6 +126,9 @@ class NewTaskViewController: UIViewController {
         priorityButtonBackgroundView.alpha = 0
         
         // Text Field
+        newTaskTextName.placeholder = "New task name".localized()
+        newTaskTextName.selectedTitle = "Task name".localized()
+        newTaskTextName.title = "Task name".localized()
         newTaskTextName.autocapitalizationType = .sentences
         if !taskListVC!.isTaskEditing {
             newTaskTextName.becomeFirstResponder()
@@ -152,10 +155,8 @@ class NewTaskViewController: UIViewController {
         }
     }
     
-    // MARK: viewDidAppear
-    
-    override func viewDidAppear(_ animated: Bool) {
-        // Priority button
+    // MARK: viewDidLayoutSubviews
+    override func viewDidLayoutSubviews() {
         priorityButtonBackgroundView.layer.cornerRadius = priorityButtonBackgroundView.bounds.size.width/2
     }
     
@@ -216,6 +217,13 @@ class NewTaskViewController: UIViewController {
         
         sliderValue = resultValue
         
+        if cancelButton.isHidden == true {
+            if let taskListVC = taskListVC {
+                if taskListVC.isTaskEditing {
+                    cancelButton.isHidden = false
+                }
+            }
+        }
         
     }
     
@@ -269,6 +277,12 @@ class NewTaskViewController: UIViewController {
         if SettingsValues.otherSettings[0] {
                 generator.impactOccurred()
         }
+        
+        if let taskListVC = taskListVC {
+            if taskListVC.isTaskEditing {
+                cancelButton.isHidden = false
+            }
+        }
     }
     
     
@@ -296,11 +310,11 @@ class NewTaskViewController: UIViewController {
         self.priorityButton.isHidden = false
         self.priorityButtonBackgroundView.isHidden = false
         backButton.setTitle("OK", for: .normal)
-        UIView.animate(withDuration: 0.7) {self.durationLabel.alpha = 1}
-        UIView.animate(withDuration: 0.7) {self.slider.alpha = 1}
-        _ = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) {_ in
-            UIView.animate(withDuration: 0.7) {self.priorityLabel.alpha = 1}
-            UIView.animate(withDuration: 0.7, animations:  { self.priorityButton.alpha = 1
+        UIView.animate(withDuration: 0.3) {self.durationLabel.alpha = 1}
+        UIView.animate(withDuration: 0.3) {self.slider.alpha = 1}
+        _ = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) {_ in
+            UIView.animate(withDuration: 0.3) {self.priorityLabel.alpha = 1}
+            UIView.animate(withDuration: 0.3, animations:  { self.priorityButton.alpha = 1
                 self.priorityButtonBackgroundView.alpha = 1
             }, completion: {_ in
                 if let firstTimeHere = SettingsValues.firstTime["newTask"] {

@@ -77,17 +77,18 @@ open class DateScrollPicker: UIView {
         //let monthEndDate = Date().firstDateOfMonth().addMonth(12)!
         //var currentDate = monthStartDate
         var currentDate = Date.today()
-        var sundays = 0
+        var lastWeekdayCount = 0
+        let lastWeekDay = Calendar.current.firstWeekday == 1 ? 7 : 1
         
-        while sundays < 2 {
+        while lastWeekdayCount < 2 {
             let weekday = Calendar.current.component(.weekday, from: currentDate)
             if currentDate == currentDate.firstDateOfMonth() {
                 dateItems.append(DateScrollItem(date: currentDate, selected: false, separator: true))
             }
             dateItems.append(DateScrollItem(date: currentDate, selected: false, separator: false))
             currentDate = currentDate.addDays(1)!
-            if weekday == 1 {
-                sundays += 1
+            if weekday == lastWeekDay {
+                lastWeekdayCount += 1
             }
         }
         

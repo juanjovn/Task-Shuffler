@@ -44,7 +44,7 @@ class TaskManager {
                 taskObj.priority = task.priority.rawValue
                 taskObj.state = task.state.rawValue
                 taskObj.gapid = task.gapid
-                print("Updated object: \(taskObj.description)")
+                //print("Updated object: \(taskObj.description)")
             }
         } catch {
             print("Error writing update to database")

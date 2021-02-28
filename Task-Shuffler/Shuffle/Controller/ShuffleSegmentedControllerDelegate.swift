@@ -90,7 +90,7 @@ class ShuffleSegmentedControllersDelegate: SJFluidSegmentedControlDelegate {
                 let pendingTaks = TaskManager.populateTasks(state: .pending)
                 let existPendingTasks = pendingTaks.count > 0
                 if existPendingTasks {
-                    self.shuffleMessageLabel.text = "You will get an instant task to do"
+                    self.shuffleMessageLabel.text = "You will get an instant task to do".localized()
                 } else {
                     self.updateShuffleMessageLabel(shuffleConf: self.shuffleConf)
                 }
@@ -137,20 +137,20 @@ extension ShuffleSegmentedControllersDelegate {
         let existPendingTasks = pendingTaks.count > 0
         
         if !existPendingTasks {
-            shuffleMessageLabel.text = "There are no tasks to shuffle"
+            shuffleMessageLabel.text = "There are no tasks to shuffle".localized()
         } else if SettingsValues.taskSettings[2] {
             if pendingGaps.count == 0 {
-                shuffleMessageLabel.text = "There are no gaps to shuffle"
+                shuffleMessageLabel.text = "There are no gaps to shuffle".localized()
             } else {
                 let numberOfGaps = pendingGaps.count
                 if shuffleConf.how == .Single {
-                    shuffleMessageLabel.text = "One task will be shuffled in \(numberOfGaps) gaps"
+                    shuffleMessageLabel.text = "One task will be shuffled in".localized() + " \(numberOfGaps) " + "gaps".localized()
                 } else {
                     let numberOfTasks = pendingTaks.count
                     if numberOfTasks > 1 {
-                        shuffleMessageLabel.text = "\(numberOfTasks) tasks will be shuffled in \(numberOfGaps) gaps"
+                        shuffleMessageLabel.text = "\(numberOfTasks) " + "tasks will be shuffled in".localized() + " \(numberOfGaps) " + "gaps".localized()
                     } else {
-                        shuffleMessageLabel.text = "\(numberOfTasks) task will be shuffled in \(numberOfGaps) gaps"
+                        shuffleMessageLabel.text = "\(numberOfTasks) " + "task will be shuffled in".localized() + " \(numberOfGaps) " + "gaps".localized()
                     }
                     
                 }
@@ -159,16 +159,16 @@ extension ShuffleSegmentedControllersDelegate {
             let numberOfTasks = pendingTaks.count
             let numberOfGaps = assignedGaps.count + pendingGaps.count
             if shuffleConf.how == .Single {
-                shuffleMessageLabel.text = "One task will be shuffled in \(numberOfGaps) gaps"
+                shuffleMessageLabel.text = "One task will be shuffled in".localized() + " \(numberOfGaps) " + "gaps".localized()
             } else {
                 if numberOfTasks > 1 {
-                    shuffleMessageLabel.text = "\(numberOfTasks) tasks will be shuffled in \(numberOfGaps) gaps"
+                    shuffleMessageLabel.text = "\(numberOfTasks) " + "tasks will be shuffled in".localized() + " \(numberOfGaps) " + "gaps".localized()
                 } else {
-                    shuffleMessageLabel.text = "\(numberOfTasks) task will be shuffled in \(numberOfGaps) gaps"
+                    shuffleMessageLabel.text = "\(numberOfTasks) " + "task will be shuffled in".localized() + " \(numberOfGaps) " + "gaps".localized()
                 }
             }
         } else {
-            shuffleMessageLabel.text = "There are no gaps to shuffle"
+            shuffleMessageLabel.text = "There are no gaps to shuffle".localized()
         }
     }
 }

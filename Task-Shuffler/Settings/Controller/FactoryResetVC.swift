@@ -42,7 +42,7 @@ class FactoryResetVC: UIViewController {
     
     private func setupReshuffleButton() {
         reshuffleButton.addTarget(self, action: #selector(reshuffleButtonAction), for: .touchUpInside)
-        reshuffleButton.setTitle("Clear All", for: .normal)
+        reshuffleButton.setTitle("Clear All".localized(), for: .normal)
     }
     
     private func setupOkButton() {
@@ -51,7 +51,7 @@ class FactoryResetVC: UIViewController {
     
     
     private func setupTitleLabel() {
-        modalView.titleLabel.text = "Factory reset"
+        modalView.titleLabel.text = "Factory reset".localized()
     }
     
     @objc private func cancelButtonAction() {
@@ -60,7 +60,7 @@ class FactoryResetVC: UIViewController {
     
     @objc private func reshuffleButtonAction() {//Clear All button in this case. Reshuffle is in parent class.
         let db = DatabaseManager()
-        Alert.confirmation(title: "Clear all data", message: "All tasks and gaps will be erased, are you sure?", vc: self) {_ in
+        Alert.confirmation(title: "Clear all data".localized(), message: "All tasks and gaps will be erased, are you sure?".localized(), vc: self) {_ in
             let queue = DispatchQueue.global()
             queue.sync {
                 db.eraseAll()
@@ -80,7 +80,7 @@ class FactoryResetVC: UIViewController {
         let db = DatabaseManager()
         switch clear {
         case .tasks:
-            Alert.confirmation(title: "Clear tasks data", message: "All tasks will be erased, are you sure?", vc: self) {_ in
+            Alert.confirmation(title: "Clear tasks data".localized(), message: "All tasks will be erased, are you sure?".localized(), vc: self) {_ in
                 let queue = DispatchQueue.global()
                 queue.sync {
                     db.deleteAllByType(object: TaskRealm.self)
@@ -96,7 +96,7 @@ class FactoryResetVC: UIViewController {
                 self.dismiss(animated: true, completion: nil)
             }
         case .gaps:
-            Alert.confirmation(title: "Clear gaps data", message: "All gaps will be erased, are you sure?", vc: self) {_ in
+            Alert.confirmation(title: "Clear gaps data".localized(), message: "All gaps will be erased, are you sure?".localized(), vc: self) {_ in
                 let queue = DispatchQueue.global()
                 queue.sync {
                     db.deleteAllByType(object: GapRealm.self)

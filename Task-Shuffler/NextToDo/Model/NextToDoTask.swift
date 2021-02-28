@@ -25,7 +25,11 @@ struct NextToDoTask: Identifiable {
         for t in pendingTasks {
             if let assignedGap = GapManager.instance.getGapById(id: t.gapid) {
                 let nextToDoTask = NextToDoTask(id: t.id, name: t.name, startTime: assignedGap.startDate, endTime: assignedGap.endDate, duration: t.duration, priority: t.priority)
-                nextToDoTasks.append(nextToDoTask)
+                //Not append outdated events
+                if nextToDoTask.endTime > Date() {
+                    nextToDoTasks.append(nextToDoTask)
+                }
+                
             }
             
         }

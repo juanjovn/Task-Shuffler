@@ -44,8 +44,7 @@ class ResultsCollectionVC: UICollectionViewController {
         
         if let gap = GapManager.instance.getGapById(id: task.gapid) {
             cell.dateLabel.text = Utils.formatDate(datePattern: "EEEE ", date: gap.startDate)
-            let ordinalDate = Utils.formatDayNumberToOrdinal(date: gap.startDate)!
-            cell.dateLabel.text! += ordinalDate
+            cell.dateLabel.text? += Utils.parseDayNumberByLocation(date: gap.startDate)
         } else {
             cell.dateLabel.text = "Date"
         }

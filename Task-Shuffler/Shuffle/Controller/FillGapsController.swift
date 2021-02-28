@@ -57,7 +57,7 @@ class FillGapsController {
     
     public func shuffleTask() -> Task {
         let task = getAssignedTask(tasks: getCandidateTasks())
-        print("You have to do \(task.name) in gap \(task.gapid)")
+        //print("You have to do \(task.name) in gap \(task.gapid)")
         return task
     }
     
@@ -122,9 +122,9 @@ class FillGapsController {
         if tasks.count == 0 {
             if let sVC = shuffleVC {
                 if candidateGaps.count == 0 {
-                    Alert.errorInformation(title: "Ooops!", message: "There are no gaps to shuffle!", vc: sVC, handler: nil)
+                    Alert.errorInformation(title: "Ooops!".localized(), message: "There are no gaps to shuffle".localized(), vc: sVC, handler: nil)
                 } else {
-                    Alert.errorInformation(title: "Ooops!", message: "There are no suitable tasks!", vc: sVC, handler: nil)
+                    Alert.errorInformation(title: "Ooops!".localized(), message: "There are no suitable tasks".localized(), vc: sVC, handler: nil)
                 }
             }
         }
@@ -151,9 +151,9 @@ class FillGapsController {
                             candidateGaps = GapManager.instance.pendingGaps
                         }
                         if candidateGaps.count > 0 {
-                            Alert.errorInformation(title: "Ooops!", message: "There are no task suitable for any gap. Try creating longer gaps or shorter tasks.", vc: sVC, handler: nil)
+                            Alert.errorInformation(title: "Ooops!".localized(), message: "There are no task suitable for any gap. Try creating longer gaps or shorter tasks.".localized(), vc: sVC, handler: nil)
                         } else if !SettingsValues.taskSettings[2]{
-                            Alert.errorInformation(title: "Ooops!", message: "There are no gaps to shuffle!", vc: sVC, handler: nil)
+                            Alert.errorInformation(title: "Ooops!".localized(), message: "There are no gaps to shuffle".localized(), vc: sVC, handler: nil)
                         }
                         
                     }
@@ -161,7 +161,7 @@ class FillGapsController {
             }
         } else {
             if let sVC = shuffleVC {
-                Alert.errorInformation(title: "Ooops!", message: "There are no task to shuffle", vc: sVC, handler: nil)
+                Alert.errorInformation(title: "Ooops!".localized(), message: "There are no task to shuffle".localized(), vc: sVC, handler: nil)
                 
             }
         }
@@ -206,7 +206,7 @@ class FillGapsController {
                 
                 if let sVC = shuffleVC {
                     if thisGaps.count == 0 {
-                        Alert.errorInformation(title: "Ooops!", message: "There are no gaps created in this week!", vc: sVC, handler: nil)
+                        Alert.errorInformation(title: "Ooops!".localized(), message: "There are no gaps created in this week!".localized(), vc: sVC, handler: nil)
                     }
                     
                 }
@@ -233,7 +233,7 @@ class FillGapsController {
                 
                 if let sVC = shuffleVC {
                     if thisGaps.count == 0{
-                        Alert.errorInformation(title: "Ooops!", message: "There are no gaps created in next week!", vc: sVC, handler: nil)
+                        Alert.errorInformation(title: "Ooops!".localized(), message: "There are no gaps created in next week!".localized(), vc: sVC, handler: nil)
                     }
                     
                 }
@@ -253,7 +253,7 @@ class FillGapsController {
             }
         } else {
             if let sVC = shuffleVC {
-                Alert.errorInformation(title: "Ooops!", message: "There are no gaps to shuffle!", vc: sVC, handler: nil)
+                Alert.errorInformation(title: "Ooops!".localized(), message: "There are no gaps to shuffle".localized(), vc: sVC, handler: nil)
                 
             }
         }

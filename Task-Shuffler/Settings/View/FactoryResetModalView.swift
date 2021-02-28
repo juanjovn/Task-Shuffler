@@ -101,7 +101,7 @@ class FactoryResetModalView: ModalView {
     
     private func setupTasksLabel() {
         bottomView.addSubview(tasksLabel)
-        tasksLabel.text = "Tasks"
+        tasksLabel.text = "Tasks".localized()
         tasksLabel.font = .avenirRegular(ofSize: 20)
         
         tasksLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -111,7 +111,7 @@ class FactoryResetModalView: ModalView {
     
     private func setupGapsLabel() {
         bottomView.addSubview(gapsLabel)
-        gapsLabel.text = "Gaps"
+        gapsLabel.text = "Gaps".localized()
         gapsLabel.font = .avenirRegular(ofSize: 20)
         
         gapsLabel.translatesAutoresizingMaskIntoConstraints = false

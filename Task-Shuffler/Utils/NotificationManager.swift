@@ -88,10 +88,10 @@ class NotificationManager {
                         return }
                     
                     if SettingsValues.notificationsSettings[0] {
-                        scheduleTaskNotification(at: gap.startDate, with: "Start the task! 💪", message: task.name, type: .start)
+                        scheduleTaskNotification(at: gap.startDate, with: "Start the task! 💪".localized(), message: task.name, type: .start)
                     }
                     if SettingsValues.notificationsSettings[1] {
-                        scheduleTaskNotification(at: gap.endDate, with: "Tasks ended! 🏁", message: "Have you completed \(task.name)?", type: .end)
+                        scheduleTaskNotification(at: gap.endDate, with: "Tasks ended! 🏁".localized(), message: "Have you completed".localized() + " \(task.name)?", type: .end)
                     }
                     
                 } else {
@@ -107,10 +107,10 @@ class NotificationManager {
                         return }
                     
                     if SettingsValues.notificationsSettings[0] {
-                        scheduleTaskNotification(at: gap.startDate, with: "Start to do the tasks! 💪", message: taskNamesSentence, type: .start)
+                        scheduleTaskNotification(at: gap.startDate, with: "Start to do the tasks! 💪".localized(), message: taskNamesSentence, type: .start)
                     }
                     if SettingsValues.notificationsSettings[1] {
-                        scheduleTaskNotification(at: gap.endDate, with: "Tasks ended! 🏁", message: "Have you completed \(taskNamesSentence)?", type: .end)
+                        scheduleTaskNotification(at: gap.endDate, with: "Tasks ended! 🏁".localized(), message: "Have you completed".localized() + " \(taskNamesSentence)?", type: .end)
                     }
                 }
             }

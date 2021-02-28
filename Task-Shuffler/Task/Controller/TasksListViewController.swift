@@ -21,6 +21,7 @@ class TasksListViewController: AMTabsViewController {
     @IBOutlet weak var newTaskButtonBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var segmentedControlBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var segmentedControl: SJFluidSegmentedControl!
+    @IBOutlet weak var placeholderImageView: UIImageView!
     
     
     
@@ -30,7 +31,7 @@ class TasksListViewController: AMTabsViewController {
     let transition = BubbleTransition()
     
     //Variables
-
+    
     var pendingTasks = [Task]()
     var assignedTasks = [Task]()
     var completedTasks = [Task]()
@@ -64,6 +65,7 @@ class TasksListViewController: AMTabsViewController {
         setupTableView()
         setupNavigationBar()
         setupSegmentedControl()
+        setupPlaceholderImageView()
         //setupTips()
     }
     
@@ -89,35 +91,35 @@ class TasksListViewController: AMTabsViewController {
     // MARK: Functions
     
     //Onboard tips views
-//    private func setupTips() {
-//
-//    }
+    //    private func setupTips() {
+    //
+    //    }
     
     private func showTips() {
-//        var preferences = EasyTipView.Preferences()
-//        preferences.drawing.font = .avenirMedium(ofSize: UIFont.scaleFont(17))
-//        preferences.drawing.foregroundColor = UIColor.pearlWhite
-//        preferences.drawing.backgroundColor = .turquesa
-//        preferences.drawing.arrowPosition = .bottom
-//        preferences.drawing.cornerRadius = 15
-//        preferences.drawing.arrowHeight = 8
-//        preferences.positioning.contentInsets = UIEdgeInsets(top: 8, left: 13, bottom: 8, right: 13)
-//        preferences.positioning.bubbleInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
-//
-//        /*
-//         * Optionally you can make these preferences global for all future EasyTipViews
-//         */
-//        EasyTipView.globalPreferences = preferences
-//
-//        let newTaskTip = EasyTipView(text: "First create a task")
-//        newTaskTip.show(animated: true, forView: newTaskButton, withinSuperview: view)
-//
-//        preferences.drawing.arrowPosition = .top
-//        preferences.positioning.bubbleInsets = UIEdgeInsets(top: 10, left: 110, bottom: 5, right: 5)
-//        preferences.drawing.arrowHeight = 25
-//        EasyTipView.globalPreferences = preferences
-//        let segmentedTip = EasyTipView(text: "Switch between pending and completed tasks")
-//        segmentedTip.show(animated: true, forView: segmentedControl, withinSuperview: view)
+        //        var preferences = EasyTipView.Preferences()
+        //        preferences.drawing.font = .avenirMedium(ofSize: UIFont.scaleFont(17))
+        //        preferences.drawing.foregroundColor = UIColor.pearlWhite
+        //        preferences.drawing.backgroundColor = .turquesa
+        //        preferences.drawing.arrowPosition = .bottom
+        //        preferences.drawing.cornerRadius = 15
+        //        preferences.drawing.arrowHeight = 8
+        //        preferences.positioning.contentInsets = UIEdgeInsets(top: 8, left: 13, bottom: 8, right: 13)
+        //        preferences.positioning.bubbleInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        //
+        //        /*
+        //         * Optionally you can make these preferences global for all future EasyTipViews
+        //         */
+        //        EasyTipView.globalPreferences = preferences
+        //
+        //        let newTaskTip = EasyTipView(text: "First create a task")
+        //        newTaskTip.show(animated: true, forView: newTaskButton, withinSuperview: view)
+        //
+        //        preferences.drawing.arrowPosition = .top
+        //        preferences.positioning.bubbleInsets = UIEdgeInsets(top: 10, left: 110, bottom: 5, right: 5)
+        //        preferences.drawing.arrowHeight = 25
+        //        EasyTipView.globalPreferences = preferences
+        //        let segmentedTip = EasyTipView(text: "Switch between pending and completed tasks")
+        //        segmentedTip.show(animated: true, forView: segmentedControl, withinSuperview: view)
         
     }
     
@@ -126,9 +128,26 @@ class TasksListViewController: AMTabsViewController {
     }
     
     @objc func onDataModified () {
+        
         fillTasks()
         self.tableView.reloadData()
-        //print("❗️NOTIFIED!!! ")
+        showOrHidePlaceHolderBackground()
+        
+        
+        
+        //print("❗️NOTIFIED onDataModified in TaskListViewController!!! ")
+    }
+    
+    private func showOrHidePlaceHolderBackground() {
+        if pendingTasks.count == 0 && assignedTasks.count == 0 {
+            UIView.animate(withDuration: 0.5, animations: {
+                self.placeholderImageView.alpha = 0.1
+            })
+        } else {
+            UIView.animate(withDuration: 0.5, animations: {
+                self.placeholderImageView.alpha = 0
+            })
+        }
     }
     
     private func setupNewTaskButton() {
@@ -142,7 +161,7 @@ class TasksListViewController: AMTabsViewController {
     }
     
     private func fillTasks(){
-        print(try! Realm().configuration.fileURL!)
+        //print(try! Realm().configuration.fileURL!)
         pendingTasks = TaskManager.populateTasks(state: .pending)
         assignedTasks = TaskManager.populateTasks(state: .assigned)
         completedTasks = TaskManager.populateTasks(state: .completed)
@@ -154,20 +173,20 @@ class TasksListViewController: AMTabsViewController {
     }
     
     @objc private func sortButtonAction () {
-        let sortMenu = UIAlertController(title: "Sort by", message: nil, preferredStyle: .actionSheet)
-        let sortByPriorityAction = UIAlertAction(title: "Priority", style: .default, handler: {
+        let sortMenu = UIAlertController(title: "Sort by".localized(), message: nil, preferredStyle: .actionSheet)
+        let sortByPriorityAction = UIAlertAction(title: "Priority".localized(), style: .default, handler: {
             action in
             self.sortActions(sortType: .priority)
         })
-        let sortByDurationAction = UIAlertAction(title: "Duration", style: .default, handler: {
+        let sortByDurationAction = UIAlertAction(title: "Duration".localized(), style: .default, handler: {
             action in
             self.sortActions(sortType: .duration)
         })
-        let sortByNameAction = UIAlertAction(title: "Name", style: .default, handler: {
+        let sortByNameAction = UIAlertAction(title: "Name".localized(), style: .default, handler: {
             action in
             self.sortActions(sortType: .name)
         })
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        let cancelAction = UIAlertAction(title: "Cancel".localized(), style: .cancel)
         
         
         sortMenu.addAction(sortByNameAction)
@@ -266,46 +285,50 @@ class TasksListViewController: AMTabsViewController {
         segmentedControl.cornerRadius = segmentedControl.bounds.height / 2
     }
     
-//    func createTestTasks() {
-//        pendingTasks = [
-//            
-//            Task(name: "Poner la lavadora y tender la ropa hoy", duration: 180, priority: .high, state: .pending),
-//            Task(name: "Tarea pendiente 1", duration: 60, priority: .medium, state: .pending),
-//            Task(name: "Tarea pendiente 2", duration: 90, priority: .low, state: .pending),
-//            Task(name: "Tarea pendiente 3", duration: 15, priority: .low, state: .pending),
-//            Task(name: "Tarea pendiente 4", duration: 30, priority: .high, state: .pending),
-//            Task(name: "Tarea pendiente 5", duration: 90, priority: .low, state: .pending),
-//            Task(name: "Tarea pendiente 6 Tarea pendiente 6", duration: 180, priority: .medium, state: .pending),
-//            Task(name: "Tarea pendiente 7", duration: 120, priority: .low, state: .pending),
-//            Task(name: "Tarea pendiente 2", duration: 90, priority: .low, state: .pending),
-//            Task(name: "Tarea pendiente 3", duration: 15, priority: .low, state: .pending),
-//            Task(name: "Tarea pendiente 6 Tarea pendiente 6", duration: 30, priority: .high, state: .pending),
-//            Task(name: "Tarea pendiente 6 Tarea pendiente 6", duration: 90, priority: .low, state: .pending),
-//            Task(name: "Tarea pendiente 6", duration: 180, priority: .medium, state: .pending),
-//        ]
-//        assignedTasks = [
-//            Task(name: "Tarea asignada 1", duration: 60, priority: .medium, state: .assigned),
-//            Task(name: "Tarea asignada 2", duration: 90, priority: .low, state: .assigned),
-//            Task(name: "Tarea asignada 3", duration: 10, priority: .high, state: .assigned),
-//            Task(name: "Tarea pendiente 2", duration: 90, priority: .low, state: .assigned),
-//            Task(name: "Tarea pendiente 3", duration: 15, priority: .low, state: .assigned),
-//            Task(name: "Tarea pendiente 6 Tarea pendiente 6", duration: 30, priority: .high, state: .assigned),
-//            Task(name: "Tarea pendiente 5", duration: 90, priority: .low, state: .assigned),
-//            Task(name: "Tarea pendiente 6", duration: 180, priority: .medium, state: .assigned),
-//        ]
-//        completedTasks = [
-//            Task(name: "Tarea completada 1", duration: 60, priority: .medium, state: .completed),
-//            Task(name: "Tarea completada 2", duration: 90, priority: .low, state: .completed),
-//            Task(name: "Tarea pendiente 6 Tarea pendiente 6", duration: 15, priority: .low, state: .completed),
-//            Task(name: "Tarea completada 4", duration: 30, priority: .high, state: .completed),
-//            Task(name: "Tarea pendiente 6 Tarea pendiente 6", duration: 90, priority: .low, state: .completed),
-//            Task(name: "Tarea pendiente 2", duration: 90, priority: .low, state: .completed),
-//            Task(name: "Tarea pendiente 6 Tarea pendiente 6", duration: 15, priority: .low, state: .completed),
-//            Task(name: "Tarea pendiente 4", duration: 30, priority: .high, state: .completed),
-//            Task(name: "Tarea pendiente 5", duration: 90, priority: .low, state: .completed),
-//            Task(name: "Tarea pendiente 6", duration: 180, priority: .medium, state: .completed),
-//        ]
-//    }
+    private func setupPlaceholderImageView() {
+        showOrHidePlaceHolderBackground()
+    }
+    
+    //    func createTestTasks() {
+    //        pendingTasks = [
+    //
+    //            Task(name: "Poner la lavadora y tender la ropa hoy", duration: 180, priority: .high, state: .pending),
+    //            Task(name: "Tarea pendiente 1", duration: 60, priority: .medium, state: .pending),
+    //            Task(name: "Tarea pendiente 2", duration: 90, priority: .low, state: .pending),
+    //            Task(name: "Tarea pendiente 3", duration: 15, priority: .low, state: .pending),
+    //            Task(name: "Tarea pendiente 4", duration: 30, priority: .high, state: .pending),
+    //            Task(name: "Tarea pendiente 5", duration: 90, priority: .low, state: .pending),
+    //            Task(name: "Tarea pendiente 6 Tarea pendiente 6", duration: 180, priority: .medium, state: .pending),
+    //            Task(name: "Tarea pendiente 7", duration: 120, priority: .low, state: .pending),
+    //            Task(name: "Tarea pendiente 2", duration: 90, priority: .low, state: .pending),
+    //            Task(name: "Tarea pendiente 3", duration: 15, priority: .low, state: .pending),
+    //            Task(name: "Tarea pendiente 6 Tarea pendiente 6", duration: 30, priority: .high, state: .pending),
+    //            Task(name: "Tarea pendiente 6 Tarea pendiente 6", duration: 90, priority: .low, state: .pending),
+    //            Task(name: "Tarea pendiente 6", duration: 180, priority: .medium, state: .pending),
+    //        ]
+    //        assignedTasks = [
+    //            Task(name: "Tarea asignada 1", duration: 60, priority: .medium, state: .assigned),
+    //            Task(name: "Tarea asignada 2", duration: 90, priority: .low, state: .assigned),
+    //            Task(name: "Tarea asignada 3", duration: 10, priority: .high, state: .assigned),
+    //            Task(name: "Tarea pendiente 2", duration: 90, priority: .low, state: .assigned),
+    //            Task(name: "Tarea pendiente 3", duration: 15, priority: .low, state: .assigned),
+    //            Task(name: "Tarea pendiente 6 Tarea pendiente 6", duration: 30, priority: .high, state: .assigned),
+    //            Task(name: "Tarea pendiente 5", duration: 90, priority: .low, state: .assigned),
+    //            Task(name: "Tarea pendiente 6", duration: 180, priority: .medium, state: .assigned),
+    //        ]
+    //        completedTasks = [
+    //            Task(name: "Tarea completada 1", duration: 60, priority: .medium, state: .completed),
+    //            Task(name: "Tarea completada 2", duration: 90, priority: .low, state: .completed),
+    //            Task(name: "Tarea pendiente 6 Tarea pendiente 6", duration: 15, priority: .low, state: .completed),
+    //            Task(name: "Tarea completada 4", duration: 30, priority: .high, state: .completed),
+    //            Task(name: "Tarea pendiente 6 Tarea pendiente 6", duration: 90, priority: .low, state: .completed),
+    //            Task(name: "Tarea pendiente 2", duration: 90, priority: .low, state: .completed),
+    //            Task(name: "Tarea pendiente 6 Tarea pendiente 6", duration: 15, priority: .low, state: .completed),
+    //            Task(name: "Tarea pendiente 4", duration: 30, priority: .high, state: .completed),
+    //            Task(name: "Tarea pendiente 5", duration: 90, priority: .low, state: .completed),
+    //            Task(name: "Tarea pendiente 6", duration: 180, priority: .medium, state: .completed),
+    //        ]
+    //    }
     
     func delayReloadSections(section: Int) {
         _ = Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false) {_ in
@@ -329,6 +352,8 @@ class TasksListViewController: AMTabsViewController {
         if segmentedControl.currentSegment > 0 {
             segmentedControl.setCurrentSegmentIndex(0, animated: true)
         }
+        
+        showOrHidePlaceHolderBackground()
     }
     
     public func replaceTask (task: Task, position: Int) {
@@ -369,11 +394,11 @@ extension TasksListViewController: TabItem{
 extension TasksListViewController: UIViewControllerTransitioningDelegate{
     
     public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-      let rowIndex: IndexPath
-      let controller = segue.destination as? NewTaskViewController
-      controller?.transitioningDelegate = self
-      controller?.modalPresentationCapturesStatusBarAppearance = true
-      controller?.modalPresentationStyle = .custom
+        let rowIndex: IndexPath
+        let controller = segue.destination as? NewTaskViewController
+        controller?.transitioningDelegate = self
+        controller?.modalPresentationCapturesStatusBarAppearance = true
+        controller?.modalPresentationStyle = .custom
         if (sender as? UIScrollView) != nil{
             rowIndex = tableView.indexPathForSelectedRow!
             controller?.selectedRow = rowIndex
@@ -383,19 +408,21 @@ extension TasksListViewController: UIViewControllerTransitioningDelegate{
     }
     
     // MARK: UIViewControllerTransitioningDelegate
-
+    
     public func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-      transition.transitionMode = .present
-      transition.startingPoint = newTaskButton.center
-      transition.bubbleColor = newTaskButton.backgroundColor ?? .black
-      return transition
+        transition.transitionMode = .present
+        transition.startingPoint = newTaskButton.center
+        transition.bubbleColor = newTaskButton.backgroundColor ?? .black
+        transition.duration = 0.3
+        return transition
     }
-
+    
     public func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-      transition.transitionMode = .dismiss
-      transition.startingPoint = newTaskButton.center
-      transition.bubbleColor = newTaskButton.backgroundColor ?? .black
-      return transition
+        transition.transitionMode = .dismiss
+        transition.startingPoint = newTaskButton.center
+        transition.bubbleColor = newTaskButton.backgroundColor ?? .black
+        transition.duration = 0.2
+        return transition
     }
     
 }
@@ -432,7 +459,7 @@ extension TasksListViewController: UITableViewDelegate{
     
     func hideButton() {
         
-        UIView.animate(withDuration: 0.5) {
+        UIView.animate(withDuration: 0.3) {
             self.newTaskButton.alpha = 0
             self.newTaskButtonBottomConstraint.constant = 0
             self.segmentedControl.alpha = 0
@@ -450,7 +477,7 @@ extension TasksListViewController: UITableViewDelegate{
     
     func showButton() {
         
-        UIView.animate(withDuration: 0.3) {
+        UIView.animate(withDuration: 0.15) {
             self.newTaskButton.alpha = 1
             self.newTaskButtonBottomConstraint.constant = 80
             self.segmentedControl.alpha = 1
@@ -467,7 +494,7 @@ extension TasksListViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         let header = view as! UITableViewHeaderFooterView
-
+        
         if let textlabel = header.textLabel {
             textlabel.font = .avenirDemiBold(ofSize: 20)
         }
@@ -476,7 +503,7 @@ extension TasksListViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             if (SettingsValues.taskSettings[1]){
-                Alert.confirmation(title: "Confirm delete?", message: nil, vc: self, handler: {_ in
+                Alert.confirmation(title: "Confirm delete?".localized(), message: nil, vc: self, handler: {_ in
                     self.deleteTask(indexPath)
                 })
             } else {
@@ -527,6 +554,7 @@ extension TasksListViewController: UITableViewDelegate{
         db.deleteByPK(primaryKey: task.id, objectClass: TaskRealm.self)
         
         hideAssignedIfEmpty()
+        showOrHidePlaceHolderBackground()
     }
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -535,7 +563,8 @@ extension TasksListViewController: UITableViewDelegate{
             swipeAction = UIContextualAction(style: .normal, title: "", handler: {
                 (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
                 self.markCompleted(indexPath: indexPath)
-                print("✅ Marcado completado")
+                //print("✅ Marcado completado")
+                self.showOrHidePlaceHolderBackground()
                 success(true)
             })
             swipeAction.image = UIGraphicsImageRenderer(size: CGSize(width: 26, height: 20)).image { _ in
@@ -546,7 +575,7 @@ extension TasksListViewController: UITableViewDelegate{
             swipeAction = UIContextualAction(style: .normal, title: "", handler: {
                 (ac: UIContextualAction, view: UIView, success: (Bool) -> Void) in
                 self.restoreTask(indexPath: indexPath)
-                print("⎌ Marcado restaurar")
+                //print("⎌ Marcado restaurar")
                 success(true)
             })
             swipeAction.image = UIGraphicsImageRenderer(size: CGSize(width: 26, height: 26)).image { _ in
@@ -622,7 +651,7 @@ extension TasksListViewController: UITableViewDelegate{
         TaskManager.updateTask(task: task)
         tableView.deleteRows(at: [indexPath], with: .fade)
     }
-
+    
     
 }
 
@@ -643,18 +672,18 @@ extension TasksListViewController : UITableViewDataSource{
         
         var task = Task(id: "", name: "", duration: 0, priority: .low, state: .pending, gapid: "")
         switch indexPath.section {
-            case 0:
-                if segmentedControl.currentSegment == 0{
-                    task = pendingTasks[indexPath.row]
-                } else {
-                    task = completedTasks[indexPath.row]
-                }
-                
-            case 1:
-                task = assignedTasks[indexPath.row]
+        case 0:
+            if segmentedControl.currentSegment == 0{
+                task = pendingTasks[indexPath.row]
+            } else {
+                task = completedTasks[indexPath.row]
+            }
             
-            default:
-                break
+        case 1:
+            task = assignedTasks[indexPath.row]
+            
+        default:
+            break
             
         }
         
@@ -685,8 +714,8 @@ extension TasksListViewController : UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let firstSectionTitle: String = segmentedControl.currentSegment == 0 ? "Pending" : "Completed"
-        let secondSectionTitle: String = segmentedControl.currentSegment == 0 ? "Assigned" : ""
+        let firstSectionTitle: String = segmentedControl.currentSegment == 0 ? "Pending".localized() : "Completed".localized()
+        let secondSectionTitle: String = segmentedControl.currentSegment == 0 ? "Assigned".localized() : ""
         switch section {
         case 0:
             return firstSectionTitle
@@ -714,9 +743,9 @@ extension TasksListViewController: SJFluidSegmentedControlDataSource{
         2
     }
     
-//    func segmentedControl(_ segmentedControl: SJFluidSegmentedControl, titleForSegmentAtIndex index: Int) -> String? {
-//        index == 0 ? "Current" : "Completed"
-//    }
+    //    func segmentedControl(_ segmentedControl: SJFluidSegmentedControl, titleForSegmentAtIndex index: Int) -> String? {
+    //        index == 0 ? "Current" : "Completed"
+    //    }
     
     func segmentedControl(_ segmentedControl: SJFluidSegmentedControl, gradientColorsForSelectedSegmentAtIndex index: Int) -> [UIColor] {
         if index == 0{
@@ -748,6 +777,12 @@ extension TasksListViewController: SJFluidSegmentedControlDelegate {
             let topIndex = IndexPath(row: 0, section: 0)
             tableView.scrollToRow(at: topIndex, at: .top, animated: true)
             tableView.reloadData()
+        }
+        
+        if toIndex == 0 {
+            showOrHidePlaceHolderBackground()
+        } else if toIndex == 1 {
+            placeholderImageView.alpha = 0
         }
         
     }
