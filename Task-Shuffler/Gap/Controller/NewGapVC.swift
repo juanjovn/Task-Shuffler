@@ -91,7 +91,7 @@ class NewGapVC: UIViewController {
     }
     
     private func setupDateLabel() {
-        dateLabel.text = isEditing ? "Edit gap:".localized() : "Select a day".localized()
+        dateLabel.text = isEditing ? "Edit time slot:".localized() : "Select a day".localized()
         //print(self.editedGap.description)
         dateLabel.font = .avenirDemiBold(ofSize: UIFont.scaleFont(30))
         view.addSubview(dateLabel)
@@ -262,7 +262,7 @@ class NewGapVC: UIViewController {
             
             let startDate = Calendar.current.date(bySettingHour: hour, minute: minute, second: 0, of: newGap.startDate)!
             if startDate < Date() {
-                Alert.errorInformation(title: "Error", message: "The gap must start later than current time".localized(), vc: self, handler: nil)
+                Alert.errorInformation(title: "Error", message: "The time slot must start later than current time".localized(), vc: self, handler: nil)
             } else {
                 nextButton.setTitle("➜", for: .normal)
                 self.toDisplayTimeView.fromHourLabel.text = self.fromDisplayTimeView.fromHourLabel.text
@@ -289,9 +289,9 @@ class NewGapVC: UIViewController {
             newGap.endDate = Calendar.current.date(bySettingHour: hour, minute: minute, second: 0, of: newGap.endDate)!
             if newGap.duration < 10 {
                 if newGap.duration < 0 {
-                    Alert.errorInformation(title: "Error", message: "The gap must end later than start time".localized(), vc: self, handler: nil)
+                    Alert.errorInformation(title: "Error", message: "The time slot must end later than start time".localized(), vc: self, handler: nil)
                 } else {
-                    Alert.errorInformation(title: "Error", message: "The gap must have at least a duration of 10 minutes".localized(), vc: self, handler: nil)
+                    Alert.errorInformation(title: "Error", message: "The time slot must have at least a duration of 10 minutes".localized(), vc: self, handler: nil)
                 }
                 
             } else {
@@ -300,7 +300,7 @@ class NewGapVC: UIViewController {
                 if let overlapedGap = results?.first as? GapRealm {
                     if isEditing {
                         if overlapedGap.id != editedGap.id {
-                            Alert.errorInformation(title: "Error", message: "The current gap overlaps with an existing gap at ".localized() + "\(Utils.formatDate(datePattern: "HH:mm", date: overlapedGap.startDate)) - \(Utils.formatDate(datePattern: "HH:mm", date: overlapedGap.endDate))", vc: self, handler: nil)
+                            Alert.errorInformation(title: "Error", message: "The current time slot overlaps with an existing one at ".localized() + "\(Utils.formatDate(datePattern: "HH:mm", date: overlapedGap.startDate)) - \(Utils.formatDate(datePattern: "HH:mm", date: overlapedGap.endDate))", vc: self, handler: nil)
                         } else {
                             do {
                                 try gapsVC?.db.realm.write{
@@ -319,7 +319,7 @@ class NewGapVC: UIViewController {
                         
                     } else {
                         
-                        Alert.errorInformation(title: "Error", message: "The current gap overlaps with an existing gap at ".localized() + "\(Utils.formatDate(datePattern: "HH:mm", date: overlapedGap.startDate)) - \(Utils.formatDate(datePattern: "HH:mm", date: overlapedGap.endDate))", vc: self, handler: nil)
+                        Alert.errorInformation(title: "Error", message: "The current time slot overlaps with an existing one at ".localized() + "\(Utils.formatDate(datePattern: "HH:mm", date: overlapedGap.startDate)) - \(Utils.formatDate(datePattern: "HH:mm", date: overlapedGap.endDate))", vc: self, handler: nil)
                     }
                 } else {
                     if isEditing {

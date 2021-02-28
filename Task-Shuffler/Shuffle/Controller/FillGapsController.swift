@@ -19,7 +19,7 @@ class FillGapsController {
     init(shuffleMode: ShuffleConfiguration, shuffleVC: ShuffleVC?) {
         self.shuffleMode = shuffleMode
         self.shuffleVC = shuffleVC
-        //If one task per gap option is enabled only take into account pending gaps
+        //If One task per time slot option is enabled only take into account pending gaps
         if SettingsValues.taskSettings[2] {
             candidateGaps = GapManager.instance.pendingGaps
         } else {
@@ -122,7 +122,7 @@ class FillGapsController {
         if tasks.count == 0 {
             if let sVC = shuffleVC {
                 if candidateGaps.count == 0 {
-                    Alert.errorInformation(title: "Ooops!".localized(), message: "There are no gaps to shuffle".localized(), vc: sVC, handler: nil)
+                    Alert.errorInformation(title: "Ooops!".localized(), message: "There are no time slots to shuffle".localized(), vc: sVC, handler: nil)
                 } else {
                     Alert.errorInformation(title: "Ooops!".localized(), message: "There are no suitable tasks".localized(), vc: sVC, handler: nil)
                 }
@@ -151,9 +151,9 @@ class FillGapsController {
                             candidateGaps = GapManager.instance.pendingGaps
                         }
                         if candidateGaps.count > 0 {
-                            Alert.errorInformation(title: "Ooops!".localized(), message: "There are no task suitable for any gap. Try creating longer gaps or shorter tasks.".localized(), vc: sVC, handler: nil)
+                            Alert.errorInformation(title: "Ooops!".localized(), message: "There are no task suitable for any time slot. Try creating longer time slots or shorter tasks.".localized(), vc: sVC, handler: nil)
                         } else if !SettingsValues.taskSettings[2]{
-                            Alert.errorInformation(title: "Ooops!".localized(), message: "There are no gaps to shuffle".localized(), vc: sVC, handler: nil)
+                            Alert.errorInformation(title: "Ooops!".localized(), message: "There are no time slots to shuffle".localized(), vc: sVC, handler: nil)
                         }
                         
                     }
@@ -206,7 +206,7 @@ class FillGapsController {
                 
                 if let sVC = shuffleVC {
                     if thisGaps.count == 0 {
-                        Alert.errorInformation(title: "Ooops!".localized(), message: "There are no gaps created in this week!".localized(), vc: sVC, handler: nil)
+                        Alert.errorInformation(title: "Ooops!".localized(), message: "There are no time slots created in this week!".localized(), vc: sVC, handler: nil)
                     }
                     
                 }
@@ -253,7 +253,7 @@ class FillGapsController {
             }
         } else {
             if let sVC = shuffleVC {
-                Alert.errorInformation(title: "Ooops!".localized(), message: "There are no gaps to shuffle".localized(), vc: sVC, handler: nil)
+                Alert.errorInformation(title: "Ooops!".localized(), message: "There are no time slots to shuffle".localized(), vc: sVC, handler: nil)
                 
             }
         }

@@ -140,17 +140,17 @@ extension ShuffleSegmentedControllersDelegate {
             shuffleMessageLabel.text = "There are no tasks to shuffle".localized()
         } else if SettingsValues.taskSettings[2] {
             if pendingGaps.count == 0 {
-                shuffleMessageLabel.text = "There are no gaps to shuffle".localized()
+                shuffleMessageLabel.text = "There are no time slots to shuffle".localized()
             } else {
                 let numberOfGaps = pendingGaps.count
                 if shuffleConf.how == .Single {
-                    shuffleMessageLabel.text = "One task will be shuffled in".localized() + " \(numberOfGaps) " + "gaps".localized()
+                    shuffleMessageLabel.text = "One task will be shuffled in".localized() + " \(numberOfGaps) " + "time slots".localized()
                 } else {
                     let numberOfTasks = pendingTaks.count
                     if numberOfTasks > 1 {
-                        shuffleMessageLabel.text = "\(numberOfTasks) " + "tasks will be shuffled in".localized() + " \(numberOfGaps) " + "gaps".localized()
+                        shuffleMessageLabel.text = "\(numberOfTasks) " + "tasks will be shuffled in".localized() + " \(numberOfGaps) " + "time slots".localized()
                     } else {
-                        shuffleMessageLabel.text = "\(numberOfTasks) " + "task will be shuffled in".localized() + " \(numberOfGaps) " + "gaps".localized()
+                        shuffleMessageLabel.text = "\(numberOfTasks) " + "task will be shuffled in".localized() + " \(numberOfGaps) " + "time slots".localized()
                     }
                     
                 }
@@ -159,16 +159,16 @@ extension ShuffleSegmentedControllersDelegate {
             let numberOfTasks = pendingTaks.count
             let numberOfGaps = assignedGaps.count + pendingGaps.count
             if shuffleConf.how == .Single {
-                shuffleMessageLabel.text = "One task will be shuffled in".localized() + " \(numberOfGaps) " + "gaps".localized()
+                shuffleMessageLabel.text = "One task will be shuffled in".localized() + " \(numberOfGaps) " + "time slots".localized()
             } else {
                 if numberOfTasks > 1 {
-                    shuffleMessageLabel.text = "\(numberOfTasks) " + "tasks will be shuffled in".localized() + " \(numberOfGaps) " + "gaps".localized()
+                    shuffleMessageLabel.text = "\(numberOfTasks) " + "tasks will be shuffled in".localized() + " \(numberOfGaps) " + "time slots".localized()
                 } else {
-                    shuffleMessageLabel.text = "\(numberOfTasks) " + "task will be shuffled in".localized() + " \(numberOfGaps) " + "gaps".localized()
+                    shuffleMessageLabel.text = "\(numberOfTasks) " + "task will be shuffled in".localized() + " \(numberOfGaps) " + "time slots".localized()
                 }
             }
         } else {
-            shuffleMessageLabel.text = "There are no gaps to shuffle".localized()
+            shuffleMessageLabel.text = "There are no time slots to shuffle".localized()
         }
     }
 }

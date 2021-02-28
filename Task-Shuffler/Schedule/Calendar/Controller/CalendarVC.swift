@@ -182,7 +182,7 @@ extension CalendarVC: ElliotableDelegate, ElliotableDataSource {
         //courseId == 1 for gap events. courseId == 2 for task events
         case 1:
             if Int(selectedCourse.courseId) != -1 { //-1 is the id of Fake events
-                Alert.errorInformation(title: "Gap of time".localized(), message: "\n" + "Starting at:".localized() + " \(selectedCourse.startTime) " + "\n" + "Finishing at:".localized() + " \(selectedCourse.endTime)"
+                Alert.errorInformation(title: "Time slot".localized(), message: "\n" + "Starting at:".localized() + " \(selectedCourse.startTime) " + "\n" + "Finishing at:".localized() + " \(selectedCourse.endTime)"
                                        , vc: self, handler: nil)
             }
         case 2:

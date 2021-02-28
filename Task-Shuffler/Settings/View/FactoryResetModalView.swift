@@ -111,7 +111,7 @@ class FactoryResetModalView: ModalView {
     
     private func setupGapsLabel() {
         bottomView.addSubview(gapsLabel)
-        gapsLabel.text = "Gaps".localized()
+        gapsLabel.text = "Time slots".localized()
         gapsLabel.font = .avenirRegular(ofSize: 20)
         
         gapsLabel.translatesAutoresizingMaskIntoConstraints = false

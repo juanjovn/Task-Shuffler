@@ -63,13 +63,13 @@ class Onboard {
         preferences.drawing.arrowHeight = 10
         preferences.positioning.maxWidth = vc.view.frame.size.width * 0.8
         EasyTipView.globalPreferences = preferences
-        let gapTip = EasyTipView(text: "Create a gap of spare time".localized())
+        let gapTip = EasyTipView(text: "Create a slot of spare time".localized())
         gapTip.show(animated: true, forView: vc.newGapButton, withinSuperview: vc.view)
         preferences.drawing.arrowPosition = .top
         preferences.positioning.bubbleInsets = UIEdgeInsets(top: 5, left: 90, bottom: 5, right: 5)
         preferences.drawing.arrowHeight = 15
         EasyTipView.globalPreferences = preferences
-        let segmentedTip = EasyTipView(text: "Switch between free and completed gaps".localized())
+        let segmentedTip = EasyTipView(text: "Switch between free and completed time slots".localized())
         segmentedTip.show(animated: true, forView: vc.segmentedControl, withinSuperview: vc.view)
     }
     

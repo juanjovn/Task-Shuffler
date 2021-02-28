@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Gaps-->
+        <!--Time slots-->
         <scene sceneID="HDJ-m7-KWq">
             <objects>
                 <viewController storyboardIdentifier="GapsViewController" interfaceStyle="dark" id="SIv-r7-qSN" customClass="GapsViewController" customModule="Task_Shuffler" customModuleProvider="target" sceneMemberID="viewController">
@@ -103,7 +103,7 @@
                             <constraint firstItem="FHw-r7-UvB" firstAttribute="height" secondItem="sOJ-LN-tvB" secondAttribute="width" multiplier="1:10" id="yla-Uc-Mie"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Gaps" id="oCX-y3-nCK"/>
+                    <navigationItem key="navigationItem" title="Time slots" id="oCX-y3-nCK"/>
                     <connections>
                         <outlet property="newGapButton" destination="wiO-6O-f3V" id="K8C-AV-E6f"/>
                         <outlet property="newGapButtonBottomConstraint" destination="UC8-VG-zFu" id="qcZ-AB-UQZ"/>

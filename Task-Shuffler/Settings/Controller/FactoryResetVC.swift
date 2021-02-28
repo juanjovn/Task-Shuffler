@@ -60,7 +60,7 @@ class FactoryResetVC: UIViewController {
     
     @objc private func reshuffleButtonAction() {//Clear All button in this case. Reshuffle is in parent class.
         let db = DatabaseManager()
-        Alert.confirmation(title: "Clear all data".localized(), message: "All tasks and gaps will be erased, are you sure?".localized(), vc: self) {_ in
+        Alert.confirmation(title: "Clear all data".localized(), message: "All tasks and time slots will be erased, are you sure?".localized(), vc: self) {_ in
             let queue = DispatchQueue.global()
             queue.sync {
                 db.eraseAll()
@@ -96,7 +96,7 @@ class FactoryResetVC: UIViewController {
                 self.dismiss(animated: true, completion: nil)
             }
         case .gaps:
-            Alert.confirmation(title: "Clear gaps data".localized(), message: "All gaps will be erased, are you sure?".localized(), vc: self) {_ in
+            Alert.confirmation(title: "Clear time slots data".localized(), message: "All time slots will be erased, are you sure?".localized(), vc: self) {_ in
                 let queue = DispatchQueue.global()
                 queue.sync {
                     db.deleteAllByType(object: GapRealm.self)
