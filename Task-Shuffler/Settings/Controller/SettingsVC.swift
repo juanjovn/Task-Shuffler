@@ -56,22 +56,10 @@ class SettingsVC: UIViewController {
                 }
                 generator.impactOccurred()
             }
-            
+        
             let easterCell = tableView.cellForRow(at: easterIndex) as! EasterCell
             let eggColorRGBA = easterCell.easterImageView.tintColor.rgba
             let eggAlpha = eggColorRGBA.3
-            
-            //        if easterCount > 0 {
-            //            UIView.animate(withDuration: 0.05, animations: {
-            //                easterCell.easterImageView.transform = CGAffineTransform(rotationAngle: 0.261799)
-            //            }, completion: {_ in
-            //                UIView.animate(withDuration: 0.05){
-            //                    easterCell.easterImageView.transform = .identity
-            //                }
-            //            })
-            //
-            //            easterCell.easterImageView.tintColor = UIColor.pearlWhite.withAlphaComponent(eggAlpha + 0.26)
-            //        }
             
             if easterCount > 0 {
                 UIView.animate(withDuration: 0.07, animations: {
@@ -274,7 +262,7 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource{
             if SettingsValues.easterEgg {
                 easterCell.easterImageView.tintColor = UIColor.pearlWhite
             } else {
-                easterCell.easterImageView.tintColor = UIColor.pearlWhite.withAlphaComponent(0.2)
+                easterCell.easterImageView.tintColor = UIColor.pearlWhite.withAlphaComponent(0.40)
             }
             
             return easterCell
