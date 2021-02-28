@@ -66,7 +66,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NotificationManager.instance.notificationPermissionRequest()
         
     
-        self.window!.rootViewController = vc
+        let onboarding = OnboardingVC()
+        if let firstTime = SettingsValues.firstTime["app"] {
+            if firstTime {
+                self.window!.rootViewController = onboarding
+            } else {
+                self.window!.rootViewController = vc
+            }
+        }
+        
+        
         window?.makeKeyAndVisible()
         return true
     }

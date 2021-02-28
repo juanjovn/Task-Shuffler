@@ -1,4 +1,4 @@
-/* 
+/*
   Localizable.strings
   Task-Shuffler
 
@@ -40,7 +40,7 @@
 "The current gap overlaps with an existing gap at " = "Este hueco se superpone con uno que ya existea las: ";
 
 //MARK: Shuffle
-"Slide to shuffle" = "    Desliza para mezclar!";
+"Slide to shuffle" = "    Desliza para shufflear!";
 "Smart" = "Inteligente";
 "Random" = "Aleatorio";
 "Single" = "Individual";
@@ -128,6 +128,18 @@
 "Ending time" = "Hora de finalización";
 "Choose if you wish to shuffle the tasks in a Smart way, Random or only shuffle a Single task" = "Elige si quieres mezclar las tareas de un modo Inteligente, Aleatorio o una única tarea";
 "Choose if you wish to shuffle in Both weeks, only in This or Next week or if you feel lucky and want to get an instant random task to do Now" = "Elige si quieres mezclar en todos los huecos, en los de esta semana, en la siguiente u obtener una tarea instantánea para hacer";
+
+//MARK: Onboarding
+"START" = "EMPEZAR";
+"Welcome to Task-Shuffler!" = "¡Bienvenido a Task-Shuffler!";
+"The app that will help you avoid the procrastination." = "La aplicación que te ayudará a luchar contra la procrastinación.";
+"Create tasks" = "Crea tareas";
+"Write down all those tasks that you were postponing for months (or even years 🙃)" = "Anota todas esas tareas que llevas posponiendo durante muchos meses (incluso años 🙃)";
+"Add spare time slots" = "Añade huecos de tiempo libre.";
+"Guess when you are going to have time to do some tasks." = "Piensa cuando tendrías tiempo para realizar las tareas.";
+"Shuffle!" = "¡Shufflea!";
+"Tasks will be automatic assigned to your time slots. You can choose different modes to achieve it. Try them all and figure it out which fit you the best." = "Se asignarán automáticamente tareas a tus huecos de tiempo. Puedes elegir diferentes modos de como hacerlo. Pruébalos todos y averigua el que más se ajusta a ti.";
+"" = "";
 "" = "";
 "" = "";
 "" = "";
