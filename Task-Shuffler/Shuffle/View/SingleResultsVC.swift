@@ -57,8 +57,7 @@ class SingleResultsVC: ViewController, ShuffleResult {
     private func setupDateLabel() {
         if let gap = gapManager.getGapById(id: task.gapid) {
             singleResultModalView.singleCard.dateLabel.text = Utils.formatDate(datePattern: "EEEE ", date: gap.startDate)
-            let ordinalDate = Utils.formatDayNumberToOrdinal(date: gap.startDate)!
-            singleResultModalView.singleCard.dateLabel.text! += ordinalDate
+            singleResultModalView.singleCard.dateLabel.text? += Utils.parseDayNumberByLocation(date: gap.startDate)
         } else {
             singleResultModalView.singleCard.dateLabel.text = "Date"
         }

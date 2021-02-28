@@ -128,6 +128,7 @@ class NewTaskViewController: UIViewController {
         // Text Field
         newTaskTextName.placeholder = "New task name".localized()
         newTaskTextName.selectedTitle = "Task name".localized()
+        newTaskTextName.title = "Task name".localized()
         newTaskTextName.autocapitalizationType = .sentences
         if !taskListVC!.isTaskEditing {
             newTaskTextName.becomeFirstResponder()

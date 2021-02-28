@@ -29,6 +29,20 @@ class Utils {
         return day
     }
     
+    //Not return 1st, 2nd etc if isn't English
+    static func parseDayNumberByLocation(date: Date) -> String {
+        var parsedDate = ""
+        //Append ordinal termination (st, nr, rd, th) if preferred language is not Spanish.
+        let languagePrefix = Locale.preferredLanguages[0]
+        if !languagePrefix.contains("es") {
+            parsedDate = formatDayNumberToOrdinal(date: date) ?? "**"
+        } else {
+            parsedDate = Utils.formatDate(datePattern: "d", date: date)
+        }
+        
+        return parsedDate
+    }
+    
     static func printLocale() {
         let formatter = DateFormatter()
         print(formatter.locale!)

@@ -36,8 +36,8 @@ struct NextToDoSwiftUIView: View {
             List(){
                 ForEach(taskList) { taskItem in
                     let dateText = Utils.formatDate(datePattern: "EEEE ", date: taskItem.startTime)
-                    let ordinalDate = Utils.formatDayNumberToOrdinal(date: taskItem.startTime)
-                    let printableDate = dateText + ordinalDate!
+                    let ordinalDate = Utils.parseDayNumberByLocation(date: taskItem.startTime)
+                    let printableDate = dateText + ordinalDate
                     
                     ZStack(alignment: .topLeading) {
                         
@@ -85,8 +85,8 @@ struct NextToDoSwiftUIView: View {
                 } else {
                     ForEach(taskList) { taskItem in
                         let dateText = Utils.formatDate(datePattern: "EEEE ", date: taskItem.startTime)
-                        let ordinalDate = Utils.formatDayNumberToOrdinal(date: taskItem.startTime)
-                        let printableDate = dateText + ordinalDate!
+                        let ordinalDate = Utils.parseDayNumberByLocation(date: taskItem.startTime)
+                        let printableDate = dateText + ordinalDate
                         
                         ZStack(alignment: .topLeading) {
                             

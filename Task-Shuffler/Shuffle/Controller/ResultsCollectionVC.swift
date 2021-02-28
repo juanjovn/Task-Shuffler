@@ -44,14 +44,7 @@ class ResultsCollectionVC: UICollectionViewController {
         
         if let gap = GapManager.instance.getGapById(id: task.gapid) {
             cell.dateLabel.text = Utils.formatDate(datePattern: "EEEE ", date: gap.startDate)
-            //Append ordinal termination (st, nr, rd, th) if preferred language is not Spanish.
-            let languagePrefix = Locale.preferredLanguages[0]
-            if !languagePrefix.contains("es") {
-                let ordinalDate = Utils.formatDayNumberToOrdinal(date: gap.startDate)!
-                cell.dateLabel.text! += ordinalDate
-            } else {
-                cell.dateLabel.text! += Utils.formatDate(datePattern: "d", date: gap.startDate)
-            }
+            cell.dateLabel.text? += Utils.parseDayNumberByLocation(date: gap.startDate)
         } else {
             cell.dateLabel.text = "Date"
         }
