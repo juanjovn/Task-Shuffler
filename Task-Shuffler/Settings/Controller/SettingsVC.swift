@@ -14,12 +14,13 @@ class SettingsVC: UIViewController {
     
     //Constants
     let taskSection =   [ "Mark completed when time ends".localized(),
-                          "Delete confirmation".localized(), "One task per time slot".localized()]
+                          "Delete confirmation".localized(), "One task per time slot".localized(), "Time format".localized()]
     let notificationsSection =  [ "Notify task starts".localized(),
                                   "Notify task ends".localized()]
     let othersSection = ["Haptic feedback".localized()]
     let resetSection = ["Factory reset".localized()]
     let creditsSection = ["Credits"]
+    let segmentedControl = TimeFormatSegmentedControl(items: ["12", "24"])
     
     //Variables
     var isEasterOpen = false
@@ -198,6 +199,13 @@ class SettingsVC: UIViewController {
         
     }
     
+    @objc func segmentedControlAction() {
+        //Set true if 24h is selected, false if not
+        SettingsValues.is24HFormat = segmentedControl.selectedSegmentIndex == 1
+        //Store values in UserDefaults
+        SettingsValues.storeSettings()
+    }
+    
     
 }
 
@@ -233,8 +241,20 @@ extension SettingsVC: UITableViewDelegate, UITableViewDataSource{
         cell.textLabel?.font = .avenirMedium(ofSize: UIFont.scaleFont(18))
         switch indexPath.section {
         case 0:
-            mySwitch.setOn(SettingsValues.taskSettings[indexPath.row], animated: false)
+            switch indexPath.row {
+            case 0, 1, 2:
+                mySwitch.setOn(SettingsValues.taskSettings[indexPath.row], animated: false)
+            case 3: //Time format 24h
+                cell.accessoryView = segmentedControl
+                segmentedControl.selectedSegmentIndex = SettingsValues.is24HFormat ? 1 : 0
+                segmentedControl.addTarget(self, action: #selector(segmentedControlAction), for: .valueChanged)
+                mySwitch.isHidden = true
+            default:
+                break
+            }
+            
             cell.textLabel?.text = taskSection[indexPath.row]
+
         case 1:
             mySwitch.setOn(SettingsValues.notificationsSettings[indexPath.row], animated: false)
             cell.textLabel?.text = notificationsSection[indexPath.row]

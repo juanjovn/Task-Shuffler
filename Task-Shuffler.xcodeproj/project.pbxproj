@@ -94,6 +94,7 @@
 		81EE677B259A428E007B9D87 /* NextToDoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EE677A259A428E007B9D87 /* NextToDoView.swift */; };
 		81EE67A7259B810F007B9D87 /* MTSlideToOpenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EE67A6259B810F007B9D87 /* MTSlideToOpenView.swift */; };
 		81EE67AA259E5093007B9D87 /* ShuffleModes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EE67A9259E5092007B9D87 /* ShuffleModes.swift */; };
+		81EFB43D25F4FF29004426A5 /* TimeFormatSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81EFB43C25F4FF29004426A5 /* TimeFormatSegmentedControl.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -192,6 +193,7 @@
 		81EE677A259A428E007B9D87 /* NextToDoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NextToDoView.swift; path = "Task-Shuffler/Shuffle/View/NextToDoView.swift"; sourceTree = SOURCE_ROOT; };
 		81EE67A6259B810F007B9D87 /* MTSlideToOpenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTSlideToOpenView.swift; sourceTree = "<group>"; };
 		81EE67A9259E5092007B9D87 /* ShuffleModes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShuffleModes.swift; sourceTree = "<group>"; };
+		81EFB43C25F4FF29004426A5 /* TimeFormatSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeFormatSegmentedControl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -603,6 +605,7 @@
 				8107629E25CB397B00F1758B /* EasterCell.swift */,
 				810762A125CC462100F1758B /* EasterEggModalView.swift */,
 				81E3F53425CF285700398F4E /* CreditsCell.swift */,
+				81EFB43C25F4FF29004426A5 /* TimeFormatSegmentedControl.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -798,6 +801,7 @@
 				81C2A19E25A3A3E200F9A53F /* FillGapsController.swift in Sources */,
 				81EE67A7259B810F007B9D87 /* MTSlideToOpenView.swift in Sources */,
 				81DECAB6243BA410009051A2 /* CustomColors.swift in Sources */,
+				81EFB43D25F4FF29004426A5 /* TimeFormatSegmentedControl.swift in Sources */,
 				81A7C65425EC088200AF5288 /* OnboardingVC.swift in Sources */,
 				81C90B5B2463DDBA001C06B4 /* Utils.swift in Sources */,
 				8107629F25CB397B00F1758B /* EasterCell.swift in Sources */,

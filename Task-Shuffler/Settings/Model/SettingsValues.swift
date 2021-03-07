@@ -14,6 +14,7 @@ class SettingsValues {
     static var otherSettings = [true] //[hapticFeedback]
     static var easterEgg = false
     static var firstTime = ["app":true, "taskList":true, "newTask":true, "gapsList":true, "newGap":true, "shuffleHow":true, "shuffleWhen":true, "nextToDo":true, "schedule":true]
+    static var is24HFormat = true //timeFormat(true -> 24h, false -> 12h)
     
     static func storeSettings(){
         let userDefault = UserDefaults.standard
@@ -23,6 +24,7 @@ class SettingsValues {
         userDefault.set(otherSettings, forKey: "otherSettings")
         userDefault.set(easterEgg, forKey: "easterEgg")
         userDefault.set(firstTime, forKey: "firstTime")
+        userDefault.set(is24HFormat, forKey: "is24HFormat")
     }
     
     static func loadSettings(){
@@ -32,6 +34,7 @@ class SettingsValues {
         otherSettings = userDefault.array(forKey: "otherSettings") as! [Bool]
         easterEgg = userDefault.bool(forKey: "easterEgg")
         firstTime = userDefault.dictionary(forKey: "firstTime") as? [String:Bool] ?? firstTime
+        is24HFormat = userDefault.bool(forKey: "is24HFormat")
     }
     
     static func resetEasterEgg() {

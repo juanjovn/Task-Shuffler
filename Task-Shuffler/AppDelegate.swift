@@ -30,6 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // MARK: UserDefaults
         if SettingsValues.isKeyPresentInUserDefaults(key: "taskSettings"){
             SettingsValues.loadSettings()
+            SettingsValues.storeSettings()
         } else {
             SettingsValues.storeSettings()
         }
