@@ -292,7 +292,7 @@ class GapsViewController: AMTabsViewController {
     }
     
     private func showOrHidePlaceHolderBackground() {
-        if gapManager.checkPlaceholderGaps() {
+        if gapManager.checkPlaceholderGaps() && segmentedControl.currentSegment == 0 {
             UIView.animate(withDuration: 0.5, animations: {
                 self.placeholderImageView.alpha = 0.1
             })
